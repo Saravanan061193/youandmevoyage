@@ -122,21 +122,21 @@ export const SocialMediaFeed = () => {
   ];
 
   return (
-    <section id="social-community" className="section-wrap bg-[#0c0a09] py-16 border-t border-b border-stone-800/80">
+    <section id="social-community" className="section-wrap bg-[#0F172A] py-16 border-t border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Header Title Lockup matching exact SS typography */}
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <span className="w-8 h-[2px] bg-[#c5a059]" />
-            <span className="text-[11px] font-mono tracking-widest text-[#c5a059] uppercase font-bold">
+            <span className="w-8 h-[2px] bg-orange-500" />
+            <span className="text-[11px] font-mono tracking-widest text-orange-400 uppercase font-bold">
               LIVE CONTENT & SOCIAL MEDIA INTEGRATION
             </span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-stone-100 leading-tight">
-            Join Our <em className="text-[#c5a059] italic font-serif font-normal">Global Safari Community</em>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+            Join Our <em className="text-orange-400 italic font-serif font-normal">Global Travel Community</em>
           </h2>
-          <p className="text-stone-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
-            Follow <strong className="text-stone-200">@DiscoverySafarisNamibia</strong> across Instagram, TikTok, YouTube & Facebook for daily live wildlife sightings, desert reels, and traveler stories.
+          <p className="text-slate-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
+            Follow <strong className="text-slate-200">@YouAndMeVoyage</strong> across Instagram, TikTok, YouTube & Facebook for daily live destination highlights, travel reels, and guest stories.
           </p>
         </div>
 
@@ -150,20 +150,20 @@ export const SocialMediaFeed = () => {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`bg-[#141210] border border-stone-800 p-4 rounded-2xl flex items-center gap-3 shadow-xl transition-all duration-300 group hover:bg-[#181614] ${item.hoverBorder}`}
+                className={`bg-slate-900 border border-slate-800 p-4 rounded-2xl flex items-center gap-3 shadow-xl transition-all duration-300 group hover:bg-slate-800 ${item.hoverBorder}`}
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-lg transition-transform group-hover:scale-110 ${item.bg}`}>
                   <Icon className="w-6 h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <strong className="text-sm font-bold text-stone-100 block truncate font-sans">
+                  <strong className="text-sm font-bold text-slate-100 block truncate font-sans">
                     {item.count}
                   </strong>
-                  <span className="text-[11px] text-stone-400 truncate block">
+                  <span className="text-[11px] text-slate-400 truncate block">
                     {item.handle}
                   </span>
                 </div>
-                <ExternalLink className="w-4 h-4 text-stone-600 group-hover:text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <ExternalLink className="w-4 h-4 text-slate-600 group-hover:text-orange-400 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
             );
           })}
@@ -179,7 +179,7 @@ export const SocialMediaFeed = () => {
                 href={card.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-2xl overflow-hidden bg-[#141210] border border-stone-800 aspect-[4/5] flex flex-col justify-between p-4 shadow-2xl transition-all duration-500 hover:border-[#c5a059]/60 hover:shadow-[#c5a059]/10"
+                className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 aspect-[4/5] flex flex-col justify-between p-4 shadow-2xl transition-all duration-500 hover:border-orange-500/60 hover:shadow-orange-500/10"
               >
                 {/* Background Image with Zoom */}
                 <div
@@ -191,7 +191,7 @@ export const SocialMediaFeed = () => {
 
                 {/* Top Badge Tag with Authentic Brand Icon */}
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-stone-200 shadow-md">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-slate-200 shadow-md">
                     <TagIcon className={`w-3.5 h-3.5 ${card.iconColor}`} />
                     {card.tag}
                   </span>
@@ -199,17 +199,17 @@ export const SocialMediaFeed = () => {
 
                 {/* Center Glowing Play Icon Overlay */}
                 <div className="relative z-10 my-auto flex justify-center">
-                  <div className="w-14 h-14 rounded-full bg-[#c5a059]/90 border border-amber-300/60 text-stone-950 flex items-center justify-center shadow-xl group-hover:scale-125 group-hover:bg-[#c5a059] group-hover:shadow-[#c5a059]/40 transition-all duration-300">
-                    <Play className="w-6 h-6 fill-stone-950 ml-0.5" />
+                  <div className="w-14 h-14 rounded-full bg-orange-500/90 border border-orange-400/60 text-white flex items-center justify-center shadow-xl group-hover:scale-125 group-hover:bg-orange-500 transition-all duration-300">
+                    <Play className="w-6 h-6 fill-white ml-0.5" />
                   </div>
                 </div>
 
                 {/* Bottom Title & Action CTA */}
                 <div className="relative z-10 space-y-1">
-                  <h4 className="text-xs font-semibold text-stone-100 line-clamp-2 leading-snug group-hover:text-[#c5a059] transition-colors">
+                  <h4 className="text-xs font-semibold text-white line-clamp-2 leading-snug group-hover:text-orange-400 transition-colors">
                     {card.title}
                   </h4>
-                  <span className="text-[10px] text-stone-400 font-mono flex items-center gap-1 group-hover:text-stone-200">
+                  <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1 group-hover:text-slate-200">
                     Click to view reel on {card.tag.split(' ')[0]} <ExternalLink className="w-3 h-3" />
                   </span>
                 </div>

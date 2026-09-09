@@ -62,13 +62,13 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-stone-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-[#141210] border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl text-stone-100 ring-1 ring-amber-500/20">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-[#0F172A] border border-orange-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-100 ring-1 ring-orange-500/20">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-100 rounded-full hover:bg-stone-900 transition-colors"
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full hover:bg-slate-800 transition-colors"
           aria-label="Close popup"
         >
           <X className="w-5 h-5" />
@@ -76,11 +76,11 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
 
         {submitted ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 bg-amber-500/20 border border-amber-500/40 rounded-full flex items-center justify-center mx-auto text-amber-400">
+            <div className="w-16 h-16 bg-orange-500/20 border border-orange-500/40 rounded-full flex items-center justify-center mx-auto text-orange-400">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100">Guide Ready to Download!</h3>
-            <p className="text-stone-300 text-sm max-w-md mx-auto leading-relaxed">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">Guide Ready to Download!</h3>
+            <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
               We have processed your request for <strong>{formData.email}</strong>. Download your official guide directly below:
             </p>
             <div className="pt-2 flex flex-col gap-3 max-w-xs mx-auto">
@@ -88,15 +88,15 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
                 href={pdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                download="Namibia_Safari_Guide.pdf"
-                className="w-full py-3.5 px-6 bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 font-bold text-xs uppercase tracking-wider rounded-xl hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg"
+                download="South_India_Travel_Guide.pdf"
+                className="w-full py-3.5 px-6 bg-orange-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-orange-600 transition-all flex items-center justify-center gap-2 shadow-lg"
               >
                 <Download className="w-4 h-4" /> Download PDF Guide
               </a>
               <button
                 type="button"
                 onClick={onClose}
-                className="text-xs text-stone-400 hover:text-stone-200 transition-colors"
+                className="text-xs text-slate-400 hover:text-slate-200 transition-colors"
               >
                 Close Window
               </button>
@@ -104,37 +104,37 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
           </div>
         ) : (
           <div className="space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold uppercase tracking-wider">
-              <BookOpen className="w-3.5 h-3.5" /> Free Safari Guide Download
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-semibold uppercase tracking-wider">
+              <BookOpen className="w-3.5 h-3.5" /> Free Travel Guide Download
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
               {/* eBook Cover Card Preview */}
-              <div className="sm:col-span-5 bg-gradient-to-br from-amber-950/60 to-stone-900 border border-amber-500/30 rounded-2xl p-5 text-center relative overflow-hidden shadow-xl">
-                <div className="text-[10px] uppercase font-mono tracking-widest text-amber-400 font-bold mb-1">Official Publication</div>
-                <h4 className="font-serif text-lg font-bold text-stone-100 leading-tight">
-                  {settings?.leadMagnetTitle?.replace('Download Free: ', '') || 'Ultimate Namibia Safari Guide'}
+              <div className="sm:col-span-5 bg-gradient-to-br from-slate-900 to-slate-950 border border-orange-500/30 rounded-2xl p-5 text-center relative overflow-hidden shadow-xl">
+                <div className="text-[10px] uppercase font-mono tracking-widest text-orange-400 font-bold mb-1">Official Publication</div>
+                <h4 className="font-serif text-lg font-bold text-white leading-tight">
+                  {settings?.leadMagnetTitle?.replace('Download Free: ', '') || 'Ultimate South India Travel Guide'}
                 </h4>
-                <div className="my-3 py-2 border-y border-amber-500/20 text-[10px] text-stone-300 font-sans leading-tight">
-                  ⭐ Wildlife Maps & Season Charts
+                <div className="my-3 py-2 border-y border-orange-500/20 text-[10px] text-slate-300 font-sans leading-tight">
+                  ⭐ Route Maps & Season Charts
                 </div>
-                <span className="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-300 text-[10px] font-bold rounded-full border border-amber-500/30">
+                <span className="inline-block px-2.5 py-1 bg-orange-500/20 text-orange-300 text-[10px] font-bold rounded-full border border-orange-500/30">
                   Full Color PDF Edition
                 </span>
               </div>
 
               {/* Description & Form */}
               <div className="sm:col-span-7 space-y-3">
-                <h3 className="font-serif text-2xl font-bold text-stone-50 leading-tight">
-                  Get the Insider Guide to <span className="text-amber-500 italic">Namibia Safaris</span>
+                <h3 className="font-serif text-2xl font-bold text-white leading-tight">
+                  Get the Insider Guide to <span className="text-orange-500 italic">South India Journeys</span>
                 </h3>
-                <p className="text-xs text-stone-300 leading-relaxed">
-                  {settings?.leadMagnetSubtext || 'Discover best travel months, wildlife tracking maps, luxury lodge comparisons & budget breakdowns.'}
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {settings?.leadMagnetSubtext || 'Discover best travel months, route maps, hotel comparisons & budget breakdowns.'}
                 </p>
 
-                <div className="flex items-center gap-2 text-[11px] text-amber-400 font-semibold">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 shrink-0" />
-                  <span>Trusted by 10,000+ Luxury Travelers</span>
+                <div className="flex items-center gap-2 text-[11px] text-orange-400 font-semibold">
+                  <Star className="w-3.5 h-3.5 fill-orange-400 shrink-0" />
+                  <span>Trusted by 10,000+ Travelers</span>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-3 pt-1">
@@ -145,7 +145,7 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
                       placeholder="Your Full Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-stone-900 border border-stone-800 focus:border-amber-500 rounded-xl px-3.5 py-2.5 text-stone-100 text-xs outline-none transition-colors"
+                      className="w-full bg-slate-900 border border-slate-800 focus:border-orange-500 rounded-xl px-3.5 py-2.5 text-slate-100 text-xs outline-none transition-colors"
                     />
                   </div>
 
@@ -156,21 +156,21 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
                       placeholder="Email address for PDF delivery"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-stone-900 border border-stone-800 focus:border-amber-500 rounded-xl px-3.5 py-2.5 text-stone-100 text-xs outline-none transition-colors"
+                      className="w-full bg-slate-900 border border-slate-800 focus:border-orange-500 rounded-xl px-3.5 py-2.5 text-slate-100 text-xs outline-none transition-colors"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-500 hover:brightness-110 text-stone-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {loading ? 'Preparing eBook...' : (settings?.leadMagnetButtonText || 'Download Free Guide (PDF)')} <Download className="w-4 h-4" />
                   </button>
                 </form>
 
-                <div className="flex items-center gap-1.5 text-[10px] text-stone-500">
-                  <Shield className="w-3 h-3 text-amber-500" /> We respect your privacy. Instant download link.
+                <div className="flex items-center gap-1.5 text-[10px] text-slate-500">
+                  <Shield className="w-3 h-3 text-orange-500" /> We respect your privacy. Instant download link.
                 </div>
               </div>
             </div>

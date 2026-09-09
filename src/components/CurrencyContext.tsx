@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type Currency = 'USD' | 'EUR' | 'GBP' | 'NAD';
+export type Currency = 'USD' | 'EUR' | 'GBP' | 'INR';
 
 interface CurrencyContextType {
   currency: Currency;
@@ -25,9 +25,9 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
   const [settings, setSettings] = useState<any>({
     usdToEur: 0.92,
     usdToGbp: 0.78,
-    usdToNad: 18.5,
-    weatherText: 'Etosha National Park: 28°C Sunny',
-    whatsappNumber: '+264 81 123 4567',
+    usdToInr: 83.5,
+    weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
+    whatsappNumber: '+91 98765 43210',
   });
 
   const fetchSettings = async () => {
@@ -68,13 +68,13 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
     } else if (currency === 'GBP') {
       converted = priceUSD * (settings.usdToGbp || 0.78);
       symbol = '£';
-    } else if (currency === 'NAD') {
-      converted = priceUSD * (settings.usdToNad || 18.5);
-      symbol = 'N$';
+    } else if (currency === 'INR') {
+      converted = priceUSD * (settings.usdToInr || settings.usdToNad || 83.5);
+      symbol = '₹';
     }
 
     const rounded = Math.round(converted);
-    return `${symbol}${rounded.toLocaleString()}`;
+    return `${symbol}${rounded.toLocaleString('en-IN')}`;
   };
 
   return (

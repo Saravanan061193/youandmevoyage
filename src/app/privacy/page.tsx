@@ -51,26 +51,26 @@ export default function PrivacyPage() {
 
   return (
     <CurrencyProvider>
-      <main className="min-h-screen bg-[#0e0c0a] text-stone-100 selection:bg-[#c5a059] selection:text-black flex flex-col">
+      <main className="min-h-screen bg-white text-slate-900 selection:bg-orange-500 selection:text-white flex flex-col">
         <UtilityBar />
         <Navbar onOpenQuoteModal={() => {}} />
 
         <div className="flex-1 max-w-4xl mx-auto px-6 py-16 w-full space-y-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-xs text-[#c5a059] font-semibold hover:underline">
+          <Link href="/" className="inline-flex items-center gap-2 text-xs text-orange-500 font-semibold hover:underline">
             <ArrowLeft className="w-4 h-4" /> Back to Home
           </Link>
 
-          <header className="border-b border-stone-800 pb-6 space-y-2">
-            <span className="text-[11px] uppercase tracking-widest text-[#c5a059] font-bold flex items-center gap-2">
+          <header className="border-b border-slate-200 pb-6 space-y-2">
+            <span className="text-[11px] uppercase tracking-widest text-orange-500 font-bold flex items-center gap-2">
               <Lock className="w-4 h-4" /> Data Privacy & Protection
             </span>
-            <h1 className="font-serif text-4xl sm:text-5xl font-bold text-stone-100">Privacy Policy</h1>
-            <p className="text-xs text-stone-400">Last updated & synced with Discovery Safaris CMS</p>
+            <h1 className="font-serif text-4xl sm:text-5xl font-bold text-slate-900">Privacy Policy</h1>
+            <p className="text-xs text-slate-500">Last updated & synced with You & Me CMS</p>
           </header>
 
-          <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 sm:p-10 text-stone-300 text-sm leading-relaxed whitespace-pre-line shadow-xl font-sans">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 text-slate-700 text-sm leading-relaxed whitespace-pre-line shadow-xl font-sans">
             {loading ? (
-              <div className="text-center py-10 text-stone-500">Loading privacy policy...</div>
+              <div className="text-center py-10 text-slate-500">Loading privacy policy...</div>
             ) : (
               content
             )}

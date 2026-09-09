@@ -8,37 +8,45 @@ generator client {
 }
 
 model Safari {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  slug          String   @unique
-  priceUSD      Float
-  days          Int
-  nights        Int
-  category      String   // Private, Luxury Tented, Adventure
-  region        String   // South, Central, North
-  badge         String?  // Bestseller, Luxury, Wildlife
-  image         String
-  route         String   // Windhoek -> Sossusvlei -> Swakopmund -> Etosha
-  accommodation String   // Luxury Lodges & Tented Camps
-  description   String
-  inclusions    String   @default("[]") // JSON string of inclusions
-  exclusions    String   @default("[]") // JSON string of exclusions
-  metaTitle     String?  // SEO Meta Title
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  slug            String   @unique
+  priceUSD        Float
+  days            Int
+  nights          Int
+  category        String   // Tamil Nadu Journeys, Kerala Journeys, South India Journeys, Cultural Journeys, etc.
+  region          String   // Tamil Nadu, Kerala, South India
+  badge           String?  // Bestseller, Cultural, Custom
+  image           String
+  route           String   // Chennai -> Mahabalipuram -> Pondicherry -> Madurai
+  startingLocation String?  // e.g. Chennai
+  endingLocation  String?  // e.g. Kochi / Trivandrum
+  bestTimeToTravel String? // e.g. October to March
+  accommodation   String   // Boutique Heritage Hotels & Resorts
+  description     String
+  inclusions      String   @default("[]") // JSON string of inclusions
+  exclusions      String   @default("[]") // JSON string of exclusions
+  gallery         String?  @default("[]") // JSON string of images
+  metaTitle       String?  // SEO Meta Title
   metaDescription String? // SEO Meta Description
-  keywords      String?  // SEO Meta Keywords
-  featured      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  keywords        String?  // SEO Meta Keywords
+  featured        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Destination {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  slug        String?  @unique
   subtitle    String
   image       String
-  region      String   @default("Central")
+  region      String   @default("Tamil Nadu") // Tamil Nadu, Kerala, South India
   size        String   @default("short") // large, tall, short
   description String?
+  highlights  String?  @default("[]") // JSON array of highlights
+  experiences String?  @default("[]") // JSON array of things to experience
+  duration    String?  @default("2-3 Days") // Suggested duration
   order       Int      @default(0)
   createdAt   DateTime @default(now())
 }
@@ -50,8 +58,8 @@ model ItineraryItem {
   daysLabel     String   // Day 01, Days 02–03
   title         String
   description   String
-  duration      String   // 45 min · 35 km
-  mealPlan      String   // Dinner, Full Board
+  duration      String   // 3 hrs · 150 km
+  mealPlan      String   // Breakfast & Local Culinary Experience
   accommodation String?
   location      String?
   image         String?
@@ -62,40 +70,73 @@ model Review {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   author      String
   country     String
-  countryFlag String   // DE, US, GB, FR
+  countryFlag String   // IN, US, GB, DE, FR
   rating      Int      @default(5)
   text        String
+  travelType  String?  @default("Custom Family Journey")
   verified    Boolean  @default(true)
   createdAt   DateTime @default(now())
 }
 
 model Inquiry {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  name                String
+  email               String
+  phone               String
+  category            String?
+  destination         String?
+  month               String?
+  duration            String?
+  travelers           Int      @default(2)
+  message             String?
+  status              String   @default("Pending") // Pending, New, Contacted, Proposal Sent, Confirmed, Completed, Cancelled
+  proposalAmount      Float?   @default(0) // Quoted Amount
+  followupDate        String?  @default("")
+  crmNotes            String?  @default("")
+  lostReason          String?  @default("")
+  // Build Your Trip Multi-step Fields
+  travelDates         String?
+  travelStyle         String?
+  destinationsList    String?  // JSON string
+  interests           String?  // JSON string
+  accommodationReq    String?
+  vehicleReq          String?
+  specialRequirements String?
+  createdAt           DateTime @default(now())
+}
+
+model Experience {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  email       String
-  phone       String
-  category    String?
-  destination String?
-  month       String?
-  duration    String?
-  travelers   Int      @default(2)
-  message     String?
-  status      String   @default("Pending") // Pending, Contacted, Follow Up, Proposal Sent, Converted, Lost
-  proposalAmount Float? @default(0) // Quoted / Proposal Amount in USD
-  followupDate String? @default("")
-  crmNotes    String?  @default("")
-  lostReason  String?  @default("")
+  title       String
+  slug        String   @unique
+  subtitle    String?
+  image       String
+  category    String   // Cultural, Heritage, Food, Nature, etc.
+  description String
+  highlights  String   @default("[]") // JSON string of highlights
+  order       Int      @default(0)
   createdAt   DateTime @default(now())
+}
+
+model GalleryItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String?
+  image     String
+  category  String   // Tamil Nadu, Kerala, Culture, Food, Temples, Nature, Travellers, Journeys
+  location  String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
 }
 
 model SiteSettings {
   id                      String   @id @default(auto()) @map("_id") @db.ObjectId
   // Basic Settings
-  siteTitle               String?  @default("Discovery Safaris Namibia")
+  siteTitle               String?  @default("You & Me – Independent Voyage")
   siteLogo                String?  @default("") // Brand logo image URL
-  contactEmail            String?  @default("info@discoverysafaris.com")
-  whatsappNumber          String   @default("+264 81 123 4567")
-  weatherText             String   @default("Etosha National Park: 28°C Sunny")
+  contactEmail            String?  @default("info@youandmevoyage.com")
+  whatsappNumber          String   @default("+91 98765 43210")
+  address                 String?  @default("Chennai, Tamil Nadu, India")
+  weatherText             String   @default("South India: 28°C Pleasant")
   adminPasscode           String   @default("admin123")
 
   // Social Media Settings
@@ -107,38 +148,38 @@ model SiteSettings {
   linkedinUrl             String?  @default("https://linkedin.com")
 
   // Cloudinary Settings
-  cloudinaryCloudName     String?  @default("discovery-safaris")
+  cloudinaryCloudName     String?  @default("youandmevoyage")
   cloudinaryApiKey        String?  @default("")
   cloudinaryApiSecret     String?  @default("")
-  cloudinaryUploadPreset  String?  @default("safari_uploads")
+  cloudinaryUploadPreset  String?  @default("voyage_uploads")
   enableCloudinary        Boolean  @default(false)
 
   // Currency Settings
   usdToEur                Float    @default(0.92)
   usdToGbp                Float    @default(0.78)
-  usdToNad                Float    @default(18.5)
+  usdToNad                Float    @default(83.5) // INR / USD rate
   defaultCurrency         String?  @default("USD")
 
   // Site SEO Settings
-  siteMetaTitle           String?  @default("Discovery Safaris Namibia | Luxury Private Tours & Expeditions")
-  siteMetaDescription     String?  @default("Experience the raw majesty of Namibia with bespoke private safaris, luxury tented camps, and wildlife expeditions.")
-  siteKeywords            String?  @default("namibia safari, luxury travel, etosha wildlife, sossusvlei dunes")
-  googleAnalyticsId       String?  @default("G-DS12345678")
+  siteMetaTitle           String?  @default("You & Me – Independent Voyage | Custom South India Private Tours")
+  siteMetaDescription     String?  @default("Private journeys, authentic local experiences, and custom driver-assisted itineraries across Tamil Nadu and Kerala.")
+  siteKeywords            String?  @default("South India private tours, Tamil Nadu driver, Kerala custom itinerary, private travel South India")
+  googleAnalyticsId       String?  @default("G-YM12345678")
   enableRobotsIndex       Boolean  @default(true)
 
   // Hero & Banner Settings
-  heroHeadline            String   @default("Experience the raw majesty of Namibia")
-  heroSubheadline         String   @default("Private journeys · Wild places · 2004—2026")
-  heroCopy                String   @default("Bespoke private safaris, luxury tented camps, and wildlife expeditions engineered for international travelers.")
-  heroImage               String   @default("https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1920&q=85")
+  heroHeadline            String   @default("Travel South India Your Way")
+  heroSubheadline         String   @default("Private journeys · Authentic experiences · Experienced local companions")
+  heroCopy                String   @default("Thoughtfully crafted itineraries across Tamil Nadu, Kerala, and South India tailored specifically to your speed and preferences.")
+  heroImage               String   @default("https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=85")
   heroBanners             String?  @default("[]") // JSON array of up to 5 Hero Banners
-  announcementBannerText  String?  @default("🔥 Special Offer: Save 15% on 2026 Private Fly-in Safaris! Book by end of month.")
-  announcementBannerLink  String?  @default("/safari/classic-namibia-expedition")
+  announcementBannerText  String?  @default("✨ Custom Private Tours for 2026 Season Now Open! Plan your Tamil Nadu & Kerala road trip today.")
+  announcementBannerLink  String?  @default("/build-your-trip")
   enableAnnouncementBanner Boolean @default(true)
 
   // Legal CMS
-  termsContent            String?  @default("Welcome to Discovery Safaris Namibia. By booking a tour with us, you agree to our booking terms, deposit conditions, cancellation policies, and liability waivers. All private safaris include comprehensive guide coverage, vehicle insurance, and park entry permits.")
-  privacyContent          String?  @default("Discovery Safaris Namibia values your privacy. We strictly protect your personal information, contact details, payment info, and passport data required for park registrations. We do not sell or share your data with third parties.")
+  termsContent            String?  @default("Welcome to You & Me – Independent Voyage. By booking a journey with us, you agree to our booking terms, deposit conditions, cancellation policies, and liability waivers. All private journeys include dedicated vehicle, experienced local companion/driver, and customizable routes.")
+  privacyContent          String?  @default("You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and passport data required for bookings. We do not sell or share your data with third parties.")
   updatedAt               DateTime @updatedAt
 }
 
@@ -149,8 +190,8 @@ model BlogPost {
   excerpt         String
   content         String
   coverImage      String
-  author          String   @default("Discovery Safaris Team")
-  authorRole      String   @default("Safari Specialist")
+  author          String   @default("You & Me Travel Team")
+  authorRole      String   @default("South India Travel Specialist")
   category        String   @default("Travel Guide")
   readTime        String   @default("5 min read")
   metaTitle       String?
@@ -159,4 +200,5 @@ model BlogPost {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
 

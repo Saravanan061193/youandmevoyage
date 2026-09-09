@@ -104,18 +104,18 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
   });
 
   return (
-    <section id="faqs" className="py-20 px-6 bg-[#0e0c0a] text-stone-100 border-t border-stone-800/80">
+    <section id="faqs" className="py-20 px-6 bg-[#0F172A] text-slate-100 border-t border-slate-800">
       <div className="max-w-5xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-[#c5a059] font-bold flex items-center justify-center gap-2">
-            <HelpCircle className="w-4 h-4 text-[#c5a059]" /> Frequently Asked Questions
+          <span className="text-xs uppercase tracking-widest text-orange-400 font-bold flex items-center justify-center gap-2">
+            <HelpCircle className="w-4 h-4 text-orange-400" /> Frequently Asked Questions
           </span>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-stone-100 leading-tight">
-            {settings?.faqHeadline || 'Everything You Need to Know Before Your Safari'}
+          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-white leading-tight">
+            {settings?.faqHeadline || 'Everything You Need to Know Before Your Journey'}
           </h2>
-          <p className="text-xs sm:text-sm text-stone-400 font-light">
-            Answers to common questions regarding private vehicles, lodges, safety, and custom itineraries
+          <p className="text-xs sm:text-sm text-slate-400 font-light">
+            Answers to common questions regarding private vehicles, driver companions, safety, and custom itineraries
           </p>
         </div>
 
@@ -127,9 +127,9 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions or keywords..."
-              className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-xl pl-10 pr-4 py-3 text-xs outline-none focus:border-[#c5a059] shadow-lg font-sans"
+              className="w-full bg-slate-900 border border-slate-800 text-slate-100 rounded-xl pl-10 pr-4 py-3 text-xs outline-none focus:border-orange-500 shadow-lg font-sans"
             />
-            <Search className="w-4 h-4 text-stone-500 absolute left-3.5 top-3.5" />
+            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
           </div>
 
           {/* Category Chips */}
@@ -141,8 +141,8 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   activeCategory === cat
-                    ? 'bg-[#c5a059] text-stone-950 font-bold shadow-md'
-                    : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-200'
+                    ? 'bg-orange-500 text-white font-bold shadow-md'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
                 {cat}
@@ -154,14 +154,14 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
         {/* Accordion FAQ List */}
         <div className="space-y-4">
           {filteredFaqs.length === 0 ? (
-            <div className="p-8 text-center bg-stone-900/40 border border-stone-800 rounded-2xl space-y-2">
-              <p className="text-stone-400 text-xs font-semibold">No questions matched your search query.</p>
+            <div className="p-8 text-center bg-slate-900/40 border border-slate-800 rounded-2xl space-y-2">
+              <p className="text-slate-400 text-xs font-semibold">No questions matched your search query.</p>
               <button
                 onClick={() => {
                   setSearchQuery('');
                   setActiveCategory('All');
                 }}
-                className="text-[11px] text-[#c5a059] hover:underline font-bold"
+                className="text-[11px] text-orange-400 hover:underline font-bold"
               >
                 Reset Search Filters
               </button>
@@ -174,8 +174,8 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
                   key={faq.id || idx}
                   className={`border rounded-2xl transition-all duration-300 overflow-hidden ${
                     isOpen
-                      ? 'bg-[#181614] border-[#c5a059]/60 shadow-xl'
-                      : 'bg-stone-900/40 border-stone-800/80 hover:border-stone-700'
+                      ? 'bg-slate-900 border-orange-500/60 shadow-xl'
+                      : 'bg-slate-900/40 border-slate-800 hover:border-slate-700'
                   }`}
                 >
                   <button
@@ -183,13 +183,13 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
                     onClick={() => setOpenIndex(isOpen ? null : idx)}
                     className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 outline-none"
                   >
-                    <span className="font-serif text-base sm:text-lg font-bold text-stone-100 flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#c5a059] shrink-0" />
+                    <span className="font-serif text-base sm:text-lg font-bold text-slate-100 flex items-center gap-3">
+                      <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0" />
                       {faq.question}
                     </span>
                     <div
                       className={`w-7 h-7 rounded-full flex items-center justify-center border transition-all shrink-0 ${
-                        isOpen ? 'bg-[#c5a059] text-stone-950 border-[#c5a059]' : 'border-stone-700 text-stone-400'
+                        isOpen ? 'bg-orange-500 text-white border-orange-500' : 'border-slate-700 text-slate-400'
                       }`}
                     >
                       <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
@@ -197,10 +197,10 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-stone-300 leading-relaxed border-t border-stone-800/60 font-sans space-y-3">
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800 font-sans space-y-3">
                       <p className="whitespace-pre-line">{faq.answer}</p>
                       {faq.category && (
-                        <span className="inline-block text-[10px] text-[#c5a059] font-mono bg-[#c5a059]/10 border border-[#c5a059]/30 px-2.5 py-0.5 rounded-md font-semibold">
+                        <span className="inline-block text-[10px] text-orange-400 font-mono bg-orange-500/10 border border-orange-500/30 px-2.5 py-0.5 rounded-md font-semibold">
                           Category: {faq.category}
                         </span>
                       )}
@@ -213,24 +213,34 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
         </div>
 
         {/* Still Have Questions CTA */}
-        <div className="p-8 bg-[#141210] border border-stone-800 rounded-3xl text-center space-y-4 shadow-2xl">
-          <div className="w-12 h-12 rounded-2xl bg-[#c5a059]/10 border border-[#c5a059]/30 text-[#c5a059] flex items-center justify-center mx-auto">
+        <div className="p-8 bg-slate-900 border border-slate-800 rounded-3xl text-center space-y-4 shadow-2xl">
+          <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center mx-auto">
             <MessageSquare className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-serif text-xl font-bold text-stone-100">Still Have Questions About Namibia Safaris?</h3>
-            <p className="text-xs text-stone-400 mt-1 max-w-md mx-auto">
-              Our safari designers are available 24/7 to answer your custom itinerary questions.
+            <h3 className="font-serif text-xl font-bold text-white">Still Have Questions About South India Private Journeys?</h3>
+            <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
+              Our travel specialists are available 24/7 to answer your custom itinerary questions. You can also read 180+ guest reviews on TripAdvisor!
             </p>
           </div>
-          {onOpenQuoteModal && (
-            <button
-              onClick={onOpenQuoteModal}
-              className="gold-button text-xs px-6 py-3 shadow-xl hover:scale-105 transition-all inline-flex items-center gap-2"
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {onOpenQuoteModal && (
+              <button
+                onClick={onOpenQuoteModal}
+                className="gold-button text-xs px-6 py-3 shadow-xl hover:scale-105 transition-all inline-flex items-center gap-2"
+              >
+                Ask a Travel Specialist <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+            <a
+              href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-950/80 border border-emerald-500/50 hover:bg-emerald-900 text-emerald-300 font-bold text-xs rounded-full transition-all shadow-md"
             >
-              Ask a Safari Specialist <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          )}
+              <span>Read TripAdvisor Reviews ↗</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -101,20 +101,20 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
         ) : (
           <div>
             <div className="flex items-center justify-between mb-2">
-              <p className="modal-subheading">INTERACTIVE SAFARI PLANNER</p>
-              <span className="text-[11px] font-mono font-bold text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full">
+              <p className="modal-subheading">INTERACTIVE JOURNEY PLANNER</p>
+              <span className="text-[11px] font-mono font-bold text-orange-700 bg-orange-100 px-2.5 py-0.5 rounded-full">
                 Step {step} of 3
               </span>
             </div>
 
             <h2 className="modal-title font-serif text-3xl sm:text-4xl">
-              Request a custom <em>safari quote</em>
+              Request a custom <em>journey quote</em>
             </h2>
 
             {/* Visual Progress Bar */}
-            <div className="w-full bg-stone-200 rounded-full h-1.5 overflow-hidden my-3">
+            <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden my-3">
               <div
-                className="bg-amber-600 h-full transition-all duration-300"
+                className="bg-orange-500 h-full transition-all duration-300"
                 style={{ width: `${(step / 3) * 100}%` }}
               />
             </div>
@@ -124,31 +124,31 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
               {step === 1 && (
                 <div className="space-y-3 animate-in fade-in">
                   <div className="field-group">
-                    <label>SAFARI CATEGORY / STYLE</label>
+                    <label>JOURNEY CATEGORY / STYLE</label>
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     >
-                      <option value="Private Luxury Safari">Private Luxury Safari (Etosha & Sossusvlei)</option>
-                      <option value="Luxury Fly-in Expedition">Luxury Fly-in Expedition (Private Cessna)</option>
-                      <option value="Honeymoon & Romantic Escape">Honeymoon & Romantic Escape</option>
-                      <option value="Wildlife Photography Safari">Wildlife Photography Safari</option>
+                      <option value="Tamil Nadu Journeys">Tamil Nadu Temple & Cultural Journeys</option>
+                      <option value="Kerala Backwater & Hill Journeys">Kerala Backwater & Hill Station Journeys</option>
+                      <option value="South India Signature Grand Tour">South India Signature Grand Tour</option>
+                      <option value="Food & Culinary Journeys">Food & Culinary Journeys</option>
                     </select>
                   </div>
 
                   <div className="field-group">
                     <div className="flex items-center justify-between">
                       <label>ESTIMATED BUDGET PER PERSON</label>
-                      <span className="text-[9.5px] text-amber-700 font-bold">⭐ 4.9/5 Value Rated</span>
+                      <span className="text-[9.5px] text-orange-700 font-bold">⭐ 4.9/5 Value Rated</span>
                     </div>
                     <select
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     >
-                      <option value="$2,500 - $4,000 per person">$2,500 – $4,000 per person</option>
-                      <option value="$4,000 - $6,500 per person">$4,000 – $6,500 per person</option>
-                      <option value="$6,500 - $10,000 per person">$6,500 – $10,000 per person</option>
-                      <option value="$10,000+ per person">$10,000+ per person</option>
+                      <option value="$1,000 - $2,000 per person">$1,000 – $2,000 per person</option>
+                      <option value="$2,000 - $3,500 per person">$2,000 – $3,500 per person</option>
+                      <option value="$3,500 - $5,000 per person">$3,500 – $5,000 per person</option>
+                      <option value="$5,000+ per person">$5,000+ per person</option>
                     </select>
                   </div>
 
@@ -200,7 +200,7 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                     <button
                       type="button"
                       onClick={prevStep}
-                      className="px-4 py-3 bg-stone-200 text-stone-800 font-bold text-xs rounded hover:bg-stone-300 transition-colors"
+                      className="px-4 py-3 bg-slate-200 text-slate-800 font-bold text-xs rounded hover:bg-slate-300 transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
@@ -252,9 +252,9 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                   </div>
 
                   {/* Strategic Social Proof Badge */}
-                  <div className="p-2.5 bg-amber-50 border border-amber-200 rounded text-[11px] text-amber-900 flex items-center justify-between">
+                  <div className="p-2.5 bg-orange-50 border border-orange-200 rounded text-[11px] text-orange-950 flex items-center justify-between">
                     <span className="flex items-center gap-1 font-medium">
-                      <Lock className="w-3.5 h-3.5 text-amber-700" /> 100% Free & No Obligation
+                      <Lock className="w-3.5 h-3.5 text-orange-600" /> 100% Free & No Obligation
                     </span>
                     <span className="font-bold">⭐ 4.9/5 TripAdvisor</span>
                   </div>
@@ -263,12 +263,12 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                     <button
                       type="button"
                       onClick={prevStep}
-                      className="px-4 py-3 bg-stone-200 text-stone-800 font-bold text-xs rounded hover:bg-stone-300 transition-colors"
+                      className="px-4 py-3 bg-slate-200 text-slate-800 font-bold text-xs rounded hover:bg-slate-300 transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
                     <button type="submit" disabled={loading} className="custom-quote-submit flex-1">
-                      {loading ? 'Sending enquiry...' : 'Submit Safari Enquiry'} <Send className="w-4 h-4" />
+                      {loading ? 'Sending enquiry...' : 'Submit Journey Enquiry'} <Send className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

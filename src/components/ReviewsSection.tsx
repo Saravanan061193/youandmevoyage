@@ -58,13 +58,18 @@ export const ReviewsSection = () => {
           </h2>
         </div>
 
-        <div className="rating-lockup">
+        <a
+          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rating-lockup hover:opacity-90 transition-opacity cursor-pointer"
+        >
           <strong>4.9</strong>
           <div>
             <div className="stars">★★★★★</div>
             <span>Tripadvisor · {180 + reviews.length} reviews</span>
           </div>
-        </div>
+        </a>
       </div>
 
       <div className="reviews-grid">

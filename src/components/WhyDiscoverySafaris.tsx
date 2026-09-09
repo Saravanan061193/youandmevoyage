@@ -22,63 +22,63 @@ export const WhyDiscoverySafaris: React.FC<WhyDiscoverySafarisProps> = ({ onOpen
   const features = [
     {
       icon: Compass,
-      title: 'Local Safari Expertise',
-      description: 'Native Namibian safari specialists with deep knowledge of wildlife corridors, secret waterholes, and seasonal weather patterns.',
+      title: 'South India Expertise',
+      description: 'Native Tamil Nadu & Kerala companions with deep cultural knowledge, temple history, and local food secrets.',
     },
     {
       icon: Shield,
-      title: 'Private 4x4 Vehicles',
-      description: 'Custom-built pop-top safari cruisers equipped with fridge units, camera mounts, charging ports, and high-clearance suspension.',
+      title: 'Private AC Vehicles',
+      description: 'Clean, spacious, high-comfort sedans and SUVs with dedicated private chauffeur companion for your group only.',
     },
     {
       icon: Award,
-      title: 'Experienced Guides',
-      description: 'Licensed master trackers and certified wildlife conservationists with over 15+ years of bush experience and wilderness first aid.',
+      title: 'Experienced Drivers',
+      description: 'Professional, courteous local companions with 10+ years of highway and Western Ghats mountain driving experience.',
     },
     {
       icon: Sparkles,
-      title: 'Tailor-Made Itineraries',
-      description: 'Bespoke travel routes engineered around your exact preferences, desired pace, photography goals, and luxury tier.',
+      title: 'Tailor-Made Routes',
+      description: 'Custom itineraries crafted around your pace, preferences, temple timing, and luxury tier across South India.',
     },
     {
       icon: Star,
-      title: 'Luxury Accommodation',
-      description: 'Handpicked boutique desert retreats, exclusive eco-villas, and high-end tented camps nestled in private game reserves.',
+      title: 'Heritage Stays',
+      description: 'Handpicked boutique heritage hotels, restored Chettinad palatial mansions, tea bungalows, and luxury houseboats.',
     },
     {
       icon: Plane,
-      title: 'Airport Transfers',
-      description: 'Seamless VIP airport meet & assist at Hosea Kutako International Airport (WDH) with private air-conditioned transfers.',
+      title: 'Airport Meet & Assist',
+      description: 'Seamless arrival and departure transfers at Chennai (MAA), Kochi (COK), Trichy (TRZ), and Trivandrum (TRV).',
     },
     {
       icon: Clock,
-      title: '24/7 Support',
-      description: 'Around-the-clock dedicated dispatch team, real-time satellite communication in remote bush camps, and instant assistance.',
+      title: '24/7 Personal Support',
+      description: 'Around-the-clock dedicated assistance throughout your road trip for total peace of mind.',
     },
     {
       icon: Globe,
-      title: 'International Traveller Assistance',
-      description: 'Full support for international guests including visa guidance, multi-currency pricing, health protocols, and travel insurance.',
+      title: 'International Guest Care',
+      description: 'Full support for international travelers including French & English assistance, multi-currency transparency, and custom pace.',
     },
   ];
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-stone-100 overflow-hidden border-t border-stone-800/80">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#0F172A] text-slate-100 overflow-hidden border-t border-slate-800">
       {/* Background Decorative Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-orange-500/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-14">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-semibold uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-            The Discovery Difference
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-xs font-semibold uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
+            The You & Me Advantage
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-stone-100 tracking-tight leading-tight">
-            Why Choose <em>Discovery Safaris</em>
+          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+            Why Choose <em>You & Me Voyage</em>
           </h2>
-          <p className="text-sm sm:text-base text-stone-400 font-sans leading-relaxed max-w-2xl mx-auto">
-            Engineered for discerning international travellers seeking unhurried, private, and deeply authentic Namibian wildlife expeditions.
+          <p className="text-sm sm:text-base text-slate-400 font-sans leading-relaxed max-w-2xl mx-auto">
+            Engineered for discerning international and luxury travelers seeking unhurried, private, and deeply authentic South India private journeys.
           </p>
         </div>
 
@@ -89,28 +89,28 @@ export const WhyDiscoverySafaris: React.FC<WhyDiscoverySafarisProps> = ({ onOpen
             return (
               <div
                 key={idx}
-                className="group relative bg-stone-900/60 backdrop-blur-md border border-stone-800/80 hover:border-amber-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between overflow-hidden"
+                className="group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-orange-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-orange-500/10 flex flex-col justify-between overflow-hidden"
               >
                 {/* Accent Corner Glow */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl group-hover:bg-amber-500/15 transition-all" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl group-hover:bg-orange-500/15 transition-all" />
 
                 <div className="space-y-4 relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 via-amber-600/10 to-amber-900/30 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-stone-950 transition-all duration-300 shadow-md">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-md">
                     <IconComponent className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl font-bold text-stone-100 group-hover:text-amber-400 transition-colors">
+                    <h3 className="font-serif text-xl font-bold text-slate-100 group-hover:text-orange-400 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-stone-400 font-sans leading-relaxed mt-2">
+                    <p className="text-xs text-slate-400 font-sans leading-relaxed mt-2">
                       {item.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-stone-800/60 flex items-center gap-1.5 text-[11px] font-semibold text-amber-400/80 group-hover:text-amber-400 transition-colors">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Guaranteed Quality</span>
+                <div className="pt-4 mt-4 border-t border-slate-800 flex items-center gap-1.5 text-[11px] font-semibold text-orange-400/80 group-hover:text-orange-400 transition-colors">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-orange-400" />
+                  <span>Guaranteed Excellence</span>
                 </div>
               </div>
             );
@@ -119,22 +119,22 @@ export const WhyDiscoverySafaris: React.FC<WhyDiscoverySafarisProps> = ({ onOpen
 
         {/* CTA Footer Banner inside Section */}
         {onOpenQuoteModal && (
-          <div className="bg-gradient-to-r from-stone-900 via-stone-900/90 to-stone-900 border border-amber-500/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="bg-slate-900 border border-orange-500/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-1 text-center sm:text-left">
-              <h4 className="font-serif text-xl sm:text-2xl font-bold text-stone-100">
-                Ready to Experience Namibia’s Wild Beauty?
+              <h4 className="font-serif text-xl sm:text-2xl font-bold text-white">
+                Ready to Experience South India Your Way?
               </h4>
-              <p className="text-xs sm:text-sm text-stone-400">
-                Speak directly with our senior safari designers to tailor your custom itinerary.
+              <p className="text-xs sm:text-sm text-slate-400">
+                Speak directly with our travel specialists to tailor your custom private itinerary.
               </p>
             </div>
             <button
               type="button"
               onClick={onOpenQuoteModal}
-              className="px-6 py-3 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:brightness-110 text-stone-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-xl hover:shadow-amber-500/20 shrink-0 flex items-center gap-2 transform hover:-translate-y-0.5"
+              className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-xl shrink-0 flex items-center gap-2 transform hover:-translate-y-0.5"
             >
-              <span>Plan Your Private Safari</span>
-              <ArrowRight className="w-4 h-4 text-stone-950" />
+              <span>Plan Your Private Journey</span>
+              <ArrowRight className="w-4 h-4 text-white" />
             </button>
           </div>
         )}

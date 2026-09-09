@@ -5,22 +5,28 @@
 :root {
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-serif: 'Cormorant Garamond', serif;
-  --background: #fdfbf7;
-  --foreground: #1e1b18;
-  --card: #fffefa;
-  --card-foreground: #1e1b18;
-  --primary: #c5a059;
-  --primary-foreground: #1e1b18;
-  --muted: #eee9df;
-  --muted-foreground: #756e63;
-  --border: #e5ded3;
-  --input: #e5ded3;
-  --ring: #c5a059;
+  --font-cinzel: 'Cinzel', serif;
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --primary: #F97316;
+  --primary-navy: #0F172A;
+  --primary-foreground: #FFFFFF;
+  --muted: #F8FAFC;
+  --muted-foreground: #475569;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #F97316;
 }
 
 * {
   box-sizing: border-box;
   border-color: var(--border);
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel);
 }
 
 /* HIDE SCROLLBAR UTILITY VISUALLY WHILE PRESERVING SCROLL FUNCTIONALITY */
@@ -34,7 +40,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: #fdfbf7;
+  background: #FFFFFF;
 }
 
 body {
@@ -42,6 +48,8 @@ body {
   color: var(--foreground);
   margin: 0;
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button, a, select, input, textarea {
@@ -54,12 +62,54 @@ a {
 }
 
 button, a {
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 ::selection {
-  color: #1e1b18;
-  background: #c5a059;
+  color: #FFFFFF;
+  background: #F97316;
+}
+
+/* ORANGE & NAVY GRADIENT & GLASS UTILITIES */
+.bg-orange-gradient {
+  background: linear-gradient(135deg, #FB923C 0%, #F97316 50%, #EA580C 100%);
+}
+
+.text-orange-gradient {
+  background: linear-gradient(135deg, #FB923C 0%, #F97316 50%, #EA580C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luxury-card-glow {
+  box-shadow: 0 20px 40px -15px rgba(249, 115, 22, 0.15);
+}
+
+.luxury-border {
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.gold-button {
+  background: #F97316;
+  color: #FFFFFF !important;
+  letter-spacing: 0.05em;
+  box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.4);
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.gold-button:hover {
+  background: #EA580C;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -5px rgba(249, 115, 22, 0.55);
 }
 
 /* TOP UTILITY BAR */
@@ -89,17 +139,17 @@ button, a {
   line-height: 0.8;
   display: flex;
   text-decoration: none;
-  color: #1c1917 !important;
+  color: #FFFFFF !important;
   font-weight: 700;
 }
 .brand-mark span {
-  color: #1c1917;
+  color: #FFFFFF;
 }
 .brand-mark small {
   font-family: var(--font-sans);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #a5813f;
+  color: #F97316;
   margin-top: 4px;
   font-size: 9px;
   font-weight: 700;
@@ -121,12 +171,13 @@ button, a {
 }
 
 .nav-link {
-  color: #292524;
+  color: #F8FAFC;
   font-size: 12px;
   font-weight: 700;
+  transition: color 0.2s ease;
 }
 .nav-link:hover, .text-link:hover {
-  color: #a5813f;
+  color: #F97316;
 }
 
 .gold-button {
@@ -375,10 +426,12 @@ h1 em, h2 em {
 
 /* TOUR COLLECTION */
 .tour-layout {
-  grid-template-columns: 220px 1fr;
-  gap: 42px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
 }
+
 .filter-panel {
   border-top: 1px solid #332c25;
   align-self: start;
@@ -773,11 +826,12 @@ h1 em, h2 em {
 
 /* QUOTE SECTION */
 .quote-section {
-  color: #fdfbf7;
-  background: #3e4a3d;
+  color: #FFFFFF;
+  background: #0F172A;
   grid-template-columns: 1fr 1fr;
   display: grid;
 }
+
 .quote-visual {
   min-height: 540px;
   position: relative;

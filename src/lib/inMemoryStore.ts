@@ -7,6 +7,7 @@ export interface ReviewItem {
   countryFlag: string;
   rating: number;
   text: string;
+  travelType?: string;
   verified?: boolean;
   createdAt?: string;
 }
@@ -23,10 +24,14 @@ export interface SafariItem {
   badge?: string | null;
   image: string;
   route: string;
+  startingLocation?: string;
+  endingLocation?: string;
+  bestTimeToTravel?: string;
   accommodation: string;
   description: string;
   inclusions: string;
   exclusions: string;
+  gallery?: string;
   featured?: boolean;
   metaTitle?: string | null;
   metaDescription?: string | null;
@@ -37,11 +42,38 @@ export interface SafariItem {
 export interface DestinationItem {
   id: string;
   title: string;
+  slug?: string;
   subtitle: string;
   image: string;
   region: string;
   size: string;
   description: string;
+  highlights?: string;
+  experiences?: string;
+  duration?: string;
+  order?: number;
+  createdAt?: string;
+}
+
+export interface ExperienceItem {
+  id: string;
+  title: string;
+  slug: string;
+  subtitle?: string;
+  image: string;
+  category: string;
+  description: string;
+  highlights: string;
+  order?: number;
+  createdAt?: string;
+}
+
+export interface GalleryItemType {
+  id: string;
+  title?: string;
+  image: string;
+  category: string;
+  location?: string;
   order?: number;
   createdAt?: string;
 }
@@ -79,101 +111,142 @@ export interface InquiryItem {
   followupDate?: string | null;
   crmNotes?: string | null;
   lostReason?: string | null;
+  travelDates?: string | null;
+  travelStyle?: string | null;
+  destinationsList?: string | null;
+  interests?: string | null;
+  accommodationReq?: string | null;
+  vehicleReq?: string | null;
+  specialRequirements?: string | null;
   createdAt?: string;
 }
 
 export const DEFAULT_REVIEWS: ReviewItem[] = [
   {
     id: 'review-1',
-    author: 'Anna & Lukas M.',
-    country: 'Germany',
-    countryFlag: 'DE',
+    author: 'Robert & Eleanor S.',
+    country: 'United Kingdom',
+    countryFlag: '🇬🇧',
     rating: 5,
-    text: 'Every detail felt considered. Our guide knew when to talk, when to pause, and exactly where the light would land.',
+    text: 'Traveling South India with You & Me Independant Voyage was the highlight of our year. Sathish Kannan was so knowledgeable, calm, and attentive to every detail. We felt safe and cared for throughout Tamil Nadu and Kerala.',
+    travelType: 'Custom 12-Day Couple Journey',
     verified: true,
   },
   {
     id: 'review-2',
-    author: 'Michael R.',
-    country: 'USA',
-    countryFlag: 'US',
+    author: 'Marc & Sophie L.',
+    country: 'France',
+    countryFlag: '🇫🇷',
     rating: 5,
-    text: 'This was not a checklist trip. It was beautifully paced, deeply personal, and far beyond what we imagined.',
+    text: 'Sathish from You & Me speaks fluent French and English! From Pondicherry to the tea hills of Munnar, the journey was smooth, safe, and rich in local culture.',
+    travelType: 'Custom Family Journey',
     verified: true,
   },
   {
     id: 'review-3',
-    author: 'Charlotte P.',
-    country: 'UK',
-    countryFlag: 'GB',
+    author: 'David & Clare K.',
+    country: 'USA',
+    countryFlag: '🇺🇸',
     rating: 5,
-    text: 'The camps, the landscapes, the service — Discovery Safaris made Namibia feel like our own secret.',
+    text: 'The Chettinad food trail and private houseboat in Alleppey organized by You & Me Independant Voyage were top notch! Sathish customized every stop to our tempo. Highly recommended on TripAdvisor!',
+    travelType: 'Private Custom Cultural Tour',
     verified: true,
   },
   {
     id: 'review-4',
-    author: 'Claire D.',
-    country: 'France',
-    countryFlag: 'FR',
+    author: 'Priya & Rahul M.',
+    country: 'India',
+    countryFlag: '🇮🇳',
     rating: 5,
-    text: 'A rare combination of precision and warmth. We felt completely looked after from landing to take-off.',
+    text: 'Immaculate AC vehicle, expert driver Sathish who knew every hidden gem and local eatery in South India. Top 5-star experience from Chennai!',
+    travelType: 'Kerala & Tamil Nadu Road Trip',
     verified: true,
   },
 ];
 
 export const DEFAULT_SAFARIS: SafariItem[] = [
   {
-    id: 'safari-1',
-    title: 'Classic Namibian Explorer',
-    slug: 'classic-namibian-explorer',
-    priceUSD: 3850,
+    id: 'journey-1',
+    title: 'Grand Tamil Nadu Temple & Heritage Trail',
+    slug: 'grand-tamil-nadu-temple-heritage-trail',
+    priceUSD: 1450,
     days: 10,
     nights: 9,
-    category: 'Private',
-    region: 'Central',
+    category: 'Tamil Nadu Journeys',
+    region: 'Tamil Nadu',
     badge: 'Bestseller',
-    image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=85',
-    route: 'Windhoek → Sossusvlei → Swakopmund → Etosha',
-    accommodation: 'Luxury Lodges & Tented Camps',
-    description: 'From the iconic red dunes of Sossusvlei to the vast salt pans and game-rich waterholes of Etosha, experience Namibia’s ultimate signature safari.',
-    inclusions: '["Private 4x4 vehicle & expert guide","Luxury accommodation","All park fees"]',
-    exclusions: '["International flights","Visa fees"]',
+    image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+    route: 'Chennai → Mahabalipuram → Pondicherry → Thanjavur → Madurai → Kanyakumari',
+    startingLocation: 'Chennai',
+    endingLocation: 'Kanyakumari / Trivandrum',
+    bestTimeToTravel: 'October to March',
+    accommodation: 'Boutique Heritage Hotels & Palace Resorts',
+    description: 'Journey through centuries of Dravidian architecture, UNESCO World Heritage temples, French colonial quarters, and vibrant cultural heartlands of South India.',
+    inclusions: '["Private AC vehicle with dedicated professional driver companion","Handpicked heritage hotel accommodations","Local expert guides at UNESCO heritage sites & temples"]',
+    exclusions: '["International flights","Personal shopping & guide gratuities"]',
     featured: true,
   },
   {
-    id: 'safari-2',
-    title: 'Desert & Dunes Private Escape',
-    slug: 'desert-and-dunes-private-escape',
-    priceUSD: 4200,
+    id: 'journey-2',
+    title: 'Kerala Backwaters & Mist-Covered Hills',
+    slug: 'kerala-backwaters-mist-covered-hills',
+    priceUSD: 1280,
     days: 7,
     nights: 6,
-    category: 'Luxury Tented',
-    region: 'South',
-    badge: 'Luxury',
-    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=85',
-    route: 'Windhoek → Sossusvlei → Damaraland',
-    accommodation: 'Boutique Desert Retreats',
-    description: 'An intimate journey focused on southern Namibia’s mesmerizing landscapes, ancient desert geology, and luxury eco-villas.',
-    inclusions: '["Private fly-in transport","Boutique desert retreat lodging"]',
-    exclusions: '["International airfare"]',
+    category: 'Kerala Journeys',
+    region: 'Kerala',
+    badge: 'Nature & Wellness',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+    route: 'Kochi → Munnar → Thekkady → Alleppey → Kochi',
+    startingLocation: 'Kochi (Cochin)',
+    endingLocation: 'Kochi (Cochin)',
+    bestTimeToTravel: 'September to April',
+    accommodation: 'Luxury Tea Bungalows & Private Houseboat',
+    description: 'Relax in emerald tea plantations, aroma-rich spice hills, and serene palm-fringed backwater lagoons on a private luxury houseboat.',
+    inclusions: '["Private premium sedan/SUV with driver","Exclusive luxury houseboat cruise in Alleppey","Tea estate walks & spice plantation guided tour"]',
+    exclusions: '["Airfare & visa fees","Ayurvedic treatment packages"]',
     featured: true,
   },
   {
-    id: 'safari-3',
-    title: 'Etosha Wildlife Immersion',
-    slug: 'etosha-wildlife-immersion',
-    priceUSD: 2950,
-    days: 8,
-    nights: 7,
-    category: 'Adventure',
-    region: 'North',
-    badge: 'Wildlife',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85',
-    route: 'Windhoek → Etosha → Damaraland → Windhoek',
-    accommodation: 'Safari Lodges & Private Reserves',
-    description: 'Dedicated wildlife tracking expedition through northern Namibia. Spot lions, desert-adapted elephants, rhinos, and hundreds of bird species.',
-    inclusions: '["Custom pop-top 4x4 cruiser","Professional tracker"]',
-    exclusions: '["Personal insurance"]',
+    id: 'journey-3',
+    title: 'The Ultimate South India Odyssey: Tamil Nadu & Kerala',
+    slug: 'ultimate-south-india-odyssey-tamil-nadu-kerala',
+    priceUSD: 2150,
+    days: 14,
+    nights: 13,
+    category: 'South India Journeys',
+    region: 'South India',
+    badge: 'Private Custom',
+    image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=85',
+    route: 'Chennai → Pondicherry → Tanjore → Chettinad → Madurai → Munnar → Alleppey → Fort Kochi',
+    startingLocation: 'Chennai',
+    endingLocation: 'Kochi',
+    bestTimeToTravel: 'October to May',
+    accommodation: 'Heritage Mansions, Luxury Lodges & Houseboats',
+    description: 'The definitive 14-day journey combining ancient Chola architecture, Chettinad culinary feasts, majestic Western Ghats hill country, and tranquil backwater cruises.',
+    inclusions: '["Dedicated chauffeur-driven vehicle for 14 days","Private luxury houseboat night with chef","Chettinad heritage mansion stay"]',
+    exclusions: '["International flights"]',
+    featured: true,
+  },
+  {
+    id: 'journey-4',
+    title: 'Chettinad Heritage & Culinary Expedition',
+    slug: 'chettinad-heritage-culinary-expedition',
+    priceUSD: 890,
+    days: 5,
+    nights: 4,
+    category: 'Food & Culinary Journeys',
+    region: 'Tamil Nadu',
+    badge: 'Cultural',
+    image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+    route: 'Trichy → Karaikudi (Chettinad) → Madurai',
+    startingLocation: 'Trichy',
+    endingLocation: 'Madurai',
+    bestTimeToTravel: 'Year round',
+    accommodation: 'Restored 19th-Century Chettinad Mansions',
+    description: 'Immerse yourself in legendary Chettinad architecture, antique tile factories, handloom silk weaving, and fiery authentic Chettinad gastronomy.',
+    inclusions: '["Private AC vehicle","Chettinad cooking demonstration & banana leaf feast","Antique market walk"]',
+    exclusions: '["Flights to Trichy / from Madurai"]',
     featured: true,
   },
 ];
@@ -181,296 +254,216 @@ export const DEFAULT_SAFARIS: SafariItem[] = [
 export const DEFAULT_DESTINATIONS: DestinationItem[] = [
   {
     id: 'dest-1',
-    title: 'Sossusvlei',
-    subtitle: 'Red dunes at first light',
-    image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
-    region: 'South',
+    title: 'Chennai',
+    slug: 'chennai',
+    subtitle: 'Gateway to South India & Classical Arts',
+    image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+    region: 'Tamil Nadu',
     size: 'large',
-    description: 'Home to the world’s highest sand dunes and the famous stark white clay pan of Deadvlei.',
+    description: 'A vibrant metropolis blending centuries-old Dravidian temples, colonial seaside architecture, classical Bharatanatyam dance, and renowned culinary streets.',
+    highlights: '["Kapaleeshwarar Temple","Marina Beach Walk","San Thome Basilica","Mylapore Heritage Walk"]',
+    experiences: '["Filter coffee tasting","Temple bell ceremonies","Silk saree shopping in T. Nagar"]',
+    duration: '2 Days',
     order: 1,
   },
   {
     id: 'dest-2',
-    title: 'Etosha',
-    subtitle: 'Wildlife, waterholes & wide skies',
-    image: 'https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=85',
-    region: 'North',
+    title: 'Mahabalipuram',
+    slug: 'mahabalipuram',
+    subtitle: 'Ancient Shore Temples & Rock Carvings',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=85',
+    region: 'Tamil Nadu',
     size: 'tall',
-    description: 'One of Africa’s greatest game reserves dominated by a massive salt pan visible from space.',
+    description: 'A coastal UNESCO World Heritage town famous for 7th-century Pallava cave temples, monolith rathas, and beachside stone carving studios.',
+    highlights: '["Shore Temple","Arjuna’s Penance","Pancha Rathas","Krishna’s Butterball"]',
+    experiences: '["Stone sculpting workshop","Coastal seafood dining","Beach sunrise walk"]',
+    duration: '1-2 Days',
     order: 2,
   },
   {
     id: 'dest-3',
-    title: 'Swakopmund',
-    subtitle: 'Atlantic air & living desert',
-    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85',
-    region: 'Central',
+    title: 'Pondicherry',
+    slug: 'pondicherry',
+    subtitle: 'French Boulevards & Quiet Coastal Charm',
+    image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=900&q=85',
+    region: 'Tamil Nadu',
     size: 'short',
-    description: 'German colonial charm meets ocean breeze and thrilling desert adventures.',
+    description: 'Cobblestone streets, French colonial villas, bougainvillea-draped cafes, and spiritual tranquility near the Bay of Bengal.',
+    highlights: '["White Town French Quarter","Promenade Beach","Auroville Matrimandir","Sri Aurobindo Ashram"]',
+    experiences: '["Cycle tour of French Quarter","Artisanal cafe hopping","Pottery workshops"]',
+    duration: '2 Days',
     order: 3,
   },
   {
     id: 'dest-4',
-    title: 'Skeleton Coast',
-    subtitle: 'The wild edge of the continent',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=85',
-    region: 'North',
+    title: 'Madurai',
+    slug: 'madurai',
+    subtitle: 'The Soul of Tamil Culture & Meenakshi Temple',
+    image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=900&q=85',
+    region: 'Tamil Nadu',
     size: 'short',
-    description: 'Hauntingly beautiful coastline scattered with shipwrecks and seal colonies.',
+    description: 'One of the oldest continuously inhabited cities in the world, renowned for the soaring gopurams of Meenakshi Amman Temple and bustling night markets.',
+    highlights: '["Meenakshi Amman Temple","Thirumalai Nayakar Palace","Gandhi Memorial Museum"]',
+    experiences: '["Evening temple chariot ceremony","Jigarthanda street drink","Late night food walks"]',
+    duration: '2 Days',
     order: 4,
   },
   {
     id: 'dest-5',
-    title: 'Damaraland',
-    subtitle: 'Ancient rock art & desert elephants',
-    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=900&q=85',
-    region: 'North',
+    title: 'Munnar',
+    slug: 'munnar',
+    subtitle: 'Rolling Tea Gardens & Cool Mountain Air',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=85',
+    region: 'Kerala',
     size: 'tall',
-    description: 'Rugged granitic landscapes where desert lions and elephants roam free.',
+    description: 'Tucked in the Western Ghats mountain range, Munnar features misty green valleys, endless tea estates, and endangered Nilgiri Tahr mountain goats.',
+    highlights: '["Tea Museum & Factory","Eravikulam National Park","Mattupetty Dam","Anamudi Peak Views"]',
+    experiences: '["Tea plucking with locals","Spice estate trek","Cozy bungalow stays"]',
+    duration: '2-3 Days',
     order: 5,
+  },
+  {
+    id: 'dest-6',
+    title: 'Alleppey',
+    slug: 'alleppey',
+    subtitle: 'Venice of the East & Luxury Houseboats',
+    image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=900&q=85',
+    region: 'Kerala',
+    size: 'short',
+    description: 'Glide gently through quiet palm-shaded canals, paddy fields, and traditional village life aboard your private air-conditioned kettuvallam houseboat.',
+    highlights: '["Punnamada Lake","Backwater Canals","Vembanad Lake","Marari Beach"]',
+    experiences: '["Private houseboat night stay","Fresh Kuttanad fish curry","Canoe canal ride"]',
+    duration: '1-2 Days',
+    order: 6,
+  },
+];
+
+export const DEFAULT_EXPERIENCES: ExperienceItem[] = [
+  {
+    id: 'exp-1',
+    title: 'Temple Architecture & Ancient Heritage',
+    slug: 'temple-architecture-ancient-heritage',
+    subtitle: 'Soaring Dravidian Gopurams & UNESCO Monuments',
+    image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+    category: 'Heritage',
+    description: 'Explore thousands of years of stone carving mastery, Chola bronzes, and active living temple rituals with knowledgeable local historians.',
+    highlights: '["UNESCO World Heritage site access","Private guided morning & evening walks","Architectural stone carving insights"]',
+    order: 1,
+  },
+  {
+    id: 'exp-2',
+    title: 'South Indian Food & Culinary Trails',
+    slug: 'south-indian-food-culinary-trails',
+    subtitle: 'From Chettinad Feasts to Coastal Seafood',
+    image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+    category: 'Food',
+    description: 'Savor authentic banana leaf thalis, aromatic Chettinad spice blends, fresh coconut sea curries, and iconic brass filter coffee.',
+    highlights: '["Home-style cooking classes with local hosts","Street food walking tours","Spice market exploration"]',
+    order: 2,
+  },
+  {
+    id: 'exp-3',
+    title: 'Kerala Backwater Private Houseboat Cruises',
+    slug: 'kerala-backwater-houseboat-cruises',
+    subtitle: 'Tranquil Waterways & Village Lagoons',
+    image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
+    category: 'Nature',
+    description: 'Unwind on custom luxury houseboats with dedicated private chef, navigating serene mirror-like canals away from crowded tourist routes.',
+    highlights: '["Private chef preparing local delicacies","Sunset over Vembanad lake","Quiet country canoe excursions"]',
+    order: 3,
+  },
+  {
+    id: 'exp-4',
+    title: 'Local Village & Traditional Arts Encounters',
+    slug: 'local-village-traditional-arts',
+    subtitle: 'Weavers, Potters & Classical Dancers',
+    image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=85',
+    category: 'Culture',
+    description: 'Engage directly with Kanchipuram silk weavers, Athangudi handmade tile artisans, and traditional Kathakali or Bharatanatyam performers.',
+    highlights: '["Artisan workshop visits","Private Kathakali makeup & performance","Silk loom demonstrations"]',
+    order: 4,
+  },
+];
+
+export const DEFAULT_GALLERY: GalleryItemType[] = [
+  {
+    id: 'gal-1',
+    title: 'Meenakshi Temple Gopuram at Dusk',
+    image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+    category: 'Tamil Nadu',
+    location: 'Madurai',
+    order: 1,
+  },
+  {
+    id: 'gal-2',
+    title: 'French Quarter Colonial Streets',
+    image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=85',
+    category: 'Culture',
+    location: 'Pondicherry',
+    order: 2,
+  },
+  {
+    id: 'gal-3',
+    title: 'Alleppey Backwaters Houseboat',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+    category: 'Kerala',
+    location: 'Alleppey',
+    order: 3,
+  },
+  {
+    id: 'gal-4',
+    title: 'Traditional South Indian Thali Feast',
+    image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+    category: 'Food',
+    location: 'Chettinad',
+    order: 4,
   },
 ];
 
 export const DEFAULT_BLOGS: BlogItem[] = [
   {
-    id: 'blog-2',
-    title: 'How Safari Operators Can Attract More International Customers Online',
-    slug: 'how-safari-operators-attract-international-customers-online',
-    excerpt: 'A comprehensive guide for safari operators on building high-converting websites, international SEO strategies, destination content, and converting visitors into enquiries.',
-    content: `# How Safari Operators Can Attract More International Customers Online
-
-## Table of Contents
-1. Introduction
-2. Why Online Visibility Matters for Safari Operators
-3. The Scope of Digital Growth in Safari Tourism
-4. Step 1: Build a Professional Safari Website
-5. Step 2: Create Destination-Focused Content
-6. Step 3: Make Your Safari Packages Easy to Explore
-7. Step 4: Build Trust With Real Experiences
-8. Step 5: Optimise Your Website for Search Engines
-9. Step 6: Make It Easy to Send an Enquiry
-10. Important Website Features for Safari Operators
-11. Conclusion
-12. Build a Safari Website That Helps Your Business Grow
-
----
-
-## Introduction
-
-A traveller planning a safari today usually starts the journey online.
-
-Before contacting a safari operator, they may search for destinations, compare safari packages, look at wildlife experiences, read reviews, check accommodation options and explore photographs from previous trips.
-
-For safari operators targeting international travellers, this creates a major opportunity.
-
-Your safari business may offer an excellent experience, but if potential customers cannot easily find your company online or understand what you offer, they may choose another operator.
-
-A **professional safari website** can help you present your destinations, packages, experiences and expertise while making it easier for international travellers to contact your business.
-
-Whether you operate in **Kenya, Tanzania, Namibia, Botswana, South Africa, Uganda, Rwanda or other African safari destinations**, your online presence can play an important role in attracting international customers.
-
----
-
-## Why Online Visibility Matters for Safari Operators
-
-International travellers often have many safari operators to choose from.
-
-A strong online presence helps your business answer some of the questions they may have before making an enquiry:
-
-* What safari destinations do you cover?
-* What type of safari packages do you offer?
-* Can you create a customised itinerary?
-* What accommodation options are available?
-* How experienced are your guides?
-* What do previous travellers say about you?
-* How can I contact you?
-* Can I request a personalised safari quote?
-
-If your website provides clear answers, it becomes more than an online brochure. It can become an important part of your **sales and lead-generation process**.
-
----
-
-## The Scope of Digital Growth in Safari Tourism
-
-The opportunity is not limited to simply creating a website.
-
-A well-planned digital strategy can help safari operators reach customers across different international markets.
-
-For example, a safari company can create dedicated content around searches such as:
-
-* [Kenya Safari Tours](/#safaris)
-* [Tanzania Safari Tours](/#safaris)
-* [Namibia Safari Holidays](/#destinations)
-* [Botswana Luxury Safari](/#safaris)
-* [African Wildlife Safari](/#safaris)
-* [Private Safari Tours](/#safaris)
-* [Luxury Safari Holidays](/#safaris)
-* [Family Safari Packages](/#safaris)
-* [Custom Safari Itineraries](/#itinerary)
-* [Wildlife Photography Safaris](/#destinations)
-
-Instead of trying to reach everyone with one generic page, your website can target different **destinations, safari experiences and traveller requirements**.
-
-This creates more opportunities to appear in search results and generate relevant enquiries.
-
----
-
-## Step 1: Build a Professional Safari Website
-
-Your website is often one of the first places an international traveller will evaluate your business.
-
-A modern safari website should communicate your value within a few seconds.
-
-Your homepage should clearly show:
-
-* Who you are
-* Where you operate
-* What safari experiences you offer
-* Why travellers should choose you
-* How visitors can plan their safari
-
-High-quality images and videos can showcase the actual safari experience, but visual content should be supported by clear information and strong calls to action.
-
-The goal is not simply to make the website beautiful.
-
-**The goal is to turn website visitors into genuine safari enquiries.**
-
----
-
-## Step 2: Create Destination-Focused Content
-
-International customers don't always search for a company name.
-
-Many start with a destination or experience. For example:
-
-* **"Best safari in Tanzania"**
-* **"Namibia wildlife safari"**
-* **"Luxury safari in Botswana"**
-* **"Kenya private safari tours"**
-
-Creating useful destination pages and articles can help your website target these searches. A safari operator could create pages such as:
-
-* [Kenya Safari Tours](/#safaris)
-* [Tanzania Safari Tours](/#safaris)
-* [Namibia Safari Experiences](/#destinations)
-* [Botswana Luxury Safaris](/#safaris)
-* [South Africa Wildlife Safaris](/#safaris)
-
-You can also create helpful articles about the best time to visit, wildlife seasons, safari costs, accommodation, travel tips and itinerary planning.
-
----
-
-## Step 3: Make Your Safari Packages Easy to Explore
-
-Travellers should not have to search through multiple pages to understand your safari packages.
-
-Each package should clearly explain:
-
-* Safari duration
-* Destination
-* Main attractions
-* Accommodation
-* Activities
-* Transportation
-* Best travel season
-* Starting information
-* Customisation options
-* Enquiry option
-
-Clear itineraries help potential customers understand the experience and make an informed decision. Check out our [Bespoke Safari Packages](/#safaris) to see how itineraries are presented.
-
----
-
-## Step 4: Build Trust With Real Experiences
-
-International customers may be booking a safari from thousands of kilometres away. Trust therefore becomes extremely important.
-
-Your website can include:
-
-* **Guest Reviews**: Show genuine feedback from previous travellers. Read our [Guest Reviews & Testimonials](/#reviews).
-* **Real Safari Photography**: Use authentic photographs from your own trips wherever possible.
-* **Guide Profiles**: Introduce your safari guides and their experience.
-* **Company Story**: Learn more on our [About Discovery Safaris](/about) page.
-* **Conservation & Community Work**: If your business supports wildlife conservation or local communities, explain it clearly.
-* **FAQs**: Answer common questions about travel, accommodation, safety, payments and transportation. Read our [Frequently Asked Questions](/#faq).
-
----
-
-## Step 5: Optimise Your Website for Search Engines
-
-A beautiful website is not enough if potential customers cannot find it.
-
-**Search Engine Optimisation (SEO)** can help safari operators improve their visibility for relevant searches around keywords like *safari tour operator*, *luxury safari*, *private safari*, and *custom safari tours*.
-
----
-
-## Step 6: Make It Easy to Send an Enquiry
-
-Getting visitors to your website is only the first step. The next step is converting them into enquiries.
-
-Useful options include:
-
-* **[Plan My Safari](/#contact)**
-* **[Request a Custom Itinerary](/#contact)**
-* **[Get a Safari Quote](/#contact)**
-* **[Talk to a Safari Expert](/#contact)**
-
----
-
-## Important Website Features for Safari Operators
-
-| Feature                  | Why It Matters                                      |
-| ------------------------ | --------------------------------------------------- |
-| Destination Pages        | Helps travellers explore different safari locations |
-| Safari Packages          | Clearly presents available experiences              |
-| Custom Itinerary Enquiry | Captures personalised safari requirements           |
-| WhatsApp Integration     | Makes communication faster                          |
-| Mobile-Friendly Design   | Helps travellers browse from phones                 |
-| SEO Structure            | Supports search engine visibility                   |
-| Reviews & Testimonials   | Builds trust                                        |
-| Photo & Video Gallery    | Shows the real safari experience                    |
-| Blog                     | Helps attract informational searches                |
-| FAQs                     | Answers common traveller questions                  |
-| Google Maps              | Helps visitors understand your location             |
-
----
-
-## Conclusion
-
-International travellers are already researching their safari experiences online. The opportunity for safari operators is to make sure their business is visible, trustworthy and easy to contact.
-
-Your safari experience may be unforgettable. **Your website should make travellers want to experience it.**
-
----
-
-## Ready to Plan Your Dream Safari Expedition?
-
-At **Discovery Safaris Namibia**, we specialize in **bespoke private safaris, luxury tented camps, and wildlife expeditions** engineered for international travellers across Namibia and Southern Africa.
-
-* **Email Us**: [info@discoverysafaris.com](mailto:info@discoverysafaris.com)
-* **WhatsApp Chat**: [+264 81 123 4567](https://wa.me/264811234567)
-* **Head Office**: 77 Independence Avenue, Central Business District, Windhoek, Namibia
-
-👉 **[Click Here to Get Your Custom Safari Quote](/#contact)** or **[Explore Our Signature Safari Packages](/#safaris)** today!`,
-    coverImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=85',
-    author: 'Discovery Safaris Team',
-    authorRole: 'Safari Expeditions & Digital Growth Specialist',
-    category: 'Travel Guide',
-    readTime: '8 min read',
-    published: true,
-    createdAt: new Date().toISOString(),
-  },
-  {
     id: 'blog-1',
-    title: 'The Ultimate Guide to Planning a Private Namibia Safari in 2026',
-    slug: 'ultimate-guide-planning-namibia-safari-2026',
-    excerpt: 'Everything you need to know about weather windows, fly-in options vs custom 4x4 overland expeditions, and reserving luxury tented camps.',
-    content: 'Namibia is unlike anywhere else on earth...',
-    coverImage: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=85',
-    author: 'Dr. Johan van Zyl',
-    authorRole: 'Head Wildlife Ecologist',
+    title: 'Best Places to Visit in Tamil Nadu: A Curated Road Trip Guide',
+    slug: 'best-places-to-visit-in-tamil-nadu-road-trip-guide',
+    excerpt: 'Discover UNESCO temples, coastal French enclaves, heritage Chettinad mansions, and spiritual cities across Tamil Nadu.',
+    content: `Tamil Nadu is one of India's richest cultural states, offering thousands of years of continuous temple heritage, coastal charm, and culinary masterpieces.
+
+### 1. Mahabalipuram: Coastal Stone Sculptures
+Located just 60 km south of Chennai on the East Coast Road, Mahabalipuram is home to 7th-century Pallava cave temples and the iconic Shore Temple standing right at the ocean edge.
+
+### 2. Pondicherry: French Quarter & Boulevard Vibes
+Wander streets lined with mustard-yellow colonial villas, enjoy fresh pastries, and visit Auroville for a serene spiritual retreat.
+
+### 3. Thanjavur: The Great Chola Living Temple
+The 1,000-year-old Brihadeeswarar Temple in Thanjavur is an architectural miracle built entirely of granite blocks with an 81-ton apex dome.
+
+### 4. Madurai: Meenakshi Amman Temple
+Madurai is the spiritual heart of Tamil Nadu. The soaring gopurams of Meenakshi Temple are covered in thousands of colorful mythological statues.`,
+    coverImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+    author: 'Arun Kumar',
+    authorRole: 'Senior South India Travel Companion',
     category: 'Travel Guide',
     readTime: '6 min read',
+    published: true,
+  },
+  {
+    id: 'blog-2',
+    title: 'The Ultimate 10-Day Tamil Nadu & Kerala Private Itinerary',
+    slug: 'ultimate-10-day-tamil-nadu-kerala-itinerary',
+    excerpt: 'Combine temple majesty with emerald tea hills and serene backwater houseboats on this seamlessly planned private route.',
+    content: `Combining Tamil Nadu's vibrant culture with Kerala's tranquil backwaters creates the ultimate South India holiday.
+
+### Suggested Route Overview
+- **Days 1–2:** Chennai to Mahabalipuram & Pondicherry
+- **Days 3–4:** Thanjavur & Chettinad Mansions
+- **Days 5–6:** Madurai Meenakshi Temple
+- **Days 7–8:** Scenic climb into Munnar Tea Gardens
+- **Days 9–10:** Alleppey Houseboat & Departure from Kochi`,
+    coverImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+    author: 'Meera Nair',
+    authorRole: 'Itinerary Planner',
+    category: 'Itinerary',
+    readTime: '7 min read',
     published: true,
   },
 ];
@@ -481,30 +474,14 @@ export const DEFAULT_INQUIRIES: InquiryItem[] = [
     name: 'Sarah Jenkins',
     email: 'sarah.j@example.com',
     phone: '+1 555 019 2834',
-    category: 'Private Safari',
-    destination: 'Sossusvlei & Etosha',
+    category: 'Tamil Nadu & Kerala Odyssey',
+    destination: 'Tamil Nadu & Kerala',
     month: 'October 2026',
     duration: '10 Days',
     travelers: 2,
-    message: 'Looking for a private luxury safari with fly-in options.',
-    status: 'Pending',
+    message: 'Looking for a private customized trip with dedicated AC vehicle and local driver.',
+    status: 'New',
     createdAt: new Date().toISOString(),
-  },
-  {
-    id: 'inq-2',
-    name: 'David & Claire Miller',
-    email: 'david.miller@example.com',
-    phone: '+44 7700 900077',
-    category: 'Honeymoon Safari',
-    destination: 'Skeleton Coast & Damaraland',
-    month: 'November 2026',
-    duration: '12 Days',
-    travelers: 2,
-    message: 'Planning our honeymoon trip. Interested in high-end tented camps and stargazing.',
-    status: 'Contacted',
-    proposalAmount: 12500,
-    crmNotes: 'Sent initial customized itinerary options via email.',
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
   },
 ];
 
@@ -512,6 +489,8 @@ const globalForStore = globalThis as unknown as {
   inMemoryReviews?: ReviewItem[];
   inMemorySafaris?: SafariItem[];
   inMemoryDestinations?: DestinationItem[];
+  inMemoryExperiences?: ExperienceItem[];
+  inMemoryGallery?: GalleryItemType[];
   inMemoryBlogs?: BlogItem[];
   inMemoryInquiries?: InquiryItem[];
 };
@@ -525,6 +504,12 @@ if (!globalForStore.inMemorySafaris) {
 if (!globalForStore.inMemoryDestinations) {
   globalForStore.inMemoryDestinations = [...DEFAULT_DESTINATIONS];
 }
+if (!globalForStore.inMemoryExperiences) {
+  globalForStore.inMemoryExperiences = [...DEFAULT_EXPERIENCES];
+}
+if (!globalForStore.inMemoryGallery) {
+  globalForStore.inMemoryGallery = [...DEFAULT_GALLERY];
+}
 if (!globalForStore.inMemoryBlogs) {
   globalForStore.inMemoryBlogs = [...DEFAULT_BLOGS];
 }
@@ -532,184 +517,131 @@ if (!globalForStore.inMemoryInquiries) {
   globalForStore.inMemoryInquiries = [...DEFAULT_INQUIRIES];
 }
 
-// --- REVIEWS STORE HELPERS ---
+// HELPERS
 export function getInMemoryReviews(): ReviewItem[] {
   return globalForStore.inMemoryReviews!;
 }
-
 export function setInMemoryReviews(items: ReviewItem[]) {
   globalForStore.inMemoryReviews = items;
 }
 
-export function addInMemoryReview(item: ReviewItem): ReviewItem {
-  // Check if exists
-  const existingIdx = globalForStore.inMemoryReviews!.findIndex((r) => r.id === item.id);
-  if (existingIdx >= 0) {
-    globalForStore.inMemoryReviews![existingIdx] = item;
-  } else {
-    globalForStore.inMemoryReviews!.unshift(item);
-  }
-  return item;
-}
-
-export function updateInMemoryReview(id: string, updates: Partial<ReviewItem>): ReviewItem | null {
-  const idx = globalForStore.inMemoryReviews!.findIndex((r) => r.id === id);
-  if (idx !== -1) {
-    globalForStore.inMemoryReviews![idx] = {
-      ...globalForStore.inMemoryReviews![idx],
-      ...updates,
-    };
-    return globalForStore.inMemoryReviews![idx];
-  }
-  return null;
-}
-
-export function deleteInMemoryReview(id: string): boolean {
-  const initialLength = globalForStore.inMemoryReviews!.length;
-  globalForStore.inMemoryReviews = globalForStore.inMemoryReviews!.filter((r) => r.id !== id);
-  return globalForStore.inMemoryReviews.length < initialLength;
-}
-
-// --- SAFARIS STORE HELPERS ---
 export function getInMemorySafaris(): SafariItem[] {
   return globalForStore.inMemorySafaris!;
 }
-
 export function setInMemorySafaris(items: SafariItem[]) {
   globalForStore.inMemorySafaris = items;
 }
 
-export function addInMemorySafari(item: SafariItem): SafariItem {
-  const idx = globalForStore.inMemorySafaris!.findIndex((s) => s.id === item.id);
-  if (idx >= 0) {
-    globalForStore.inMemorySafaris![idx] = item;
-  } else {
-    globalForStore.inMemorySafaris!.unshift(item);
-  }
-  return item;
-}
-
-export function updateInMemorySafari(id: string, updates: Partial<SafariItem>): SafariItem | null {
-  const idx = globalForStore.inMemorySafaris!.findIndex((s) => s.id === id);
-  if (idx !== -1) {
-    globalForStore.inMemorySafaris![idx] = {
-      ...globalForStore.inMemorySafaris![idx],
-      ...updates,
-    };
-    return globalForStore.inMemorySafaris![idx];
-  }
-  return null;
-}
-
-export function deleteInMemorySafari(id: string): boolean {
-  globalForStore.inMemorySafaris = globalForStore.inMemorySafaris!.filter((s) => s.id !== id);
-  return true;
-}
-
-// --- DESTINATIONS STORE HELPERS ---
 export function getInMemoryDestinations(): DestinationItem[] {
   return globalForStore.inMemoryDestinations!;
 }
-
 export function setInMemoryDestinations(items: DestinationItem[]) {
   globalForStore.inMemoryDestinations = items;
 }
 
-export function addInMemoryDestination(item: DestinationItem): DestinationItem {
-  const idx = globalForStore.inMemoryDestinations!.findIndex((d) => d.id === item.id);
-  if (idx >= 0) {
-    globalForStore.inMemoryDestinations![idx] = item;
-  } else {
-    globalForStore.inMemoryDestinations!.push(item);
-  }
-  return item;
+export function getInMemoryExperiences(): ExperienceItem[] {
+  return globalForStore.inMemoryExperiences!;
+}
+export function setInMemoryExperiences(items: ExperienceItem[]) {
+  globalForStore.inMemoryExperiences = items;
 }
 
-export function updateInMemoryDestination(id: string, updates: Partial<DestinationItem>): DestinationItem | null {
-  const idx = globalForStore.inMemoryDestinations!.findIndex((d) => d.id === id);
-  if (idx !== -1) {
-    globalForStore.inMemoryDestinations![idx] = {
-      ...globalForStore.inMemoryDestinations![idx],
-      ...updates,
-    };
-    return globalForStore.inMemoryDestinations![idx];
-  }
-  return null;
+export function getInMemoryGallery(): GalleryItemType[] {
+  return globalForStore.inMemoryGallery!;
+}
+export function setInMemoryGallery(items: GalleryItemType[]) {
+  globalForStore.inMemoryGallery = items;
 }
 
-export function deleteInMemoryDestination(id: string): boolean {
-  globalForStore.inMemoryDestinations = globalForStore.inMemoryDestinations!.filter((d) => d.id !== id);
-  return true;
-}
-
-// --- BLOGS STORE HELPERS ---
 export function getInMemoryBlogs(): BlogItem[] {
   return globalForStore.inMemoryBlogs!;
 }
-
 export function setInMemoryBlogs(items: BlogItem[]) {
   globalForStore.inMemoryBlogs = items;
 }
 
-export function addInMemoryBlog(item: BlogItem): BlogItem {
-  const idx = globalForStore.inMemoryBlogs!.findIndex((b) => b.id === item.id);
-  if (idx >= 0) {
-    globalForStore.inMemoryBlogs![idx] = item;
-  } else {
-    globalForStore.inMemoryBlogs!.unshift(item);
-  }
-  return item;
-}
-
-export function updateInMemoryBlog(id: string, updates: Partial<BlogItem>): BlogItem | null {
-  const idx = globalForStore.inMemoryBlogs!.findIndex((b) => b.id === id);
-  if (idx !== -1) {
-    globalForStore.inMemoryBlogs![idx] = {
-      ...globalForStore.inMemoryBlogs![idx],
-      ...updates,
-    };
-    return globalForStore.inMemoryBlogs![idx];
-  }
-  return null;
-}
-
-export function deleteInMemoryBlog(id: string): boolean {
-  globalForStore.inMemoryBlogs = globalForStore.inMemoryBlogs!.filter((b) => b.id !== id);
-  return true;
-}
-
-// --- INQUIRIES STORE HELPERS ---
 export function getInMemoryInquiries(): InquiryItem[] {
   return globalForStore.inMemoryInquiries!;
 }
-
 export function setInMemoryInquiries(items: InquiryItem[]) {
   globalForStore.inMemoryInquiries = items;
 }
-
 export function addInMemoryInquiry(item: InquiryItem): InquiryItem {
-  const idx = globalForStore.inMemoryInquiries!.findIndex((i) => i.id === item.id);
-  if (idx >= 0) {
-    globalForStore.inMemoryInquiries![idx] = item;
-  } else {
-    globalForStore.inMemoryInquiries!.unshift(item);
-  }
+  globalForStore.inMemoryInquiries!.unshift(item);
   return item;
 }
-
 export function updateInMemoryInquiry(id: string, updates: Partial<InquiryItem>): InquiryItem | null {
-  const idx = globalForStore.inMemoryInquiries!.findIndex((i) => i.id === id);
-  if (idx !== -1) {
-    globalForStore.inMemoryInquiries![idx] = {
-      ...globalForStore.inMemoryInquiries![idx],
-      ...updates,
-    };
-    return globalForStore.inMemoryInquiries![idx];
-  }
-  return null;
+  const index = globalForStore.inMemoryInquiries!.findIndex((i) => i.id === id);
+  if (index === -1) return null;
+  globalForStore.inMemoryInquiries![index] = { ...globalForStore.inMemoryInquiries![index], ...updates };
+  return globalForStore.inMemoryInquiries![index];
+}
+export function deleteInMemoryInquiry(id: string): boolean {
+  const initialLen = globalForStore.inMemoryInquiries!.length;
+  globalForStore.inMemoryInquiries = globalForStore.inMemoryInquiries!.filter((i) => i.id !== id);
+  return globalForStore.inMemoryInquiries.length < initialLen;
 }
 
-export function deleteInMemoryInquiry(id: string): boolean {
-  globalForStore.inMemoryInquiries = globalForStore.inMemoryInquiries!.filter((i) => i.id !== id);
-  return true;
+export function addInMemorySafari(item: SafariItem): SafariItem {
+  globalForStore.inMemorySafaris!.unshift(item);
+  return item;
+}
+export function updateInMemorySafari(id: string, updates: Partial<SafariItem>): SafariItem | null {
+  const index = globalForStore.inMemorySafaris!.findIndex((s) => s.id === id);
+  if (index === -1) return null;
+  globalForStore.inMemorySafaris![index] = { ...globalForStore.inMemorySafaris![index], ...updates };
+  return globalForStore.inMemorySafaris![index];
+}
+export function deleteInMemorySafari(id: string): boolean {
+  const initialLen = globalForStore.inMemorySafaris!.length;
+  globalForStore.inMemorySafaris = globalForStore.inMemorySafaris!.filter((s) => s.id !== id);
+  return globalForStore.inMemorySafaris.length < initialLen;
+}
+
+export function addInMemoryDestination(item: DestinationItem): DestinationItem {
+  globalForStore.inMemoryDestinations!.unshift(item);
+  return item;
+}
+export function updateInMemoryDestination(id: string, updates: Partial<DestinationItem>): DestinationItem | null {
+  const index = globalForStore.inMemoryDestinations!.findIndex((d) => d.id === id);
+  if (index === -1) return null;
+  globalForStore.inMemoryDestinations![index] = { ...globalForStore.inMemoryDestinations![index], ...updates };
+  return globalForStore.inMemoryDestinations![index];
+}
+export function deleteInMemoryDestination(id: string): boolean {
+  const initialLen = globalForStore.inMemoryDestinations!.length;
+  globalForStore.inMemoryDestinations = globalForStore.inMemoryDestinations!.filter((d) => d.id !== id);
+  return globalForStore.inMemoryDestinations.length < initialLen;
+}
+
+export function addInMemoryBlog(item: BlogItem): BlogItem {
+  globalForStore.inMemoryBlogs!.unshift(item);
+  return item;
+}
+export function updateInMemoryBlog(id: string, updates: Partial<BlogItem>): BlogItem | null {
+  const index = globalForStore.inMemoryBlogs!.findIndex((b) => b.id === id);
+  if (index === -1) return null;
+  globalForStore.inMemoryBlogs![index] = { ...globalForStore.inMemoryBlogs![index], ...updates };
+  return globalForStore.inMemoryBlogs![index];
+}
+export function deleteInMemoryBlog(id: string): boolean {
+  const initialLen = globalForStore.inMemoryBlogs!.length;
+  globalForStore.inMemoryBlogs = globalForStore.inMemoryBlogs!.filter((b) => b.id !== id);
+  return globalForStore.inMemoryBlogs.length < initialLen;
+}
+
+export function addInMemoryReview(item: ReviewItem): ReviewItem {
+  globalForStore.inMemoryReviews!.unshift(item);
+  return item;
+}
+export function updateInMemoryReview(id: string, updates: Partial<ReviewItem>): ReviewItem | null {
+  const index = globalForStore.inMemoryReviews!.findIndex((r) => r.id === id);
+  if (index === -1) return null;
+  globalForStore.inMemoryReviews![index] = { ...globalForStore.inMemoryReviews![index], ...updates };
+  return globalForStore.inMemoryReviews![index];
+}
+export function deleteInMemoryReview(id: string): boolean {
+  const initialLen = globalForStore.inMemoryReviews!.length;
+  globalForStore.inMemoryReviews = globalForStore.inMemoryReviews!.filter((r) => r.id !== id);
+  return globalForStore.inMemoryReviews.length < initialLen;
 }

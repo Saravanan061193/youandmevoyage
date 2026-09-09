@@ -269,7 +269,7 @@ export default function SingleBlogPostPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
       />
-      <main className="min-h-screen bg-[#0e0c0a] text-stone-100 flex flex-col selection:bg-[#c5a059] selection:text-black">
+      <main className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-orange-500 selection:text-white">
         <UtilityBar />
         <Navbar onOpenQuoteModal={() => setIsQuoteOpen(true)} />
 
@@ -277,44 +277,44 @@ export default function SingleBlogPostPage() {
         <article className="max-w-4xl mx-auto px-6 py-12 w-full space-y-8 flex-1">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-xs text-[#c5a059] font-semibold hover:underline"
+            className="inline-flex items-center gap-2 text-xs text-orange-500 font-semibold hover:underline"
           >
             <ArrowLeft className="w-4 h-4" /> Back to All Articles
           </Link>
 
           <header className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="bg-[#c5a059] text-black text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">
+              <span className="bg-orange-500 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">
                 {post.category}
               </span>
-              <span className="text-xs text-stone-400 flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-stone-500" /> {post.readTime}
+              <span className="text-xs text-slate-500 flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-slate-400" /> {post.readTime}
               </span>
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-5xl font-bold text-stone-100 leading-tight">
+            <h1 className="font-serif text-3xl sm:text-5xl font-bold text-slate-900 leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-base text-stone-300 font-light leading-relaxed">
+            <p className="text-base text-slate-600 font-light leading-relaxed">
               {post.excerpt}
             </p>
 
             {/* Author Bio Header Strip */}
-            <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-stone-800 text-xs">
+            <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-slate-200 text-xs">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#1c1916] border border-[#383129] flex items-center justify-center font-bold text-[#c5a059]">
-                  {post.author ? post.author.charAt(0) : 'D'}
+                <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-orange-600">
+                  {post.author ? post.author.charAt(0) : 'Y'}
                 </div>
                 <div>
-                  <strong className="text-stone-100 font-bold block">{post.author || 'Discovery Safaris Team'}</strong>
-                  <span className="text-stone-400 text-[11px] block">{post.authorRole || 'Safari Specialist'}</span>
+                  <strong className="text-slate-900 font-bold block">{post.author || 'You & Me Team'}</strong>
+                  <span className="text-slate-500 text-[11px] block">{post.authorRole || 'Travel Specialist'}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 text-stone-400 text-[11px]">
+              <div className="flex items-center gap-4 text-slate-500 text-[11px]">
                 <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <Calendar className="w-3.5 h-3.5 text-orange-500" />
                   {post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
@@ -326,7 +326,7 @@ export default function SingleBlogPostPage() {
           </header>
 
           {/* Featured Cover Image */}
-          <div className="relative h-80 sm:h-[420px] w-full rounded-2xl overflow-hidden border border-stone-800 shadow-2xl">
+          <div className="relative h-80 sm:h-[420px] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-2xl">
             <img
               src={post.coverImage}
               alt={post.title}
@@ -335,31 +335,31 @@ export default function SingleBlogPostPage() {
           </div>
 
           {/* Article Body Content with Markdown parser */}
-          <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 sm:p-10 text-stone-300 text-base leading-relaxed shadow-xl font-light space-y-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 text-slate-700 text-base leading-relaxed shadow-xl font-light space-y-4">
             {renderFormattedContent(post.content)}
           </div>
 
           {/* Author Box */}
-          <div className="bg-[#181614] border border-stone-800 p-6 rounded-2xl flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#c5a059] text-black font-bold text-lg flex items-center justify-center shrink-0">
-              {post.author ? post.author.charAt(0) : 'D'}
+          <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl flex items-start gap-4">
+            <div className="w-12 h-12 rounded-full bg-orange-500 text-white font-bold text-lg flex items-center justify-center shrink-0">
+              {post.author ? post.author.charAt(0) : 'Y'}
             </div>
             <div className="space-y-1">
-              <span className="text-[10px] uppercase tracking-widest text-[#c5a059] font-bold block">Written By</span>
-              <h4 className="font-serif text-lg font-bold text-stone-100">{post.author || 'Discovery Safaris Team'}</h4>
-              <p className="text-xs text-stone-400 font-light">
-                {post.authorRole || 'Safari Specialist'} at Discovery Safaris Namibia. Specializing in bespoke private expeditions, luxury tented camp logistics, and Namibian conservation.
+              <span className="text-[10px] uppercase tracking-widest text-orange-600 font-bold block">Written By</span>
+              <h4 className="font-serif text-lg font-bold text-slate-900">{post.author || 'You & Me Team'}</h4>
+              <p className="text-xs text-slate-600 font-light">
+                {post.authorRole || 'Travel Specialist'} at You & Me – Independent Voyage. Specializing in bespoke private tours, temple trails, backwater cruises, and South Indian road trips.
               </p>
             </div>
           </div>
 
           {/* CTA Banner */}
-          <div className="bg-gradient-to-r from-[#1c1916] to-[#25201a] border border-[#3d3326] p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="bg-[#0F172A] border border-slate-800 p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-white">
             <div className="space-y-1">
-              <span className="text-xs text-[#c5a059] font-bold uppercase tracking-widest flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4" /> Ready to explore Namibia?
+              <span className="text-xs text-orange-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4" /> Ready to explore South India?
               </span>
-              <h3 className="font-serif text-2xl font-bold text-stone-100">Plan a private custom safari journey</h3>
+              <h3 className="font-serif text-2xl font-bold text-white">Plan a private custom journey</h3>
             </div>
             <button onClick={() => setIsQuoteOpen(true)} className="gold-button shrink-0">
               Request Custom Quote <ArrowRight className="w-4 h-4" />
@@ -368,18 +368,18 @@ export default function SingleBlogPostPage() {
 
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
-            <div className="space-y-6 pt-8 border-t border-stone-800">
-              <h3 className="font-serif text-2xl font-bold text-stone-100">Related Articles</h3>
+            <div className="space-y-6 pt-8 border-t border-slate-200">
+              <h3 className="font-serif text-2xl font-bold text-slate-900">Related Articles</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {relatedPosts.map((rel) => (
                   <Link
                     key={rel.id}
                     href={`/blog/${rel.slug}`}
-                    className="group bg-[#141210] border border-stone-800 rounded-xl overflow-hidden p-4 space-y-3 hover:border-[#c5a059] transition-all"
+                    className="group bg-white border border-slate-200 rounded-xl overflow-hidden p-4 space-y-3 hover:border-orange-500 transition-all"
                   >
                     <img src={rel.coverImage} alt={rel.title} className="h-32 w-full object-cover rounded-lg group-hover:scale-105 transition-transform" />
-                    <span className="text-[10px] text-[#c5a059] font-bold uppercase block">{rel.category}</span>
-                    <h4 className="font-serif font-bold text-sm text-stone-200 group-hover:text-[#c5a059] transition-colors line-clamp-2">
+                    <span className="text-[10px] text-orange-600 font-bold uppercase block">{rel.category}</span>
+                    <h4 className="font-serif font-bold text-sm text-slate-900 group-hover:text-orange-600 transition-colors line-clamp-2">
                       {rel.title}
                     </h4>
                   </Link>

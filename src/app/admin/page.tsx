@@ -61,7 +61,7 @@ import { ImageUploader } from '@/components/ImageUploader';
 
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [username, setUsername] = useState('admin@discoverysafaris.com');
+  const [username, setUsername] = useState('admin@youandmevoyage.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [passcode, setPasscode] = useState('');
@@ -174,57 +174,57 @@ export default function AdminPage() {
       {
         dayNumber: '01',
         daysLabel: 'Day 01',
-        title: 'Arrival in Windhoek & Sunset Game Drive',
-        description: 'Welcome to Namibia. Meet your private guide, settle into your design-led lodge, then watch the city turn amber from a quiet reserve.',
-        duration: '45 min · 35 km',
+        title: 'Arrival in Chennai & Historic Shore Temples',
+        description: 'Welcome to South India! Meet your private driver-companion at Chennai airport, travel to Mahabalipuram, and visit ancient UNESCO rock-cut shore temples.',
+        duration: '1.5 hrs · 55 km',
         mealPlan: 'Dinner',
-        accommodation: 'Little Kulala',
-        accommodationSub: 'Private desert villa · Sossusvlei',
-        image: 'https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=1200&q=85',
+        accommodation: 'Radisson Blu Resort Temple Bay',
+        accommodationSub: 'Beachfront resort · Mahabalipuram',
+        image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
       },
       {
         dayNumber: '02',
         daysLabel: 'Days 02–03',
-        title: 'Sossusvlei Dunes & Deadvlei 4x4 Excursion',
-        description: 'Journey south into the ancient Namib Desert. Climb Dune 45 at sunrise, walk among the ancient camel thorn trees of Deadvlei, and explore Sesriem Canyon.',
-        duration: '4.5 hrs · 350 km',
-        mealPlan: 'Full Board',
-        accommodation: 'Little Kulala Villa',
-        accommodationSub: 'Luxury desert villa · Sossusvlei',
-        image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
+        title: 'Pondicherry French Quarter & Auroville',
+        description: 'Drive along the Bay of Bengal coastline to Pondicherry. Wander through quiet mustard-yellow French Quarter lanes, visit Sri Aurobindo Ashram and experimental town Auroville.',
+        duration: '2 hrs · 100 km',
+        mealPlan: 'Breakfast & Dinner',
+        accommodation: 'Palais de Mahe',
+        accommodationSub: 'Heritage hotel · French Quarter',
+        image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=85',
       },
       {
         dayNumber: '03',
         daysLabel: 'Days 04–05',
-        title: 'Coastal Swakopmund & Living Desert Tour',
-        description: 'Traverse the desert to the coastal town of Swakopmund. Enjoy fresh oysters, a marine catamaran cruise in Walvis Bay, and a living desert gecko hunt.',
-        duration: '4 hrs · 320 km',
-        mealPlan: 'Breakfast & Lunch',
-        accommodation: 'Strand Hotel Swakopmund',
-        accommodationSub: 'Luxury Atlantic retreat',
-        image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85',
+        title: 'Thanjavur Great Living Chola Temples & Chettinad Mansions',
+        description: 'Visit the grand Brihadeeswarar Temple in Thanjavur, then head into the heart of Chettinad to explore palatial heritage mansions and savor world-famous local cuisine.',
+        duration: '4 hrs · 220 km',
+        mealPlan: 'Full Board',
+        accommodation: 'The Bangala',
+        accommodationSub: 'Heritage mansion hotel · Chettinad',
+        image: 'https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=1200&q=85',
       },
       {
         dayNumber: '04',
         daysLabel: 'Days 06–08',
-        title: 'Etosha National Park Big Five Safari',
-        description: 'Enter Etosha National Park for three full days of premier game viewing around floodlit waterholes teeming with lions, elephants, and black rhinos.',
-        duration: '5 hrs · 490 km',
+        title: 'Munnar Tea Plantations & Alleppey Houseboat Cruise',
+        description: 'Ascend into the misty Western Ghats to Munnar tea estates. Descend to Alleppey backwaters for a tranquil private luxury houseboat cruise along palm-fringed canals.',
+        duration: '4.5 hrs · 240 km',
         mealPlan: 'Full Board',
-        accommodation: 'Ongava Lodge',
-        accommodationSub: 'Private reserve villa · Etosha',
-        image: 'https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=85',
+        accommodation: 'Private Luxury Houseboat & Windermere Estate',
+        accommodationSub: 'Backwater luxury boat & tea estate bungalow',
+        image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
       },
       {
         dayNumber: '05',
         daysLabel: 'Days 09–10',
-        title: 'Damaraland Rock Art & Return',
-        description: 'Discover Twyfelfontein UNESCO rock engravings and track desert-adapted elephants before returning to Windhoek for international departure.',
-        duration: '4 hrs · 380 km',
-        mealPlan: 'Breakfast & Farewell Dinner',
-        accommodation: 'Okapuka Safari Lodge',
-        accommodationSub: 'Safari lodge · Windhoek',
-        image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=900&q=85',
+        title: 'Historic Fort Kochi & Departure',
+        description: 'Discover Chinese fishing nets, spice markets, and Kathakali cultural performances in historic Fort Kochi before seamless airport drop-off.',
+        duration: '1.5 hrs · 45 km',
+        mealPlan: 'Breakfast',
+        accommodation: 'Brunton Boatyard',
+        accommodationSub: 'Harborfront heritage hotel · Fort Kochi',
+        image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=85',
       },
     ];
   }, [settings?.homeItineraries]);
@@ -238,8 +238,8 @@ export default function AdminPage() {
   // Notifications state
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([
-    { id: 1, title: 'New Quote Inquiry', desc: 'Sarah Jenkins requested a custom quote for Private Safari', time: '10m ago', unread: true },
-    { id: 2, title: 'Blog Post Draft Saved', desc: 'Etosha Wildlife Waterholes guide created', time: '1h ago', unread: true },
+    { id: 1, title: 'New Quote Inquiry', desc: 'Sarah Jenkins requested a custom quote for South India Private Tour', time: '10m ago', unread: true },
+    { id: 2, title: 'Blog Post Draft Saved', desc: 'Tamil Nadu & Kerala Grand Circuit guide created', time: '1h ago', unread: true },
     { id: 3, title: 'CMS Data Synchronized', desc: 'Exchange rates & tour prices updated live', time: '3h ago', unread: false },
   ]);
 
@@ -258,18 +258,18 @@ export default function AdminPage() {
   const [editingSafari, setEditingSafari] = useState<any>(null);
   const [safariForm, setSafariForm] = useState({
     title: '',
-    priceUSD: '3000',
+    priceUSD: '1800',
     days: '7',
     nights: '6',
-    category: 'Private',
-    region: 'Central',
+    category: 'Customized Private',
+    region: 'Tamil Nadu',
     badge: 'Bestseller',
     image: '',
     route: '',
     accommodation: '',
     description: '',
-    inclusions: '["Private 4x4 vehicle","Luxury lodge"]',
-    exclusions: '["Flights","Personal items"]',
+    inclusions: '["Private Air-Conditioned Vehicle","English Speaking Driver-Companion","Heritage Hotels"]',
+    exclusions: '["Flights","Personal Expenses","Tips"]',
     metaTitle: '',
     metaDescription: '',
     keywords: '',
@@ -281,7 +281,7 @@ export default function AdminPage() {
     title: '',
     subtitle: '',
     image: '',
-    region: 'Central',
+    region: 'Tamil Nadu',
     size: 'short',
     description: '',
   });
@@ -302,9 +302,9 @@ export default function AdminPage() {
     slug: '',
     excerpt: '',
     content: '',
-    coverImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=85',
-    author: 'Discovery Safaris Team',
-    authorRole: 'Safari Specialist',
+    coverImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+    author: 'You & Me Travel Team',
+    authorRole: 'South India Travel Specialist',
     category: 'Travel Guide',
     readTime: '5 min read',
     metaTitle: '',
@@ -346,8 +346,8 @@ export default function AdminPage() {
   });
 
   // Dynamic Categories & Regions states
-  const [categoriesList, setCategoriesList] = useState<string[]>(['Private', 'Luxury Tented', 'Adventure']);
-  const [regionsList, setRegionsList] = useState<string[]>(['Central', 'North', 'South']);
+  const [categoriesList, setCategoriesList] = useState<string[]>(['Customized Private', 'Cultural & Heritage', 'Backwaters & Coastal', 'Hill Station & Nature', 'Temple & Architecture']);
+  const [regionsList, setRegionsList] = useState<string[]>(['Tamil Nadu', 'Kerala', 'South India Circuit']);
   const [showAddCatInput, setShowAddCatInput] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState('');
   const [showAddRegionInput, setShowAddRegionInput] = useState(false);
@@ -466,7 +466,7 @@ export default function AdminPage() {
         setAuthenticated(true);
         fetchAllData();
       } else {
-        setAuthError(data.error || 'Invalid credentials. Default: admin@discoverysafaris.com / admin123');
+        setAuthError(data.error || 'Invalid credentials. Default: admin@youandmevoyage.com / admin123');
       }
     } catch (err: any) {
       setAuthError('Server error during login');
@@ -1258,15 +1258,15 @@ export default function AdminPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/80 to-stone-950/90 backdrop-blur-sm" />
 
         {/* Ambient Background Gold Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="w-full max-w-md bg-[#141210]/90 backdrop-blur-xl border border-amber-500/30 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6 relative z-10 hover:border-amber-500/50 transition-all">
+        <div className="w-full max-w-md bg-[#141210]/90 backdrop-blur-xl border border-orange-500/30 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6 relative z-10 hover:border-orange-500/50 transition-all">
           <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 via-amber-600/10 to-amber-900/30 border border-amber-500/40 text-amber-400 flex items-center justify-center mx-auto mb-3 shadow-lg">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 via-orange-600/10 to-orange-900/30 border border-orange-500/40 text-orange-400 flex items-center justify-center mx-auto mb-3 shadow-lg">
               <Lock className="w-7 h-7" />
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-[10px] font-bold uppercase tracking-widest">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-[10px] font-bold uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
               CMS Control Portal
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100 tracking-tight">Discovery Safaris Admin</h1>
@@ -1282,7 +1282,7 @@ export default function AdminPage() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="admin@discoverysafaris.com"
+                  placeholder="admin@youandmevoyage.com"
                   className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-4 py-3 text-sm outline-none focus:border-primary font-sans"
                 />
                 <User className="w-4 h-4 text-stone-500 absolute left-3 top-3.5" />
@@ -1295,7 +1295,7 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    setForgotEmail(username || 'info@discoverysafaris.com');
+                    setForgotEmail(username || 'info@youandmevoyage.com');
                     setShowForgotModal(true);
                   }}
                   className="text-xs text-primary hover:underline font-medium"
@@ -1346,7 +1346,7 @@ export default function AdminPage() {
         {/* FORGOT PASSWORD RESET MODAL */}
         {showForgotModal && (
           <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-[#141210] border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5 relative animate-in zoom-in-95">
+            <div className="w-full max-w-md bg-[#141210] border border-orange-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5 relative animate-in zoom-in-95">
               <button
                 onClick={() => {
                   setShowForgotModal(false);
@@ -1360,7 +1360,7 @@ export default function AdminPage() {
               </button>
 
               <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center mx-auto mb-3">
+                <div className="w-12 h-12 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center mx-auto mb-3">
                   <Mail className="w-6 h-6" />
                 </div>
                 <h3 className="font-serif text-2xl font-bold text-stone-100">Reset Admin Password</h3>
@@ -1381,9 +1381,9 @@ export default function AdminPage() {
                 <div className="p-3 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs rounded-xl text-center space-y-1">
                   <p>{forgotMsg}</p>
                   {previewOtp && (
-                    <div className="mt-2 p-2 bg-stone-900 border border-amber-500/40 rounded-lg text-center">
-                      <span className="text-[10px] text-amber-400 uppercase tracking-widest block font-semibold">Dev Verification Code:</span>
-                      <strong className="font-mono text-lg text-amber-300 tracking-widest">{previewOtp}</strong>
+                    <div className="mt-2 p-2 bg-stone-900 border border-orange-500/40 rounded-lg text-center">
+                      <span className="text-[10px] text-orange-400 uppercase tracking-widest block font-semibold">Dev Verification Code:</span>
+                      <strong className="font-mono text-lg text-orange-300 tracking-widest">{previewOtp}</strong>
                     </div>
                   )}
                 </div>
@@ -1400,7 +1400,7 @@ export default function AdminPage() {
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
                       placeholder="info@discoverysafaris.com"
-                      className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-4 py-3 text-sm outline-none focus:border-amber-400"
+                      className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400"
                     />
                   </div>
 
@@ -1424,7 +1424,7 @@ export default function AdminPage() {
                       value={otpCodeInput}
                       onChange={(e) => setOtpCodeInput(e.target.value)}
                       placeholder="e.g. 849201"
-                      className="w-full bg-stone-900 border border-amber-500/50 text-amber-300 font-mono tracking-widest text-center text-lg rounded-lg py-2.5 outline-none focus:border-amber-400"
+                      className="w-full bg-stone-900 border border-orange-500/50 text-orange-300 font-mono tracking-widest text-center text-lg rounded-lg py-2.5 outline-none focus:border-orange-400"
                     />
                   </div>
 
@@ -1437,7 +1437,7 @@ export default function AdminPage() {
                       value={newPasswordInput}
                       onChange={(e) => setNewPasswordInput(e.target.value)}
                       placeholder="Enter new password (min 6 chars)"
-                      className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-4 py-3 text-sm outline-none focus:border-amber-400"
+                      className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400"
                     />
                   </div>
 
@@ -1480,7 +1480,7 @@ export default function AdminPage() {
             className="p-2 rounded-lg bg-stone-900 border border-stone-800 text-stone-300 hover:text-primary hover:border-stone-700 transition-all flex items-center gap-2"
             title={sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
-            <Menu className="w-4.5 h-4.5 text-[#c5a059]" />
+            <Menu className="w-4.5 h-4.5 text-[#F97316]" />
             <span className="text-xs font-semibold hidden sm:inline text-stone-300">
               {sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             </span>
@@ -1513,7 +1513,7 @@ export default function AdminPage() {
             >
               <Bell className="w-4 h-4" />
               {notifications.filter((n) => n.unread).length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-amber-500 text-black font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-md animate-pulse">
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-black font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-md animate-pulse">
                   {notifications.filter((n) => n.unread).length}
                 </span>
               )}
@@ -1524,13 +1524,13 @@ export default function AdminPage() {
               <div className="absolute right-0 mt-3 w-80 bg-[#141210] border border-stone-800 rounded-2xl shadow-2xl z-50 p-4 space-y-3">
                 <div className="flex items-center justify-between border-b border-stone-800 pb-2">
                   <span className="font-serif text-xs font-bold text-stone-100 flex items-center gap-2">
-                    <Bell className="w-3.5 h-3.5 text-[#c5a059]" /> System Notifications
+                    <Bell className="w-3.5 h-3.5 text-[#F97316]" /> System Notifications
                   </span>
                   <button
                     onClick={() => {
                       setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })));
                     }}
-                    className="text-[10px] text-[#c5a059] hover:underline font-semibold"
+                    className="text-[10px] text-[#F97316] hover:underline font-semibold"
                   >
                     Mark all read
                   </button>
@@ -1545,7 +1545,7 @@ export default function AdminPage() {
                         key={notif.id}
                         className={`p-3 rounded-xl border text-xs space-y-1 transition-all ${
                           notif.unread
-                            ? 'bg-[#181614] border-[#c5a059]/40 text-stone-100'
+                            ? 'bg-[#181614] border-[#F97316]/40 text-stone-100'
                             : 'bg-stone-900/40 border-stone-800 text-stone-400'
                         }`}
                       >
@@ -1654,7 +1654,7 @@ export default function AdminPage() {
                 {!sidebarCollapsed && <span>Quote Requests</span>}
               </span>
               {!sidebarCollapsed && (
-                <span className="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[10px] font-bold">
+                <span className="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-[10px] font-bold">
                   {inquiries.filter((i) => i.status === 'Pending').length} new
                 </span>
               )}
@@ -1684,12 +1684,12 @@ export default function AdminPage() {
                 title="CMS Content Modules"
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-xs font-semibold transition-all ${
                   ['blogs', 'faqs', 'about', 'legal', 'itineraries'].includes(activeTab)
-                    ? 'bg-stone-800 text-stone-100 font-bold border-l-2 border-[#c5a059]'
+                    ? 'bg-stone-800 text-stone-100 font-bold border-l-2 border-[#F97316]'
                     : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
                 } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
               >
                 <span className="flex items-center gap-3">
-                  <Layout className="w-4 h-4 shrink-0 text-[#c5a059]" />
+                  <Layout className="w-4 h-4 shrink-0 text-[#F97316]" />
                   {!sidebarCollapsed && <span>CMS</span>}
                 </span>
                 {!sidebarCollapsed && (
@@ -1730,7 +1730,7 @@ export default function AdminPage() {
                     } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
                   >
                     <span className="flex items-center gap-2.5">
-                      <HelpCircle className="w-3.5 h-3.5 shrink-0 text-[#c5a059]" />
+                      <HelpCircle className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
                       {!sidebarCollapsed && <span>FAQ</span>}
                     </span>
                     {!sidebarCollapsed && (
@@ -1748,7 +1748,7 @@ export default function AdminPage() {
                         : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
                     } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
                   >
-                    <Globe className="w-3.5 h-3.5 shrink-0 text-[#c5a059]" />
+                    <Globe className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
                     {!sidebarCollapsed && <span>About Page</span>}
                   </button>
 
@@ -1762,7 +1762,7 @@ export default function AdminPage() {
                         : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
                     } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
                   >
-                    <FileText className="w-3.5 h-3.5 shrink-0 text-[#c5a059]" />
+                    <FileText className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
                     {!sidebarCollapsed && <span>Legal & Terms</span>}
                   </button>
 
@@ -1776,7 +1776,7 @@ export default function AdminPage() {
                         : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
                     } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
                   >
-                    <Clock className="w-3.5 h-3.5 shrink-0 text-[#c5a059]" />
+                    <Clock className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
                     {!sidebarCollapsed && <span>Home Itineraries</span>}
                   </button>
                 </div>
@@ -1792,7 +1792,7 @@ export default function AdminPage() {
               } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
             >
               <span className="flex items-center gap-3">
-                <BarChart3 className="w-4 h-4 shrink-0 text-[#c5a059]" />
+                <BarChart3 className="w-4 h-4 shrink-0 text-[#F97316]" />
                 {!sidebarCollapsed && <span>Safari Insights</span>}
               </span>
               {!sidebarCollapsed && (
@@ -1861,7 +1861,7 @@ export default function AdminPage() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-stone-800/80 pb-4">
                   <div>
                     <h2 className="font-serif text-2xl font-bold text-stone-100 flex items-center gap-2">
-                      <Compass className="w-6 h-6 text-[#c5a059]" /> Dashboard Overview
+                      <Compass className="w-6 h-6 text-[#F97316]" /> Dashboard Overview
                     </h2>
                     <p className="text-xs text-stone-400 mt-1">Real-time status, booking analytics, and filtered website activities</p>
                   </div>
@@ -1869,14 +1869,14 @@ export default function AdminPage() {
                   {/* Filter Toolbar: Today | Week | Month | Custom | All */}
                   <div className="flex flex-wrap items-center gap-1.5 bg-[#141210] border border-stone-800 p-1.5 rounded-xl shadow-lg">
                     <span className="text-[11px] text-stone-400 font-semibold px-2 flex items-center gap-1">
-                      <Filter className="w-3.5 h-3.5 text-[#c5a059]" /> Date Filter:
+                      <Filter className="w-3.5 h-3.5 text-[#F97316]" /> Date Filter:
                     </span>
 
                     <button
                       onClick={() => setDateFilter('today')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                         dateFilter === 'today'
-                          ? 'bg-[#c5a059] text-stone-950 font-bold shadow-md'
+                          ? 'bg-[#F97316] text-stone-950 font-bold shadow-md'
                           : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
                     >
@@ -1887,7 +1887,7 @@ export default function AdminPage() {
                       onClick={() => setDateFilter('week')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                         dateFilter === 'week'
-                          ? 'bg-[#c5a059] text-stone-950 font-bold shadow-md'
+                          ? 'bg-[#F97316] text-stone-950 font-bold shadow-md'
                           : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
                     >
@@ -1898,7 +1898,7 @@ export default function AdminPage() {
                       onClick={() => setDateFilter('month')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                         dateFilter === 'month'
-                          ? 'bg-[#c5a059] text-stone-950 font-bold shadow-md'
+                          ? 'bg-[#F97316] text-stone-950 font-bold shadow-md'
                           : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
                     >
@@ -1909,7 +1909,7 @@ export default function AdminPage() {
                       onClick={() => setDateFilter('custom')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
                         dateFilter === 'custom'
-                          ? 'bg-[#c5a059] text-stone-950 font-bold shadow-md'
+                          ? 'bg-[#F97316] text-stone-950 font-bold shadow-md'
                           : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
                     >
@@ -1920,7 +1920,7 @@ export default function AdminPage() {
                       onClick={() => setDateFilter('all')}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                         dateFilter === 'all'
-                          ? 'bg-[#c5a059] text-stone-950 font-bold shadow-md'
+                          ? 'bg-[#F97316] text-stone-950 font-bold shadow-md'
                           : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
                     >
@@ -1938,7 +1938,7 @@ export default function AdminPage() {
                         type="date"
                         value={customStartDate}
                         onChange={(e) => setCustomStartDate(e.target.value)}
-                        className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-1.5 rounded-lg outline-none focus:border-[#c5a059]"
+                        className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-1.5 rounded-lg outline-none focus:border-[#F97316]"
                       />
                     </div>
                     <div className="flex items-center gap-2">
@@ -1947,7 +1947,7 @@ export default function AdminPage() {
                         type="date"
                         value={customEndDate}
                         onChange={(e) => setCustomEndDate(e.target.value)}
-                        className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-1.5 rounded-lg outline-none focus:border-[#c5a059]"
+                        className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-1.5 rounded-lg outline-none focus:border-[#F97316]"
                       />
                     </div>
                     {(customStartDate || customEndDate) && (
@@ -1967,10 +1967,10 @@ export default function AdminPage() {
                 {/* Stat Metric Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {/* 1. TOTAL SAFARIS CARD */}
-                  <div className="bg-[#141210] border border-stone-800 p-6 rounded-2xl space-y-3 shadow-xl relative overflow-hidden group hover:border-[#c5a059]/60 transition-all duration-300">
+                  <div className="bg-[#141210] border border-stone-800 p-6 rounded-2xl space-y-3 shadow-xl relative overflow-hidden group hover:border-[#F97316]/60 transition-all duration-300">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-stone-400 font-bold uppercase tracking-wider">Total Safaris</span>
-                      <div className="w-10 h-10 rounded-xl bg-[#c5a059]/10 border border-[#c5a059]/30 text-[#c5a059] flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-[#c5a059] group-hover:text-stone-950 transition-all duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-[#F97316]/10 border border-[#F97316]/30 text-[#F97316] flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-[#F97316] group-hover:text-stone-950 transition-all duration-300">
                         <Compass className="w-5 h-5" />
                       </div>
                     </div>
@@ -1981,17 +1981,17 @@ export default function AdminPage() {
                   </div>
 
                   {/* 2. QUOTE INQUIRIES CARD */}
-                  <div className="bg-[#141210] border border-stone-800 p-6 rounded-2xl space-y-3 shadow-xl relative overflow-hidden group hover:border-amber-500/60 transition-all duration-300">
+                  <div className="bg-[#141210] border border-stone-800 p-6 rounded-2xl space-y-3 shadow-xl relative overflow-hidden group hover:border-orange-500/60 transition-all duration-300">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-stone-400 font-bold uppercase tracking-wider">Quote Inquiries</span>
-                      <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-stone-950 transition-all duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-orange-400 group-hover:text-stone-950 transition-all duration-300">
                         <MessageSquare className="w-5 h-5" />
                       </div>
                     </div>
                     <div>
-                      <strong className="text-3xl font-serif font-bold text-amber-400 block">{filteredInquiries.length}</strong>
-                      <span className="text-[11px] text-amber-500/90 font-medium mt-1 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                      <strong className="text-3xl font-serif font-bold text-orange-400 block">{filteredInquiries.length}</strong>
+                      <span className="text-[11px] text-orange-500/90 font-medium mt-1 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
                         {filteredInquiries.filter((i) => i.status === 'Pending').length} pending action
                       </span>
                     </div>
@@ -2182,8 +2182,8 @@ export default function AdminPage() {
                         const count = catCounts[cat];
                         const pct = Math.round((count / safariTotal) * 100);
                         const colors = [
-                          { bg: 'bg-[#c5a059]', text: 'text-[#c5a059]' },
-                          { bg: 'bg-amber-500', text: 'text-amber-400' },
+                          { bg: 'bg-[#F97316]', text: 'text-[#F97316]' },
+                          { bg: 'bg-orange-500', text: 'text-orange-400' },
                           { bg: 'bg-emerald-500', text: 'text-emerald-400' },
                           { bg: 'bg-sky-500', text: 'text-sky-400' },
                         ];
@@ -2191,8 +2191,8 @@ export default function AdminPage() {
                         return { name: cat, percentage: pct, bg: colorObj.bg, text: colorObj.text, count };
                       })
                     : [
-                        { name: 'Private Safaris', percentage: 55, bg: 'bg-[#c5a059]', text: 'text-[#c5a059]', count: 3 },
-                        { name: 'Luxury Tented Camps', percentage: 30, bg: 'bg-amber-500', text: 'text-amber-400', count: 2 },
+                        { name: 'Private Safaris', percentage: 55, bg: 'bg-[#F97316]', text: 'text-[#F97316]', count: 3 },
+                        { name: 'Luxury Tented Camps', percentage: 30, bg: 'bg-orange-500', text: 'text-orange-400', count: 2 },
                         { name: 'Adventure Expeditions', percentage: 15, bg: 'bg-emerald-500', text: 'text-emerald-400', count: 1 },
                       ];
 
@@ -2203,10 +2203,10 @@ export default function AdminPage() {
                         <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                           <div>
                             <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                              <BarChart3 className="w-5 h-5 text-[#c5a059]" /> Inquiries & Visitor Analytics
+                              <BarChart3 className="w-5 h-5 text-[#F97316]" /> Inquiries & Visitor Analytics
                             </h3>
                             <p className="text-[11px] text-stone-400 font-sans">
-                              Active Filter: <strong className="text-[#c5a059] font-mono">{dateFilter.toUpperCase()}</strong> ({filteredInquiries.length} total leads)
+                              Active Filter: <strong className="text-[#F97316] font-mono">{dateFilter.toUpperCase()}</strong> ({filteredInquiries.length} total leads)
                             </p>
                           </div>
                           <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-1 rounded font-bold flex items-center gap-1 font-mono">
@@ -2220,12 +2220,12 @@ export default function AdminPage() {
                             {displayGraph.map((item, i) => (
                               <div key={i} className="flex-1 flex flex-col items-center justify-end gap-2 group relative h-full">
                                 {/* Hover Tooltip */}
-                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute -top-8 bg-stone-900 border border-[#c5a059]/60 text-[10px] text-amber-300 px-2.5 py-1 rounded-md font-bold font-mono pointer-events-none z-30 shadow-2xl whitespace-nowrap">
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute -top-8 bg-stone-900 border border-[#F97316]/60 text-[10px] text-orange-300 px-2.5 py-1 rounded-md font-bold font-mono pointer-events-none z-30 shadow-2xl whitespace-nowrap">
                                   {item.count} leads ({item.percentage}%)
                                 </div>
 
                                 {/* Bar Value Badge on top of bar */}
-                                <span className={`text-[10px] font-mono font-bold ${item.count > 0 ? 'text-[#c5a059]' : 'text-stone-600'}`}>
+                                <span className={`text-[10px] font-mono font-bold ${item.count > 0 ? 'text-[#F97316]' : 'text-stone-600'}`}>
                                   {item.count}
                                 </span>
                                 
@@ -2235,14 +2235,14 @@ export default function AdminPage() {
                                     style={{ height: `${item.percentage}%` }}
                                     className={`w-full ${
                                       item.count > 0
-                                        ? 'bg-gradient-to-t from-[#8a6d3b] via-[#c5a059] to-[#f3d999] group-hover:brightness-125'
+                                        ? 'bg-gradient-to-t from-[#8a6d3b] via-[#F97316] to-[#f3d999] group-hover:brightness-125'
                                         : 'bg-stone-800/40'
                                     } transition-all duration-500 rounded-t-md shadow-lg`}
                                   />
                                 </div>
 
                                 {/* X-Axis Label */}
-                                <span className="text-[10px] text-stone-400 font-mono group-hover:text-amber-400 font-semibold transition-colors">
+                                <span className="text-[10px] text-stone-400 font-mono group-hover:text-orange-400 font-semibold transition-colors">
                                   {item.label}
                                 </span>
                               </div>
@@ -2255,7 +2255,7 @@ export default function AdminPage() {
                       <div className="lg:col-span-4 bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-6 shadow-xl">
                         <div className="border-b border-stone-800 pb-3">
                           <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                            <PieChart className="w-5 h-5 text-[#c5a059]" /> Safari Category Share
+                            <PieChart className="w-5 h-5 text-[#F97316]" /> Safari Category Share
                           </h3>
                           <p className="text-[11px] text-stone-400">Live tour style demand distribution</p>
                         </div>
@@ -2283,14 +2283,14 @@ export default function AdminPage() {
                   <div className="lg:col-span-6 bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                     <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Activity className="w-5 h-5 text-[#c5a059]" /> Recent Activities Stream
+                        <Activity className="w-5 h-5 text-[#F97316]" /> Recent Activities Stream
                       </h3>
                       <span className="text-[10px] text-stone-500 font-mono">Live Activity Logs</span>
                     </div>
 
                     <div className="space-y-3">
                       {[
-                        { icon: MessageSquare, color: 'text-amber-400 bg-amber-950/40 border-amber-800', title: 'New Quote Request', detail: 'Sarah Jenkins submitted an itinerary inquiry', time: '12 mins ago' },
+                        { icon: MessageSquare, color: 'text-orange-400 bg-orange-950/40 border-orange-800', title: 'New Quote Request', detail: 'Sarah Jenkins submitted an itinerary inquiry', time: '12 mins ago' },
                         { icon: MapPin, color: 'text-primary bg-stone-900 border-stone-700', title: 'Safari Updated', detail: 'Classic Namibia Expedition SEO and pricing saved', time: '45 mins ago' },
                         { icon: BookOpen, color: 'text-emerald-400 bg-emerald-950/40 border-emerald-800', title: 'Blog Post Published', detail: 'Ultimate Guide to Etosha Waterholes live on front-end', time: '2 hours ago' },
                         { icon: Star, color: 'text-yellow-400 bg-yellow-950/40 border-yellow-800', title: 'Guest Review Verified', detail: '5-star review from Mark Mueller (Germany) approved', time: '4 hours ago' },
@@ -2316,9 +2316,9 @@ export default function AdminPage() {
                   <div className="lg:col-span-6 bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                     <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <MessageSquare className="w-5 h-5 text-[#c5a059]" /> Recent Quote Inquiries
+                        <MessageSquare className="w-5 h-5 text-[#F97316]" /> Recent Quote Inquiries
                       </h3>
-                      <button onClick={() => setActiveTab('inquiries')} className="text-xs text-[#c5a059] font-bold hover:underline">
+                      <button onClick={() => setActiveTab('inquiries')} className="text-xs text-[#F97316] font-bold hover:underline">
                         View All →
                       </button>
                     </div>
@@ -2338,7 +2338,7 @@ export default function AdminPage() {
                               <span
                                 className={`px-2.5 py-0.5 rounded text-[10px] font-bold ${
                                   inq.status === 'Pending'
-                                    ? 'bg-amber-500/20 text-amber-400 border border-amber-800'
+                                    ? 'bg-orange-500/20 text-orange-400 border border-orange-800'
                                     : inq.status === 'Contacted'
                                     ? 'bg-blue-500/20 text-blue-400 border border-blue-800'
                                     : 'bg-emerald-500/20 text-emerald-400 border border-emerald-800'
@@ -2372,18 +2372,18 @@ export default function AdminPage() {
                         setEditingSafari(null);
                         setSafariForm({
                           title: '',
-                          priceUSD: '3500',
+                          priceUSD: '1800',
                           days: '7',
                           nights: '6',
-                          category: 'Private',
-                          region: 'Central',
+                          category: 'Customized Private',
+                          region: 'Tamil Nadu',
                           badge: 'Bestseller',
-                          image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=85',
-                          route: 'Windhoek → Sossusvlei → Etosha',
-                          accommodation: 'Luxury Lodges & Tented Camps',
-                          description: 'Custom luxury safari experience through Namibia.',
-                          inclusions: '["Private 4x4 guide vehicle","Full board luxury lodging","Park entry fees"]',
-                          exclusions: '["International flights","Personal travel insurance"]',
+                          image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+                          route: 'Chennai → Mahabalipuram → Pondicherry → Thanjavur → Madurai → Munnar → Alleppey → Kochi',
+                          accommodation: 'Heritage Mansions & Backwater Resorts',
+                          description: 'Custom private trip through South India with dedicated driver-companion.',
+                          inclusions: '["Private AC vehicle & dedicated driver-companion","Heritage lodging & luxury resort stays","Daily breakfast"]',
+                          exclusions: '["International flights","Personal expenses & tips"]',
                           metaTitle: '',
                           metaDescription: '',
                           keywords: '',
@@ -2497,13 +2497,13 @@ export default function AdminPage() {
                     <div className="flex items-center gap-4">
                       <button
                         onClick={() => setSafariViewMode('list')}
-                        className="flex items-center gap-2 text-xs text-[#c5a059] font-bold bg-stone-900 border border-stone-800 px-3 py-2 rounded-lg hover:bg-stone-800 transition-colors"
+                        className="flex items-center gap-2 text-xs text-[#F97316] font-bold bg-stone-900 border border-stone-800 px-3 py-2 rounded-lg hover:bg-stone-800 transition-colors"
                       >
                         <ArrowLeft className="w-4 h-4" /> Back to Safaris Collection
                       </button>
                       <div>
                         <h2 className="font-serif text-2xl font-bold text-stone-100 flex items-center gap-2">
-                          <MapPin className="w-5 h-5 text-[#c5a059]" />
+                          <MapPin className="w-5 h-5 text-[#F97316]" />
                           {editingSafari ? 'Safari Package Workspace' : 'Create New Safari Workspace'}
                         </h2>
                         <p className="text-xs text-stone-400">Full itinerary customization, pricing & dedicated SEO configuration studio</p>
@@ -2587,7 +2587,7 @@ export default function AdminPage() {
                               <button
                                 type="button"
                                 onClick={() => setShowAddCatInput(true)}
-                                className="text-[10px] text-[#c5a059] font-bold hover:underline flex items-center gap-0.5"
+                                className="text-[10px] text-[#F97316] font-bold hover:underline flex items-center gap-0.5"
                               >
                                 <Plus className="w-3 h-3" /> Add Custom
                               </button>
@@ -2603,14 +2603,14 @@ export default function AdminPage() {
                                     setSafariForm({ ...safariForm, category: e.target.value });
                                   }
                                 }}
-                                className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                                className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                               >
                                 {categoriesList.map((cat) => (
                                   <option key={cat} value={cat}>
                                     {cat}
                                   </option>
                                 ))}
-                                <option value="__ADD_NEW__" className="text-[#c5a059] font-bold">
+                                <option value="__ADD_NEW__" className="text-[#F97316] font-bold">
                                   + Add New Category...
                                 </option>
                               </select>
@@ -2631,12 +2631,12 @@ export default function AdminPage() {
                                     }
                                   }}
                                   placeholder="e.g. Fly-in Safari"
-                                  className="w-full bg-stone-900 border border-[#c5a059] p-2 rounded text-xs text-stone-100 outline-none"
+                                  className="w-full bg-stone-900 border border-[#F97316] p-2 rounded text-xs text-stone-100 outline-none"
                                 />
                                 <button
                                   type="button"
                                   onClick={() => handleAddNewCategory()}
-                                  className="px-2.5 py-2 bg-[#c5a059] text-stone-950 font-bold rounded text-xs shrink-0 hover:brightness-110"
+                                  className="px-2.5 py-2 bg-[#F97316] text-stone-950 font-bold rounded text-xs shrink-0 hover:brightness-110"
                                 >
                                   Add
                                 </button>
@@ -2661,7 +2661,7 @@ export default function AdminPage() {
                               <button
                                 type="button"
                                 onClick={() => setShowAddRegionInput(true)}
-                                className="text-[10px] text-[#c5a059] font-bold hover:underline flex items-center gap-0.5"
+                                className="text-[10px] text-[#F97316] font-bold hover:underline flex items-center gap-0.5"
                               >
                                 <Plus className="w-3 h-3" /> Add Custom
                               </button>
@@ -2677,14 +2677,14 @@ export default function AdminPage() {
                                     setSafariForm({ ...safariForm, region: e.target.value });
                                   }
                                 }}
-                                className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                                className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                               >
                                 {regionsList.map((reg) => (
                                   <option key={reg} value={reg}>
                                     {reg}
                                   </option>
                                 ))}
-                                <option value="__ADD_NEW__" className="text-[#c5a059] font-bold">
+                                <option value="__ADD_NEW__" className="text-[#F97316] font-bold">
                                   + Add New Region...
                                 </option>
                               </select>
@@ -2705,12 +2705,12 @@ export default function AdminPage() {
                                     }
                                   }}
                                   placeholder="e.g. Caprivi Strip"
-                                  className="w-full bg-stone-900 border border-[#c5a059] p-2 rounded text-xs text-stone-100 outline-none"
+                                  className="w-full bg-stone-900 border border-[#F97316] p-2 rounded text-xs text-stone-100 outline-none"
                                 />
                                 <button
                                   type="button"
                                   onClick={() => handleAddNewRegion()}
-                                  className="px-2.5 py-2 bg-[#c5a059] text-stone-950 font-bold rounded text-xs shrink-0 hover:brightness-110"
+                                  className="px-2.5 py-2 bg-[#F97316] text-stone-950 font-bold rounded text-xs shrink-0 hover:brightness-110"
                                 >
                                   Add
                                 </button>
@@ -2754,7 +2754,7 @@ export default function AdminPage() {
                             required
                             value={safariForm.route}
                             onChange={(e) => setSafariForm({ ...safariForm, route: e.target.value })}
-                            placeholder="Windhoek → Sossusvlei → Swakopmund → Etosha"
+                            placeholder="Chennai → Mahabalipuram → Pondicherry → Thanjavur → Madurai → Munnar → Alleppey"
                             className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
                           />
                         </div>
@@ -2766,7 +2766,7 @@ export default function AdminPage() {
                             required
                             value={safariForm.accommodation}
                             onChange={(e) => setSafariForm({ ...safariForm, accommodation: e.target.value })}
-                            placeholder="Luxury Lodges & Private Reserves"
+                            placeholder="Heritage Hotels, Resorts & Luxury Houseboats"
                             className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
                           />
                         </div>
@@ -2788,14 +2788,14 @@ export default function AdminPage() {
                       <div className="lg:col-span-5 space-y-6">
                         {/* SEO Studio Box */}
                         <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
-                          <h3 className="font-serif text-lg font-bold text-[#c5a059] border-b border-stone-800 pb-3">SEO & Search Engine Snippet</h3>
+                          <h3 className="font-serif text-lg font-bold text-[#F97316] border-b border-stone-800 pb-3">SEO & Search Engine Snippet</h3>
 
                           <div>
                             <div className="flex items-center justify-between mb-1">
                               <label className="block text-stone-400 font-semibold">SEO Meta Title</label>
                               {(() => {
                                 const titleLen = (safariForm.metaTitle || '').length;
-                                let color = 'text-amber-400 bg-amber-950/40 border-amber-800/60';
+                                let color = 'text-orange-400 bg-orange-950/40 border-orange-800/60';
                                 if (titleLen >= 50 && titleLen <= 60) color = 'text-emerald-400 bg-emerald-950/40 border-emerald-800/60';
                                 if (titleLen > 60) color = 'text-rose-400 bg-rose-950/40 border-rose-800/60';
                                 return (
@@ -2819,7 +2819,7 @@ export default function AdminPage() {
                               <label className="block text-stone-400 font-semibold">SEO Meta Description</label>
                               {(() => {
                                 const descLen = (safariForm.metaDescription || '').length;
-                                let color = 'text-amber-400 bg-amber-950/40 border-amber-800/60';
+                                let color = 'text-orange-400 bg-orange-950/40 border-orange-800/60';
                                 if (descLen >= 140 && descLen <= 160) color = 'text-emerald-400 bg-emerald-950/40 border-emerald-800/60';
                                 if (descLen > 160) color = 'text-rose-400 bg-rose-950/40 border-rose-800/60';
                                 return (
@@ -2987,7 +2987,7 @@ export default function AdminPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <h2 className="font-serif text-2xl font-bold flex items-center gap-2">
-                      <MessageSquare className="w-6 h-6 text-[#c5a059]" /> Quote Requests & Lead CRM Studio
+                      <MessageSquare className="w-6 h-6 text-[#F97316]" /> Quote Requests & Lead CRM Studio
                     </h2>
                     <p className="text-xs text-stone-400">Track lead pipelines, stage transitions, scheduled follow-ups, and proposal revenue values</p>
                   </div>
@@ -2995,10 +2995,10 @@ export default function AdminPage() {
 
                 {/* CRM Pipeline KPI Stat Cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                  <div className="bg-[#141210] border border-stone-800 p-4 rounded-xl space-y-2 shadow group hover:border-[#c5a059]/40 transition-all">
+                  <div className="bg-[#141210] border border-stone-800 p-4 rounded-xl space-y-2 shadow group hover:border-[#F97316]/40 transition-all">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Total Leads</span>
-                      <div className="w-7 h-7 rounded-lg bg-stone-900 border border-stone-700 text-[#c5a059] flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-lg bg-stone-900 border border-stone-700 text-[#F97316] flex items-center justify-center">
                         <User className="w-3.5 h-3.5" />
                       </div>
                     </div>
@@ -3006,14 +3006,14 @@ export default function AdminPage() {
                     <span className="text-[10px] text-stone-500 block">All Website Enquiries</span>
                   </div>
 
-                  <div className="bg-[#141210] border border-amber-900/40 p-4 rounded-xl space-y-2 shadow group hover:border-amber-500/60 transition-all">
+                  <div className="bg-[#141210] border border-orange-900/40 p-4 rounded-xl space-y-2 shadow group hover:border-orange-500/60 transition-all">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">New Pending</span>
-                      <div className="w-7 h-7 rounded-lg bg-amber-950/60 border border-amber-800 text-amber-400 flex items-center justify-center">
+                      <span className="text-[10px] text-orange-400 font-bold uppercase tracking-wider block">New Pending</span>
+                      <div className="w-7 h-7 rounded-lg bg-orange-950/60 border border-orange-800 text-orange-400 flex items-center justify-center">
                         <Clock className="w-3.5 h-3.5" />
                       </div>
                     </div>
-                    <div className="text-xl font-serif font-bold text-amber-400">
+                    <div className="text-xl font-serif font-bold text-orange-400">
                       {inquiries.filter((i) => i.status === 'Pending').length}
                     </div>
                     <span className="text-[10px] text-stone-500 block">Awaiting First Response</span>
@@ -3094,7 +3094,7 @@ export default function AdminPage() {
                               setInquiryPage(1);
                             }}
                             placeholder="Search by Name, Email, Mobile No., or Location..."
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-xl pl-10 pr-4 py-2.5 text-xs outline-none focus:border-[#c5a059] shadow-inner"
+                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-xl pl-10 pr-4 py-2.5 text-xs outline-none focus:border-[#F97316] shadow-inner"
                           />
                           <Search className="w-4 h-4 text-stone-500 absolute left-3.5 top-3" />
                           {inquirySearchQuery && (
@@ -3110,7 +3110,7 @@ export default function AdminPage() {
                         {/* CRM Stage Status Filter Pills & Dropdown */}
                         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
                           <span className="text-xs text-stone-400 font-semibold flex items-center gap-1">
-                            <Filter className="w-3.5 h-3.5 text-[#c5a059]" /> Stage:
+                            <Filter className="w-3.5 h-3.5 text-[#F97316]" /> Stage:
                           </span>
 
                           <select
@@ -3119,7 +3119,7 @@ export default function AdminPage() {
                               setInquiryStatusFilter(e.target.value);
                               setInquiryPage(1);
                             }}
-                            className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-2 rounded-xl text-xs outline-none focus:border-[#c5a059] font-semibold cursor-pointer"
+                            className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-2 rounded-xl text-xs outline-none focus:border-[#F97316] font-semibold cursor-pointer"
                           >
                             <option value="All">All Lead Stages ({inquiries.length})</option>
                             <option value="Pending">🟡 Pending ({inquiries.filter((i) => i.status === 'Pending').length})</option>
@@ -3186,12 +3186,12 @@ export default function AdminPage() {
                                           });
                                           setInquiryViewMode('editor');
                                         }}
-                                        className="font-bold text-stone-100 hover:text-[#c5a059] text-xs transition-colors flex items-center gap-1.5 group text-left"
+                                        className="font-bold text-stone-100 hover:text-[#F97316] text-xs transition-colors flex items-center gap-1.5 group text-left"
                                         title="Click to open Lead Studio Workspace"
                                       >
-                                        <User className="w-3.5 h-3.5 text-[#c5a059] shrink-0" />
+                                        <User className="w-3.5 h-3.5 text-[#F97316] shrink-0" />
                                         <span className="group-hover:underline underline-offset-2 font-semibold">{inq.name}</span>
-                                        <Eye className="w-3 h-3 text-stone-500 group-hover:text-[#c5a059] shrink-0 transition-colors opacity-70 group-hover:opacity-100" />
+                                        <Eye className="w-3 h-3 text-stone-500 group-hover:text-[#F97316] shrink-0 transition-colors opacity-70 group-hover:opacity-100" />
                                       </button>
                                     </td>
 
@@ -3246,7 +3246,7 @@ export default function AdminPage() {
                                         onChange={(e) => updateInquiryStatus(inq.id, e.target.value)}
                                         className={`text-xs font-semibold rounded px-2.5 py-1 outline-none border cursor-pointer ${
                                           inq.status === 'Pending'
-                                            ? 'bg-amber-950/80 text-amber-300 border-amber-800'
+                                            ? 'bg-orange-950/80 text-orange-300 border-orange-800'
                                             : inq.status === 'Contacted'
                                             ? 'bg-sky-950/80 text-sky-300 border-sky-800'
                                             : inq.status === 'Follow Up'
@@ -3355,13 +3355,13 @@ export default function AdminPage() {
                   <div className="flex items-center gap-4">
                     <button
                       onClick={() => setInquiryViewMode('list')}
-                      className="flex items-center gap-2 text-xs text-[#c5a059] font-bold bg-stone-900 border border-stone-800 px-3.5 py-2 rounded-xl hover:bg-stone-800 transition-colors"
+                      className="flex items-center gap-2 text-xs text-[#F97316] font-bold bg-stone-900 border border-stone-800 px-3.5 py-2 rounded-xl hover:bg-stone-800 transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" /> Back to Quote Requests List
                     </button>
                     <div>
                       <h2 className="font-serif text-2xl font-bold text-stone-100 flex items-center gap-2">
-                        <User className="w-6 h-6 text-[#c5a059]" /> Lead CRM Workspace: {editingLead?.name}
+                        <User className="w-6 h-6 text-[#F97316]" /> Lead CRM Workspace: {editingLead?.name}
                       </h2>
                       <p className="text-xs text-stone-400">Full-width dedicated CRM pipeline manager & quote proposal studio</p>
                     </div>
@@ -3401,7 +3401,7 @@ export default function AdminPage() {
                     <div className="lg:col-span-2 space-y-6 bg-[#141210] border border-stone-800 rounded-2xl p-6 sm:p-8 shadow-xl">
                       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-800 pb-4">
                         <h3 className="font-serif text-xl font-bold text-stone-100 flex items-center gap-2.5">
-                          <FileText className="w-5 h-5 text-[#c5a059]" /> Visitor Inquiry Profile
+                          <FileText className="w-5 h-5 text-[#F97316]" /> Visitor Inquiry Profile
                         </h3>
                         <span className="text-[11px] font-mono bg-stone-900 border border-stone-800 text-stone-400 px-3 py-1 rounded-full font-semibold">
                           ID: {editingLead?.id}
@@ -3443,7 +3443,7 @@ export default function AdminPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-stone-900/40 border border-stone-800/80 rounded-xl">
                           <div className="space-y-1">
                             <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block">Preferred Travel Month</span>
-                            <span className="text-sm text-amber-400 font-bold block">{editingLead?.month || 'Flexible'}</span>
+                            <span className="text-sm text-orange-400 font-bold block">{editingLead?.month || 'Flexible'}</span>
                           </div>
                           <div className="space-y-1">
                             <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block">Number of Guests</span>
@@ -3472,16 +3472,16 @@ export default function AdminPage() {
                       <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                         <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                           <h3 className="font-serif text-base font-bold text-stone-200 flex items-center gap-2">
-                            <Target className="w-4 h-4 text-[#c5a059]" /> Select Deal Stage *
+                            <Target className="w-4 h-4 text-[#F97316]" /> Select Deal Stage *
                           </h3>
-                          <span className="text-[10px] bg-stone-800 text-[#c5a059] px-2 py-0.5 rounded font-mono font-bold">
+                          <span className="text-[10px] bg-stone-800 text-[#F97316] px-2 py-0.5 rounded font-mono font-bold">
                             {leadForm.status}
                           </span>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                           {[
-                            { id: 'Pending', label: '🟡 Pending', color: 'border-amber-700 bg-amber-950/40 text-amber-300' },
+                            { id: 'Pending', label: '🟡 Pending', color: 'border-orange-700 bg-orange-950/40 text-orange-300' },
                             { id: 'Contacted', label: '🔵 Contacted', color: 'border-sky-700 bg-sky-950/40 text-sky-300' },
                             { id: 'Follow Up', label: '🟣 Follow Up', color: 'border-purple-700 bg-purple-950/40 text-purple-300' },
                             { id: 'Proposal Sent', label: '🟧 Proposal Sent', color: 'border-orange-700 bg-orange-950/40 text-orange-300' },
@@ -3494,7 +3494,7 @@ export default function AdminPage() {
                               onClick={() => setLeadForm({ ...leadForm, status: stage.id })}
                               className={`px-2.5 py-2 rounded-xl border text-[11px] font-bold transition-all text-center leading-tight ${
                                 leadForm.status === stage.id
-                                  ? `${stage.color} ring-2 ring-[#c5a059]`
+                                  ? `${stage.color} ring-2 ring-[#F97316]`
                                   : 'border-stone-800 bg-stone-900 text-stone-400 hover:text-stone-200'
                               }`}
                             >
@@ -3608,7 +3608,7 @@ export default function AdminPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h2 className="font-serif text-2xl font-bold flex items-center gap-2">
-                    <BarChart3 className="w-6 h-6 text-[#c5a059]" /> Safari Insights & Safari CRM Reports
+                    <BarChart3 className="w-6 h-6 text-[#F97316]" /> Safari Insights & Safari CRM Reports
                   </h2>
                   <p className="text-xs text-stone-400">Financial pipeline analytics, conversion rates, deal loss analysis, and customer safari preferences</p>
                 </div>
@@ -3642,11 +3642,11 @@ export default function AdminPage() {
                   <p className="text-[11px] text-emerald-500/80 leading-tight">Confirmed safari bookings revenue</p>
                 </div>
 
-                <div className="bg-[#141210] border border-amber-900/50 p-5 rounded-2xl space-y-2 shadow-xl">
-                  <span className="text-xs text-amber-400 font-bold uppercase tracking-wider block flex items-center gap-1.5">
-                    <TrendingUp className="w-4 h-4 text-amber-400" /> In-Progress Pipeline
+                <div className="bg-[#141210] border border-orange-900/50 p-5 rounded-2xl space-y-2 shadow-xl">
+                  <span className="text-xs text-orange-400 font-bold uppercase tracking-wider block flex items-center gap-1.5">
+                    <TrendingUp className="w-4 h-4 text-orange-400" /> In-Progress Pipeline
                   </span>
-                  <div className="text-2xl font-serif font-bold text-amber-400">
+                  <div className="text-2xl font-serif font-bold text-orange-400">
                     ${inquiries.filter((i) => ['Contacted', 'Follow Up', 'Proposal Sent'].includes(i.status)).reduce((sum, i) => sum + (i.proposalAmount || 0), 0).toLocaleString()} USD
                   </div>
                   <p className="text-[11px] text-stone-500 leading-tight">Active negotiations & proposal quotes in progress</p>
@@ -3654,7 +3654,7 @@ export default function AdminPage() {
 
                 <div className="bg-[#141210] border border-stone-800 p-5 rounded-2xl space-y-2 shadow-xl">
                   <span className="text-xs text-stone-400 font-bold uppercase tracking-wider block flex items-center gap-1.5">
-                    <Coins className="w-4 h-4 text-[#c5a059]" /> Average Quote Size
+                    <Coins className="w-4 h-4 text-[#F97316]" /> Average Quote Size
                   </span>
                   <div className="text-2xl font-serif font-bold text-stone-100">
                     ${inquiries.length > 0
@@ -3670,12 +3670,12 @@ export default function AdminPage() {
                 {/* Left Column: Funnel Distribution */}
                 <div className="lg:col-span-7 bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-6 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <PieChart className="w-5 h-5 text-[#c5a059]" /> Sales Funnel & Pipeline Stage Distribution
+                    <PieChart className="w-5 h-5 text-[#F97316]" /> Sales Funnel & Pipeline Stage Distribution
                   </h3>
 
                   <div className="space-y-4">
                     {[
-                      { stage: 'Pending', label: '🟡 New Pending Inquiries', color: 'bg-amber-500', count: inquiries.filter((i) => i.status === 'Pending').length },
+                      { stage: 'Pending', label: '🟡 New Pending Inquiries', color: 'bg-orange-500', count: inquiries.filter((i) => i.status === 'Pending').length },
                       { stage: 'Contacted', label: '🔵 Contacted Leads', color: 'bg-sky-500', count: inquiries.filter((i) => i.status === 'Contacted').length },
                       { stage: 'Follow Up', label: '🟣 Scheduled Follow-ups', color: 'bg-purple-500', count: inquiries.filter((i) => i.status === 'Follow Up').length },
                       { stage: 'Proposal Sent', label: '🟧 Proposals Sent', color: 'bg-orange-500', count: inquiries.filter((i) => i.status === 'Proposal Sent').length },
@@ -3749,7 +3749,7 @@ export default function AdminPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <Compass className="w-5 h-5 text-[#c5a059]" /> Demand by Safari Tour Category
+                    <Compass className="w-5 h-5 text-[#F97316]" /> Demand by Safari Tour Category
                   </h3>
 
                   <div className="space-y-3">
@@ -3760,7 +3760,7 @@ export default function AdminPage() {
                         <div key={cat} className="space-y-1">
                           <div className="flex justify-between text-xs text-stone-300 font-medium">
                             <span>{cat}</span>
-                            <span className="font-mono text-amber-400">{count} inquiries ({pct}%)</span>
+                            <span className="font-mono text-orange-400">{count} inquiries ({pct}%)</span>
                           </div>
                           <div className="w-full h-2.5 bg-stone-900 rounded-full overflow-hidden">
                             <div className="h-full bg-gold-gradient" style={{ width: `${pct}%` }} />
@@ -3773,7 +3773,7 @@ export default function AdminPage() {
 
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#c5a059]" /> Destination Inquiries Breakdown
+                    <MapPin className="w-5 h-5 text-[#F97316]" /> Destination Inquiries Breakdown
                   </h3>
 
                   <div className="space-y-3">
@@ -3831,7 +3831,7 @@ export default function AdminPage() {
                     <div key={rev.id} className="bg-[#141210] border border-stone-800 p-5 rounded-xl space-y-2 shadow-lg">
                       <div className="flex items-center justify-between">
                         <strong className="font-serif font-bold text-stone-100">{rev.author} ({rev.countryFlag})</strong>
-                        <span className="text-amber-400 text-xs font-bold">★ {rev.rating}/5</span>
+                        <span className="text-orange-400 text-xs font-bold">★ {rev.rating}/5</span>
                       </div>
                       <p className="text-xs text-stone-300 italic">“{rev.text}”</p>
                       <div className="flex justify-end gap-2 pt-2 border-t border-stone-800">
@@ -3962,7 +3962,7 @@ export default function AdminPage() {
                                   </div>
                                 </td>
                                 <td className="p-4">
-                                  <span className="bg-stone-800 text-[#c5a059] px-2 py-0.5 rounded text-[10px] font-bold">
+                                  <span className="bg-stone-800 text-[#F97316] px-2 py-0.5 rounded text-[10px] font-bold">
                                     {post.category}
                                   </span>
                                 </td>
@@ -4057,13 +4057,13 @@ export default function AdminPage() {
                     <div className="flex items-center gap-4">
                       <button
                         onClick={() => setBlogViewMode('list')}
-                        className="flex items-center gap-2 text-xs text-[#c5a059] font-bold bg-stone-900 border border-stone-800 px-3 py-2 rounded-lg hover:bg-stone-800 transition-colors"
+                        className="flex items-center gap-2 text-xs text-[#F97316] font-bold bg-stone-900 border border-stone-800 px-3 py-2 rounded-lg hover:bg-stone-800 transition-colors"
                       >
                         <ArrowLeft className="w-4 h-4" /> Back to Articles List
                       </button>
                       <div>
                         <h2 className="font-serif text-2xl font-bold text-stone-100 flex items-center gap-2">
-                          <BookOpen className="w-5 h-5 text-[#c5a059]" />
+                          <BookOpen className="w-5 h-5 text-[#F97316]" />
                           {editingBlog ? 'Editing Article Workspace' : 'Create New Article Workspace'}
                         </h2>
                         <p className="text-xs text-stone-400">Full-width dedicated article creation and SEO optimization studio</p>
@@ -4202,7 +4202,7 @@ export default function AdminPage() {
                         <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                           <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                             <h3 className="font-serif text-lg font-bold text-stone-200">Article Main Body</h3>
-                            <span className="text-[10px] bg-stone-800 text-[#c5a059] px-2 py-0.5 rounded font-mono font-bold">Markdown Supported</span>
+                            <span className="text-[10px] bg-stone-800 text-[#F97316] px-2 py-0.5 rounded font-mono font-bold">Markdown Supported</span>
                           </div>
 
                           <div>
@@ -4219,14 +4219,14 @@ export default function AdminPage() {
 
                         {/* SEO Box & Search Preview */}
                         <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
-                          <h3 className="font-serif text-lg font-bold text-[#c5a059] border-b border-stone-800 pb-3">SEO & Search Engine Snippet</h3>
+                          <h3 className="font-serif text-lg font-bold text-[#F97316] border-b border-stone-800 pb-3">SEO & Search Engine Snippet</h3>
 
                           <div>
                             <div className="flex items-center justify-between mb-1">
                               <label className="block text-stone-400 font-semibold">SEO Meta Title</label>
                               {(() => {
                                 const titleLen = (blogForm.metaTitle || '').length;
-                                let color = 'text-amber-400 bg-amber-950/40 border-amber-800/60';
+                                let color = 'text-orange-400 bg-orange-950/40 border-orange-800/60';
                                 if (titleLen >= 50 && titleLen <= 60) color = 'text-emerald-400 bg-emerald-950/40 border-emerald-800/60';
                                 if (titleLen > 60) color = 'text-rose-400 bg-rose-950/40 border-rose-800/60';
                                 return (
@@ -4250,7 +4250,7 @@ export default function AdminPage() {
                               <label className="block text-stone-400 font-semibold">SEO Meta Description</label>
                               {(() => {
                                 const descLen = (blogForm.metaDescription || '').length;
-                                let color = 'text-amber-400 bg-amber-950/40 border-amber-800/60';
+                                let color = 'text-orange-400 bg-orange-950/40 border-orange-800/60';
                                 if (descLen >= 140 && descLen <= 160) color = 'text-emerald-400 bg-emerald-950/40 border-emerald-800/60';
                                 if (descLen > 160) color = 'text-rose-400 bg-rose-950/40 border-rose-800/60';
                                 return (
@@ -4326,7 +4326,7 @@ export default function AdminPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="font-serif text-2xl font-bold flex items-center gap-2">
-                    <HelpCircle className="w-6 h-6 text-[#c5a059]" /> Frequently Asked Questions (FAQ) CMS
+                    <HelpCircle className="w-6 h-6 text-[#F97316]" /> Frequently Asked Questions (FAQ) CMS
                   </h2>
                   <p className="text-xs text-stone-400">Add, edit, or delete dynamic FAQ items live-synced across the website</p>
                 </div>
@@ -4359,7 +4359,7 @@ export default function AdminPage() {
                       <div key={faq.id} className="bg-[#141210] border border-stone-800 p-5 rounded-xl space-y-3 shadow-lg flex flex-col justify-between">
                         <div className="space-y-2">
                           <div className="flex items-center justify-between gap-2">
-                            <span className="text-[10px] bg-[#c5a059]/10 border border-[#c5a059]/30 text-[#c5a059] px-2.5 py-0.5 rounded font-mono font-bold">
+                            <span className="text-[10px] bg-[#F97316]/10 border border-[#F97316]/30 text-[#F97316] px-2.5 py-0.5 rounded font-mono font-bold">
                               {faq.category || 'General'}
                             </span>
                             <span className="text-[10px] text-stone-500 font-mono">ID: {faq.id}</span>
@@ -4413,7 +4413,7 @@ export default function AdminPage() {
                       <button
                         key={p}
                         onClick={() => setFaqPage(p)}
-                        className={`w-7 h-7 rounded font-bold ${faqPage === p ? 'bg-[#c5a059] text-black' : 'bg-stone-900 border border-stone-800 text-stone-300'}`}
+                        className={`w-7 h-7 rounded font-bold ${faqPage === p ? 'bg-[#F97316] text-black' : 'bg-stone-900 border border-stone-800 text-stone-300'}`}
                       >
                         {p}
                       </button>
@@ -4495,7 +4495,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('basic')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'basic'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4507,7 +4507,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('social')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'social'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4519,7 +4519,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('cloudinary')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'cloudinary'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4531,7 +4531,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('currency')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'currency'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4543,7 +4543,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('seo')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'seo'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4555,7 +4555,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('banner')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'banner'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4567,7 +4567,7 @@ export default function AdminPage() {
                   onClick={() => setSettingsSubTab('sidebar')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'sidebar'
-                      ? 'bg-[#c5a059] text-black font-bold shadow'
+                      ? 'bg-[#F97316] text-black font-bold shadow'
                       : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
                   }`}
                 >
@@ -4582,7 +4582,7 @@ export default function AdminPage() {
                   <div className="space-y-4">
                     <div className="border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Sliders className="w-5 h-5 text-[#c5a059]" /> Basic Site Configuration
+                        <Sliders className="w-5 h-5 text-[#F97316]" /> Basic Site Configuration
                       </h3>
                     </div>
                     <div className="flex flex-col gap-4 w-full">
@@ -4656,8 +4656,8 @@ export default function AdminPage() {
 
                       {/* Google Maps Location Configuration */}
                       <div className="w-full space-y-4 pt-4 border-t border-stone-800">
-                        <h4 className="text-xs font-bold text-[#c5a059] uppercase tracking-wider flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-[#c5a059]" /> Google Map Location & Office Contact Settings
+                        <h4 className="text-xs font-bold text-[#F97316] uppercase tracking-wider flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-[#F97316]" /> Google Map Location & Office Contact Settings
                         </h4>
 
                         <div className="flex flex-col gap-4 w-full">
@@ -4683,7 +4683,7 @@ export default function AdminPage() {
                               type="text"
                               value={settings.officeAddress || ''}
                               onChange={(e) => setSettings({ ...settings, officeAddress: e.target.value })}
-                              placeholder="77 Independence Avenue, Windhoek, Namibia"
+                              placeholder="Dispatch Hub: Airport Road, Madurai / Chennai, Tamil Nadu, India"
                               className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                             />
                           </div>
@@ -4694,7 +4694,7 @@ export default function AdminPage() {
                               type="text"
                               value={settings.officePhone || ''}
                               onChange={(e) => setSettings({ ...settings, officePhone: e.target.value })}
-                              placeholder="+264 61 234 5678 / +264 81 123 4567"
+                              placeholder="+91 98400 00000 / +91 44 2345 6789"
                               className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                             />
                           </div>
@@ -4717,7 +4717,7 @@ export default function AdminPage() {
                               id="showGoogleMapInFooter"
                               checked={settings.showGoogleMapInFooter !== false}
                               onChange={(e) => setSettings({ ...settings, showGoogleMapInFooter: e.target.checked })}
-                              className="w-4 h-4 accent-amber-500 rounded cursor-pointer shrink-0"
+                              className="w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
                             />
                             <label htmlFor="showGoogleMapInFooter" className="text-xs text-stone-300 font-medium cursor-pointer">
                               Show interactive Google Map card in website Footer
@@ -4729,15 +4729,15 @@ export default function AdminPage() {
                       {/* Lead Magnet eBook PDF & Banner Configuration */}
                       <div className="w-full space-y-4 pt-4 border-t border-stone-800">
                         <div className="flex flex-wrap items-center justify-between gap-2">
-                          <h4 className="text-xs font-bold text-[#c5a059] uppercase tracking-wider flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-[#c5a059]" /> Lead Magnet eBook PDF & Banner Configuration
+                          <h4 className="text-xs font-bold text-[#F97316] uppercase tracking-wider flex items-center gap-2">
+                            <FileText className="w-4 h-4 text-[#F97316]" /> Lead Magnet eBook PDF & Banner Configuration
                           </h4>
                           {settings.leadMagnetPdfUrl && (
                             <a
                               href={settings.leadMagnetPdfUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold text-[11px] rounded-lg hover:bg-amber-500/20 transition-all flex items-center gap-1.5"
+                              className="px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 text-orange-400 font-bold text-[11px] rounded-lg hover:bg-orange-500/20 transition-all flex items-center gap-1.5"
                             >
                               <Download className="w-3.5 h-3.5" /> Download Current Safari Guide PDF
                             </a>
@@ -4813,7 +4813,7 @@ export default function AdminPage() {
                                 <button
                                   type="button"
                                   onClick={() => document.getElementById('pdf-file-upload-input')?.click()}
-                                  className="px-5 py-2.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:brightness-110 text-stone-950 font-bold text-xs rounded-lg transition-all shadow-md flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+                                  className="px-5 py-2.5 bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-500 hover:brightness-110 text-stone-950 font-bold text-xs rounded-lg transition-all shadow-md flex items-center justify-center gap-2 shrink-0 cursor-pointer"
                                 >
                                   <Upload className="w-4 h-4 text-stone-950" />
                                   <span>Upload PDF File from Device</span>
@@ -4831,7 +4831,7 @@ export default function AdminPage() {
                                   value={settings.leadMagnetPdfUrl || ''}
                                   onChange={(e) => setSettings({ ...settings, leadMagnetPdfUrl: e.target.value })}
                                   placeholder="https://your-domain.com/downloads/namibia-safari-guide.pdf"
-                                  className="w-full bg-stone-950 border border-stone-800 text-stone-100 rounded-lg px-3.5 py-2 text-xs outline-none focus:border-amber-500 font-mono"
+                                  className="w-full bg-stone-950 border border-stone-800 text-stone-100 rounded-lg px-3.5 py-2 text-xs outline-none focus:border-orange-500 font-mono"
                                 />
                                 {settings.leadMagnetPdfUrl && (
                                   <a
@@ -4839,7 +4839,7 @@ export default function AdminPage() {
                                     target="_blank"
                                     download="Safari-Guide.pdf"
                                     rel="noopener noreferrer"
-                                    className="px-4 py-2 bg-stone-800 hover:bg-stone-700 text-amber-400 border border-amber-500/30 font-bold text-xs rounded-lg shrink-0 flex items-center gap-1.5 transition-all"
+                                    className="px-4 py-2 bg-stone-800 hover:bg-stone-700 text-orange-400 border border-orange-500/30 font-bold text-xs rounded-lg shrink-0 flex items-center gap-1.5 transition-all"
                                   >
                                     <Download className="w-4 h-4" /> Download PDF
                                   </a>
@@ -4879,12 +4879,12 @@ export default function AdminPage() {
                   <div className="space-y-6">
                     <div className="border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Share2 className="w-5 h-5 text-[#c5a059]" /> Social Media Integration & Live Video Feed CMS
+                        <Share2 className="w-5 h-5 text-[#F97316]" /> Social Media Integration & Live Video Feed CMS
                       </h3>
                       <p className="text-xs text-stone-400">Configure active social channel links, follower counters & live social video cards</p>
                     </div>
                     <div className="space-y-4 w-full">
-                      <h4 className="text-xs font-bold text-[#c5a059] uppercase tracking-wider">1. Social Profile URLs & Follower Badges</h4>
+                      <h4 className="text-xs font-bold text-[#F97316] uppercase tracking-wider">1. Social Profile URLs & Follower Badges</h4>
                       <div className="flex flex-col gap-4 w-full">
                         <div className="w-full">
                           <label className="text-xs text-stone-400 font-semibold block mb-1">Instagram Profile URL</label>
@@ -4977,7 +4977,7 @@ export default function AdminPage() {
                     </div>
 
                     <div className="space-y-4 pt-4 border-t border-stone-800 w-full">
-                      <h4 className="text-xs font-bold text-[#c5a059] uppercase tracking-wider">2. Front-End Reel Video Cards (Thumbnails & Video Links)</h4>
+                      <h4 className="text-xs font-bold text-[#F97316] uppercase tracking-wider">2. Front-End Reel Video Cards (Thumbnails & Video Links)</h4>
                       
                       <div className="flex flex-col gap-4 w-full">
                         <div className="bg-stone-900/60 p-4 border border-stone-800 rounded-xl space-y-3 w-full">
@@ -5053,7 +5053,7 @@ export default function AdminPage() {
                   <div className="space-y-4 w-full">
                     <div className="border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Cloud className="w-5 h-5 text-[#c5a059]" /> Cloudinary Image CDN Configuration
+                        <Cloud className="w-5 h-5 text-[#F97316]" /> Cloudinary Image CDN Configuration
                       </h3>
                       <p className="text-xs text-stone-400">Configure Cloudinary for cloud media storage & automated image optimization</p>
                     </div>
@@ -5109,7 +5109,7 @@ export default function AdminPage() {
                           id="enableCloudinary"
                           checked={settings.enableCloudinary || false}
                           onChange={(e) => setSettings({ ...settings, enableCloudinary: e.target.checked })}
-                          className="w-4 h-4 accent-amber-500 rounded cursor-pointer shrink-0"
+                          className="w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
                         />
                         <label htmlFor="enableCloudinary" className="text-xs text-stone-300 font-medium cursor-pointer">
                           Enable automatic Cloudinary image CDN optimization on upload
@@ -5124,7 +5124,7 @@ export default function AdminPage() {
                   <div className="space-y-4 w-full">
                     <div className="border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Coins className="w-5 h-5 text-[#c5a059]" /> Multi-Currency Rates & Defaults
+                        <Coins className="w-5 h-5 text-[#F97316]" /> Multi-Currency Rates & Defaults
                       </h3>
                       <p className="text-xs text-stone-400">Configure base USD exchange rates for automatic currency conversion</p>
                     </div>
@@ -5186,7 +5186,7 @@ export default function AdminPage() {
                     <div className="border-b border-stone-800 pb-3 flex items-center justify-between">
                       <div>
                         <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                          <Globe className="w-5 h-5 text-[#c5a059]" /> Global Site SEO Configuration
+                          <Globe className="w-5 h-5 text-[#F97316]" /> Global Site SEO Configuration
                         </h3>
                         <p className="text-xs text-stone-400">Master search engine optimization metadata & tracking pixels</p>
                       </div>
@@ -5199,24 +5199,24 @@ export default function AdminPage() {
                     {/* SEO Best Practice Rules & Character Limits Guidance Notice */}
                     <div className="p-4 bg-stone-900 border border-stone-800 rounded-2xl space-y-2 w-full">
                       <div className="flex items-center gap-2 text-xs font-bold text-primary">
-                        <Globe className="w-4 h-4 text-[#c5a059]" /> Standard Search Engine Character Length Guidance
+                        <Globe className="w-4 h-4 text-[#F97316]" /> Standard Search Engine Character Length Guidance
                       </div>
                       <div className="flex flex-col gap-3 text-[11px] text-stone-300 pt-1 w-full">
                         <div className="bg-[#141210] p-3 rounded-xl border border-stone-800 space-y-1 w-full">
                           <strong className="text-stone-100 block font-semibold">Meta Title Length</strong>
-                          <span className="text-amber-400 font-mono font-bold block">50 – 60 Characters</span>
+                          <span className="text-orange-400 font-mono font-bold block">50 – 60 Characters</span>
                           <p className="text-[10px] text-stone-400 leading-tight">Titles longer than 60 letters will be cut off by Google with "..."</p>
                         </div>
 
                         <div className="bg-[#141210] p-3 rounded-xl border border-stone-800 space-y-1 w-full">
                           <strong className="text-stone-100 block font-semibold">Meta Description Length</strong>
-                          <span className="text-amber-400 font-mono font-bold block">150 – 160 Characters</span>
+                          <span className="text-orange-400 font-mono font-bold block">150 – 160 Characters</span>
                           <p className="text-[10px] text-stone-400 leading-tight">Descriptions above 160 letters get truncated in search result snippets.</p>
                         </div>
 
                         <div className="bg-[#141210] p-3 rounded-xl border border-stone-800 space-y-1 w-full">
                           <strong className="text-stone-100 block font-semibold">Target Keywords</strong>
-                          <span className="text-amber-400 font-mono font-bold block">5 – 10 Key Phrases</span>
+                          <span className="text-orange-400 font-mono font-bold block">5 – 10 Key Phrases</span>
                           <p className="text-[10px] text-stone-400 leading-tight">Use relevant comma-separated safari and destination terms.</p>
                         </div>
                       </div>
@@ -5229,7 +5229,7 @@ export default function AdminPage() {
                           <label className="text-xs text-stone-300 font-semibold">Global Meta Title</label>
                           {(() => {
                             const titleLen = (settings.siteMetaTitle || '').length;
-                            let color = 'text-amber-400 border-amber-800/60 bg-amber-950/40';
+                            let color = 'text-orange-400 border-orange-800/60 bg-orange-950/40';
                             if (titleLen >= 50 && titleLen <= 60) color = 'text-emerald-400 border-emerald-800/60 bg-emerald-950/40';
                             if (titleLen > 60) color = 'text-rose-400 border-rose-800/60 bg-rose-950/40';
                             return (
@@ -5254,7 +5254,7 @@ export default function AdminPage() {
                           <label className="text-xs text-stone-300 font-semibold">Global Meta Description</label>
                           {(() => {
                             const descLen = (settings.siteMetaDescription || '').length;
-                            let color = 'text-amber-400 border-amber-800/60 bg-amber-950/40';
+                            let color = 'text-orange-400 border-orange-800/60 bg-orange-950/40';
                             if (descLen >= 140 && descLen <= 160) color = 'text-emerald-400 border-emerald-800/60 bg-emerald-950/40';
                             if (descLen > 160) color = 'text-rose-400 border-rose-800/60 bg-rose-950/40';
                             return (
@@ -5317,7 +5317,7 @@ export default function AdminPage() {
                           id="enableRobotsIndex"
                           checked={settings.enableRobotsIndex ?? true}
                           onChange={(e) => setSettings({ ...settings, enableRobotsIndex: e.target.checked })}
-                          className="w-4 h-4 accent-amber-500 rounded cursor-pointer shrink-0"
+                          className="w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
                         />
                         <label htmlFor="enableRobotsIndex" className="text-xs text-stone-300 font-medium cursor-pointer">
                           Allow Search Engines to Index the Website (Robots Indexing Enabled)
@@ -5333,12 +5333,12 @@ export default function AdminPage() {
                     <div className="border-b border-stone-800 pb-3 flex items-center justify-between">
                       <div>
                         <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                          <ImageIcon className="w-5 h-5 text-[#c5a059]" /> Hero Multi-Banner Slider (Up to 5 Banners)
+                          <ImageIcon className="w-5 h-5 text-[#F97316]" /> Hero Multi-Banner Slider (Up to 5 Banners)
                         </h3>
                         <p className="text-xs text-stone-400">Configure homepage carousel hero slides and top promotional announcement banner</p>
                       </div>
 
-                      <span className="text-[10px] text-amber-400 bg-amber-950/60 border border-amber-800/80 px-3 py-1 rounded-full font-mono font-bold flex items-center gap-1.5">
+                      <span className="text-[10px] text-orange-400 bg-orange-950/60 border border-orange-800/80 px-3 py-1 rounded-full font-mono font-bold flex items-center gap-1.5">
                         📐 Spec: 1920 × 1080 px (Max 2MB)
                       </span>
                     </div>
@@ -5359,10 +5359,10 @@ export default function AdminPage() {
                           bannerList = [
                             {
                               id: 1,
-                              headline: settings.heroHeadline || 'Experience the raw majesty of Namibia',
-                              subheadline: settings.heroSubheadline || 'Private journeys · Wild places · 2004—2026',
-                              copy: settings.heroCopy || 'Bespoke private safaris, luxury tented camps, and wildlife expeditions engineered for international travelers.',
-                              image: settings.heroImage || 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1920&q=85',
+                              headline: settings.heroHeadline || 'Discover Authentic South India Travel',
+                              subheadline: settings.heroSubheadline || 'Private Journeys · Heritage Temples · Serene Backwaters',
+                              copy: settings.heroCopy || 'Bespoke private tours, architectural wonders, tranquil backwater cruises, and hill station escapes across Tamil Nadu, Kerala, and South India.',
+                              image: settings.heroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
                             },
                           ];
                         }
@@ -5380,11 +5380,12 @@ export default function AdminPage() {
                           }
                           const newBanner = {
                             id: Date.now(),
-                            headline: 'Discover Untamed Wilderness',
-                            subheadline: 'Luxury Safaris & Wildlife Encounters',
-                            copy: 'Embark on an unforgettable journey through private game reserves and iconic landscapes.',
-                            image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=85',
+                            headline: 'Serene Backwaters & Houseboat Cruises of Kerala',
+                            subheadline: 'Palm-Fringed Canals · Authentic Culture · Tropical Escapes',
+                            copy: 'Relax on private luxury houseboats drifting through peaceful palm-lined waters.',
+                            image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
                           };
+
                           const updated = [...bannerList, newBanner];
                           setSettings({ ...settings, heroBanners: JSON.stringify(updated) });
                         };
@@ -5408,7 +5409,7 @@ export default function AdminPage() {
                                 <button
                                   type="button"
                                   onClick={addBannerSlot}
-                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#c5a059]/10 text-[#c5a059] border border-[#c5a059]/40 text-xs font-bold hover:bg-[#c5a059]/20 transition-all"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/40 text-xs font-bold hover:bg-[#F97316]/20 transition-all"
                                 >
                                   <Plus className="w-3.5 h-3.5" /> Add Hero Banner Slot ({5 - bannerList.length} Left)
                                 </button>
@@ -5418,8 +5419,8 @@ export default function AdminPage() {
                             {bannerList.map((banner: any, index: number) => (
                               <div key={banner.id || index} className="bg-[#181614] border border-stone-800 rounded-2xl p-6 space-y-5 relative group shadow-xl mb-6 w-full">
                                 <div className="flex items-center justify-between border-b border-stone-800/80 pb-3 w-full">
-                                  <span className="text-xs font-bold text-[#c5a059] font-mono flex items-center gap-2">
-                                    <span className="w-2.5 h-2.5 rounded-full bg-[#c5a059]" /> Hero Banner Slot #{index + 1}
+                                  <span className="text-xs font-bold text-[#F97316] font-mono flex items-center gap-2">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-[#F97316]" /> Hero Banner Slot #{index + 1}
                                   </span>
 
                                   {bannerList.length > 1 && (
@@ -5508,7 +5509,7 @@ export default function AdminPage() {
                           id="enableAnnouncementBanner"
                           checked={settings.enableAnnouncementBanner ?? true}
                           onChange={(e) => setSettings({ ...settings, enableAnnouncementBanner: e.target.checked })}
-                          className="w-4 h-4 accent-amber-500 rounded cursor-pointer shrink-0"
+                          className="w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
                         />
                         <label htmlFor="enableAnnouncementBanner" className="text-xs text-stone-300 font-medium cursor-pointer">
                           Display Top Promotional Banner across all site pages
@@ -5523,7 +5524,7 @@ export default function AdminPage() {
                   <div className="space-y-6 w-full">
                     <div className="border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <PanelLeft className="w-5 h-5 text-[#c5a059]" /> Navigation Sidebar Layout & Preferences
+                        <PanelLeft className="w-5 h-5 text-[#F97316]" /> Navigation Sidebar Layout & Preferences
                       </h3>
                       <p className="text-xs text-stone-400 font-sans">Configure left navigation sidebar mode, item visibility, and toggle settings</p>
                     </div>
@@ -5549,35 +5550,35 @@ export default function AdminPage() {
                         <strong className="text-stone-200 block border-b border-stone-800 pb-2 font-semibold">Active Sidebar Navigation Modules</strong>
                         <div className="flex flex-col gap-3 text-stone-300 w-full">
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Overview Dashboard</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Safaris Collection</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Destinations</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Quote Requests</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Guest Reviews</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Blog Posts CMS</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Legal & Terms CMS</span>
                           </label>
                           <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-amber-500 w-4 h-4 rounded shrink-0" />
+                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
                             <span>Site Settings & CMS</span>
                           </label>
                         </div>
@@ -5618,7 +5619,7 @@ export default function AdminPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-stone-100 flex items-center gap-2">
-                    <Globe className="w-6 h-6 text-[#c5a059]" /> About Page CMS Studio
+                    <Globe className="w-6 h-6 text-[#F97316]" /> About Page CMS Studio
                   </h2>
                   <p className="text-xs text-stone-400 mt-1">
                     Manage company story, mission & vision, team guides, why choose us, safety, certifications, awards, SEO, and CTA banner
@@ -5647,7 +5648,7 @@ export default function AdminPage() {
                 {/* 1. HERO BANNER MEDIA */}
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4 text-[#c5a059]" /> Hero Banner Media & Headlines
+                    <ImageIcon className="w-4 h-4 text-[#F97316]" /> Hero Banner Media & Headlines
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -5658,7 +5659,7 @@ export default function AdminPage() {
                         value={settings.aboutHeroHeadline || ''}
                         onChange={(e) => setSettings({ ...settings, aboutHeroHeadline: e.target.value })}
                         placeholder="Crafting Extraordinary Namibian Journeys"
-                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                       />
                     </div>
                     <div>
@@ -5668,7 +5669,7 @@ export default function AdminPage() {
                         value={settings.aboutHeroSubheadline || ''}
                         onChange={(e) => setSettings({ ...settings, aboutHeroSubheadline: e.target.value })}
                         placeholder="Bespoke Private Expeditions · Wildlife Conservation · Expert Guides Since 2004"
-                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                       />
                     </div>
                   </div>
@@ -5684,7 +5685,7 @@ export default function AdminPage() {
                 {/* 2. COMPANY STORY */}
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-[#c5a059]" /> Company Story Section
+                    <FileText className="w-4 h-4 text-[#F97316]" /> Company Story Section
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -5695,7 +5696,7 @@ export default function AdminPage() {
                         value={settings.aboutCompanyStoryTitle || ''}
                         onChange={(e) => setSettings({ ...settings, aboutCompanyStoryTitle: e.target.value })}
                         placeholder="Our Story: Two Decades of Safari Heritage"
-                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                       />
                     </div>
                     <div>
@@ -5705,7 +5706,7 @@ export default function AdminPage() {
                         value={settings.aboutCompanyStorySubheadline || ''}
                         onChange={(e) => setSettings({ ...settings, aboutCompanyStorySubheadline: e.target.value })}
                         placeholder="Engineered for international travelers seeking authentic African wilderness"
-                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                       />
                     </div>
                   </div>
@@ -5717,7 +5718,7 @@ export default function AdminPage() {
                       value={settings.aboutCompanyStoryContent || ''}
                       onChange={(e) => setSettings({ ...settings, aboutCompanyStoryContent: e.target.value })}
                       placeholder="Write your company history, private 4x4 fleet info, guide philosophy..."
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059] resize-y"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] resize-y"
                     />
                   </div>
 
@@ -5732,7 +5733,7 @@ export default function AdminPage() {
                 {/* 3. MISSION & VISION */}
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-[#c5a059]" /> Mission & Vision Statements
+                    <Target className="w-4 h-4 text-[#F97316]" /> Mission & Vision Statements
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -5742,7 +5743,7 @@ export default function AdminPage() {
                         rows={3}
                         value={settings.aboutMission || ''}
                         onChange={(e) => setSettings({ ...settings, aboutMission: e.target.value })}
-                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059] resize-none"
+                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] resize-none"
                       />
                     </div>
                     <div>
@@ -5751,7 +5752,7 @@ export default function AdminPage() {
                         rows={3}
                         value={settings.aboutVision || ''}
                         onChange={(e) => setSettings({ ...settings, aboutVision: e.target.value })}
-                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059] resize-none"
+                        className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] resize-none"
                       />
                     </div>
                   </div>
@@ -5761,7 +5762,7 @@ export default function AdminPage() {
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                     <h3 className="font-serif text-lg font-bold text-stone-200 flex items-center gap-2">
-                      <Star className="w-4 h-4 text-[#c5a059]" /> Why Choose Us Highlights
+                      <Star className="w-4 h-4 text-[#F97316]" /> Why Choose Us Highlights
                     </h3>
                     <button
                       type="button"
@@ -5778,7 +5779,7 @@ export default function AdminPage() {
                         const updated = [...current, { id: Date.now(), title: 'New Highlight', desc: 'Describe why guests should choose Discovery Safaris.' }];
                         setSettings({ ...settings, aboutWhyChooseUs: JSON.stringify(updated) });
                       }}
-                      className="text-xs text-[#c5a059] font-bold hover:underline flex items-center gap-1"
+                      className="text-xs text-[#F97316] font-bold hover:underline flex items-center gap-1"
                     >
                       <Plus className="w-3.5 h-3.5" /> Add Highlight Card
                     </button>
@@ -5850,7 +5851,7 @@ export default function AdminPage() {
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                     <h3 className="font-serif text-lg font-bold text-stone-200 flex items-center gap-2">
-                      <User className="w-4 h-4 text-[#c5a059]" /> Team & Safari Guides CMS
+                      <User className="w-4 h-4 text-[#F97316]" /> Team & Safari Guides CMS
                     </h3>
                     <button
                       type="button"
@@ -5876,7 +5877,7 @@ export default function AdminPage() {
                         ];
                         setSettings({ ...settings, aboutTeamMembers: JSON.stringify(updated) });
                       }}
-                      className="text-xs text-[#c5a059] font-bold hover:underline flex items-center gap-1"
+                      className="text-xs text-[#F97316] font-bold hover:underline flex items-center gap-1"
                     >
                       <Plus className="w-3.5 h-3.5" /> Add Team Member
                     </button>
@@ -6011,7 +6012,7 @@ export default function AdminPage() {
 
                   {/* Wilderness Safety */}
                   <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
-                    <h3 className="font-serif text-lg font-bold text-amber-400 border-b border-stone-800 pb-3 flex items-center gap-2">
+                    <h3 className="font-serif text-lg font-bold text-orange-400 border-b border-stone-800 pb-3 flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4" /> Wilderness Safety Protocols
                     </h3>
 
@@ -6042,28 +6043,28 @@ export default function AdminPage() {
                   {/* Certifications */}
                   <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                     <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-[#c5a059]" /> Certifications List (JSON Array)
+                      <ShieldCheck className="w-4 h-4 text-[#F97316]" /> Certifications List (JSON Array)
                     </h3>
                     <textarea
                       rows={5}
                       value={typeof settings.aboutCertifications === 'string' ? settings.aboutCertifications : JSON.stringify(settings.aboutCertifications, null, 2)}
                       onChange={(e) => setSettings({ ...settings, aboutCertifications: e.target.value })}
                       placeholder='["Namibia Tourism Board Registered", "TASA Accredited Member"]'
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 font-mono text-xs outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 font-mono text-xs outline-none focus:border-[#F97316]"
                     />
                   </div>
 
                   {/* Awards */}
                   <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                     <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                      <Award className="w-4 h-4 text-[#c5a059]" /> Industry Awards (JSON Array)
+                      <Award className="w-4 h-4 text-[#F97316]" /> Industry Awards (JSON Array)
                     </h3>
                     <textarea
                       rows={5}
                       value={typeof settings.aboutAwards === 'string' ? settings.aboutAwards : JSON.stringify(settings.aboutAwards, null, 2)}
                       onChange={(e) => setSettings({ ...settings, aboutAwards: e.target.value })}
                       placeholder='["🏆 World Travel Awards 2024", "⭐ TripAdvisor Travelers Choice 2025"]'
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 font-mono text-xs outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 font-mono text-xs outline-none focus:border-[#F97316]"
                     />
                   </div>
                 </div>
@@ -6071,7 +6072,7 @@ export default function AdminPage() {
                 {/* 8. ABOUT PAGE SEO & CTA BANNER */}
                 <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                   <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                    <Globe className="w-4 h-4 text-[#c5a059]" /> About Page SEO & Call To Action (CTA)
+                    <Globe className="w-4 h-4 text-[#F97316]" /> About Page SEO & Call To Action (CTA)
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -6129,7 +6130,7 @@ export default function AdminPage() {
                         type="text"
                         value={settings.aboutCtaButtonText || ''}
                         onChange={(e) => setSettings({ ...settings, aboutCtaButtonText: e.target.value })}
-                        className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none font-bold text-[#c5a059]"
+                        className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none font-bold text-[#F97316]"
                       />
                     </div>
                   </div>
@@ -6155,7 +6156,7 @@ export default function AdminPage() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#141210] border border-stone-800 p-6 rounded-2xl shadow-xl">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-[10px] font-bold uppercase tracking-wider mb-2">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-[10px] font-bold uppercase tracking-wider mb-2">
                     <Sparkles className="w-3 h-3" /> Home Page Section Studio
                   </div>
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100">Signature Itineraries CMS</h2>
@@ -6195,7 +6196,7 @@ export default function AdminPage() {
               {/* Section Headline & Copy Form */}
               <form onSubmit={handleSaveSettings} className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
                 <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                  <Layout className="w-4 h-4 text-[#c5a059]" /> Section Header Text
+                  <Layout className="w-4 h-4 text-[#F97316]" /> Section Header Text
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -6205,7 +6206,7 @@ export default function AdminPage() {
                       value={settings?.homeItineraryHeadline || ''}
                       onChange={(e) => setSettings({ ...settings, homeItineraryHeadline: e.target.value })}
                       placeholder="10-day classic Namibian explorer"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                   <div>
@@ -6215,7 +6216,7 @@ export default function AdminPage() {
                       value={settings?.homeItineraryCopy || ''}
                       onChange={(e) => setSettings({ ...settings, homeItineraryCopy: e.target.value })}
                       placeholder="One signature journey. Five distinct landscapes..."
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                 </div>
@@ -6233,14 +6234,14 @@ export default function AdminPage() {
               {/* Day-by-Day Timeline List */}
               <div className="space-y-4">
                 <h3 className="font-serif text-xl font-bold text-stone-200 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-[#c5a059]" /> Timeline Day Steps ({homeItineraryItemsList.length})
+                  <Clock className="w-5 h-5 text-[#F97316]" /> Timeline Day Steps ({homeItineraryItemsList.length})
                 </h3>
 
                 <div className="space-y-3">
                   {homeItineraryItemsList.map((step: any, idx: number) => (
                     <div
                       key={idx}
-                      className="bg-[#141210] border border-stone-800 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 hover:border-[#c5a059]/50 transition-all shadow-lg"
+                      className="bg-[#141210] border border-stone-800 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 hover:border-[#F97316]/50 transition-all shadow-lg"
                     >
                       <div className="flex items-center gap-4">
                         <img
@@ -6250,14 +6251,14 @@ export default function AdminPage() {
                         />
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <span className="bg-[#c5a059]/20 border border-[#c5a059] text-[#c5a059] text-[10px] font-bold px-2 py-0.5 rounded font-mono">
+                            <span className="bg-[#F97316]/20 border border-[#F97316] text-[#F97316] text-[10px] font-bold px-2 py-0.5 rounded font-mono">
                               {step.dayNumber || `0${idx + 1}`}
                             </span>
                             <span className="text-xs font-semibold text-stone-400">{step.daysLabel}</span>
                           </div>
                           <h4 className="font-serif text-lg font-bold text-stone-100">{step.title}</h4>
                           <p className="text-xs text-stone-400 line-clamp-1">{step.description}</p>
-                          <div className="flex flex-wrap items-center gap-3 text-[11px] text-amber-400/90 pt-1">
+                          <div className="flex flex-wrap items-center gap-3 text-[11px] text-orange-400/90 pt-1">
                             <span>⏱ {step.duration}</span>
                             <span>🍽 {step.mealPlan}</span>
                             <span>🏨 {step.accommodation}</span>
@@ -6273,7 +6274,7 @@ export default function AdminPage() {
                             setItineraryForm({ ...step });
                             setItineraryModalOpen(true);
                           }}
-                          className="px-3 py-2 bg-stone-900 border border-stone-700 rounded-lg text-xs font-bold text-amber-400 hover:bg-stone-800 transition-colors flex items-center gap-1.5"
+                          className="px-3 py-2 bg-stone-900 border border-stone-700 rounded-lg text-xs font-bold text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-1.5"
                         >
                           <Edit className="w-3.5 h-3.5" /> Edit
                         </button>
@@ -6333,7 +6334,7 @@ export default function AdminPage() {
                     <button
                       type="button"
                       onClick={() => setShowAddRegionInput(true)}
-                      className="text-[10px] text-[#c5a059] font-bold hover:underline flex items-center gap-0.5"
+                      className="text-[10px] text-[#F97316] font-bold hover:underline flex items-center gap-0.5"
                     >
                       <Plus className="w-3 h-3" /> Add Custom
                     </button>
@@ -6341,7 +6342,7 @@ export default function AdminPage() {
                   <select
                     value={destForm.region}
                     onChange={(e) => setDestForm({ ...destForm, region: e.target.value })}
-                    className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded text-stone-100 outline-none focus:border-[#c5a059]"
+                    className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded text-stone-100 outline-none focus:border-[#F97316]"
                   >
                     {regionsList.map((reg) => (
                       <option key={reg} value={reg}>
@@ -6466,7 +6467,7 @@ export default function AdminPage() {
           <div className="w-full max-w-lg bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between border-b border-stone-800 pb-3">
               <h3 className="font-serif text-xl font-bold text-stone-100 flex items-center gap-2">
-                <HelpCircle className="w-5 h-5 text-[#c5a059]" /> {editingFaq ? 'Edit FAQ Question' : 'Add New FAQ Question'}
+                <HelpCircle className="w-5 h-5 text-[#F97316]" /> {editingFaq ? 'Edit FAQ Question' : 'Add New FAQ Question'}
               </h3>
               <button onClick={() => setFaqModal(false)} className="text-stone-400 hover:text-stone-200">
                 <X className="w-5 h-5" />
@@ -6481,7 +6482,7 @@ export default function AdminPage() {
                   value={faqForm.category}
                   onChange={(e) => setFaqForm({ ...faqForm, category: e.target.value })}
                   placeholder="e.g. Booking & Inclusions, Safari Planning, Safety & Health"
-                  className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                  className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                 />
               </div>
 
@@ -6493,7 +6494,7 @@ export default function AdminPage() {
                   value={faqForm.question}
                   onChange={(e) => setFaqForm({ ...faqForm, question: e.target.value })}
                   placeholder="e.g. What is included in a Discovery Safaris private expedition?"
-                  className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059] font-semibold text-sm"
+                  className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] font-semibold text-sm"
                 />
               </div>
 
@@ -6505,7 +6506,7 @@ export default function AdminPage() {
                   value={faqForm.answer}
                   onChange={(e) => setFaqForm({ ...faqForm, answer: e.target.value })}
                   placeholder="Provide comprehensive details for guests..."
-                  className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none resize-none leading-relaxed focus:border-[#c5a059]"
+                  className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none resize-none leading-relaxed focus:border-[#F97316]"
                 />
               </div>
 
@@ -6538,7 +6539,7 @@ export default function AdminPage() {
             {/* Header */}
             <div className="flex items-center justify-between p-5 sm:p-6 border-b border-stone-800 shrink-0 bg-[#141210]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center font-bold font-mono text-sm shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center font-bold font-mono text-sm shrink-0">
                   {itineraryForm.dayNumber || '01'}
                 </div>
                 <div>
@@ -6569,7 +6570,7 @@ export default function AdminPage() {
                       value={itineraryForm.dayNumber}
                       onChange={(e) => setItineraryForm({ ...itineraryForm, dayNumber: e.target.value })}
                       placeholder="01"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                   <div>
@@ -6580,7 +6581,7 @@ export default function AdminPage() {
                       value={itineraryForm.daysLabel}
                       onChange={(e) => setItineraryForm({ ...itineraryForm, daysLabel: e.target.value })}
                       placeholder="Days 02–03"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                 </div>
@@ -6593,7 +6594,7 @@ export default function AdminPage() {
                     value={itineraryForm.title}
                     onChange={(e) => setItineraryForm({ ...itineraryForm, title: e.target.value })}
                     placeholder="e.g. Sossusvlei Dunes & Deadvlei 4x4 Excursion"
-                    className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059] font-serif text-sm font-bold text-stone-100"
+                    className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] font-serif text-sm font-bold text-stone-100"
                   />
                 </div>
 
@@ -6605,7 +6606,7 @@ export default function AdminPage() {
                     value={itineraryForm.description}
                     onChange={(e) => setItineraryForm({ ...itineraryForm, description: e.target.value })}
                     placeholder="Describe the day's safari activities, scenery, wildlife sightings..."
-                    className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059] leading-relaxed"
+                    className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] leading-relaxed"
                   />
                 </div>
 
@@ -6617,7 +6618,7 @@ export default function AdminPage() {
                       value={itineraryForm.duration}
                       onChange={(e) => setItineraryForm({ ...itineraryForm, duration: e.target.value })}
                       placeholder="4.5 hrs · 350 km"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                   <div>
@@ -6627,7 +6628,7 @@ export default function AdminPage() {
                       value={itineraryForm.mealPlan}
                       onChange={(e) => setItineraryForm({ ...itineraryForm, mealPlan: e.target.value })}
                       placeholder="Full Board / Breakfast & Dinner"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                 </div>
@@ -6640,7 +6641,7 @@ export default function AdminPage() {
                       value={itineraryForm.accommodation}
                       onChange={(e) => setItineraryForm({ ...itineraryForm, accommodation: e.target.value })}
                       placeholder="Little Kulala Villa"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                   <div>
@@ -6650,7 +6651,7 @@ export default function AdminPage() {
                       value={itineraryForm.accommodationSub}
                       onChange={(e) => setItineraryForm({ ...itineraryForm, accommodationSub: e.target.value })}
                       placeholder="Luxury desert villa · Sossusvlei"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#c5a059]"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                     />
                   </div>
                 </div>
@@ -6687,7 +6688,7 @@ export default function AdminPage() {
       {/* SUCCESS NOTIFICATION POPUP MODAL */}
       {saveSuccessModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-sm bg-[#141210] border border-amber-500/50 rounded-2xl p-6 text-center space-y-4 shadow-2xl">
+          <div className="w-full max-w-sm bg-[#141210] border border-orange-500/50 rounded-2xl p-6 text-center space-y-4 shadow-2xl">
             <div className="w-14 h-14 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 flex items-center justify-center mx-auto shadow-xl">
               <CheckCircle2 className="w-8 h-8" />
             </div>

@@ -6,12 +6,12 @@ import { logAuditEvent } from '@/lib/auditLogger';
 
 const DEFAULT_SETTINGS = {
   id: 'default-settings',
-  siteTitle: 'Discovery Safaris Namibia',
+  siteTitle: 'You & Me – Independent Voyage',
   siteLogo: '',
   siteFavicon: '',
-  contactEmail: 'info@discoverysafaris.com',
-  whatsappNumber: '+264 81 123 4567',
-  weatherText: 'Etosha National Park: 28°C Sunny',
+  contactEmail: 'info@youandmeindependentvoyage.com',
+  whatsappNumber: '+91 98765 43210',
+  weatherText: 'Chennai, Tamil Nadu: 30°C Sunny',
   adminPasscode: 'admin123',
 
   instagramUrl: 'https://instagram.com',
@@ -38,13 +38,14 @@ const DEFAULT_SETTINGS = {
   googleAnalyticsId: 'G-DS12345678',
   enableRobotsIndex: true,
 
-  heroHeadline: 'Experience the raw majesty of Namibia',
-  heroSubheadline: 'Private journeys · Wild places · 2004—2026',
-  heroCopy: 'Bespoke private safaris, luxury tented camps, and wildlife expeditions engineered for international travelers.',
-  heroImage: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1920&q=85',
+  heroHeadline: 'Discover Authentic South India Travel',
+  heroSubheadline: 'Private Journeys · Heritage Temples · Serene Backwaters',
+  heroCopy: 'Bespoke private tours, architectural wonders, tranquil backwater cruises, and hill station escapes across Tamil Nadu, Kerala, and South India.',
+  heroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
   heroBanners: JSON.stringify([
-    { id: 1, headline: 'Experience the raw majesty of Namibia', subheadline: 'Private journeys · Wild places · 2004—2026', image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1920&q=85' },
-    { id: 2, headline: 'Etosha Wildlife Waterholes Expedition', subheadline: 'Big 5 Safari · Luxury Tented Lodges', image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=85' },
+    { id: 1, headline: 'Discover the Iconic Temples & Heritage of Tamil Nadu', subheadline: 'Architectural Wonders · Shore Temples · Cultural Journeys', image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90' },
+    { id: 2, headline: 'Serene Backwaters & Houseboat Cruises of Kerala', subheadline: 'Palm-Fringed Canals · Authentic Culture · Tropical Escapes', image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90' },
+    { id: 3, headline: 'Mist-Covered Tea Gardens & Hills of Munnar & Nilgiris', subheadline: 'Hill Station Escapes · Nature · Custom Expeditions', image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90' },
   ]),
   announcementBannerText: '🔥 Special Offer: Save 15% on 2026 Private Fly-in Safaris! Book by end of month.',
   announcementBannerLink: '/safari/classic-namibia-expedition',

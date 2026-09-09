@@ -57,10 +57,10 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
     <div className="space-y-2 bg-[#181614] border border-stone-800 p-4 rounded-2xl shadow-md">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-stone-800/80 pb-2.5">
         <label className="text-xs text-stone-200 font-bold uppercase tracking-wider flex items-center gap-2">
-          <ImageIcon className="w-4 h-4 text-[#c5a059]" /> {label}
+          <ImageIcon className="w-4 h-4 text-orange-500" /> {label}
         </label>
         {recommendedSize && (
-          <span className="text-[10px] text-amber-400 font-mono bg-amber-950/60 border border-amber-800/80 px-2.5 py-0.5 rounded-md font-bold">
+          <span className="text-[10px] text-orange-400 font-mono bg-orange-950/60 border border-orange-800/80 px-2.5 py-0.5 rounded-md font-bold">
             📐 {recommendedSize}
           </span>
         )}
@@ -98,7 +98,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#c5a059]/15 text-[#c5a059] border border-[#c5a059]/40 text-xs font-bold hover:bg-[#c5a059]/30 transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500/15 text-orange-500 border border-orange-500/40 text-xs font-bold hover:bg-orange-500/30 transition-all"
               >
                 <RefreshCw className="w-3.5 h-3.5" /> Change Image
               </button>
@@ -117,13 +117,13 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         /* Empty Upload Trigger Dropzone */
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-stone-700/80 hover:border-[#c5a059] rounded-xl p-5 text-center cursor-pointer bg-stone-900/40 hover:bg-stone-900/80 transition-all group space-y-2"
+          className="border-2 border-dashed border-stone-700/80 hover:border-orange-500 rounded-xl p-5 text-center cursor-pointer bg-stone-900/40 hover:bg-stone-900/80 transition-all group space-y-2"
         >
-          <div className="w-10 h-10 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/30 text-[#c5a059] flex items-center justify-center mx-auto group-hover:scale-110 group-hover:bg-[#c5a059] group-hover:text-stone-950 transition-all">
+          <div className="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-500 flex items-center justify-center mx-auto group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all">
             <Upload className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-xs font-bold text-stone-200 block group-hover:text-[#c5a059] transition-colors">
+            <span className="text-xs font-bold text-stone-200 block group-hover:text-orange-500 transition-colors">
               Click to Upload Image File from Device
             </span>
             <span className="text-[10px] text-stone-400 block mt-0.5">
@@ -135,3 +135,4 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
     </div>
   );
 };
+
