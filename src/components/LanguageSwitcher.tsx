@@ -44,25 +44,31 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
 
     // Initialize Google Translate Script dynamically
     if (typeof window !== 'undefined') {
+      (window as any).googleTranslateElementInit = () => {
+        if ((window as any).google?.translate?.TranslateElement) {
+          new (window as any).google.translate.TranslateElement(
+            {
+              pageLanguage: 'en',
+              includedLanguages: 'en,de,fr,es,it,nl,af,zh-CN',
+              autoDisplay: false,
+            },
+            'google_translate_element'
+          );
+        }
+      };
+
       if (!document.getElementById('google-translate-script')) {
         const script = document.createElement('script');
         script.id = 'google-translate-script';
         script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
         script.async = true;
         document.body.appendChild(script);
-
-        (window as any).googleTranslateElementInit = () => {
-          if ((window as any).google?.translate?.TranslateElement) {
-            new (window as any).google.translate.TranslateElement(
-              {
-                pageLanguage: 'en',
-                includedLanguages: 'en,de,fr,es,it,nl,af,zh-CN',
-                autoDisplay: false,
-              },
-              'google_translate_element'
-            );
-          }
-        };
+      } else if ((window as any).google?.translate?.TranslateElement) {
+        try {
+          (window as any).googleTranslateElementInit();
+        } catch (e) {
+          console.error('Google translate init error:', e);
+        }
       }
     }
   }, []);
@@ -77,23 +83,34 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const setTranslateCookie = (langCode: string) => {
+    const hostname = window.location.hostname;
+    const cookieVal = `/en/${langCode}`;
+
+    // Clear old cookies
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname};`;
+
+    const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.local');
+    if (!isLocal && hostname.includes('.')) {
+      const rootDomain = '.' + hostname.split('.').slice(-2).join('.');
+      document.cookie = `googtrans=${cookieVal}; path=/; domain=${rootDomain};`;
+    }
+    document.cookie = `googtrans=${cookieVal}; path=/;`;
+    localStorage.setItem('site_language', langCode);
+  };
+
   const changeLanguage = (langCode: string) => {
     setCurrentLang(langCode);
     setIsOpen(false);
+    setTranslateCookie(langCode);
 
-    // Set cookie for Google Translate
-    const domain = window.location.hostname;
-    document.cookie = `googtrans=/en/${langCode}; path=/; domain=${domain}`;
-    document.cookie = `googtrans=/en/${langCode}; path=/;`;
-    localStorage.setItem('site_language', langCode);
-
-    // Check if Google Translate iframe/select exists
+    // Trigger Google Translate combo element
     const selectElem = document.querySelector('.goog-te-combo') as HTMLSelectElement;
     if (selectElem) {
       selectElem.value = langCode;
       selectElem.dispatchEvent(new Event('change'));
     } else {
-      // Reload page to apply google translate cookie
       window.location.reload();
     }
   };

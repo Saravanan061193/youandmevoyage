@@ -1489,9 +1489,22 @@ h1 em, h2 em {
 }
 
 /* GOOGLE TRANSLATE CUSTOM STYLING & OVERRIDES */
-#google_translate_element,
+#google_translate_element {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .goog-te-gadget {
-  display: none !important;
+  display: inline-block !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 
 .goog-te-banner-frame.skiptranslate,
