@@ -14,7 +14,8 @@ export const TrustStrip = () => {
   ];
 
   return (
-    <section className="bg-[#0F172A] border-y border-slate-800 py-10 px-4 sm:px-6 lg:px-8 text-slate-100">
+    <section className="bg-[#0F172A] border-y border-slate-800 pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-slate-100">
+
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <span className="text-xs uppercase tracking-widest text-orange-400 font-bold">Why Travel With Us</span>

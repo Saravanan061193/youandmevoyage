@@ -307,15 +307,17 @@ h1 em, h2 em {
 
 /* SEARCH WIDGET */
 .search-widget {
-  z-index: 2;
-  color: #1e1b18;
-  background: #fdfbf7;
-  padding: 24px;
+  z-index: 20;
+  color: #F8FAFC;
+  background: #0F172A;
+  padding: 24px 32px;
   position: absolute;
-  bottom: -76px;
+  bottom: -40px;
   left: 5%;
   right: 5%;
-  box-shadow: 0 18px 50px #1e1b1824;
+  border-radius: 24px;
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
 }
 .search-heading {
   justify-content: space-between;
@@ -324,11 +326,12 @@ h1 em, h2 em {
   display: flex;
 }
 .search-heading h2 {
-  font-size: 34px;
+  color: #FFFFFF !important;
+  font-size: clamp(20px, 3vw, 30px);
 }
 .search-fields {
   grid-template-columns: repeat(4, 1fr) 1.2fr;
-  gap: 10px;
+  gap: 12px;
   display: grid;
 }
 .search-fields label, .quote-form label {
@@ -337,17 +340,18 @@ h1 em, h2 em {
   display: flex;
 }
 .search-fields label > span, .quote-form label {
-  color: #81786a;
+  color: #94A3B8;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 10px;
   font-weight: 700;
 }
 .search-fields select, .quote-form input, .quote-form select, .quote-form textarea {
-  border: 1px solid var(--border);
-  color: #1e1b18;
-  background: 0 0;
+  border: 1px solid #334155;
+  color: #F8FAFC;
+  background: #020617;
   outline: none;
+
   min-height: 45px;
   padding: 0 12px;
   font-size: 12px;
