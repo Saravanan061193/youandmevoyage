@@ -132,9 +132,10 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
       <div className="section-intro mb-10">
         <div>
           <p className="eyebrow text-orange-500 uppercase tracking-widest font-bold text-xs">Curated Routes</p>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mt-1">
-            South India <em>Journeys & Expeditions</em>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mt-1 leading-snug">
+            South India <em className="text-orange-500 italic">Journeys & Expeditions</em>
           </h2>
+
         </div>
         <p className="text-slate-600 text-sm max-w-xl">
           Private, flexible, driver-assisted road trips through Tamil Nadu temple heritage, Kerala backwaters, and pristine hills.

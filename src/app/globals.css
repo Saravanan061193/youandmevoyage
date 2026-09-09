@@ -233,13 +233,18 @@ button, a {
   font-size: 11px;
   font-weight: 700;
 }
-.hero-content h1, h2 {
+.hero-content h1, .hero-content h2 {
   font-family: var(--font-serif);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   margin: 0;
   font-weight: 500;
-  line-height: 0.94;
+  line-height: 1.15;
 }
+
+h2 {
+  line-height: 1.25;
+}
+
 .hero-content h1 {
   font-size: clamp(56px, 7.5vw, 104px);
   margin-bottom: 24px;
