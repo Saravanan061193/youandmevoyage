@@ -1269,7 +1269,7 @@ export default function AdminPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
               CMS Control Portal
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100 tracking-tight">Discovery Safaris Admin</h1>
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100 tracking-tight">You & Me Independent Voyage Admin</h1>
             <p className="text-xs text-stone-400 font-sans leading-relaxed">Enter your admin credentials to manage website content</p>
           </div>
 
@@ -1493,7 +1493,7 @@ export default function AdminPage() {
           </Link>
           <span className="text-stone-700">|</span>
           <h1 className="font-serif font-bold text-lg text-stone-100">
-            Discovery Safaris <span className="text-primary text-xs uppercase font-sans">CMS Control Panel</span>
+            You & Me Independent Voyage <span className="text-primary text-xs uppercase font-sans">CMS Control Panel</span>
           </h1>
         </div>
 
@@ -1607,17 +1607,17 @@ export default function AdminPage() {
               {!sidebarCollapsed && <span>Overview Dashboard</span>}
             </button>
 
-            {/* 2. Safaris Collection */}
+            {/* 2. Journeys Collection */}
             <button
               onClick={() => setActiveTab('safaris')}
-              title="Safaris Collection"
+              title="Journeys Collection"
               className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'safaris' ? 'bg-primary text-black font-bold' : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
               } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
             >
               <span className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 shrink-0" />
-                {!sidebarCollapsed && <span>Safaris Collection</span>}
+                {!sidebarCollapsed && <span>Journeys Collection</span>}
               </span>
               {!sidebarCollapsed && (
                 <span className="bg-stone-800 text-stone-300 px-2 py-0.5 rounded text-[10px]">{safaris.length}</span>
@@ -1783,17 +1783,17 @@ export default function AdminPage() {
               )}
             </div>
 
-            {/* 7. Safari Insights */}
+            {/* 7. Journey Insights */}
             <button
               onClick={() => setActiveTab('reports')}
-              title="Safari Insights"
+              title="Journey Insights"
               className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'reports' ? 'bg-primary text-black font-bold' : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
               } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
             >
               <span className="flex items-center gap-3">
                 <BarChart3 className="w-4 h-4 shrink-0 text-[#F97316]" />
-                {!sidebarCollapsed && <span>Safari Insights</span>}
+                {!sidebarCollapsed && <span>Journey Insights</span>}
               </span>
               {!sidebarCollapsed && (
                 <span className="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-bold">
@@ -1969,7 +1969,7 @@ export default function AdminPage() {
                   {/* 1. TOTAL SAFARIS CARD */}
                   <div className="bg-[#141210] border border-stone-800 p-6 rounded-2xl space-y-3 shadow-xl relative overflow-hidden group hover:border-[#F97316]/60 transition-all duration-300">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-stone-400 font-bold uppercase tracking-wider">Total Safaris</span>
+                      <span className="text-xs text-stone-400 font-bold uppercase tracking-wider">Total Journeys</span>
                       <div className="w-10 h-10 rounded-xl bg-[#F97316]/10 border border-[#F97316]/30 text-[#F97316] flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-[#F97316] group-hover:text-stone-950 transition-all duration-300">
                         <Compass className="w-5 h-5" />
                       </div>
@@ -2191,10 +2191,11 @@ export default function AdminPage() {
                         return { name: cat, percentage: pct, bg: colorObj.bg, text: colorObj.text, count };
                       })
                     : [
-                        { name: 'Private Safaris', percentage: 55, bg: 'bg-[#F97316]', text: 'text-[#F97316]', count: 3 },
-                        { name: 'Luxury Tented Camps', percentage: 30, bg: 'bg-orange-500', text: 'text-orange-400', count: 2 },
-                        { name: 'Adventure Expeditions', percentage: 15, bg: 'bg-emerald-500', text: 'text-emerald-400', count: 1 },
+                        { name: 'Private Custom Journeys', percentage: 55, bg: 'bg-[#F97316]', text: 'text-[#F97316]', count: 3 },
+                        { name: 'Heritage Temple Journeys', percentage: 30, bg: 'bg-orange-500', text: 'text-orange-400', count: 2 },
+                        { name: 'Kerala Backwater Expeditions', percentage: 15, bg: 'bg-emerald-500', text: 'text-emerald-400', count: 1 },
                       ];
+
 
                   return (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -2255,7 +2256,7 @@ export default function AdminPage() {
                       <div className="lg:col-span-4 bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-6 shadow-xl">
                         <div className="border-b border-stone-800 pb-3">
                           <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                            <PieChart className="w-5 h-5 text-[#F97316]" /> Safari Category Share
+                            <PieChart className="w-5 h-5 text-[#F97316]" /> Journey Category Share
                           </h3>
                           <p className="text-[11px] text-stone-400">Live tour style demand distribution</p>
                         </div>
@@ -2364,8 +2365,8 @@ export default function AdminPage() {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="font-serif text-2xl font-bold">Safaris Collection Manager</h2>
-                      <p className="text-xs text-stone-400">Add, update prices, manage itineraries, or set SEO settings for safari tours</p>
+                      <h2 className="font-serif text-2xl font-bold">Journeys Collection Manager</h2>
+                      <p className="text-xs text-stone-400">Add, update prices, manage itineraries, or set SEO settings for custom journeys</p>
                     </div>
                     <button
                       onClick={() => {
@@ -2392,7 +2393,7 @@ export default function AdminPage() {
                       }}
                       className="flex items-center gap-2 rounded-lg bg-gold-gradient px-4 py-2 text-xs font-semibold text-stone-950 shadow-md hover:brightness-110"
                     >
-                      <Plus className="w-4 h-4" /> Add New Safari Package
+                      <Plus className="w-4 h-4" /> Add New Journey Package
                     </button>
                   </div>
 
@@ -2401,7 +2402,7 @@ export default function AdminPage() {
                     <table className="w-full text-left text-xs text-stone-300">
                       <thead className="bg-stone-900 border-b border-stone-800 uppercase tracking-wider text-[10px] text-stone-400">
                         <tr>
-                          <th className="p-4">Safari Title</th>
+                          <th className="p-4">Journey Title</th>
                           <th className="p-4">Price (USD)</th>
                           <th className="p-4">Duration</th>
                           <th className="p-4">Category</th>
@@ -2491,6 +2492,7 @@ export default function AdminPage() {
                 </div>
               ) : (
                 /* DEDICATED FULL-PAGE SAFARI EDITOR WORKSPACE & SEO STUDIO (NO POPUP MODAL!) */
+                /* DEDICATED FULL-PAGE EDITOR WORKSPACE & SEO STUDIO (NO POPUP MODAL!) */
                 <div className="space-y-6">
                   {/* Editor Header Navigation */}
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
@@ -2499,12 +2501,12 @@ export default function AdminPage() {
                         onClick={() => setSafariViewMode('list')}
                         className="flex items-center gap-2 text-xs text-[#F97316] font-bold bg-stone-900 border border-stone-800 px-3 py-2 rounded-lg hover:bg-stone-800 transition-colors"
                       >
-                        <ArrowLeft className="w-4 h-4" /> Back to Safaris Collection
+                        <ArrowLeft className="w-4 h-4" /> Back to Journeys Collection
                       </button>
                       <div>
                         <h2 className="font-serif text-2xl font-bold text-stone-100 flex items-center gap-2">
                           <MapPin className="w-5 h-5 text-[#F97316]" />
-                          {editingSafari ? 'Safari Package Workspace' : 'Create New Safari Workspace'}
+                          {editingSafari ? 'Journey Package Workspace' : 'Create New Journey Workspace'}
                         </h2>
                         <p className="text-xs text-stone-400">Full itinerary customization, pricing & dedicated SEO configuration studio</p>
                       </div>
@@ -2522,7 +2524,7 @@ export default function AdminPage() {
                         onClick={handleSaveSafari}
                         className="flex items-center gap-2 px-5 py-2 bg-gold-gradient text-stone-950 text-xs font-bold rounded-lg shadow-md hover:brightness-110"
                       >
-                        <Save className="w-4 h-4" /> {editingSafari ? 'Save & Update Safari' : 'Create Safari Package'}
+                        <Save className="w-4 h-4" /> {editingSafari ? 'Save & Update Journey' : 'Create Journey Package'}
                       </button>
                     </div>
                   </div>
@@ -2530,12 +2532,12 @@ export default function AdminPage() {
                   {/* Form Container */}
                   <form onSubmit={handleSaveSafari} className="space-y-6 text-xs">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                      {/* Left Column: Safari Itinerary Specifications */}
+                      {/* Left Column: Itinerary Specifications */}
                       <div className="lg:col-span-7 space-y-6 bg-[#141210] border border-stone-800 rounded-2xl p-6 shadow-xl">
                         <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3">Itinerary Specifications & Media</h3>
 
                         <div>
-                          <label className="block text-stone-400 font-semibold mb-1">Safari Title *</label>
+                          <label className="block text-stone-400 font-semibold mb-1">Journey Title *</label>
                           <input
                             type="text"
                             required
