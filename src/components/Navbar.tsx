@@ -47,14 +47,22 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
           )}
         </Link>
 
-        {/* Desktop Nav: [Logo] | About Us | Explore ▾ | Contact | [Build Your Trip ✨] | GB EN | WhatsApp */}
+        {/* Desktop Nav: [Logo] | Home | About Us | Explore ▾ | Contact | [Build Your Trip ✨] | GB EN | WhatsApp */}
         <nav className="hidden items-center gap-5 xl:gap-7 lg:flex">
+          <Link
+            href="/"
+            className="nav-link text-xs uppercase tracking-widest font-bold text-slate-200 hover:text-orange-400 transition-colors"
+          >
+            Home
+          </Link>
+
           <Link
             href="/about"
             className="nav-link text-xs uppercase tracking-widest font-bold text-slate-200 hover:text-orange-400 transition-colors"
           >
             About Us
           </Link>
+
 
           {/* Explore Dropdown */}
           <div
@@ -159,9 +167,14 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
             <LanguageSwitcher variant="full" />
           </div>
 
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="nav-link py-1 text-base font-semibold hover:text-orange-400">
+            Home
+          </Link>
+
           <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="nav-link py-1 text-base font-semibold hover:text-orange-400">
             About Us
           </Link>
+
 
           <div className="py-2 border-y border-slate-800 space-y-2">
             <span className="text-xs uppercase font-bold text-orange-400 tracking-wider block">Explore:</span>
