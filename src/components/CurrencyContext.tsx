@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type Currency = 'USD' | 'EUR' | 'GBP' | 'INR';
+export type Currency = 'INR';
 
 interface CurrencyContextType {
   currency: Currency;
@@ -13,18 +13,16 @@ interface CurrencyContextType {
 }
 
 const CurrencyContext = createContext<CurrencyContextType>({
-  currency: 'USD',
+  currency: 'INR',
   setCurrency: () => {},
-  formatPrice: (price: number) => `$${price.toLocaleString()}`,
+  formatPrice: (price: number) => `₹${price.toLocaleString('en-IN')}`,
   settings: null,
   reloadSettings: () => {},
 });
 
 export const CurrencyProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currency, setCurrency] = useState<Currency>('USD');
+  const [currency] = useState<Currency>('INR');
   const [settings, setSettings] = useState<any>({
-    usdToEur: 0.92,
-    usdToGbp: 0.78,
     usdToInr: 83.5,
     weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
     whatsappNumber: '+91 98765 43210',
@@ -60,28 +58,20 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
 
   const formatPrice = (priceUSD: number): string => {
     let converted = priceUSD;
-    let symbol = '$';
-
-    if (currency === 'EUR') {
-      converted = priceUSD * (settings.usdToEur || 0.92);
-      symbol = '€';
-    } else if (currency === 'GBP') {
-      converted = priceUSD * (settings.usdToGbp || 0.78);
-      symbol = '£';
-    } else if (currency === 'INR') {
-      converted = priceUSD * (settings.usdToInr || settings.usdToNad || 83.5);
-      symbol = '₹';
+    if (priceUSD < 20000) {
+      converted = priceUSD * (settings?.usdToInr || 83.5);
     }
-
     const rounded = Math.round(converted);
-    return `${symbol}${rounded.toLocaleString('en-IN')}`;
+    return `₹${rounded.toLocaleString('en-IN')}`;
   };
+
 
   return (
     <CurrencyContext.Provider
       value={{
         currency,
-        setCurrency,
+        setCurrency: () => {},
+
         formatPrice,
         settings,
         reloadSettings: fetchSettings,

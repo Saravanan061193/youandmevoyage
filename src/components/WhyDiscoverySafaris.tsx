@@ -58,7 +58,8 @@ export const WhyDiscoverySafaris: React.FC<WhyDiscoverySafarisProps> = ({ onOpen
     {
       icon: Globe,
       title: 'International Guest Care',
-      description: 'Full support for international travelers including French & English assistance, multi-currency transparency, and custom pace.',
+      description: 'Full support for travelers including English assistance, transparent Indian Rupee pricing, and custom pace.',
+
     },
   ];
 
