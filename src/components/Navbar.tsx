@@ -18,28 +18,28 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-[#0F172A]/95 backdrop-blur-2xl transition-all shadow-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 lg:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-3.5 py-3 sm:px-6 sm:py-3.5">
         {/* Brand Mark with Dynamic Logo (Links to /) */}
-        <Link href="/" className="brand-mark flex items-center gap-3 group">
+        <Link href="/" className="brand-mark flex items-center gap-2.5 sm:gap-3 group">
           {settings?.siteLogo ? (
             <img
               src={settings.siteLogo}
               alt={settings?.siteTitle || "You & Me – Independent Voyage"}
-              className="h-10 w-auto max-w-[200px] object-contain"
+              className="h-8 sm:h-10 w-auto max-w-[140px] sm:max-w-[200px] object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
           ) : (
-            <div className="flex items-center gap-3">
-              <span className="w-10 h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-xl flex items-center justify-center shadow-md ring-2 ring-orange-400/40 shrink-0 group-hover:scale-105 transition-transform">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-lg sm:text-xl flex items-center justify-center shadow-md ring-2 ring-orange-400/40 shrink-0 group-hover:scale-105 transition-transform">
                 YM
               </span>
               <div className="flex flex-col">
-                <span className="text-white font-bold text-lg font-serif tracking-tight leading-none group-hover:text-orange-400 transition-colors">
+                <span className="text-white font-bold text-sm sm:text-lg font-serif tracking-tight leading-none group-hover:text-orange-400 transition-colors">
                   {settings?.siteTitle && !settings.siteTitle.includes('Namibia') ? settings.siteTitle : "You & Me"}
                 </span>
-                <span className="text-[9px] uppercase tracking-[0.25em] text-orange-400 font-sans font-extrabold mt-1">
+                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-orange-400 font-sans font-extrabold mt-0.5 sm:mt-1">
                   INDEPENDENT VOYAGE
                 </span>
               </div>

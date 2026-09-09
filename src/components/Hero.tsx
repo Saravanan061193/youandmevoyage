@@ -222,7 +222,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
           <button
             type="button"
             onClick={handleSearch}
-            className="gold-button flex items-center justify-center font-bold text-xs py-3.5 px-4 rounded-xl shadow-lg hover:scale-105 transition-all self-end"
+            className="gold-button w-full lg:w-auto flex items-center justify-center font-bold text-xs py-3.5 px-4 rounded-xl shadow-lg hover:scale-105 transition-all self-end"
           >
             <Search className="w-4 h-4 inline mr-1.5" /> Search Journeys
           </button>

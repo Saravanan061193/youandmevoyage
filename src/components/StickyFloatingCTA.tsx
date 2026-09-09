@@ -76,10 +76,11 @@ export const StickyFloatingCTA = ({ onOpenQuoteModal, onOpenLeadMagnetModal }: S
           <button
             type="button"
             onClick={onOpenQuoteModal}
-            className="gold-button inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all"
+            className="gold-button inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold text-white uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all shrink-0"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Get Custom Quote</span>
+            <span className="hidden sm:inline">Get Custom Quote</span>
+            <span className="sm:hidden">Get Quote</span>
           </button>
 
           {/* Close Dismiss Button */}
