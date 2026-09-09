@@ -29,6 +29,22 @@ function BuildYourTripContent() {
   const [submitting, setSubmitting] = useState(false);
 
   // Form State
+  const [startDateInput, setStartDateInput] = useState('');
+  const [endDateInput, setEndDateInput] = useState('');
+
+  const handleDateSelection = (start: string, end: string) => {
+    setStartDateInput(start);
+    setEndDateInput(end);
+    if (start && end) {
+      const sDate = new Date(start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const eDate = new Date(end).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      setFormData((prev) => ({ ...prev, travelDates: `${sDate} – ${eDate}` }));
+    } else if (start) {
+      const sDate = new Date(start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      setFormData((prev) => ({ ...prev, travelDates: `From ${sDate}` }));
+    }
+  };
+
   const [formData, setFormData] = useState({
     travelDates: '',
     travelers: 2,
@@ -237,22 +253,96 @@ I would love to receive a customized itinerary proposal!`;
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* STEP 1: Travel Dates */}
               {step === 1 && (
-                <div className="space-y-5 animate-in fade-in duration-300">
+                <div className="space-y-6 animate-in fade-in duration-300">
                   <div className="flex items-center gap-3">
                     <Calendar className="w-6 h-6 text-orange-500 shrink-0" />
                     <div>
                       <h3 className="font-serif font-bold text-xl text-slate-900">When do you plan to travel?</h3>
-                      <p className="text-xs text-slate-500">Exact dates or approximate month/year</p>
+                      <p className="text-xs text-slate-500">Pick exact calendar dates or choose an approximate month</p>
                     </div>
                   </div>
-                  <input
-                    type="text"
-                    required
-                    value={formData.travelDates}
-                    onChange={(e) => setFormData({ ...formData, travelDates: e.target.value })}
-                    placeholder="e.g. November 15 - 25, 2026 or October 2026"
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm focus:border-orange-500 focus:bg-white outline-none"
-                  />
+
+                  {/* Option 1: Calendar Date Picker */}
+                  <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <label className="block text-xs font-bold uppercase text-slate-600 tracking-wider">
+                      Option A: Select Exact Dates (Calendar)
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <span className="block text-xs text-slate-500 mb-1 font-medium">Arrival Date</span>
+                        <input
+                          type="date"
+                          value={startDateInput}
+                          min={new Date().toISOString().split('T')[0]}
+                          onChange={(e) => handleDateSelection(e.target.value, endDateInput)}
+                          className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-800 focus:border-orange-500 outline-none cursor-pointer"
+                        />
+                      </div>
+                      <div>
+                        <span className="block text-xs text-slate-500 mb-1 font-medium">Departure Date</span>
+                        <input
+                          type="date"
+                          value={endDateInput}
+                          min={startDateInput || new Date().toISOString().split('T')[0]}
+                          onChange={(e) => handleDateSelection(startDateInput, e.target.value)}
+                          className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-800 focus:border-orange-500 outline-none cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Option 2: Quick Month Selection Chips */}
+                  <div className="space-y-2">
+                    <label className="block text-xs font-bold uppercase text-slate-600 tracking-wider">
+                      Option B: Or Select Preferred Month / Season
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        'October 2026',
+                        'November 2026',
+                        'December 2026',
+                        'January 2027',
+                        'February 2027',
+                        'March 2027',
+                        'Flexible / Not Decided Yet',
+                      ].map((month) => {
+                        const isSelected = formData.travelDates === month;
+                        return (
+                          <button
+                            key={month}
+                            type="button"
+                            onClick={() => {
+                              setStartDateInput('');
+                              setEndDateInput('');
+                              setFormData({ ...formData, travelDates: month });
+                            }}
+                            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${
+                              isSelected
+                                ? 'bg-orange-500 text-white border-orange-500 shadow-sm'
+                                : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            {month}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Option 3: Selected Dates Summary / Custom Input */}
+                  <div className="space-y-2 pt-2">
+                    <label className="block text-xs font-bold uppercase text-slate-600 tracking-wider">
+                      Your Selected Travel Window *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.travelDates}
+                      onChange={(e) => setFormData({ ...formData, travelDates: e.target.value })}
+                      placeholder="e.g. Nov 15 – Nov 25, 2026 or October 2026"
+                      className="w-full bg-white border border-orange-300 rounded-xl p-4 text-sm font-semibold text-slate-900 focus:border-orange-500 outline-none shadow-sm"
+                    />
+                  </div>
                 </div>
               )}
 
