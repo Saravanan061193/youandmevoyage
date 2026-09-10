@@ -56,12 +56,15 @@ import {
   Download,
   Upload,
   Sparkles,
+  Loader2,
 } from 'lucide-react';
 import { ImageUploader } from '@/components/ImageUploader';
 import { triggerPdfDownload } from '@/lib/downloadPdf';
 
 export default function AdminPage() {
+  const [authChecking, setAuthChecking] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
+
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('admin123');
   const [showPassword, setShowPassword] = useState(false);
@@ -416,26 +419,43 @@ export default function AdminPage() {
   // Check auth session & listen for inquiry updates
   useEffect(() => {
     const checkAuthSession = async () => {
+      const hasLocalAuth =
+        typeof window !== 'undefined' &&
+        (sessionStorage.getItem('admin_auth') === 'true' || localStorage.getItem('admin_auth') === 'true');
+
+      if (hasLocalAuth) {
+        setAuthenticated(true);
+        setAuthChecking(false);
+        fetchAllData();
+      }
+
       try {
         const res = await fetch('/api/auth', { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           if (data.authenticated) {
+            if (typeof window !== 'undefined') {
+              sessionStorage.setItem('admin_auth', 'true');
+              localStorage.setItem('admin_auth', 'true');
+            }
             setAuthenticated(true);
-            fetchAllData();
+            setAuthChecking(false);
+            if (!hasLocalAuth) {
+              fetchAllData();
+            }
             return;
           }
         }
       } catch (e) {}
-      
-      const isAuth = sessionStorage.getItem('admin_auth');
-      if (isAuth === 'true') {
-        setAuthenticated(true);
-        fetchAllData();
+
+      if (!hasLocalAuth) {
+        setAuthenticated(false);
       }
+      setAuthChecking(false);
     };
 
     checkAuthSession();
+
 
     const handleInquiriesUpdated = () => {
       if (typeof window !== 'undefined') {
@@ -465,8 +485,12 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        sessionStorage.setItem('admin_auth', 'true');
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('admin_auth', 'true');
+          localStorage.setItem('admin_auth', 'true');
+        }
         setAuthenticated(true);
+        setAuthChecking(false);
         fetchAllData();
       } else {
         setAuthError(data.error || 'Invalid credentials. Default: admin / admin123');
@@ -548,8 +572,12 @@ export default function AdminPage() {
         body: JSON.stringify({ action: 'logout' }),
       });
     } catch (e) {}
-    sessionStorage.removeItem('admin_auth');
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('admin_auth');
+      localStorage.removeItem('admin_auth');
+    }
     setAuthenticated(false);
+    setAuthChecking(false);
   };
 
   const fetchAllData = async () => {
@@ -1245,9 +1273,23 @@ export default function AdminPage() {
   };
 
   // ----------------------------------------------------
-  // ADMIN LOGIN SCREEN (USERNAME + PASSWORD + FORGOT PASSWORD)
+  // ADMIN LOADING & LOGIN SCREENS
   // ----------------------------------------------------
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col items-center justify-center space-y-4 p-4 relative overflow-hidden">
+        <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 text-orange-500 flex items-center justify-center shadow-lg">
+          <Loader2 className="w-6 h-6 animate-spin" />
+        </div>
+        <span className="text-xs font-semibold text-stone-400 tracking-widest uppercase font-mono">
+          Loading Control Panel...
+        </span>
+      </div>
+    );
+  }
+
   if (!authenticated) {
+
     return (
       <div className="min-h-screen text-stone-100 flex items-center justify-center p-4 relative overflow-hidden bg-stone-950">
         {/* Safari Tour Background Image */}
