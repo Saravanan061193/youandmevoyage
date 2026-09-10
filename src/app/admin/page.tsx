@@ -705,18 +705,15 @@ export default function AdminPage() {
         body: JSON.stringify(safariForm),
       });
 
-      let savedItem: any = null;
-      if (res.ok) {
-        savedItem = await res.json();
-      } else {
-        savedItem = {
-          id: editingSafari ? editingSafari.id : `safari-${Date.now()}`,
-          ...safariForm,
-          priceUSD: parseFloat(safariForm.priceUSD) || 3000,
-          days: parseInt(safariForm.days) || 7,
-          nights: parseInt(safariForm.nights) || 6,
-        };
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        showNotification(`Error: ${errorData.error || 'Failed to save journey package'}`);
+        alert(`Could not save package: ${errorData.error || 'Invalid input or server error'}`);
+        setSaving(false);
+        return;
       }
+
+      const savedItem = await res.json();
 
       setSafaris((prev) => {
         let updated;
@@ -738,25 +735,7 @@ export default function AdminPage() {
       fetchAllData();
     } catch (e) {
       console.error(e);
-      const fallbackItem = {
-        id: editingSafari ? editingSafari.id : `safari-${Date.now()}`,
-        ...safariForm,
-        priceUSD: parseFloat(safariForm.priceUSD) || 3000,
-        days: parseInt(safariForm.days) || 7,
-        nights: parseInt(safariForm.nights) || 6,
-      };
-      setSafaris((prev) => {
-        const updated = editingSafari
-          ? prev.map((s) => (s.id === editingSafari.id ? { ...s, ...fallbackItem } : s))
-          : [fallbackItem, ...prev];
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('site_safaris_cache', JSON.stringify(updated));
-        }
-        return updated;
-      });
-      setSaveSuccessModal('Safari tour package saved successfully!');
-      setSafariViewMode('list');
-      setEditingSafari(null);
+      alert('Network error while saving journey package.');
     } finally {
       setSaving(false);
     }

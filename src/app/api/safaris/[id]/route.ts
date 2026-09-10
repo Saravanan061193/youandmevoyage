@@ -44,19 +44,19 @@ export async function PUT(request: Request, { params }: { params: { id: string }
           nights: parseInt(nights),
           category,
           region,
-          badge: badge || null,
+          badge: badge || undefined,
           image,
           route,
           accommodation,
           description,
           inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
           exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
-          metaTitle: metaTitle || null,
-          metaDescription: metaDescription || null,
-          keywords: keywords || null,
+          metaTitle: metaTitle || undefined,
+          metaDescription: metaDescription || undefined,
+          keywords: keywords || undefined,
         },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       const dbRes: any = await Promise.race([dbPromise, timeoutPromise]);
       if (dbRes && dbRes.id) {
         safari = dbRes;

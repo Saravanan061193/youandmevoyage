@@ -44,22 +44,22 @@ export const InquiryUpdateSchema = z.object({
 });
 
 export const SafariSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(200),
+  title: z.string().min(1, 'Title is required').max(300),
   priceUSD: z.union([z.number(), z.string()]).transform((val) => Math.max(0, parseFloat(val.toString()) || 0)),
   days: z.union([z.number(), z.string()]).transform((val) => Math.max(1, parseInt(val.toString(), 10) || 1)),
   nights: z.union([z.number(), z.string()]).transform((val) => Math.max(0, parseInt(val.toString(), 10) || 0)),
-  category: z.string().max(100).default('Private'),
-  region: z.string().max(100).default('Central'),
-  badge: z.string().max(50).default('Bestseller'),
-  image: z.string().max(5000000).optional().default(''),
-  route: z.string().max(500).optional().default(''),
-  accommodation: z.string().max(500).optional().default(''),
-  description: z.string().max(5000).optional().default(''),
-  inclusions: z.string().max(2000).optional().default('[]'),
-  exclusions: z.string().max(2000).optional().default('[]'),
-  metaTitle: z.string().max(200).optional().default(''),
-  metaDescription: z.string().max(500).optional().default(''),
-  keywords: z.string().max(500).optional().default(''),
+  category: z.string().max(200).optional().default('Customized Private'),
+  region: z.string().max(200).optional().default('Tamil Nadu'),
+  badge: z.string().max(100).nullable().optional().default('Bestseller'),
+  image: z.string().optional().default(''),
+  route: z.string().nullable().optional().default(''),
+  accommodation: z.string().nullable().optional().default(''),
+  description: z.string().nullable().optional().default(''),
+  inclusions: z.union([z.string(), z.array(z.any())]).transform((val) => (typeof val === 'string' ? val : JSON.stringify(val || []))).optional().default('[]'),
+  exclusions: z.union([z.string(), z.array(z.any())]).transform((val) => (typeof val === 'string' ? val : JSON.stringify(val || []))).optional().default('[]'),
+  metaTitle: z.string().nullable().optional().default(''),
+  metaDescription: z.string().nullable().optional().default(''),
+  keywords: z.string().nullable().optional().default(''),
 });
 
 export const DestinationSchema = z.object({

@@ -34,13 +34,8 @@ export async function GET(request: Request) {
       where,
       orderBy: { createdAt: 'desc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const safaris = await Promise.race([dbPromise, timeoutPromise]);
-
-    if (safaris && Array.isArray(safaris) && safaris.length > 0) {
-      setInMemorySafaris(safaris as any);
-      return NextResponse.json(safaris);
-    }
 
     let memoryList = getInMemorySafaris();
     if (category && category !== 'All') {
@@ -51,6 +46,14 @@ export async function GET(request: Request) {
     }
     if (maxBudget) {
       memoryList = memoryList.filter((s) => s.priceUSD <= parseFloat(maxBudget));
+    }
+
+    if (safaris && Array.isArray(safaris) && safaris.length > 0) {
+      const dbIds = new Set(safaris.map((s: any) => s.id));
+      const memoryOnlyItems = memoryList.filter((m) => !dbIds.has(m.id));
+      const merged = [...memoryOnlyItems, ...safaris];
+      setInMemorySafaris(merged as any);
+      return NextResponse.json(merged);
     }
 
     return NextResponse.json(memoryList);
@@ -70,7 +73,9 @@ export async function POST(request: Request) {
     const rawBody = await request.json();
     const parseResult = SafariSchema.safeParse(rawBody);
     if (!parseResult.success) {
-      return NextResponse.json({ error: 'Invalid safari package payload' }, { status: 400 });
+      const errorMsg = parseResult.error.issues[0]?.message || 'Invalid safari package payload';
+      console.error('[SAFARI_VALIDATION_ERROR]', parseResult.error.format());
+      return NextResponse.json({ error: errorMsg }, { status: 400 });
     }
     const body = sanitizeObject(parseResult.data);
     const {
@@ -109,19 +114,20 @@ export async function POST(request: Request) {
           nights: Number(nights),
           category,
           region,
-          badge: badge || null,
-          image,
-          route,
-          accommodation,
-          description,
+          badge: badge || undefined,
+          image: image || '',
+          route: route || '',
+          accommodation: accommodation || '',
+          description: description || '',
           inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
           exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
-          metaTitle: metaTitle || null,
-          metaDescription: metaDescription || null,
-          keywords: keywords || null,
+          metaTitle: metaTitle || undefined,
+          metaDescription: metaDescription || undefined,
+          keywords: keywords || undefined,
+
         },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       const dbRes: any = await Promise.race([dbPromise, timeoutPromise]);
       if (dbRes && dbRes.id) {
         createdSafari = dbRes;
@@ -138,12 +144,12 @@ export async function POST(request: Request) {
         priceUSD: Number(priceUSD) || 3000,
         days: Number(days) || 7,
         nights: Number(nights) || 6,
-        category: category || 'Private',
-        region: region || 'Central',
+        category: category || 'Customized Private',
+        region: region || 'Tamil Nadu',
         badge: badge || null,
         image: image || 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=85',
-        route: route || 'Windhoek → Sossusvlei',
-        accommodation: accommodation || 'Luxury Lodges',
+        route: route || '',
+        accommodation: accommodation || '',
         description: description || '',
         inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
         exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
@@ -161,3 +167,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }
 }
+
