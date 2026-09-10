@@ -5358,7 +5358,7 @@ export default function AdminPage() {
                           bannerList = [];
                         }
 
-                        if (!Array.isArray(bannerList) || bannerList.length === 0) {
+                        if (!Array.isArray(bannerList) || bannerList.length < 3) {
                           bannerList = [
                             {
                               id: 1,
@@ -5366,6 +5366,20 @@ export default function AdminPage() {
                               subheadline: settings.heroSubheadline || 'Private Journeys · Heritage Temples · Serene Backwaters',
                               copy: settings.heroCopy || 'Bespoke private tours, architectural wonders, tranquil backwater cruises, and hill station escapes across Tamil Nadu, Kerala, and South India.',
                               image: settings.heroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
+                            },
+                            {
+                              id: 2,
+                              headline: 'Serene Backwaters & Houseboat Cruises of Kerala',
+                              subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES',
+                              copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons.',
+                              image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
+                            },
+                            {
+                              id: 3,
+                              headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
+                              subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
+                              copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
+                              image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
                             },
                           ];
                         }

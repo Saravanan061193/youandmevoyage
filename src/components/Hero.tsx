@@ -54,42 +54,68 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       .catch(() => {});
   }, []);
 
-  // Default fallback banners so slide carousel always has multiple rich slides to navigate
+  // Verified 3 default hero banners with distinct high-res South India images
   const defaultBanners = useMemo(() => [
     {
+      id: 1,
       image: settings?.heroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
       headline: settings?.heroHeadline || 'Discover Authentic South India Travel',
-      subheadline: settings?.heroSubheadline || 'Private journeys · Authentic experiences · Local travel specialists',
+      subheadline: settings?.heroSubheadline || 'Private Journeys · Heritage Temples · Serene Backwaters',
       copy: settings?.heroCopy || 'Handcrafted private journeys across iconic temples, tranquil backwaters, hill stations, and heritage sites of Tamil Nadu and Kerala.',
     },
     {
+      id: 2,
       image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
       headline: 'Serene Alleppey Backwaters & Houseboat Cruises',
       subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES',
       copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons at your own tempo.',
     },
     {
-      image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=2200&q=90',
+      id: 3,
+      image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
       headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
       subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
       copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
     }
   ], [settings?.heroImage, settings?.heroHeadline, settings?.heroSubheadline, settings?.heroCopy]);
 
-  // Parse hero banners list from CMS settings
+  // Robustly parse CMS hero banners ensuring at least 3 distinct working images
   const banners = useMemo(() => {
+    let list: any[] = defaultBanners;
     try {
-      if (!settings?.heroBanners) return defaultBanners;
-      const parsed = typeof settings.heroBanners === 'string' ? JSON.parse(settings.heroBanners) : settings.heroBanners;
-      if (Array.isArray(parsed) && parsed.length >= 2) {
-        return parsed;
-      } else if (Array.isArray(parsed) && parsed.length === 1) {
-        return [parsed[0], ...defaultBanners.slice(1)];
+      if (settings?.heroBanners) {
+        const parsed = typeof settings.heroBanners === 'string' ? JSON.parse(settings.heroBanners) : settings.heroBanners;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          list = [...parsed];
+        }
       }
-      return defaultBanners;
     } catch (e) {
-      return defaultBanners;
+      list = defaultBanners;
     }
+
+    // Fill missing slots so there are always at least 3 distinct slides
+    while (list.length < 3) {
+      list.push(defaultBanners[list.length % defaultBanners.length]);
+    }
+
+    // Ensure each slide has a valid, distinct image
+    return list.map((item, idx) => {
+      const fallback = defaultBanners[idx % defaultBanners.length];
+      const imageVal = (item.image && typeof item.image === 'string' && item.image.trim().length > 10)
+        ? item.image.trim()
+        : fallback.image;
+      
+      // If slide 2 or 3 repeats the exact same image URL as slide 1, replace with default distinct image
+      const finalImage = (idx > 0 && imageVal === list[0].image) ? fallback.image : imageVal;
+
+      return {
+        ...item,
+        image: finalImage,
+        headline: item.headline || fallback.headline,
+        subheadline: item.subheadline || fallback.subheadline,
+        copy: item.copy || fallback.copy,
+      };
+    });
   }, [settings?.heroBanners, defaultBanners]);
 
   // Auto slide timer
@@ -133,10 +159,10 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
 
   const activeBanner = banners[currentSlideIndex] || banners[0];
 
-  const bgImage = activeBanner?.image || defaultBanners[0].image;
-  const headlineText = activeBanner?.headline || defaultBanners[0].headline;
-  const subheadlineText = activeBanner?.subheadline || defaultBanners[0].subheadline;
-  const copyText = activeBanner?.copy || defaultBanners[0].copy;
+  const bgImage = activeBanner.image;
+  const headlineText = activeBanner.headline;
+  const subheadlineText = activeBanner.subheadline;
+  const copyText = activeBanner.copy;
 
   const handleSearch = () => {
     const journeysSec = document.getElementById('journeys') || document.getElementById('safaris');
