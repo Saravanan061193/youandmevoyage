@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown, Compass, Search, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { useCurrency } from './CurrencyContext';
@@ -26,7 +26,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
   ]);
 
   // Fetch dynamic destinations & tour categories from CMS APIs
-  React.useEffect(() => {
+  useEffect(() => {
     fetch('/api/destinations')
       .then((res) => res.json())
       .then((data) => {
@@ -54,19 +54,8 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       .catch(() => {});
   }, []);
 
-  // Parse hero banners list from CMS settings
-  const cmsBanners = React.useMemo(() => {
-    try {
-      if (!settings?.heroBanners) return [];
-      const parsed = typeof settings.heroBanners === 'string' ? JSON.parse(settings.heroBanners) : settings.heroBanners;
-      return Array.isArray(parsed) && parsed.length > 0 ? parsed : [];
-    } catch (e) {
-      return [];
-    }
-  }, [settings?.heroBanners]);
-
-  // Fallback default banners if CMS list has 0 or 1 item so slide controls are rich and interactive
-  const defaultBanners = [
+  // Default fallback banners so slide carousel always has multiple rich slides to navigate
+  const defaultBanners = useMemo(() => [
     {
       image: settings?.heroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
       headline: settings?.heroHeadline || 'Discover Authentic South India Travel',
@@ -85,12 +74,26 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
       copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
     }
-  ];
+  ], [settings?.heroImage, settings?.heroHeadline, settings?.heroSubheadline, settings?.heroCopy]);
 
-  const banners = cmsBanners.length > 0 ? cmsBanners : defaultBanners;
+  // Parse hero banners list from CMS settings
+  const banners = useMemo(() => {
+    try {
+      if (!settings?.heroBanners) return defaultBanners;
+      const parsed = typeof settings.heroBanners === 'string' ? JSON.parse(settings.heroBanners) : settings.heroBanners;
+      if (Array.isArray(parsed) && parsed.length >= 2) {
+        return parsed;
+      } else if (Array.isArray(parsed) && parsed.length === 1) {
+        return [parsed[0], ...defaultBanners.slice(1)];
+      }
+      return defaultBanners;
+    } catch (e) {
+      return defaultBanners;
+    }
+  }, [settings?.heroBanners, defaultBanners]);
 
-  // Auto slide effect
-  React.useEffect(() => {
+  // Auto slide timer
+  useEffect(() => {
     if (banners.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % banners.length);
@@ -98,29 +101,42 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
     return () => clearInterval(timer);
   }, [banners.length]);
 
-  const handlePrevSlide = () => {
+  const handlePrevSlide = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentSlideIndex((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
   };
 
-  const handleNextSlide = () => {
+  const handleNextSlide = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentSlideIndex((prev) => (prev + 1) % banners.length);
   };
 
-  const scrollToSearchWidget = () => {
-    const searchWidget = document.getElementById('search-widget') || document.getElementById('journeys');
+  const scrollToSearchWidget = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const searchWidget = document.getElementById('search-widget') || document.getElementById('journeys') || document.getElementById('safaris');
     if (searchWidget) {
-      searchWidget.scrollIntoView({ behavior: 'smooth' });
+      const topOffset = searchWidget.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: topOffset, behavior: 'smooth' });
     } else {
-      window.scrollBy({ top: 500, behavior: 'smooth' });
+      window.scrollTo({ top: window.innerHeight * 0.75, behavior: 'smooth' });
     }
   };
 
   const activeBanner = banners[currentSlideIndex] || banners[0];
 
-  const bgImage = activeBanner?.image || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90';
-  const headlineText = activeBanner?.headline || 'Discover Authentic South India Travel';
-  const subheadlineText = activeBanner?.subheadline || 'Private journeys · Authentic experiences · Local travel specialists';
-  const copyText = activeBanner?.copy || 'Handcrafted private journeys across iconic temples, tranquil backwaters, hill stations, and heritage sites of Tamil Nadu and Kerala.';
+  const bgImage = activeBanner?.image || defaultBanners[0].image;
+  const headlineText = activeBanner?.headline || defaultBanners[0].headline;
+  const subheadlineText = activeBanner?.subheadline || defaultBanners[0].subheadline;
+  const copyText = activeBanner?.copy || defaultBanners[0].copy;
 
   const handleSearch = () => {
     const journeysSec = document.getElementById('journeys') || document.getElementById('safaris');
@@ -134,33 +150,37 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
 
   return (
     <section id="top" className="hero-section relative overflow-hidden group">
+      {/* Background Image with Key to force smooth fade animation on slide change */}
       <div
-        className="hero-image transition-all duration-1000 ease-in-out"
+        key={`bg-${currentSlideIndex}`}
+        className="hero-image transition-all duration-700 ease-in-out animate-fadeIn"
         style={{ backgroundImage: `url('${bgImage}')` }}
       />
-      {/* Dark gradient overlay for high contrast text on left while keeping right side bright */}
+
+      {/* Dark gradient overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/95 via-[#0F172A]/40 to-transparent z-0 pointer-events-none" />
 
-      {/* Side Arrow Buttons (Left & Right Carousel Navigation) */}
+      {/* Side Arrow Buttons (Left Carousel Navigation) */}
       <button
         type="button"
         onClick={handlePrevSlide}
         aria-label="Previous Slide"
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/80 hover:bg-orange-500 text-white backdrop-blur-md border border-white/20 hover:border-orange-400 flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 ring-2 ring-black/40 group/btn"
+        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
       >
-        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-slate-100 group-hover/btn:text-white transition-transform group-hover/btn:-translate-x-0.5" />
+        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:-translate-x-1" />
       </button>
 
+      {/* Side Arrow Buttons (Right Carousel Navigation) */}
       <button
         type="button"
         onClick={handleNextSlide}
         aria-label="Next Slide"
-        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/80 hover:bg-orange-500 text-white backdrop-blur-md border border-white/20 hover:border-orange-400 flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 ring-2 ring-black/40 group/btn"
+        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
       >
-        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-slate-100 group-hover/btn:text-white transition-transform group-hover/btn:translate-x-0.5" />
+        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:translate-x-1" />
       </button>
 
-      <div className="hero-content z-10 relative max-w-3xl space-y-3">
+      <div key={`content-${currentSlideIndex}`} className="hero-content z-10 relative max-w-3xl space-y-3 animate-fadeIn">
         <a
           href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
           target="_blank"
@@ -171,13 +191,13 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
           <span className="text-slate-100 font-bold">TripAdvisor Excellent Rating</span>
           <span className="text-emerald-400 hover:text-emerald-300 font-semibold underline text-[11px]">View Reviews ↗</span>
         </a>
-        <p className="eyebrow text-orange-400 transition-opacity duration-500 font-semibold tracking-widest uppercase text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+        <p className="eyebrow text-orange-400 font-semibold tracking-widest uppercase text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
           {subheadlineText}
         </p>
-        <h1 className="transition-opacity duration-500 font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15] sm:leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+        <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15] sm:leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
           <span>{headlineText}</span>
         </h1>
-        <p className="hero-copy transition-opacity duration-500 text-slate-200 text-sm sm:text-base max-w-2xl leading-relaxed mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+        <p className="hero-copy text-slate-200 text-sm sm:text-base max-w-2xl leading-relaxed mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           {copyText}
         </p>
         <div className="flex flex-wrap items-center gap-3 pt-4">
@@ -187,19 +207,20 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
           <button type="button" onClick={onOpenQuoteModal} className="outline-gold-button">
             Custom Itinerary Quote <Compass className="w-4 h-4" />
           </button>
-          <button type="button" onClick={scrollToSearchWidget} className="outline-light-button flex items-center gap-1.5">
+          <button type="button" onClick={scrollToSearchWidget} className="outline-light-button flex items-center gap-1.5 cursor-pointer">
             Explore Below <ChevronDown className="w-4 h-4 animate-bounce" />
           </button>
         </div>
       </div>
 
       {/* Hero Carousel Navigation Dots */}
-      <div className="absolute top-8 right-8 z-20 flex items-center gap-2 bg-black/50 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/15 shadow-xl">
+      <div className="absolute top-8 right-8 z-50 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20 shadow-2xl">
         {banners.map((_: any, idx: number) => (
           <button
             key={idx}
+            type="button"
             onClick={() => setCurrentSlideIndex(idx)}
-            className={`h-2.5 rounded-full transition-all ${
+            className={`h-2.5 rounded-full transition-all cursor-pointer ${
               idx === currentSlideIndex ? 'bg-orange-500 w-7' : 'bg-white/40 hover:bg-white/80 w-2.5'
             }`}
             title={`Slide ${idx + 1}`}
@@ -212,13 +233,13 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       </div>
 
       {/* Below Arrow Button (Floating Scroll Indicator) */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 hidden sm:flex flex-col items-center gap-1 group cursor-pointer" onClick={scrollToSearchWidget}>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-1 cursor-pointer" onClick={scrollToSearchWidget}>
         <button
           type="button"
-          aria-label="Scroll down"
-          className="w-10 h-10 rounded-full bg-slate-900/80 hover:bg-orange-500 text-orange-400 hover:text-white border border-orange-500/50 hover:border-orange-400 flex items-center justify-center backdrop-blur-md shadow-2xl transition-all animate-bounce"
+          aria-label="Scroll down to search"
+          className="w-11 h-11 rounded-full bg-slate-950/90 hover:bg-orange-500 text-orange-400 hover:text-white border-2 border-orange-500/50 hover:border-orange-400 flex items-center justify-center backdrop-blur-md shadow-[0_10px_25px_rgba(0,0,0,0.8)] transition-all hover:scale-110 active:scale-95 animate-bounce cursor-pointer"
         >
-          <ChevronDown className="w-5 h-5" />
+          <ChevronDown className="w-6 h-6" />
         </button>
       </div>
 
@@ -292,7 +313,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
           <button
             type="button"
             onClick={handleSearch}
-            className="gold-button w-full lg:w-auto flex items-center justify-center font-bold text-xs py-3.5 px-4 rounded-xl shadow-lg hover:scale-105 transition-all self-end"
+            className="gold-button w-full lg:w-auto flex items-center justify-center font-bold text-xs py-3.5 px-4 rounded-xl shadow-lg hover:scale-105 transition-all self-end cursor-pointer"
           >
             <Search className="w-4 h-4 inline mr-1.5" /> Search Journeys
           </button>
