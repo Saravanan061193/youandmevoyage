@@ -217,8 +217,8 @@ function SafariDetailContent() {
 
           {/* Pricing Box */}
           <div className="bg-[#0F172A]/90 border border-slate-800 backdrop-blur-md p-5 rounded-2xl shrink-0 space-y-1 text-white">
-            <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Total Price per Person</span>
-            <strong className="text-3xl font-serif text-orange-400 font-bold block">{formatPrice(safari.priceUSD)}</strong>
+            <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Private Custom Tour</span>
+            <strong className="text-2xl font-serif text-orange-400 font-bold block">Quote On Request</strong>
             <span className="text-[11px] text-slate-400 block">Private Driver & Heritage Stay</span>
           </div>
         </div>

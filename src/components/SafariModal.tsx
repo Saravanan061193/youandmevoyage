@@ -73,8 +73,8 @@ export const SafariModal = ({ safari, onClose, onOpenQuoteModal }: SafariModalPr
             </div>
 
             <div className="text-left sm:text-right bg-slate-950/70 backdrop-blur-md p-3 rounded-xl border border-slate-800">
-              <span className="text-[10px] text-slate-400 uppercase block">Total Price per Person</span>
-              <strong className="text-2xl font-serif text-orange-400 font-bold">{formatPrice(safari.priceUSD)}</strong>
+              <span className="text-[10px] text-slate-400 uppercase block">Private Custom Tour</span>
+              <strong className="text-xl font-serif text-orange-400 font-bold">Quote On Request</strong>
             </div>
           </div>
         </div>
@@ -144,18 +144,18 @@ export const SafariModal = ({ safari, onClose, onOpenQuoteModal }: SafariModalPr
               onClose();
               onOpenQuoteModal();
             }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 hover:bg-orange-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 hover:bg-orange-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all cursor-pointer"
           >
-            Request Custom Quote for this Journey
+            Enquire & Request Custom Quote
           </button>
           <a
-            href={`https://wa.me/${whatsappClean}?text=Hello%20You%20%26%20Me%2C%20I%20want%20to%20book%20the%20${encodeURIComponent(safari.title)}.`}
+            href={`https://wa.me/${whatsappClean}?text=${encodeURIComponent(`Hi You & Me! I am inquiring about the "${safari.title}" journey. Please provide custom price quote & details.`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-500/50 bg-emerald-950/50 text-emerald-300 hover:bg-emerald-500 hover:text-black px-5 py-3 text-sm font-semibold transition-all"
           >
             <MessageCircle className="w-4 h-4" />
-            Discuss on WhatsApp
+            Enquire via WhatsApp
           </a>
         </div>
       </div>

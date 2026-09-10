@@ -178,12 +178,11 @@ function JourneyDetailContent() {
         <div className="lg:col-span-4">
           <div className="sticky top-24 bg-white border border-slate-200 rounded-3xl p-6 shadow-xl space-y-6">
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest block">Estimated Starting From</span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest block">Private Custom Tour</span>
               <div className="flex items-baseline gap-1 mt-1">
-                <strong className="font-serif text-3xl font-bold text-slate-900">{formatPrice(journey.priceUSD)}</strong>
-                <span className="text-xs text-slate-500 font-sans">/ person</span>
+                <strong className="font-serif text-2xl font-bold text-slate-900">Custom Quote On Request</strong>
               </div>
-              <p className="text-[11px] text-slate-500 mt-1">Customizable based on group size, vehicle choice & hotel tier.</p>
+              <p className="text-[11px] text-slate-500 mt-1">Tailored specifically around your group size, travel dates & hotel preference.</p>
             </div>
 
             <div className="space-y-3 pt-2">
@@ -191,9 +190,9 @@ function JourneyDetailContent() {
                 href={`https://wa.me/${whatsappNum}?text=${whatsappText}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all"
+                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all"
               >
-                <MessageCircle className="w-4 h-4" /> Ask About This Journey
+                <MessageCircle className="w-4 h-4" /> Enquire via WhatsApp
               </a>
               <button
                 type="button"

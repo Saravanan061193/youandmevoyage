@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, Star, Lock, Sparkles, Send } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Star, Lock, Sparkles, Send, MessageCircle } from 'lucide-react';
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -91,12 +91,22 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
             <p className="text-slate-300 text-sm max-w-sm mx-auto leading-relaxed font-sans">
               Thank you, <strong className="text-white">{formData.name}</strong>. A senior travel specialist will reach out to you personally within 24 hours.
             </p>
-            <button
-              onClick={() => { setSubmitted(false); setStep(1); onClose(); }}
-              className="custom-quote-submit mt-4 max-w-xs mx-auto"
-            >
-              Close Window
-            </button>
+            <div className="pt-3 flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
+              <a
+                href={`https://wa.me/919994315778?text=${encodeURIComponent(`Hi You & Me! I just submitted a custom journey enquiry on your website.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Category:* ${formData.category}\n*Travel Date:* ${formData.date || 'Flexible'}\n*Travellers:* ${formData.travelers}\n*Notes:* ${formData.message}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto py-3 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg flex-1 cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4" /> Send via WhatsApp
+              </a>
+              <button
+                onClick={() => { setSubmitted(false); setStep(1); onClose(); }}
+                className="w-full sm:w-auto py-3 px-5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex-1 cursor-pointer"
+              >
+                Close Window
+              </button>
+            </div>
           </div>
         ) : (
           <div>

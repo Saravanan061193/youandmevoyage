@@ -193,25 +193,8 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
             </div>
           </div>
 
-          {/* Max Budget Slider & Reset Button */}
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="flex items-center gap-2 bg-slate-900 px-3.5 py-1.5 rounded-xl border border-slate-800">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Max Budget:</span>
-              <input
-                type="range"
-                min="500"
-                max="5000"
-                step="250"
-                value={maxBudget}
-                onChange={(e) => setMaxBudget(Number(e.target.value))}
-                className="w-24 accent-orange-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg appearance-none"
-              />
-              <span className="text-xs font-serif text-orange-400 font-bold ml-1 min-w-[50px]">
-                {formatPrice(maxBudget)}
-              </span>
-            </div>
-
-            {hasActiveFilters && (
+          {hasActiveFilters && (
+            <div className="flex items-center gap-3 shrink-0">
               <button
                 type="button"
                 onClick={handleReset}
@@ -219,8 +202,8 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
               >
                 Reset All ↺
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Category Horizontal Filter Bar */}
@@ -304,8 +287,9 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
                           <Clock3 className="w-3.5 h-3.5 text-orange-500" /> {safari.days} Days / {safari.nights} Nights
                         </span>
                         <div>
-                          <span className="text-[10px] uppercase text-slate-400 block text-right">Estimate</span>
-                          <strong className="text-sm font-bold text-slate-900">{formatPrice(safari.priceUSD)}</strong>
+                          <span className="px-2.5 py-1 bg-orange-50 border border-orange-200 text-orange-600 font-bold text-[10px] uppercase tracking-wider rounded-md">
+                            Custom Quote
+                          </span>
                         </div>
                       </div>
 
@@ -328,12 +312,12 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
                         View Itinerary
                       </Link>
                       <a
-                        href={`https://wa.me/${whatsappClean}?text=${encodeURIComponent(`Hi, I am interested in the ${safari.title}. I would like to know more about availability and customization.`)}`}
+                        href={`https://wa.me/${whatsappClean}?text=${encodeURIComponent(`Hi You & Me! I am inquiring about the "${safari.title}" journey. Please provide custom price quote & itinerary details.`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1 transition-colors shrink-0"
+                        className="py-2 px-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shrink-0 shadow-sm"
                       >
-                        <MessageCircle className="w-3.5 h-3.5" /> WhatsApp
+                        <MessageCircle className="w-3.5 h-3.5" /> Enquire Now
                       </a>
                     </div>
                   </div>
