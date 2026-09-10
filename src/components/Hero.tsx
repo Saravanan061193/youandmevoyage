@@ -58,7 +58,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
   const defaultBanners = useMemo(() => [
     {
       id: 1,
-      image: settings?.heroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
+      image: settings?.heroImage || '/images/thanjavur_periya_kovil.png',
       headline: settings?.heroHeadline || 'Thanjavur Brihadeeswarar Temple & South India Heritage',
       subheadline: settings?.heroSubheadline || 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE',
       copy: settings?.heroCopy || 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), iconic coastal shore temples, and authentic cultural routes across South India.',

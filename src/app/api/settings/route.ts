@@ -42,9 +42,9 @@ const DEFAULT_SETTINGS = {
   heroHeadline: 'Thanjavur Brihadeeswarar Temple & South India Heritage',
   heroSubheadline: 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE',
   heroCopy: 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), iconic coastal shore temples, and authentic cultural routes across South India.',
-  heroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90',
+  heroImage: '/images/thanjavur_periya_kovil.png',
   heroBanners: JSON.stringify([
-    { id: 1, headline: 'Thanjavur Brihadeeswarar Temple & Great Chola Heritage', subheadline: 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE', image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2200&q=90', copy: 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), pristine shore temples, and heritage routes across South India.' },
+    { id: 1, headline: 'Thanjavur Brihadeeswarar Temple & Great Chola Heritage', subheadline: 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE', image: '/images/thanjavur_periya_kovil.png', copy: 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), pristine shore temples, and heritage routes across South India.' },
     { id: 2, headline: 'Serene Alleppey Backwaters & Houseboat Cruises', subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES', image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90', copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons at your own tempo.' },
     { id: 3, headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails', subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS', image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90', copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.' },
   ]),
