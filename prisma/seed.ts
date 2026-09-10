@@ -21,8 +21,10 @@ async function main() {
     data: {
       siteTitle: 'You & Me – Independent Voyage',
       siteLogo: '',
-      contactEmail: 'info@youandmevoyage.com',
-      whatsappNumber: '+91 98765 43210',
+      contactEmail: 'youandmevoyage@gmail.com',
+      whatsappNumber: '+91 63814 20556',
+      instagramUrl: 'https://www.instagram.com/youandmevoyage/',
+      facebookUrl: 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/',
       address: 'Chennai, Tamil Nadu, India',
       weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
       adminPasscode: 'admin123',
@@ -183,6 +185,69 @@ async function main() {
     },
   });
 
+  const journey5 = await prisma.safari.create({
+    data: {
+      title: 'Goa Coastal Sunshine & Portuguese Heritage Escape',
+      slug: 'goa-coastal-sunshine-portuguese-heritage-escape',
+      priceUSD: 980,
+      days: 5,
+      nights: 4,
+      category: 'Goa Journeys',
+      region: 'Goa',
+      badge: 'Beach & Heritage',
+      image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=85',
+      route: 'Panaji → Old Goa Cathedrals → Spice Plantations → Palolem Beach → Mandovi River',
+      startingLocation: 'Goa Airport (Dabolim/Mopa)',
+      endingLocation: 'Goa Airport (Dabolim/Mopa)',
+      bestTimeToTravel: 'October to April',
+      accommodation: 'Luxury Beachfront Resorts & Heritage Portuguese Villas',
+      description: 'Relax along golden palm-fringed coastlines, explore 16th-century UNESCO Old Goa cathedrals, wander yellow Latin quarters in Fontainhas, savor spice farm lunches, and enjoy private Mandovi sunset cruises.',
+      inclusions: JSON.stringify([
+        'Private AC SUV with dedicated professional driver companion',
+        'Handpicked beachfront resort stays with daily breakfast',
+        'Old Goa guided heritage walking tour',
+        'Sahakari spice plantation tour with Goan buffet lunch',
+        'Private Mandovi river sunset cruise',
+      ]),
+      exclusions: JSON.stringify([
+        'Airfare & visa fees',
+        'Water sports activities & personal shopping',
+      ]),
+      featured: true,
+    },
+  });
+
+  const journey6 = await prisma.safari.create({
+    data: {
+      title: 'Royal Karnataka & Bangalore Garden City Trail',
+      slug: 'royal-karnataka-bangalore-garden-city-trail',
+      priceUSD: 1150,
+      days: 6,
+      nights: 5,
+      category: 'Karnataka Journeys',
+      region: 'Karnataka',
+      badge: 'Royal & Nature',
+      image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=85',
+      route: 'Bangalore → Mysore Palace → Coorg Coffee Estates → Bangalore',
+      startingLocation: 'Bangalore (Bengaluru)',
+      endingLocation: 'Bangalore (Bengaluru)',
+      bestTimeToTravel: 'September to March',
+      accommodation: 'Palace Hotels & Luxury Coorg Plantation Bungalows',
+      description: 'Experience Bangalore’s historic gardens and tech energy, witness the grand illumination of Mysore Palace, walk through aromatic cardamom & coffee estates of Coorg, and taste authentic Kodava cuisine.',
+      inclusions: JSON.stringify([
+        'Private AC sedan/SUV with experienced local driver',
+        'Boutique heritage stay in Mysore & luxury coffee estate resort in Coorg',
+        'Guided tour of Bangalore Palace & Lalbagh Gardens',
+        'Private coffee & spice plantation walk in Coorg',
+      ]),
+      exclusions: JSON.stringify([
+        'Flight tickets to Bangalore',
+        'Personal expenses & alcoholic beverages',
+      ]),
+      featured: true,
+    },
+  });
+
   // Create Itinerary Items for Grand Tamil Nadu Temple & Heritage Trail
   await prisma.itineraryItem.createMany({
     data: [
@@ -335,6 +400,32 @@ async function main() {
         duration: '1-2 Days',
         order: 6,
       },
+      {
+        title: 'Bangalore',
+        slug: 'bangalore',
+        subtitle: 'The Garden City & Tech Capital of South India',
+        image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=900&q=85',
+        region: 'Karnataka',
+        size: 'short',
+        description: 'Known for its vibrant culture, sprawling Lalbagh Botanical Gardens, Tudor-style Bangalore Palace, and pleasant year-round climate.',
+        highlights: JSON.stringify(['Bangalore Palace', 'Lalbagh Botanical Garden', 'Cubbon Park', 'Vidhana Soudha']),
+        experiences: JSON.stringify(['Artisanal cafe hopping', 'Garden walks', 'Silk saree shopping']),
+        duration: '2 Days',
+        order: 7,
+      },
+      {
+        title: 'Goa',
+        slug: 'goa',
+        subtitle: 'Sun-Kissed Beaches & Portuguese Heritage',
+        image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=85',
+        region: 'Goa',
+        size: 'tall',
+        description: 'Golden palm-fringed coastlines, colonial Latin quarters, baroque 16th-century cathedrals, and laid-back tropical vibes.',
+        highlights: JSON.stringify(['Basilica of Bom Jesus', 'Fontainhas Latin Quarter', 'Palolem Beach', 'Mandovi River Cruise']),
+        experiences: JSON.stringify(['Spice farm feast', 'Beach sunset dining', 'Heritage villa stay']),
+        duration: '3-4 Days',
+        order: 8,
+      },
     ],
   });
 
@@ -440,7 +531,7 @@ async function main() {
         country: 'United Kingdom',
         countryFlag: '🇬🇧',
         rating: 5,
-        text: 'Traveling South India with You & Me Independant Voyage was the highlight of our year. Sathish Kannan was so knowledgeable, calm, and attentive to every detail. We felt safe and cared for throughout Tamil Nadu and Kerala.',
+        text: 'Traveling South India with You & Me Independent Voyage was the highlight of our year. Sathish Kannan was so knowledgeable, calm, and attentive to every detail. We felt safe and cared for throughout Tamil Nadu and Kerala.',
         travelType: 'Custom 12-Day Couple Journey',
         verified: true,
       },
@@ -458,7 +549,7 @@ async function main() {
         country: 'USA',
         countryFlag: '🇺🇸',
         rating: 5,
-        text: 'The Chettinad food trail and private houseboat in Alleppey organized by You & Me Independant Voyage were top notch! Sathish customized every stop to our tempo. Highly recommended on TripAdvisor!',
+        text: 'The Chettinad food trail and private houseboat in Alleppey organized by You & Me Independent Voyage were top notch! Sathish customized every stop to our tempo. Highly recommended on TripAdvisor!',
         travelType: 'Private Custom Cultural Tour',
         verified: true,
       },

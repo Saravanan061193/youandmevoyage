@@ -67,11 +67,12 @@ export const DriverSection = () => {
                 </div>
               </div>
               <a
-                href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+                href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-900/60 border border-emerald-500/50 hover:bg-emerald-800 text-emerald-300 text-xs font-bold rounded-xl transition-all shrink-0"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 border border-emerald-400/60 hover:bg-slate-800 text-emerald-300 text-xs font-bold rounded-xl transition-all shrink-0 shadow-md"
               >
+                <span className="text-amber-400 font-black">★</span>
                 <span>Read TripAdvisor Reviews ↗</span>
               </a>
             </div>

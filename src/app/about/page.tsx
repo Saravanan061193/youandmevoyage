@@ -120,7 +120,7 @@ export default function AboutPage() {
               />
             </div>
             <a
-              href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+              href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
               target="_blank"
               rel="noopener noreferrer"
               className="absolute -bottom-6 -left-6 bg-[#0F172A] text-white p-6 rounded-2xl shadow-xl max-w-xs space-y-1.5 hidden sm:block border border-slate-800 hover:border-orange-500/50 transition-all cursor-pointer group"

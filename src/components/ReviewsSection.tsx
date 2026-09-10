@@ -59,7 +59,7 @@ export const ReviewsSection = () => {
         </div>
 
         <a
-          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
           target="_blank"
           rel="noopener noreferrer"
           className="rating-lockup hover:opacity-90 transition-opacity cursor-pointer"

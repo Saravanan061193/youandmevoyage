@@ -48,11 +48,11 @@ export const ExitIntentModal = ({ onOpenQuoteModal }: ExitIntentModalProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
-          email: isEmail ? formData.emailOrPhone : 'exitintent@discoverysafaris.com',
-          phone: !isEmail ? formData.emailOrPhone : '+264 81 123 4567',
+          email: isEmail ? formData.emailOrPhone : 'exitintent@youandmevoyage.com',
+          phone: !isEmail ? formData.emailOrPhone : '+91 63814 20556',
           category: `Exit-Intent Lead: ${formData.interest}`,
-          destination: 'Sossusvlei & Etosha National Park',
-          message: 'Captured via Exit-Intent Popup: Requested urgent 24-hour safari expert consultation.',
+          destination: 'Tamil Nadu & Kerala',
+          message: 'Captured via Exit-Intent Popup: Requested urgent 24-hour travel specialist consultation.',
         }),
       });
 

@@ -21,7 +21,7 @@ function ContactContent() {
     message: '',
   });
 
-  const whatsappNum = settings?.whatsappNumber || '+91 98765 43210';
+  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -102,7 +102,7 @@ function ContactContent() {
                 <Mail className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Email</strong>
-                  <span>{settings?.contactEmail || 'info@youandmevoyage.com'}</span>
+                  <span>{settings?.contactEmail || 'youandmevoyage@gmail.com'}</span>
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ function ContactContent() {
                 <MessageSquare className="w-4 h-4" /> Start WhatsApp Conversation
               </a>
               <a
-                href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+                href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 bg-[#0F172A] hover:bg-slate-800 text-orange-400 font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-orange-500/30 transition-all shadow-sm"

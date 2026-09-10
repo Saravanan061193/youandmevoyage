@@ -14,11 +14,11 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
   const { settings } = useCurrency();
-  const whatsappNumber = (settings?.whatsappNumber || '+91 98765 43210').replace(/[^0-9+]/g, '');
+  const whatsappNumber = (settings?.whatsappNumber || '+91 63814 20556').replace(/[^0-9+]/g, '');
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-[#0F172A]/95 backdrop-blur-2xl transition-all shadow-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-3.5 py-3 sm:px-6 sm:py-3.5">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-3.5 py-3 sm:px-6 lg:px-8 sm:py-3.5">
         {/* Brand Mark with Dynamic Logo (Links to /) */}
         <Link href="/" className="brand-mark flex items-center gap-2.5 sm:gap-3 group">
           {settings?.siteLogo ? (
@@ -103,9 +103,23 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
                 >
                   Experiences
                 </Link>
+                <Link
+                  href="/blog"
+                  onClick={() => setExploreOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors"
+                >
+                  Blog / Travel Journal
+                </Link>
               </div>
             )}
           </div>
+
+          <Link
+            href="/blog"
+            className="nav-link text-xs uppercase tracking-widest font-bold text-slate-200 hover:text-orange-400 transition-colors"
+          >
+            Blog
+          </Link>
 
           <Link
             href="/contact"
@@ -187,7 +201,14 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
             <Link href="/experiences" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-sm font-medium hover:text-orange-400">
               Experiences
             </Link>
+            <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-sm font-medium hover:text-orange-400">
+              Blog / Travel Journal
+            </Link>
           </div>
+
+          <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="nav-link py-1 text-base font-semibold hover:text-orange-400">
+            Blog
+          </Link>
 
           <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="nav-link py-1 text-base font-semibold hover:text-orange-400">
             Contact

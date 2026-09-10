@@ -14,32 +14,32 @@ export interface FAQItem {
 const DEFAULT_FAQS: FAQItem[] = [
   {
     id: 'faq-1',
-    question: 'What is included in a Discovery Safaris private expedition?',
-    answer: 'All our private safaris include a dedicated 4x4 land cruiser vehicle with pop-up roof, an expert FGASA certified guide, luxury lodge or tented camp accommodations, all park entrance fees, 3 meals daily, bottled mineral water, and complimentary Flying Doctors medical evacuation insurance.',
+    question: 'What is included in a You & Me Independent Voyage private journey?',
+    answer: 'All our private journeys include a dedicated AC vehicle with an experienced local companion/driver, boutique hotel or houseboat accommodations, daily breakfast, fuel, tolls, parking, driver allowances, and 24/7 personal travel support.',
     category: 'Booking & Inclusions',
   },
   {
     id: 'faq-2',
-    question: 'When is the best time of year to visit Namibia for wildlife?',
-    answer: 'The dry winter season (May to October) is ideal for game viewing in Etosha, as animals congregate around waterholes. However, November to April offers lush green desert landscapes, migratory birding, and newborn wildlife.',
-    category: 'Safari Planning',
+    question: 'When is the best time of year to visit South India?',
+    answer: 'The winter season (October to March) offers pleasant, clear weather across Tamil Nadu temples and Kerala backwaters. Monsoon (June to September) brings lush scenery and tranquil houseboat experiences in Alleppey.',
+    category: 'Journey Planning',
   },
   {
     id: 'faq-3',
-    question: 'Are private safaris suitable for families with children or seniors?',
-    answer: 'Yes! Because our safaris are 100% private, the pace, driving hours, meal stops, and daily activities are completely customized to your group’s comfort, preferences, and age range.',
-    category: 'Safari Planning',
+    question: 'Are private driver journeys suitable for families, couples, or solo travellers?',
+    answer: 'Yes! Because our journeys are 100% private, the tempo, daily schedule, sightseeing stops, and meal choices are completely customized to your group’s comfort and preferences.',
+    category: 'Journey Planning',
   },
   {
     id: 'faq-4',
-    question: 'What medical safety and vehicle protocols do you have in place?',
-    answer: 'Every 4x4 expedition vehicle is equipped with dual satellite communication phones, real-time GPS tracking linked to our Windhoek HQ, first-aid medical trauma kits, onboard oxygen, and emergency Westair Flying Doctor air evacuation coverage for all guests.',
-    category: 'Safety & Health',
+    question: 'What vehicle options and safety protocols are provided?',
+    answer: 'We provide clean, modern air-conditioned sedans, SUVs, and Tempo Travellers (such as Toyota Innova Crysta & Etios) driven by experienced, English-speaking local companions with deep regional knowledge.',
+    category: 'Safety & Comfort',
   },
   {
     id: 'faq-5',
-    question: 'How far in advance should we book a private Namibia safari?',
-    answer: 'We recommend booking 6 to 12 months in advance, especially for high-season travel (July to October), as boutique luxury lodges in Sossusvlei, Etosha, and Damaraland have limited room capacity.',
+    question: 'How far in advance should we book a custom South India journey?',
+    answer: 'We recommend booking 2 to 6 months in advance, especially for high-season travel (October to March), to ensure reservation at preferred boutique heritage hotels and luxury houseboats.',
     category: 'Booking & Inclusions',
   },
 ];
@@ -52,37 +52,56 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
   useEffect(() => {
-    // Load dynamic FAQs from settings or localStorage or API
+    // Purge old Namibia/Discovery Safaris cached entries from localStorage
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('site_faqs_cache');
+      if (cached && (cached.includes('Namibia') || cached.includes('Discovery Safaris'))) {
+        localStorage.removeItem('site_faqs_cache');
+      }
+    }
+
+    const cleanFaqList = (list: FAQItem[]) => {
+      return list.map((item) => {
+        let q = item.question
+          .replace(/Discovery Safaris/gi, 'You & Me – Independent Voyage')
+          .replace(/Namibia/gi, 'South India')
+          .replace(/safari/gi, 'journey');
+        let a = item.answer
+          .replace(/Discovery Safaris/gi, 'You & Me – Independent Voyage')
+          .replace(/Namibia/gi, 'South India')
+          .replace(/safari/gi, 'journey')
+          .replace(/4x4 land cruiser/gi, 'dedicated AC vehicle')
+          .replace(/Etosha/gi, 'Tamil Nadu & Kerala')
+          .replace(/Windhoek/gi, 'Chennai')
+          .replace(/Sossusvlei/gi, 'Pondicherry');
+        let c = (item.category || 'General').replace(/Safari Planning/gi, 'Journey Planning');
+        return { ...item, question: q, answer: a, category: c };
+      });
+    };
+
     const loadFaqs = () => {
       if (settings?.siteFaqs) {
         try {
           const parsed = typeof settings.siteFaqs === 'string' ? JSON.parse(settings.siteFaqs) : settings.siteFaqs;
           if (Array.isArray(parsed) && parsed.length > 0) {
-            setFaqs(parsed);
+            setFaqs(cleanFaqList(parsed));
             return;
           }
         } catch (e) {}
       }
 
-      if (typeof window !== 'undefined') {
-        const cached = localStorage.getItem('site_faqs_cache');
-        if (cached) {
-          try {
-            const parsed = JSON.parse(cached);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              setFaqs(parsed);
-              return;
-            }
-          } catch (e) {}
-        }
-      }
-
       fetch('/api/faqs')
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
-          if (Array.isArray(data) && data.length > 0) setFaqs(data);
+          if (Array.isArray(data) && data.length > 0) {
+            setFaqs(cleanFaqList(data));
+          } else {
+            setFaqs(DEFAULT_FAQS);
+          }
         })
-        .catch(() => {});
+        .catch(() => {
+          setFaqs(DEFAULT_FAQS);
+        });
     };
 
     loadFaqs();
@@ -233,11 +252,12 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
               </button>
             )}
             <a
-              href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+              href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-950/80 border border-emerald-500/50 hover:bg-emerald-900 text-emerald-300 font-bold text-xs rounded-full transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-slate-900 border border-emerald-400/60 hover:bg-slate-800 text-emerald-300 font-bold text-xs rounded-full transition-all shadow-md"
             >
+              <span className="text-amber-400 font-black">★</span>
               <span>Read TripAdvisor Reviews ↗</span>
             </a>
           </div>

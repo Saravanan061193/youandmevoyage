@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           }
         } else if (!content) {
           setContent(
-            'Discovery Safaris Namibia values your privacy. We strictly protect your personal information, contact details, payment info, and passport data required for park registrations.'
+            'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.'
           );
         }
       })

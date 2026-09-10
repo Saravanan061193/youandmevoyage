@@ -34,16 +34,16 @@ const FacebookLogo = ({ className = "w-6 h-6" }: { className?: string }) => (
 export const SocialMediaFeed = () => {
   const { settings } = useCurrency();
 
-  const instagramUrl = settings?.instagramUrl || 'https://instagram.com';
+  const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/youandmevoyage/';
   const tiktokUrl = settings?.tiktokUrl || 'https://tiktok.com';
   const youtubeUrl = settings?.youtubeUrl || 'https://youtube.com';
-  const facebookUrl = settings?.facebookUrl || 'https://facebook.com';
+  const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/';
 
   const socialStats = [
     {
       id: 'instagram',
       name: 'Instagram',
-      handle: 'Instagram @discoverysafaris.na',
+      handle: 'Instagram @youandmevoyage',
       count: settings?.instagramFollowers || '48.5K Followers',
       icon: InstagramLogo,
       url: instagramUrl,
@@ -53,7 +53,7 @@ export const SocialMediaFeed = () => {
     {
       id: 'tiktok',
       name: 'TikTok',
-      handle: 'TikTok Safari Reels',
+      handle: 'TikTok Travel Reels',
       count: settings?.tiktokFollowers || '22.4K Community',
       icon: TikTokLogo,
       url: tiktokUrl,
@@ -88,8 +88,8 @@ export const SocialMediaFeed = () => {
       tag: 'Instagram Reel',
       icon: InstagramLogo,
       iconColor: 'text-pink-400',
-      title: 'Majestic Desert Elephant Encounter in Damaraland',
-      image: settings?.socialCard1Image || 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=85',
+      title: 'Majestic Shore Temple Sunset in Mahabalipuram',
+      image: settings?.socialCard1Image || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=85',
       url: settings?.socialCard1Url || instagramUrl,
     },
     {
@@ -97,8 +97,8 @@ export const SocialMediaFeed = () => {
       tag: 'TikTok Viral',
       icon: TikTokLogo,
       iconColor: 'text-cyan-400',
-      title: 'Golden Sunset Silhouette over Etosha Waterhole',
-      image: settings?.socialCard2Image || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=85',
+      title: 'Serene Backwater Cruise in Alleppey Kerala',
+      image: settings?.socialCard2Image || 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=85',
       url: settings?.socialCard2Url || tiktokUrl,
     },
     {
@@ -106,8 +106,8 @@ export const SocialMediaFeed = () => {
       tag: 'YouTube 4K',
       icon: YouTubeLogo,
       iconColor: 'text-red-500',
-      title: '4K Private Game Drive Expedition with Expert Trackers',
-      image: settings?.socialCard3Image || 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=800&q=85',
+      title: '4K Private South India Road Trip & Cultural Vlogs',
+      image: settings?.socialCard3Image || 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=800&q=85',
       url: settings?.socialCard3Url || youtubeUrl,
     },
     {
@@ -115,8 +115,8 @@ export const SocialMediaFeed = () => {
       tag: 'Facebook Story',
       icon: FacebookLogo,
       iconColor: 'text-blue-400',
-      title: 'Sunrise Hot Air Balloon Flight over Sossusvlei Dunes',
-      image: settings?.socialCard4Image || 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=85',
+      title: 'Misty Morning Tea Garden Walk in Munnar Hills',
+      image: settings?.socialCard4Image || 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=85',
       url: settings?.socialCard4Url || facebookUrl,
     },
   ];

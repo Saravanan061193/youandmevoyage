@@ -16,6 +16,7 @@ import { DestinationsMasonry } from '@/components/DestinationsMasonry';
 import { QuoteBanner } from '@/components/QuoteBanner';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { EnquirySection } from '@/components/EnquirySection';
+import { BlogSection } from '@/components/BlogSection';
 import { FAQSection } from '@/components/FAQSection';
 import { Footer } from '@/components/Footer';
 import { QuoteModal } from '@/components/QuoteModal';
@@ -37,7 +38,7 @@ function HomeContent() {
     name: 'You & Me – Independent Voyage',
     description: 'Bespoke private journeys, authentic experiences and driver-assisted road trips across Tamil Nadu and Kerala.',
     url: 'https://youandmevoyage.com',
-    telephone: '+91 98765 43210',
+    telephone: '+91 63814 20556',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Chennai',
@@ -119,6 +120,7 @@ function HomeContent() {
       <QuoteBanner onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
       <ReviewsSection />
       <EnquirySection />
+      <BlogSection />
       <FAQSection onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
       <Footer />
 

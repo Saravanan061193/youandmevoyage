@@ -33,10 +33,10 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          phone: '+264 81 123 4567',
-          category: `Lead Magnet: ${settings?.leadMagnetTitle || 'Namibia Safari Guide PDF'}`,
-          destination: 'Sossusvlei & Etosha National Park',
-          message: 'Requested Safari Guide eBook download.',
+          phone: '+91 63814 20556',
+          category: `Lead Magnet: ${settings?.leadMagnetTitle || 'Ultimate South India Travel Guide PDF'}`,
+          destination: 'Tamil Nadu & Kerala',
+          message: 'Requested South India Travel Guide eBook download.',
         }),
       });
 

@@ -60,7 +60,7 @@ function BuildYourTripContent() {
     phone: '',
   });
 
-  const whatsappNum = (settings?.whatsappNumber || '+91 98765 43210').replace(/[^0-9+]/g, '');
+  const whatsappNum = (settings?.whatsappNumber || '+91 63814 20556').replace(/[^0-9+]/g, '');
 
   const availableDestinations = [
     'Chennai',
@@ -76,6 +76,10 @@ function BuildYourTripContent() {
     'Thekkady',
     'Alleppey',
     'Fort Kochi',
+    'Bangalore',
+    'Mysore',
+    'Coorg',
+    'Goa',
   ];
 
   const availableInterests = [

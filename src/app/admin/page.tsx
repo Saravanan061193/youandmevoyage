@@ -1295,7 +1295,7 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    setForgotEmail(username || 'info@youandmevoyage.com');
+                    setForgotEmail(username || 'youandmevoyage@gmail.com');
                     setShowForgotModal(true);
                   }}
                   className="text-xs text-primary hover:underline font-medium"
@@ -3206,7 +3206,7 @@ export default function AdminPage() {
                                       <div className="flex items-center gap-1.5 mt-1 text-[11px]">
                                         <Phone className="w-3 h-3 text-emerald-500 shrink-0" />
                                         <a
-                                          href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(inq.name)}%2C%20thank%20you%20for%20your%20inquiry%20with%20Discovery%20Safaris%20Namibia.`}
+                                          href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(inq.name)}%2C%20thank%20you%20for%20your%20inquiry%20with%20You%20%26%20Me%20Independent%20Voyage.`}
                                           target="_blank"
                                           className="text-emerald-400 hover:underline font-medium flex items-center gap-1"
                                           title="Chat on WhatsApp"
@@ -3373,14 +3373,15 @@ export default function AdminPage() {
                     {editingLead && (
                       <>
                         <a
-                          href={`https://wa.me/${editingLead.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(editingLead.name)}%2C%20thank%20you%20for%20your%20safari%20inquiry%20with%20Discovery%20Safaris%20Namibia.`}
+                          href={`https://wa.me/${editingLead.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(editingLead.name)}%2C%20thank%20you%20for%20your%20inquiry%20with%20You%20%26%20Me%20Independent%20Voyage.`}
                           target="_blank"
-                          className="flex items-center gap-2 px-4 py-2 bg-emerald-950/80 border border-emerald-700 text-emerald-400 rounded-lg text-xs font-bold hover:bg-emerald-900 transition-colors"
+                          rel="noopener noreferrer"
+                          className="px-3 py-2 bg-[#00e676] text-slate-950 font-bold rounded-lg text-xs hover:bg-[#00c853] transition-colors inline-flex items-center gap-1.5 shadow-sm"
                         >
                           <MessageSquare className="w-4 h-4" /> Chat on WhatsApp
                         </a>
                         <a
-                          href={`mailto:${editingLead.email}?subject=Discovery%20Safaris%20Namibia%20-%20Your%20Custom%20Safari%20Proposal`}
+                          href={`mailto:${editingLead.email}?subject=You%20%26%20Me%20Independent%20Voyage%20-%20Your%20Custom%20Tour%20Proposal`}
                           className="flex items-center gap-2 px-4 py-2 bg-sky-950/80 border border-sky-700 text-sky-400 rounded-lg text-xs font-bold hover:bg-sky-900 transition-colors"
                         >
                           <Mail className="w-4 h-4" /> Send Email
@@ -4610,7 +4611,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Website Brand / Title</label>
                         <input
                           type="text"
-                          value={settings.siteTitle || 'Discovery Safaris Namibia'}
+                          value={settings.siteTitle || 'You & Me – Independent Voyage'}
                           onChange={(e) => setSettings({ ...settings, siteTitle: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4620,7 +4621,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Contact Email Address</label>
                         <input
                           type="email"
-                          value={settings.contactEmail || 'info@discoverysafaris.com'}
+                          value={settings.contactEmail || 'youandmevoyage@gmail.com'}
                           onChange={(e) => setSettings({ ...settings, contactEmail: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4630,7 +4631,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">WhatsApp Hotline Number</label>
                         <input
                           type="text"
-                          value={settings.whatsappNumber || '+264 81 123 4567'}
+                          value={settings.whatsappNumber || '+91 63814 20556'}
                           onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4640,7 +4641,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Top Bar Weather Text</label>
                         <input
                           type="text"
-                          value={settings.weatherText || 'Etosha National Park: 28°C Sunny'}
+                          value={settings.weatherText || 'Chennai, Tamil Nadu: 30°C Sunny'}
                           onChange={(e) => setSettings({ ...settings, weatherText: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4751,10 +4752,10 @@ export default function AdminPage() {
                             <label className="text-xs text-stone-400 font-semibold block mb-1">Lead Magnet Banner Title</label>
                             <input
                               type="text"
-                              value={settings.leadMagnetTitle || 'Download Free: Ultimate Namibia Safari Guide'}
+                              value={settings.leadMagnetTitle || 'Download Free: Ultimate South India Travel Guide'}
                               onChange={(e) => setSettings({ ...settings, leadMagnetTitle: e.target.value })}
-                              placeholder="e.g. Download Free: Ultimate Namibia Safari Guide"
-                              className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary font-semibold"
+                              className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                              placeholder="e.g. Download Free: Ultimate South India Travel Guide"
                             />
                           </div>
 
@@ -4894,7 +4895,7 @@ export default function AdminPage() {
                             type="text"
                             value={settings.instagramUrl || ''}
                             onChange={(e) => setSettings({ ...settings, instagramUrl: e.target.value })}
-                            placeholder="https://instagram.com/discoverysafaris.na"
+                            placeholder="https://www.instagram.com/youandmevoyage/"
                             className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                           />
                         </div>
@@ -4916,7 +4917,7 @@ export default function AdminPage() {
                             type="text"
                             value={settings.tiktokUrl || ''}
                             onChange={(e) => setSettings({ ...settings, tiktokUrl: e.target.value })}
-                            placeholder="https://tiktok.com/@discoverysafaris"
+                            placeholder="https://tiktok.com/@youandmevoyage"
                             className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                           />
                         </div>
@@ -4938,7 +4939,7 @@ export default function AdminPage() {
                             type="text"
                             value={settings.youtubeUrl || ''}
                             onChange={(e) => setSettings({ ...settings, youtubeUrl: e.target.value })}
-                            placeholder="https://youtube.com/@discoverysafaris"
+                            placeholder="https://youtube.com/@youandmevoyage"
                             className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                           />
                         </div>
@@ -4960,7 +4961,7 @@ export default function AdminPage() {
                             type="text"
                             value={settings.facebookUrl || ''}
                             onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
-                            placeholder="https://facebook.com/discoverysafaris.na"
+                            placeholder="https://www.facebook.com/p/Youme-independent-voyage-100064363920653/"
                             className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                           />
                         </div>
@@ -5245,8 +5246,8 @@ export default function AdminPage() {
                           type="text"
                           value={settings.siteMetaTitle || ''}
                           onChange={(e) => setSettings({ ...settings, siteMetaTitle: e.target.value })}
-                          placeholder="Discovery Safaris Namibia | Luxury Private Tours & Expeditions"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary font-semibold"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary font-mono"
+                          placeholder="You & Me – Independent Voyage | Custom South India Private Tours"
                         />
                       </div>
 
@@ -5267,25 +5268,25 @@ export default function AdminPage() {
                           })()}
                         </div>
                         <textarea
-                          rows={3}
+                          rows={2}
                           value={settings.siteMetaDescription || ''}
                           onChange={(e) => setSettings({ ...settings, siteMetaDescription: e.target.value })}
-                          placeholder="Experience the raw majesty of Namibia with bespoke private safaris, luxury tented camps, and wildlife expeditions engineered for international travelers."
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary resize-none leading-relaxed"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary font-mono"
+                          placeholder="Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India."
                         />
                       </div>
 
                       {/* Live Google Search Preview Card */}
-                      <div className="bg-stone-900/80 border border-stone-800 p-4 rounded-xl space-y-1.5 w-full">
-                        <span className="text-[10px] text-stone-500 font-bold uppercase tracking-wider block">Live Google Search Result Preview</span>
-                        <div className="text-sm text-blue-400 font-semibold truncate hover:underline cursor-pointer">
-                          {settings.siteMetaTitle || 'Discovery Safaris Namibia | Luxury Private Tours'}
+                      <div className="bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-1 font-sans">
+                        <span className="text-[10px] text-stone-500 font-bold uppercase tracking-wider block mb-1">Google Search Preview</span>
+                        <div className="text-blue-400 text-sm font-semibold hover:underline cursor-pointer truncate">
+                          {settings.siteMetaTitle || 'You & Me – Independent Voyage | Custom South India Private Tours'}
                         </div>
-                        <div className="text-xs text-emerald-500 truncate font-mono">
-                          https://discoverysafaris.com
+                        <div className="text-emerald-500 text-xs truncate">
+                          https://youandmevoyage.com
                         </div>
-                        <div className="text-xs text-stone-400 line-clamp-2 leading-snug">
-                          {settings.siteMetaDescription || 'Experience the raw majesty of Namibia with bespoke private safaris, luxury tented camps, and wildlife expeditions engineered for international travelers.'}
+                        <div className="text-stone-400 text-xs line-clamp-2">
+                          {settings.siteMetaDescription || 'Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India.'}
                         </div>
                       </div>
 
@@ -6162,7 +6163,7 @@ export default function AdminPage() {
                     <Sparkles className="w-3 h-3" /> Home Page Section Studio
                   </div>
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100">Signature Itineraries CMS</h2>
-                  <p className="text-xs text-stone-400 mt-1">Manage the 10-Day Namibian Explorer timeline section on the homepage in real-time</p>
+                  <p className="text-xs text-stone-400 mt-1">Manage the 10-Day South India Explorer timeline section on the homepage in real-time</p>
                 </div>
                 <button
                   type="button"
@@ -6200,17 +6201,13 @@ export default function AdminPage() {
                 <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
                   <Layout className="w-4 h-4 text-[#F97316]" /> Section Header Text
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs text-stone-400 font-semibold mb-1">Section Headline</label>
+                    <label className="text-xs text-stone-400 font-semibold block mb-1">Headline</label>
                     <input
                       type="text"
                       value={settings?.homeItineraryHeadline || ''}
                       onChange={(e) => setSettings({ ...settings, homeItineraryHeadline: e.target.value })}
-                      placeholder="10-day classic Namibian explorer"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#F97316]"
-                    />
-                  </div>
                   <div>
                     <label className="block text-xs text-stone-400 font-semibold mb-1">Section Intro Subcopy</label>
                     <input

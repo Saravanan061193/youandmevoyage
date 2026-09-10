@@ -34,7 +34,7 @@ function SafariDetailContent() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [activeDayIndex, setActiveDayIndex] = useState(0);
 
-  const whatsappNum = settings?.whatsappNumber || '+264 81 123 4567';
+  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function SafariDetailContent() {
       .then((data) => {
         setSafari(data);
         if (typeof document !== 'undefined') {
-          document.title = data.metaTitle || `${data.title} | Discovery Safaris Namibia`;
+          document.title = data.metaTitle || `${data.title} | You & Me – Independent Voyage`;
           if (data.metaDescription) {
             let metaDesc = document.querySelector('meta[name="description"]');
             if (!metaDesc) {

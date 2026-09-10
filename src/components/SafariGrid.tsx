@@ -23,7 +23,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  const whatsappNum = settings?.whatsappNumber || '+91 98765 43210';
+  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const fetchSafaris = async () => {
@@ -71,6 +71,8 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
       'All',
       'Tamil Nadu Journeys',
       'Kerala Journeys',
+      'Goa Journeys',
+      'Karnataka Journeys',
       'South India Journeys',
       'Cultural Journeys',
       'Temple Journeys',
@@ -85,7 +87,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   }, [safaris]);
 
   const availableRegions = useMemo(() => {
-    const set = new Set(['All', 'Tamil Nadu', 'Kerala', 'South India']);
+    const set = new Set(['All', 'Tamil Nadu', 'Kerala', 'Goa', 'Karnataka', 'South India']);
     safaris.forEach((s) => {
       if (s.region) set.add(s.region);
     });

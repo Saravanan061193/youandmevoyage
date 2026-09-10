@@ -8,57 +8,57 @@ const defaultTimelineData = [
   {
     dayNumber: '01',
     daysLabel: 'Day 01',
-    title: 'Arrival in Windhoek & Sunset Game Drive',
-    description: 'Welcome to Namibia. Meet your private guide, settle into your design-led lodge, then watch the city turn amber from a quiet reserve.',
-    duration: '45 min · 35 km',
-    mealPlan: 'Dinner',
-    accommodation: 'Little Kulala',
-    accommodationSub: 'Private desert villa · Sossusvlei',
-    image: 'https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=1200&q=85',
+    title: 'Arrival in Chennai & Coastal Promenade Walk',
+    description: 'Welcome to South India! Meet your private driver companion at Chennai airport. Check into your heritage hotel and take a sunset walk along Marina Beach.',
+    duration: '3 hrs · 25 km',
+    mealPlan: 'Welcome Dinner',
+    accommodation: 'Taj Connemara',
+    accommodationSub: 'Heritage Hotel · Chennai',
+    image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
   },
   {
     dayNumber: '02',
     daysLabel: 'Days 02–03',
-    title: 'Sossusvlei Dunes & Deadvlei 4x4 Excursion',
-    description: 'Journey south into the ancient Namib Desert. Climb Dune 45 at sunrise, walk among the ancient camel thorn trees of Deadvlei, and explore Sesriem Canyon.',
-    duration: '4.5 hrs · 350 km',
-    mealPlan: 'Full Board',
-    accommodation: 'Little Kulala Villa',
-    accommodationSub: 'Luxury desert villa · Sossusvlei',
-    image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
+    title: 'Mahabalipuram Shore Temples & French Pondicherry',
+    description: 'Drive along the East Coast Road to Mahabalipuram UNESCO Shore Temples. Continue south to Pondicherry French Quarter to wander yellow colonial streets.',
+    duration: '2.5 hrs · 100 km',
+    mealPlan: 'Breakfast & Seafood Lunch',
+    accommodation: 'Palais de Mahe',
+    accommodationSub: 'French Villa · Pondicherry',
+    image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=85',
   },
   {
     dayNumber: '03',
     daysLabel: 'Days 04–05',
-    title: 'Coastal Swakopmund & Living Desert Tour',
-    description: 'Traverse the desert to the coastal town of Swakopmund. Enjoy fresh oysters, a marine catamaran cruise in Walvis Bay, and a living desert gecko hunt.',
-    duration: '4 hrs · 320 km',
-    mealPlan: 'Breakfast & Lunch',
-    accommodation: 'Strand Hotel Swakopmund',
-    accommodationSub: 'Luxury Atlantic retreat',
-    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85',
+    title: 'Thanjavur Chola Living Temples & Chettinad Mansions',
+    description: 'Explore 1,000-year-old Brihadeeswarar Temple in Thanjavur. Savor authentic Chettinad banana leaf feasts and stay at restored ancestral mansions.',
+    duration: '4 hrs · 170 km',
+    mealPlan: 'Full Board & Banana Leaf Feast',
+    accommodation: 'Visalam Chettinad Mansion',
+    accommodationSub: '19th-Century Heritage Mansion · Karaikudi',
+    image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=900&q=85',
   },
   {
     dayNumber: '04',
     daysLabel: 'Days 06–08',
-    title: 'Etosha National Park Big Five Safari',
-    description: 'Enter Etosha National Park for three full days of premier game viewing around floodlit waterholes teeming with lions, elephants, and black rhinos.',
-    duration: '5 hrs · 490 km',
+    title: 'Madurai Meenakshi Temple & Munnar Tea Gardens',
+    description: 'Witness the night ceremony at Madurai Meenakshi Temple. Climb into Western Ghats tea hills in Munnar for fresh mountain air and tea estate walks.',
+    duration: '4.5 hrs · 220 km',
     mealPlan: 'Full Board',
-    accommodation: 'Ongava Lodge',
-    accommodationSub: 'Private reserve villa · Etosha',
-    image: 'https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=85',
+    accommodation: 'Windermere Estate Bungalow',
+    accommodationSub: 'Luxury Tea Resort · Munnar',
+    image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=900&q=85',
   },
   {
     dayNumber: '05',
     daysLabel: 'Days 09–10',
-    title: 'Damaraland Rock Art & Return',
-    description: 'Discover Twyfelfontein UNESCO rock engravings and track desert-adapted elephants before returning to Windhoek for international departure.',
-    duration: '4 hrs · 380 km',
-    mealPlan: 'Breakfast & Farewell Dinner',
-    accommodation: 'Okapuka Safari Lodge',
-    accommodationSub: 'Safari lodge · Windhoek',
-    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=900&q=85',
+    title: 'Alleppey Private Houseboat Cruise & Fort Kochi',
+    description: 'Unwind on your private luxury houseboat gliding through quiet backwater canals. Conclude your journey exploring colonial Fort Kochi.',
+    duration: '4 hrs · 160 km',
+    mealPlan: 'Breakfast & Houseboat Meals',
+    accommodation: 'Private Luxury Kettuvallam',
+    accommodationSub: 'Air-Conditioned Houseboat · Alleppey',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=85',
   },
 ];
 
@@ -77,8 +77,8 @@ export const ItinerarySection = () => {
   })();
 
   const activeItem = timelineData[activeIndex] || timelineData[0] || defaultTimelineData[0];
-  const headline = settings?.homeItineraryHeadline || '10-day classic Namibian explorer';
-  const copy = settings?.homeItineraryCopy || 'One signature journey. Five distinct landscapes. An itinerary designed to leave room for the moments you cannot plan.';
+  const headline = settings?.homeItineraryHeadline || '10-day classic South India explorer';
+  const copy = settings?.homeItineraryCopy || 'One signature journey. Tamil Nadu temples, Chettinad heritage, Munnar tea hills, and Kerala backwaters in seamless sequence.';
 
   return (
     <section id="itinerary" className="itinerary-section">
@@ -86,7 +86,7 @@ export const ItinerarySection = () => {
         <div className="section-intro light">
           <div>
             <p className="eyebrow text-primary">A closer look</p>
-            <h2 dangerouslySetInnerHTML={{ __html: headline.replace('Namibian explorer', '<em>Namibian explorer</em>') }} />
+            <h2 dangerouslySetInnerHTML={{ __html: headline.includes('explorer') ? headline.replace('explorer', '<em>explorer</em>') : `<em>${headline}</em>` }} />
           </div>
           <p>{copy}</p>
         </div>
@@ -129,7 +129,7 @@ export const ItinerarySection = () => {
               src={activeItem.image}
               alt={activeItem.title}
               onError={(e) => {
-                e.currentTarget.src = "https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=1200&q=85";
+                e.currentTarget.src = "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85";
               }}
             />
             <div className="image-note">
@@ -144,31 +144,31 @@ export const ItinerarySection = () => {
           <div>
             <h3>Included in your journey</h3>
             <p>
-              <Check className="w-4 h-4" /> Private 4x4 safari vehicle & expert guide
+              <Check className="w-4 h-4" /> Dedicated AC vehicle & driver companion
             </p>
             <p>
-              <Check className="w-4 h-4" /> Luxury accommodation with full board
+              <Check className="w-4 h-4" /> Luxury heritage stays & tea estate bungalows
             </p>
             <p>
-              <Check className="w-4 h-4" /> All park fees, transfers & activities
+              <Check className="w-4 h-4" /> Private Alleppey houseboat cruise with chef
             </p>
             <p>
-              <Check className="w-4 h-4" /> Airport meet-and-greet in Windhoek
+              <Check className="w-4 h-4" /> Tolls, parking, fuel & 24/7 personal support
             </p>
           </div>
           <div>
             <h3>Not included</h3>
             <p>
-              <Minus className="w-4 h-4" /> International flights & travel insurance
+              <Minus className="w-4 h-4" /> Flight tickets & travel insurance
             </p>
             <p>
-              <Minus className="w-4 h-4" /> Visa fees and personal purchases
+              <Minus className="w-4 h-4" /> Personal shopping & camera fees
             </p>
             <p>
-              <Minus className="w-4 h-4" /> Optional scenic flights
+              <Minus className="w-4 h-4" /> Ayurvedic spa treatment packages
             </p>
             <p>
-              <Minus className="w-4 h-4" /> Guide gratuities
+              <Minus className="w-4 h-4" /> Driver & local guide gratuities
             </p>
           </div>
         </div>

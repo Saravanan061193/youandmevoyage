@@ -41,7 +41,7 @@ export default function TermsPage() {
           }
         } else if (!content) {
           setContent(
-            'Welcome to Discovery Safaris Namibia. By booking a safari journey with us, you agree to our terms and conditions. All private safaris include comprehensive guide coverage, vehicle insurance, and national park entry permits.'
+            'Welcome to You & Me – Independent Voyage. By booking a private tour package with us, you agree to our terms and conditions. All private tour packages include dedicated AC vehicle, experienced local driver companion, and full itinerary support.'
           );
         }
       })

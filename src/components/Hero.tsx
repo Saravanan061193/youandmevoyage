@@ -19,10 +19,10 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const [dynamicDestinations, setDynamicDestinations] = useState<string[]>([
-    'Chennai', 'Mahabalipuram', 'Pondicherry', 'Thanjavur', 'Madurai', 'Chettinad', 'Kanyakumari', 'Munnar', 'Kerala', 'Alleppey'
+    'Chennai', 'Mahabalipuram', 'Pondicherry', 'Thanjavur', 'Madurai', 'Chettinad', 'Kanyakumari', 'Munnar', 'Kerala', 'Alleppey', 'Bangalore', 'Goa'
   ]);
   const [dynamicCategories, setDynamicCategories] = useState<string[]>([
-    'Tamil Nadu Journeys', 'Kerala Journeys', 'South India Journeys', 'Cultural Journeys', 'Temple Journeys', 'Food & Culinary Journeys', 'Private Custom Journeys'
+    'Tamil Nadu Journeys', 'Kerala Journeys', 'Goa Journeys', 'Karnataka Journeys', 'South India Journeys', 'Cultural Journeys', 'Temple Journeys', 'Food & Culinary Journeys', 'Private Custom Journeys'
   ]);
 
   // Fetch dynamic destinations & tour categories from CMS APIs
@@ -92,31 +92,32 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
   };
 
   return (
-    <section id="top" className="hero-section relative">
+    <section id="top" className="hero-section relative overflow-hidden">
       <div
         className="hero-image transition-all duration-1000 ease-in-out"
         style={{ backgroundImage: `url('${bgImage}')` }}
       />
-      <div className="hero-overlay" />
+      {/* Dark gradient overlay for high contrast text on left while keeping right side bright */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/95 via-[#0F172A]/40 to-transparent z-0 pointer-events-none" />
 
-      <div className="hero-content z-10">
+      <div className="hero-content z-10 relative max-w-3xl space-y-3">
         <a
-          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independant_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950/80 border border-emerald-500/40 rounded-full text-emerald-300 text-xs font-semibold hover:bg-emerald-900 transition-all mb-2"
+          className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-slate-900/90 border border-emerald-400/60 rounded-full text-white text-xs font-bold shadow-lg hover:border-emerald-400 hover:bg-slate-900 transition-all mb-2 ring-1 ring-emerald-500/30"
         >
-          <span className="text-orange-400 font-bold">★ 4.9</span>
-          <span>TripAdvisor Excellent Rating</span>
-          <span className="text-[10px] text-emerald-400 underline font-mono">View Reviews ↗</span>
+          <span className="flex items-center gap-1 bg-amber-500 text-slate-950 font-black px-2 py-0.5 rounded-full text-[11px] shadow">★ 4.9</span>
+          <span className="text-slate-100 font-bold">TripAdvisor Excellent Rating</span>
+          <span className="text-emerald-400 hover:text-emerald-300 font-semibold underline text-[11px]">View Reviews ↗</span>
         </a>
-        <p className="eyebrow text-orange-400 transition-opacity duration-500 font-semibold tracking-widest uppercase">
+        <p className="eyebrow text-orange-400 transition-opacity duration-500 font-semibold tracking-widest uppercase text-xs drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
           {subheadlineText}
         </p>
-        <h1 className="transition-opacity duration-500 font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+        <h1 className="transition-opacity duration-500 font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15] sm:leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
           <span>{headlineText}</span>
         </h1>
-        <p className="hero-copy transition-opacity duration-500 text-slate-200 text-sm sm:text-base max-w-2xl mt-3">
+        <p className="hero-copy transition-opacity duration-500 text-slate-200 text-sm sm:text-base max-w-2xl leading-relaxed mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           {copyText}
         </p>
         <div className="flex flex-wrap items-center gap-3 pt-4">
