@@ -4391,17 +4391,6 @@ export default function AdminPage() {
                             />
                           </div>
 
-                          <div>
-                            <label className="block text-stone-400 font-semibold mb-1">SEO Search Keywords / Tags</label>
-                            <input
-                              type="text"
-                              value={blogForm.keywords}
-                              onChange={(e) => setBlogForm({ ...blogForm, keywords: e.target.value })}
-                              placeholder="e.g. South India Travel Guide, Tamil Nadu Temples, Kerala Backwaters"
-                              className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
-                            />
-                          </div>
-
                           {/* Live Google Search Result Preview Box */}
                           <div className="bg-stone-900 border border-stone-800 p-4 rounded-xl space-y-1">
                             <span className="text-[10px] text-stone-500 font-bold uppercase tracking-wider block mb-1">Google Search Result Preview</span>
