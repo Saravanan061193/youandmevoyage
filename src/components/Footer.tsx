@@ -22,9 +22,6 @@ export const Footer = () => {
   const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/youandmevoyage/';
   const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/';
   const tripadvisorUrl = settings?.tripadvisorUrl || settings?.tripAdvisorUrl || 'https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html';
-  const youtubeUrl = settings?.youtubeUrl || 'https://youtube.com';
-  const tiktokUrl = settings?.tiktokUrl || 'https://tiktok.com';
-  const xUrl = settings?.xUrl || 'https://x.com';
 
   const extractDirectMapUrl = (embedUrl: string) => {
     if (!embedUrl) return 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248756.1167541638!2d80.06892534579308!3d13.047525492160913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a7037740e53a!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin';

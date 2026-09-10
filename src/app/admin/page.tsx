@@ -4902,7 +4902,7 @@ export default function AdminPage() {
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
                       <div className="w-full">
                         <label className="text-xs text-stone-400 font-semibold block mb-1">TripAdvisor Profile / Review URL</label>
                         <input
@@ -4932,50 +4932,6 @@ export default function AdminPage() {
                           value={settings.facebookUrl || ''}
                           onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
                           placeholder="https://www.facebook.com/p/Youme-independent-voyage-100064363920653/"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">YouTube Channel URL</label>
-                        <input
-                          type="text"
-                          value={settings.youtubeUrl || ''}
-                          onChange={(e) => setSettings({ ...settings, youtubeUrl: e.target.value })}
-                          placeholder="https://youtube.com/@youandmevoyage"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">TikTok Handle URL</label>
-                        <input
-                          type="text"
-                          value={settings.tiktokUrl || ''}
-                          onChange={(e) => setSettings({ ...settings, tiktokUrl: e.target.value })}
-                          placeholder="https://tiktok.com/@youandmevoyage"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">X (Twitter) Profile URL</label>
-                        <input
-                          type="text"
-                          value={settings.xUrl || ''}
-                          onChange={(e) => setSettings({ ...settings, xUrl: e.target.value })}
-                          placeholder="https://x.com/youandmevoyage"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">LinkedIn Profile URL</label>
-                        <input
-                          type="text"
-                          value={settings.linkedinUrl || ''}
-                          onChange={(e) => setSettings({ ...settings, linkedinUrl: e.target.value })}
-                          placeholder="https://linkedin.com/company/youandmevoyage"
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
                       </div>
