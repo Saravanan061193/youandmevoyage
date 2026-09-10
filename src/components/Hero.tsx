@@ -191,7 +191,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
         type="button"
         onClick={handlePrevSlide}
         aria-label="Previous Slide"
-        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
+        className="absolute left-2 sm:left-6 top-[32%] sm:top-[36%] -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
       >
         <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:-translate-x-1" />
       </button>
@@ -201,7 +201,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
         type="button"
         onClick={handleNextSlide}
         aria-label="Next Slide"
-        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
+        className="absolute right-2 sm:right-6 top-[32%] sm:top-[36%] -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
       >
         <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:translate-x-1" />
       </button>
