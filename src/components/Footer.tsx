@@ -167,45 +167,49 @@ export const Footer = () => {
 
           <div className="flex flex-col gap-3">
             <span className="font-bold text-[#FFFFFF] uppercase tracking-wider text-xs text-orange-400">Follow the Journey</span>
-            <div className="flex items-center gap-2.5 mt-1">
+            <div className="flex items-center gap-3 mt-1.5">
+              {/* Instagram Official Logo */}
               <a
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                title="Instagram"
-                className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-orange-400 hover:border-orange-500/50 flex items-center justify-center transition-all shadow-sm group"
+                title="Follow Us on Instagram"
+                className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white flex items-center justify-center transition-all shadow-md hover:scale-110 active:scale-95 group"
               >
-                <svg className="w-4 h-4 fill-none stroke-current group-hover:scale-110 transition-transform" strokeWidth="2" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 fill-none stroke-current group-hover:rotate-6 transition-transform" strokeWidth="2" viewBox="0 0 24 24">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
 
+              {/* Facebook Official Logo */}
               <a
                 href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                title="Facebook"
-                className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-orange-400 hover:border-orange-500/50 flex items-center justify-center transition-all shadow-sm group"
+                title="Follow Us on Facebook"
+                className="w-10 h-10 rounded-xl bg-[#1877F2] text-white flex items-center justify-center transition-all shadow-md hover:scale-110 active:scale-95 group"
               >
-                <svg className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </a>
 
+              {/* TripAdvisor Official Owl Logo */}
               <a
                 href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TripAdvisor"
-                title="TripAdvisor Reviews"
-                className="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-emerald-500/50 text-emerald-300 hover:text-emerald-200 hover:border-emerald-400 flex items-center gap-1.5 transition-all shadow-sm font-bold text-xs"
+                title="Read TripAdvisor Reviews"
+                className="w-10 h-10 rounded-xl bg-[#00AA6C] hover:bg-[#008f5a] text-white flex items-center justify-center transition-all shadow-md hover:scale-110 active:scale-95 group"
               >
-                <span className="text-orange-400 font-extrabold text-sm">★</span>
-                <span className="text-[11px]">TripAdvisor</span>
+                <svg className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                  <path d="M19.324 7.648a4.965 4.965 0 0 0-4.307-2.474c-.958 0-1.849.278-2.61.761a4.978 4.978 0 0 0-2.612-.761 4.966 4.966 0 0 0-4.307 2.474C2.511 8.878 2 10.384 2 12c0 3.033 1.95 5.617 4.717 6.554L4 21.333h3.5l1.833-2.133c.833.3 1.733.467 2.667.467s1.833-.167 2.667-.467L16.5 21.333H20l-2.717-2.779C20.05 17.617 22 15.033 22 12c0-1.616-.511-3.122-3.476-4.352zm-12.824 7.352a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm11 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM6.5 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                </svg>
               </a>
             </div>
 
