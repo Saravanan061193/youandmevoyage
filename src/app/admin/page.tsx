@@ -454,11 +454,13 @@ export default function AdminPage() {
     e.preventDefault();
     setAuthError('');
     try {
+      const inputPass = (password || passcode || '').trim();
+      const inputUser = (username || 'admin').trim();
       const res = await fetch('/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ action: 'login', username, password: password || passcode }),
+        body: JSON.stringify({ action: 'login', username: inputUser, password: inputPass, passcode: inputPass }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
@@ -466,7 +468,7 @@ export default function AdminPage() {
         setAuthenticated(true);
         fetchAllData();
       } else {
-        setAuthError(data.error || 'Invalid credentials. Default: admin@youandmevoyage.com / admin123');
+        setAuthError(data.error || 'Invalid credentials. Default: admin / admin123');
       }
     } catch (err: any) {
       setAuthError('Server error during login');
@@ -1313,15 +1315,21 @@ export default function AdminPage() {
                     setPasscode(e.target.value);
                   }}
                   placeholder="Default: admin123"
-                  className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-10 py-3 text-sm outline-none focus:border-primary font-sans"
+                  className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-12 py-3 text-sm outline-none focus:border-primary font-sans"
                 />
-                <Lock className="w-4 h-4 text-stone-500 absolute left-3 top-3.5" />
+                <Lock className="w-4 h-4 text-stone-500 absolute left-3 top-3.5 pointer-events-none" />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3.5 text-stone-400 hover:text-stone-200"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setShowPassword((prev) => !prev);
+                  }}
+                  className="absolute right-3 top-2.5 text-stone-400 hover:text-orange-400 p-1.5 rounded-lg z-20 cursor-pointer transition-colors"
+                  aria-label="Toggle password visibility"
+                  title={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? <EyeOff className="w-4 h-4 text-orange-400" /> : <Eye className="w-4 h-4 text-stone-400" />}
                 </button>
               </div>
             </div>
