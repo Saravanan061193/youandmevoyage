@@ -2334,7 +2334,7 @@ export default function AdminPage() {
                     <div className="space-y-3">
                       {[
                         { icon: MessageSquare, color: 'text-orange-400 bg-orange-950/40 border-orange-800', title: 'New Quote Request', detail: 'Sarah Jenkins submitted an itinerary inquiry', time: '12 mins ago' },
-                        { icon: MapPin, color: 'text-primary bg-stone-900 border-stone-700', title: 'Safari Updated', detail: 'Classic Namibia Expedition SEO and pricing saved', time: '45 mins ago' },
+                        { icon: MapPin, color: 'text-primary bg-stone-900 border-stone-700', title: 'Safari Updated', detail: 'Classic South India Tour SEO and pricing saved', time: '45 mins ago' },
                         { icon: BookOpen, color: 'text-emerald-400 bg-emerald-950/40 border-emerald-800', title: 'Blog Post Published', detail: 'Ultimate Guide to Etosha Waterholes live on front-end', time: '2 hours ago' },
                         { icon: Star, color: 'text-yellow-400 bg-yellow-950/40 border-yellow-800', title: 'Guest Review Verified', detail: '5-star review from Mark Mueller (Germany) approved', time: '4 hours ago' },
                         { icon: SettingsIcon, color: 'text-stone-300 bg-stone-900 border-stone-800', title: 'CMS Sync Complete', detail: 'Currency exchange rates updated to match market', time: '6 hours ago' },
@@ -2639,7 +2639,7 @@ export default function AdminPage() {
                             required
                             value={safariForm.title}
                             onChange={(e) => setSafariForm({ ...safariForm, title: e.target.value })}
-                            placeholder="e.g. Classic Namibia Wildlife & Dunes Expedition"
+                            placeholder="e.g. 10-Day Classic South India Heritage & Backwater Private Journey"
                             className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-primary text-sm font-semibold"
                           />
                         </div>
@@ -2718,7 +2718,7 @@ export default function AdminPage() {
                                       if (safariForm.category === '__ADD_NEW__') setSafariForm({ ...safariForm, category: categoriesList[0] || 'Private' });
                                     }
                                   }}
-                                  placeholder="e.g. Fly-in Safari"
+                                  placeholder="e.g. Private Driver Companion"
                                   className="w-full bg-stone-900 border border-[#F97316] p-2 rounded text-xs text-stone-100 outline-none"
                                 />
                                 <button
@@ -2829,7 +2829,7 @@ export default function AdminPage() {
                         </div>
 
                         <ImageUploader
-                          label="Safari Cover Image"
+                          label="Journey Cover Image"
                           value={safariForm.image}
                           onChange={(val) => setSafariForm({ ...safariForm, image: val })}
                           recommendedSize="1200 × 800 px (3:2 Ratio)"
@@ -2899,7 +2899,7 @@ export default function AdminPage() {
                             required
                             value={safariForm.description}
                             onChange={(e) => setSafariForm({ ...safariForm, description: e.target.value })}
-                            placeholder="Detailed overview describing the safari experience..."
+                            placeholder="Detailed overview describing the private journey experience across Tamil Nadu and Kerala..."
                             className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none resize-none leading-relaxed"
                           />
                         </div>
@@ -2930,7 +2930,7 @@ export default function AdminPage() {
                               type="text"
                               value={safariForm.metaTitle}
                               onChange={(e) => setSafariForm({ ...safariForm, metaTitle: e.target.value })}
-                              placeholder={`Defaults to ${safariForm.title || 'Safari Title'} | Discovery Safaris`}
+                              placeholder={`Defaults to ${safariForm.title || 'Journey Title'} | You & Me – Independent Voyage`}
                               className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none font-semibold text-xs"
                             />
                           </div>
@@ -2954,7 +2954,7 @@ export default function AdminPage() {
                               rows={3}
                               value={safariForm.metaDescription}
                               onChange={(e) => setSafariForm({ ...safariForm, metaDescription: e.target.value })}
-                              placeholder="Defaults to Safari Description copy"
+                              placeholder="Defaults to Journey Description copy"
                               className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none resize-none text-xs leading-relaxed"
                             />
                           </div>
@@ -2965,7 +2965,7 @@ export default function AdminPage() {
                               type="text"
                               value={safariForm.keywords}
                               onChange={(e) => setSafariForm({ ...safariForm, keywords: e.target.value })}
-                              placeholder="e.g. Namibia Safari, Etosha Wildlife, Sossusvlei Dunes"
+                              placeholder="e.g. South India Tour, Tamil Nadu Temples, Kerala Backwaters, Private Driver Companion"
                               className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
                             />
                           </div>
@@ -2974,13 +2974,13 @@ export default function AdminPage() {
                           <div className="bg-stone-900 border border-stone-800 p-4 rounded-xl space-y-1">
                             <span className="text-[10px] text-stone-500 font-bold uppercase tracking-wider block mb-1">Google Search Result Preview</span>
                             <div className="text-xs text-blue-400 font-semibold truncate hover:underline cursor-pointer">
-                              {safariForm.metaTitle || safariForm.title || 'Safari Title | Discovery Safaris'}
+                              {safariForm.metaTitle || safariForm.title || 'Journey Title | You & Me – Independent Voyage'}
                             </div>
                             <div className="text-[11px] text-emerald-500 truncate font-mono">
-                              https://discoverysafaris.com/safari/{editingSafari?.id || 'tour-id'}
+                              https://youandmevoyage.com/journeys/{editingSafari?.id || 'journey-id'}
                             </div>
                             <div className="text-[11px] text-stone-400 line-clamp-2">
-                              {safariForm.metaDescription || safariForm.description || 'Safari tour description will appear here in search engine results.'}
+                              {safariForm.metaDescription || safariForm.description || 'Journey tour description will appear here in search engine results.'}
                             </div>
                           </div>
                         </div>
@@ -3338,8 +3338,8 @@ export default function AdminPage() {
 
                                     {/* 3. Travel Preferences Column */}
                                     <td className="px-4 py-3 max-w-[230px]">
-                                      <div className="font-semibold text-stone-200 text-xs truncate" title={`${inq.category || 'Private Safari'} · ${inq.destination || 'Namibia'}`}>
-                                        {inq.category || 'Private Safari'} · {inq.destination || 'Namibia'}
+                                      <div className="font-semibold text-stone-200 text-xs truncate" title={`${inq.category || 'Private Tour'} · ${inq.destination || 'Tamil Nadu & Kerala'}`}>
+                                        {inq.category || 'Private Tour'} · {inq.destination || 'Tamil Nadu & Kerala'}
                                       </div>
                                       <div className="text-stone-400 text-[11px] mt-1 flex items-center gap-2 font-mono">
                                         <span>📅 {inq.month || 'Flexible'}</span>
@@ -3557,7 +3557,7 @@ export default function AdminPage() {
                           </div>
                           <div className="space-y-1">
                             <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block">Destination</span>
-                            <span className="text-sm text-stone-100 font-bold block">{editingLead?.destination || 'Namibia'}</span>
+                            <span className="text-sm text-stone-100 font-bold block">{editingLead?.destination || 'Tamil Nadu & Kerala'}</span>
                           </div>
                         </div>
 
@@ -4227,7 +4227,7 @@ export default function AdminPage() {
                               const autoSlug = titleVal.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
                               setBlogForm({ ...blogForm, title: titleVal, slug: editingBlog ? blogForm.slug : autoSlug });
                             }}
-                            placeholder="e.g. The Ultimate Guide to Planning a Namibia Safari"
+                            placeholder="e.g. The Ultimate Guide to South India Temple & Backwater Tour"
                             className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-primary text-sm font-semibold"
                           />
                         </div>
@@ -4362,7 +4362,7 @@ export default function AdminPage() {
                               type="text"
                               value={blogForm.metaTitle}
                               onChange={(e) => setBlogForm({ ...blogForm, metaTitle: e.target.value })}
-                              placeholder="Defaults to Title | Discovery Safaris"
+                              placeholder="Defaults to Title | You & Me – Independent Voyage"
                               className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none font-semibold text-xs"
                             />
                           </div>
@@ -4383,22 +4383,33 @@ export default function AdminPage() {
                               })()}
                             </div>
                             <textarea
-                              rows={2}
+                              rows={3}
                               value={blogForm.metaDescription}
                               onChange={(e) => setBlogForm({ ...blogForm, metaDescription: e.target.value })}
-                              placeholder="Defaults to Excerpt"
+                              placeholder="Defaults to Article excerpt copy"
                               className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none resize-none text-xs leading-relaxed"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-stone-400 font-semibold mb-1">SEO Search Keywords / Tags</label>
+                            <input
+                              type="text"
+                              value={blogForm.keywords}
+                              onChange={(e) => setBlogForm({ ...blogForm, keywords: e.target.value })}
+                              placeholder="e.g. South India Travel Guide, Tamil Nadu Temples, Kerala Backwaters"
+                              className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
                             />
                           </div>
 
                           {/* Live Google Search Result Preview Box */}
                           <div className="bg-stone-900 border border-stone-800 p-4 rounded-xl space-y-1">
-                            <span className="text-[10px] text-stone-500 font-bold uppercase tracking-wider block mb-1">Google Search Preview</span>
+                            <span className="text-[10px] text-stone-500 font-bold uppercase tracking-wider block mb-1">Google Search Result Preview</span>
                             <div className="text-xs text-blue-400 font-semibold truncate hover:underline cursor-pointer">
-                              {blogForm.metaTitle || blogForm.title || 'Article Title | Discovery Safaris'}
+                              {blogForm.metaTitle || blogForm.title || 'Article Title | You & Me – Independent Voyage'}
                             </div>
                             <div className="text-[11px] text-emerald-500 truncate font-mono">
-                              https://discoverysafaris.com/blog/{blogForm.slug || 'article-slug'}
+                              https://youandmevoyage.com/blog/{blogForm.slug || 'article-slug'}
                             </div>
                             <div className="text-[11px] text-stone-400 line-clamp-2">
                               {blogForm.metaDescription || blogForm.excerpt || 'Article summary preview will appear here in search engine results.'}
@@ -5372,7 +5383,7 @@ export default function AdminPage() {
                                       type="text"
                                       value={banner.headline || ''}
                                       onChange={(e) => updateBannerItem(index, 'headline', e.target.value)}
-                                      placeholder="Experience the raw majesty of Namibia"
+                                      placeholder="Experience authentic South India with custom private driver tours"
                                       className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3 py-2 text-xs outline-none focus:border-primary font-semibold"
                                     />
                                   </div>
@@ -5522,7 +5533,7 @@ export default function AdminPage() {
                         type="text"
                         value={settings.aboutHeroHeadline || ''}
                         onChange={(e) => setSettings({ ...settings, aboutHeroHeadline: e.target.value })}
-                        placeholder="Crafting Extraordinary Namibian Journeys"
+                        placeholder="Crafting Authentic South India Journeys"
                         className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316]"
                       />
                     </div>
@@ -5640,7 +5651,7 @@ export default function AdminPage() {
                             return [];
                           }
                         })();
-                        const updated = [...current, { id: Date.now(), title: 'New Highlight', desc: 'Describe why guests should choose Discovery Safaris.' }];
+                        const updated = [...current, { id: Date.now(), title: 'New Highlight', desc: 'Describe why guests should choose You & Me – Independent Voyage.' }];
                         setSettings({ ...settings, aboutWhyChooseUs: JSON.stringify(updated) });
                       }}
                       className="text-xs text-[#F97316] font-bold hover:underline flex items-center gap-1"
@@ -5913,7 +5924,7 @@ export default function AdminPage() {
                       rows={5}
                       value={typeof settings.aboutCertifications === 'string' ? settings.aboutCertifications : JSON.stringify(settings.aboutCertifications, null, 2)}
                       onChange={(e) => setSettings({ ...settings, aboutCertifications: e.target.value })}
-                      placeholder='["Namibia Tourism Board Registered", "TASA Accredited Member"]'
+                      placeholder='["Registered South India Private Tour Operator", "TripAdvisor Rated Partner"]'
                       className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 font-mono text-xs outline-none focus:border-[#F97316]"
                     />
                   </div>
@@ -6357,7 +6368,7 @@ export default function AdminPage() {
                   required
                   value={faqForm.question}
                   onChange={(e) => setFaqForm({ ...faqForm, question: e.target.value })}
-                  placeholder="e.g. What is included in a Discovery Safaris private expedition?"
+                  placeholder="e.g. What is included in a You & Me private journey?"
                   className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none focus:border-[#F97316] font-semibold text-sm"
                 />
               </div>
