@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 
+import { useCurrency } from './CurrencyContext';
+
 export const ReviewsSection = () => {
+  const { settings } = useCurrency();
+  const tripadvisorUrl = settings?.tripadvisorUrl || settings?.tripAdvisorUrl || "https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html";
   const [reviews, setReviews] = useState<any[]>([]);
 
   const loadReviews = () => {
@@ -59,7 +63,7 @@ export const ReviewsSection = () => {
         </div>
 
         <a
-          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+          href={tripadvisorUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="rating-lockup hover:opacity-90 transition-opacity cursor-pointer"

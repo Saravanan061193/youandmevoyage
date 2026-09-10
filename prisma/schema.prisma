@@ -140,8 +140,9 @@ model SiteSettings {
   adminPasscode           String   @default("admin123")
 
   // Social Media Settings
-  instagramUrl            String?  @default("https://instagram.com")
-  facebookUrl             String?  @default("https://facebook.com")
+  instagramUrl            String?  @default("https://www.instagram.com/youandmevoyage/")
+  facebookUrl             String?  @default("https://www.facebook.com/p/Youme-independent-voyage-100064363920653/")
+  tripadvisorUrl          String?  @default("https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html")
   youtubeUrl              String?  @default("https://youtube.com")
   tiktokUrl               String?  @default("https://tiktok.com")
   xUrl                    String?  @default("https://x.com")

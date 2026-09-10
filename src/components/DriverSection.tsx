@@ -3,7 +3,11 @@
 import React from 'react';
 import { ShieldCheck, MapPin, Compass, Navigation, HeartHandshake, Coffee, ThumbsUp } from 'lucide-react';
 
+import { useCurrency } from './CurrencyContext';
+
 export const DriverSection = () => {
+  const { settings } = useCurrency();
+  const tripadvisorUrl = settings?.tripadvisorUrl || settings?.tripAdvisorUrl || "https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html";
   const features = [
     {
       title: 'Deep Local Knowledge',
@@ -67,7 +71,7 @@ export const DriverSection = () => {
                 </div>
               </div>
               <a
-                href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+                href={tripadvisorUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 border border-emerald-400/60 hover:bg-slate-800 text-emerald-300 text-xs font-bold rounded-xl transition-all shrink-0 shadow-md"

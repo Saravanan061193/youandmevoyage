@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { CurrencyProvider } from '@/components/CurrencyContext';
+import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { Star, Quote, ExternalLink, ShieldCheck, Heart } from 'lucide-react';
 
 function ReviewsContent() {
+  const { settings } = useCurrency();
+  const tripadvisorUrl = settings?.tripadvisorUrl || settings?.tripAdvisorUrl || "https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html";
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [reviews, setReviews] = useState<any[]>([]);
 
@@ -37,7 +39,7 @@ function ReviewsContent() {
 
           <div className="pt-4">
             <a
-              href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+              href={tripadvisorUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg"

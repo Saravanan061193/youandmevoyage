@@ -208,7 +208,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
 
       <div key={`content-${currentSlideIndex}`} className="hero-content z-10 relative max-w-3xl space-y-3 animate-fadeIn">
         <a
-          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+          href={settings?.tripadvisorUrl || settings?.tripAdvisorUrl || "https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-slate-900/90 border border-emerald-400/60 rounded-full text-white text-xs font-bold shadow-lg hover:border-emerald-400 hover:bg-slate-900 transition-all mb-2 ring-1 ring-emerald-500/30"

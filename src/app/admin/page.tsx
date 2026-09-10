@@ -4890,170 +4890,94 @@ export default function AdminPage() {
                   <div className="space-y-6">
                     <div className="border-b border-stone-800 pb-3">
                       <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Share2 className="w-5 h-5 text-[#F97316]" /> Social Media Integration & Live Video Feed CMS
+                        <Share2 className="w-5 h-5 text-[#F97316]" /> Social Media & TripAdvisor Profile Links
                       </h3>
-                      <p className="text-xs text-stone-400">Configure active social channel links, follower counters & live social video cards</p>
+                      <p className="text-xs text-stone-400">Configure official social channel URLs & TripAdvisor link. These links update live in header, footer & site badges.</p>
                     </div>
-                    <div className="space-y-4 w-full">
-                      <h4 className="text-xs font-bold text-[#F97316] uppercase tracking-wider">1. Social Profile URLs & Follower Badges</h4>
-                      <div className="flex flex-col gap-4 w-full">
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">Instagram Profile URL</label>
-                          <input
-                            type="text"
-                            value={settings.instagramUrl || ''}
-                            onChange={(e) => setSettings({ ...settings, instagramUrl: e.target.value })}
-                            placeholder="https://www.instagram.com/youandmevoyage/"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
 
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">Instagram Follower Count Badge</label>
-                          <input
-                            type="text"
-                            value={settings.instagramFollowers || '48.5K Followers'}
-                            onChange={(e) => setSettings({ ...settings, instagramFollowers: e.target.value })}
-                            placeholder="e.g. 48.5K Followers"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
+                    <div className="p-4 bg-orange-500/10 border border-orange-500/30 rounded-2xl flex items-start gap-3">
+                      <Sparkles className="w-5 h-5 text-orange-400 shrink-0 mt-0.5" />
+                      <p className="text-xs text-stone-300 leading-relaxed">
+                        Enter your official profile links below. Any link provided will automatically be displayed across the website header, footer, and trip rating badges.
+                      </p>
+                    </div>
 
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">TikTok Handle URL</label>
-                          <input
-                            type="text"
-                            value={settings.tiktokUrl || ''}
-                            onChange={(e) => setSettings({ ...settings, tiktokUrl: e.target.value })}
-                            placeholder="https://tiktok.com/@youandmevoyage"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
-
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">TikTok Community Count Badge</label>
-                          <input
-                            type="text"
-                            value={settings.tiktokFollowers || '22.4K Community'}
-                            onChange={(e) => setSettings({ ...settings, tiktokFollowers: e.target.value })}
-                            placeholder="e.g. 22.4K Community"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
-
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">YouTube Channel URL</label>
-                          <input
-                            type="text"
-                            value={settings.youtubeUrl || ''}
-                            onChange={(e) => setSettings({ ...settings, youtubeUrl: e.target.value })}
-                            placeholder="https://youtube.com/@youandmevoyage"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
-
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">YouTube Subscribers Badge</label>
-                          <input
-                            type="text"
-                            value={settings.youtubeSubscribers || '15.8K Subscribers'}
-                            onChange={(e) => setSettings({ ...settings, youtubeSubscribers: e.target.value })}
-                            placeholder="e.g. 15.8K Subscribers"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
-
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">Facebook Page URL</label>
-                          <input
-                            type="text"
-                            value={settings.facebookUrl || ''}
-                            onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
-                            placeholder="https://www.facebook.com/p/Youme-independent-voyage-100064363920653/"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
-
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">Facebook Members Badge</label>
-                          <input
-                            type="text"
-                            value={settings.facebookMembers || '34K Members'}
-                            onChange={(e) => setSettings({ ...settings, facebookMembers: e.target.value })}
-                            placeholder="e.g. 34K Members"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">TripAdvisor Profile / Review URL</label>
+                        <input
+                          type="text"
+                          value={settings.tripadvisorUrl || settings.tripAdvisorUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, tripadvisorUrl: e.target.value, tripAdvisorUrl: e.target.value })}
+                          placeholder="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews..."
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
                       </div>
-                    </div>
 
-                    <div className="space-y-4 pt-4 border-t border-stone-800 w-full">
-                      <h4 className="text-xs font-bold text-[#F97316] uppercase tracking-wider">2. Front-End Reel Video Cards (Thumbnails & Video Links)</h4>
-                      
-                      <div className="flex flex-col gap-4 w-full">
-                        <div className="bg-stone-900/60 p-4 border border-stone-800 rounded-xl space-y-3 w-full">
-                          <strong className="text-xs text-stone-200 block">Card 1: Instagram Reel</strong>
-                          <ImageUploader
-                            label="Thumbnail Image"
-                            value={settings.socialCard1Image || 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=85'}
-                            onChange={(val) => setSettings({ ...settings, socialCard1Image: val })}
-                          />
-                          <input
-                            type="text"
-                            value={settings.socialCard1Url || ''}
-                            onChange={(e) => setSettings({ ...settings, socialCard1Url: e.target.value })}
-                            placeholder="Direct Reel / Video Link URL"
-                            className="w-full bg-stone-950 border border-stone-700 text-stone-100 rounded p-2 text-xs outline-none truncate text-ellipsis overflow-hidden whitespace-nowrap font-mono"
-                          />
-                        </div>
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">Instagram Profile URL</label>
+                        <input
+                          type="text"
+                          value={settings.instagramUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, instagramUrl: e.target.value })}
+                          placeholder="https://www.instagram.com/youandmevoyage/"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
+                      </div>
 
-                        <div className="bg-stone-900/60 p-4 border border-stone-800 rounded-xl space-y-3 w-full">
-                          <strong className="text-xs text-stone-200 block">Card 2: TikTok Viral</strong>
-                          <ImageUploader
-                            label="Thumbnail Image"
-                            value={settings.socialCard2Image || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=85'}
-                            onChange={(val) => setSettings({ ...settings, socialCard2Image: val })}
-                          />
-                          <input
-                            type="text"
-                            value={settings.socialCard2Url || ''}
-                            onChange={(e) => setSettings({ ...settings, socialCard2Url: e.target.value })}
-                            placeholder="Direct Video Link URL"
-                            className="w-full bg-stone-950 border border-stone-700 text-stone-100 rounded p-2 text-xs outline-none truncate text-ellipsis overflow-hidden whitespace-nowrap font-mono"
-                          />
-                        </div>
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">Facebook Page URL</label>
+                        <input
+                          type="text"
+                          value={settings.facebookUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
+                          placeholder="https://www.facebook.com/p/Youme-independent-voyage-100064363920653/"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
+                      </div>
 
-                        <div className="bg-stone-900/60 p-4 border border-stone-800 rounded-xl space-y-3 w-full">
-                          <strong className="text-xs text-stone-200 block">Card 3: YouTube 4K</strong>
-                          <ImageUploader
-                            label="Thumbnail Image"
-                            value={settings.socialCard3Image || 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=800&q=85'}
-                            onChange={(val) => setSettings({ ...settings, socialCard3Image: val })}
-                          />
-                          <input
-                            type="text"
-                            value={settings.socialCard3Url || ''}
-                            onChange={(e) => setSettings({ ...settings, socialCard3Url: e.target.value })}
-                            placeholder="Direct Video / Vlog Link URL"
-                            className="w-full bg-stone-950 border border-stone-700 text-stone-100 rounded p-2 text-xs outline-none truncate text-ellipsis overflow-hidden whitespace-nowrap font-mono"
-                          />
-                        </div>
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">YouTube Channel URL</label>
+                        <input
+                          type="text"
+                          value={settings.youtubeUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, youtubeUrl: e.target.value })}
+                          placeholder="https://youtube.com/@youandmevoyage"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
+                      </div>
 
-                        <div className="bg-stone-900/60 p-4 border border-stone-800 rounded-xl space-y-3 w-full">
-                          <strong className="text-xs text-stone-200 block">Card 4: Facebook Story</strong>
-                          <ImageUploader
-                            label="Thumbnail Image"
-                            value={settings.socialCard4Image || 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=85'}
-                            onChange={(val) => setSettings({ ...settings, socialCard4Image: val })}
-                          />
-                          <input
-                            type="text"
-                            value={settings.socialCard4Url || ''}
-                            onChange={(e) => setSettings({ ...settings, socialCard4Url: e.target.value })}
-                            placeholder="Direct Story / Post Link URL"
-                            className="w-full bg-stone-950 border border-stone-700 text-stone-100 rounded p-2 text-xs outline-none truncate text-ellipsis overflow-hidden whitespace-nowrap font-mono"
-                          />
-                        </div>
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">TikTok Handle URL</label>
+                        <input
+                          type="text"
+                          value={settings.tiktokUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, tiktokUrl: e.target.value })}
+                          placeholder="https://tiktok.com/@youandmevoyage"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
+                      </div>
+
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">X (Twitter) Profile URL</label>
+                        <input
+                          type="text"
+                          value={settings.xUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, xUrl: e.target.value })}
+                          placeholder="https://x.com/youandmevoyage"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
+                      </div>
+
+                      <div className="w-full">
+                        <label className="text-xs text-stone-400 font-semibold block mb-1">LinkedIn Profile URL</label>
+                        <input
+                          type="text"
+                          value={settings.linkedinUrl || ''}
+                          onChange={(e) => setSettings({ ...settings, linkedinUrl: e.target.value })}
+                          placeholder="https://linkedin.com/company/youandmevoyage"
+                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                        />
                       </div>
                     </div>
                   </div>

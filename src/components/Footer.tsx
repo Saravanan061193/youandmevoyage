@@ -21,6 +21,7 @@ export const Footer = () => {
 
   const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/youandmevoyage/';
   const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/';
+  const tripadvisorUrl = settings?.tripadvisorUrl || settings?.tripAdvisorUrl || 'https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html';
   const youtubeUrl = settings?.youtubeUrl || 'https://youtube.com';
   const tiktokUrl = settings?.tiktokUrl || 'https://tiktok.com';
   const xUrl = settings?.xUrl || 'https://x.com';
@@ -195,7 +196,7 @@ export const Footer = () => {
 
               {/* TripAdvisor Official Owl Logo */}
               <a
-                href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+                href={tripadvisorUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TripAdvisor"

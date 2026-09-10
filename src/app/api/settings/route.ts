@@ -16,6 +16,7 @@ const DEFAULT_SETTINGS = {
 
   instagramUrl: 'https://www.instagram.com/youandmevoyage/',
   facebookUrl: 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/',
+  tripadvisorUrl: 'https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html',
   youtubeUrl: 'https://youtube.com',
   tiktokUrl: 'https://tiktok.com',
   xUrl: 'https://x.com',
@@ -159,6 +160,7 @@ export async function PUT(request: Request) {
       adminPasscode,
       instagramUrl,
       facebookUrl,
+      tripadvisorUrl,
       youtubeUrl,
       tiktokUrl,
       xUrl,
@@ -200,6 +202,7 @@ export async function PUT(request: Request) {
 
     if (instagramUrl !== undefined) updateData.instagramUrl = instagramUrl;
     if (facebookUrl !== undefined) updateData.facebookUrl = facebookUrl;
+    if (tripadvisorUrl !== undefined || body.tripAdvisorUrl !== undefined) updateData.tripadvisorUrl = tripadvisorUrl || body.tripAdvisorUrl;
     if (youtubeUrl !== undefined) updateData.youtubeUrl = youtubeUrl;
     if (tiktokUrl !== undefined) updateData.tiktokUrl = tiktokUrl;
     if (xUrl !== undefined) updateData.xUrl = xUrl;

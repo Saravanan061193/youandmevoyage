@@ -13,6 +13,7 @@ export const UtilityBar = () => {
   const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/youandmevoyage/';
   const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/';
   const tripadvisorUrl =
+    settings?.tripadvisorUrl || settings?.tripAdvisorUrl ||
     'https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html';
 
   return (

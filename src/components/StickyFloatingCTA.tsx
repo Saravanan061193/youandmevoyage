@@ -3,12 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { MessageSquare, Sparkles, BookOpen, Star, X } from 'lucide-react';
 
+import { useCurrency } from './CurrencyContext';
+
 interface StickyFloatingCTAProps {
   onOpenQuoteModal: () => void;
   onOpenLeadMagnetModal: () => void;
 }
 
 export const StickyFloatingCTA = ({ onOpenQuoteModal, onOpenLeadMagnetModal }: StickyFloatingCTAProps) => {
+  const { settings } = useCurrency();
+  const tripadvisorUrl = settings?.tripadvisorUrl || settings?.tripAdvisorUrl || "https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html";
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -34,7 +38,7 @@ export const StickyFloatingCTA = ({ onOpenQuoteModal, onOpenLeadMagnetModal }: S
         
         {/* Rating & Social Proof badge */}
         <a
-          href="https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html"
+          href={tripadvisorUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 shrink-0 hover:opacity-90 transition-opacity cursor-pointer"
