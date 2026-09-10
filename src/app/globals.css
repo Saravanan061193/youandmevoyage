@@ -1561,5 +1561,65 @@ body {
   display: none !important;
 }
 
+/* ==================================================== */
+/* COMPREHENSIVE RESPONSIVE DESIGN SYSTEM BREAKPOINTS */
+/* ==================================================== */
 
+/* 1. EXTRA SMALL MOBILE (Up to 480px) */
+@media (max-width: 480px) {
+  html, body {
+    font-size: 14px;
+    overflow-x: hidden !important;
+  }
 
+  .brand-mark img {
+    max-height: 32px !important;
+    width: auto !important;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(26px, 8vw, 36px) !important;
+    letter-spacing: -0.01em;
+  }
+
+  .search-widget {
+    padding: 14px 12px !important;
+  }
+
+  .custom-quote-modal {
+    padding: 24px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .modal-title {
+    font-size: 26px !important;
+  }
+
+  .form-row.two-col {
+    grid-template-columns: 1fr !important;
+  }
+
+  .tour-grid,
+  .reviews-grid,
+  .destination-masonry {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 2. TABLETS & SMALL LAPTOPS (481px to 1024px) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .tour-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* 3. DESKTOP & LARGE MONITORS (1440px+) */
+@media (min-width: 1440px) {
+  .hero-section {
+    min-height: 720px;
+  }
+}
