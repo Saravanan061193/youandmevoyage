@@ -1463,7 +1463,6 @@ export default function AdminPage() {
           </div>
         )}
       </div>
-    </div>
     );
   }
 
@@ -6209,6 +6208,10 @@ export default function AdminPage() {
                       type="text"
                       value={settings?.homeItineraryHeadline || ''}
                       onChange={(e) => setSettings({ ...settings, homeItineraryHeadline: e.target.value })}
+                      placeholder="10-day classic South India explorer"
+                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#F97316]"
+                    />
+                  </div>
                   <div>
                     <label className="block text-xs text-stone-400 font-semibold mb-1">Section Intro Subcopy</label>
                     <input
