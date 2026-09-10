@@ -19,8 +19,8 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
     phone: '',
     date: '',
     travelers: '2',
-    budget: '$4,000 - $6,500 per person',
-    category: 'Private Luxury Safari',
+    budget: '$2,000 – $3,500 per person',
+    category: 'Tamil Nadu Temple & Cultural Journeys',
     message: '',
   });
 
@@ -84,12 +84,12 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
 
         {submitted ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mx-auto text-amber-800">
-              <CheckCircle2 className="w-8 h-8 text-amber-700" />
+            <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-emerald-400 shadow-lg">
+              <CheckCircle2 className="w-9 h-9 text-emerald-400" />
             </div>
-            <h2 className="font-serif text-3xl font-bold text-stone-900">Enquiry Received</h2>
-            <p className="text-stone-600 text-sm max-w-sm mx-auto leading-relaxed">
-              Thank you, <strong>{formData.name}</strong>. A senior safari designer will be in touch personally within 24 hours.
+            <h2 className="font-serif text-3xl font-bold text-white">Enquiry Received!</h2>
+            <p className="text-slate-300 text-sm max-w-sm mx-auto leading-relaxed font-sans">
+              Thank you, <strong className="text-white">{formData.name}</strong>. A senior travel specialist will reach out to you personally within 24 hours.
             </p>
             <button
               onClick={() => { setSubmitted(false); setStep(1); onClose(); }}
@@ -102,7 +102,7 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
           <div>
             <div className="flex items-center justify-between mb-2">
               <p className="modal-subheading">INTERACTIVE JOURNEY PLANNER</p>
-              <span className="text-[11px] font-mono font-bold text-orange-700 bg-orange-100 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs font-mono font-bold text-orange-400 bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full shadow-sm">
                 Step {step} of 3
               </span>
             </div>
@@ -112,9 +112,9 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
             </h2>
 
             {/* Visual Progress Bar */}
-            <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden my-3">
+            <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden my-3">
               <div
-                className="bg-orange-500 h-full transition-all duration-300"
+                className="bg-gradient-to-r from-orange-500 to-orange-400 h-full transition-all duration-300 shadow-sm"
                 style={{ width: `${(step / 3) * 100}%` }}
               />
             </div>
@@ -133,13 +133,15 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                       <option value="Kerala Backwater & Hill Journeys">Kerala Backwater & Hill Station Journeys</option>
                       <option value="South India Signature Grand Tour">South India Signature Grand Tour</option>
                       <option value="Food & Culinary Journeys">Food & Culinary Journeys</option>
+                      <option value="Goa Beach & Portuguese Heritage">Goa Beach & Portuguese Heritage</option>
+                      <option value="Karnataka Royal & Garden Trail">Karnataka Royal & Garden Trail</option>
                     </select>
                   </div>
 
                   <div className="field-group">
                     <div className="flex items-center justify-between">
                       <label>ESTIMATED BUDGET PER PERSON</label>
-                      <span className="text-[9.5px] text-orange-700 font-bold">⭐ 4.9/5 Value Rated</span>
+                      <span className="text-[10px] text-orange-400 font-bold">⭐ 4.9/5 Value Rated</span>
                     </div>
                     <select
                       value={formData.budget}
@@ -200,7 +202,7 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                     <button
                       type="button"
                       onClick={prevStep}
-                      className="px-4 py-3 bg-slate-200 text-slate-800 font-bold text-xs rounded hover:bg-slate-300 transition-colors"
+                      className="px-4 py-3 bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs rounded-xl hover:bg-slate-700 transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
@@ -252,18 +254,18 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                   </div>
 
                   {/* Strategic Social Proof Badge */}
-                  <div className="p-2.5 bg-orange-50 border border-orange-200 rounded text-[11px] text-orange-950 flex items-center justify-between">
-                    <span className="flex items-center gap-1 font-medium">
-                      <Lock className="w-3.5 h-3.5 text-orange-600" /> 100% Free & No Obligation
+                  <div className="p-3 bg-slate-800/80 border border-slate-700 rounded-xl text-xs text-slate-300 flex items-center justify-between shadow-sm">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <Lock className="w-3.5 h-3.5 text-orange-400" /> 100% Free & No Obligation
                     </span>
-                    <span className="font-bold">⭐ 4.9/5 TripAdvisor</span>
+                    <span className="font-bold text-orange-400">⭐ 4.9/5 TripAdvisor</span>
                   </div>
 
                   <div className="flex gap-2">
                     <button
                       type="button"
                       onClick={prevStep}
-                      className="px-4 py-3 bg-slate-200 text-slate-800 font-bold text-xs rounded hover:bg-slate-300 transition-colors"
+                      className="px-4 py-3 bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs rounded-xl hover:bg-slate-700 transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>

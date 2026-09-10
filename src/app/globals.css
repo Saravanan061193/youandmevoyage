@@ -1316,7 +1316,7 @@ h1 em, h2 em {
   }
 }
 
-/* CUSTOM QUOTE MODAL (MATCHING SCREENSHOT DESIGN) */
+/* CUSTOM QUOTE MODAL (SLEEK DARK LUXURY THEMING) */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1324,8 +1324,8 @@ h1 em, h2 em {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(20, 18, 15, 0.72);
-  backdrop-filter: blur(5px);
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
   padding: 16px;
   overflow-y: auto;
 }
@@ -1334,12 +1334,13 @@ h1 em, h2 em {
   position: relative;
   width: 100%;
   max-width: 580px;
-  background-color: #fdfbf9;
-  border-radius: 4px;
+  background-color: #0F172A;
+  border: 1px solid #334155;
+  border-radius: 24px;
   padding: 38px 42px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(249, 115, 22, 0.1);
   margin: auto;
-  color: #1a1816;
+  color: #F8FAFC;
   font-family: var(--font-sans);
 }
 
@@ -1347,51 +1348,55 @@ h1 em, h2 em {
   position: absolute;
   top: 24px;
   right: 24px;
-  background: transparent;
-  border: none;
-  color: #787065;
+  background: #1E293B;
+  border: 1px solid #334155;
+  border-radius: 50%;
+  color: #94A3B8;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .custom-quote-close:hover {
-  color: #1a1816;
+  background: #F97316;
+  border-color: #F97316;
+  color: #FFFFFF;
+  transform: rotate(90deg);
 }
 
 .modal-subheading {
-  color: #8c8273;
+  color: #F97316;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 }
 
 .modal-title {
   font-family: var(--font-serif);
-  font-size: 42px;
-  font-weight: 500;
-  line-height: 1.05;
-  color: #1a1816;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #FFFFFF;
   margin: 0 0 10px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .modal-title em {
   font-style: italic;
-  color: #bd954e;
+  color: #F97316;
   font-weight: 400;
 }
 
 .modal-description {
-  color: #787065;
-  font-size: 12px;
+  color: #94A3B8;
+  font-size: 13px;
   line-height: 1.5;
-  margin: 0 0 26px;
+  margin: 0 0 24px;
 }
 
 .custom-quote-form {
@@ -1417,7 +1422,7 @@ h1 em, h2 em {
 }
 
 .field-group label {
-  color: #8c8273;
+  color: #94A3B8;
   font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1428,12 +1433,12 @@ h1 em, h2 em {
 .custom-quote-form select,
 .custom-quote-form textarea {
   width: 100%;
-  background-color: #faf9f6 !important;
-  border: 1px solid #e7e1d8 !important;
-  border-radius: 2px !important;
-  padding: 12px 14px !important;
+  background-color: #1E293B !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px !important;
+  padding: 13px 16px !important;
   font-size: 13px !important;
-  color: #1a1816 !important;
+  color: #FFFFFF !important;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
   font-family: var(--font-sans);
@@ -1441,13 +1446,13 @@ h1 em, h2 em {
 
 .custom-quote-form input::placeholder,
 .custom-quote-form textarea::placeholder {
-  color: #9e9587 !important;
+  color: #64748B !important;
 }
 
 .custom-quote-form select {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1816' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F97316' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
   background-repeat: no-repeat !important;
   background-position: right 14px center !important;
   background-size: 14px !important;
@@ -1455,39 +1460,47 @@ h1 em, h2 em {
 }
 
 .custom-quote-form select option {
-  background-color: #ffffff;
-  color: #1a1816;
+  background-color: #0F172A;
+  color: #FFFFFF;
 }
 
 .custom-quote-form input:focus,
 .custom-quote-form select:focus,
 .custom-quote-form textarea:focus {
-  border-color: #bd954e !important;
-  box-shadow: 0 0 0 2px rgba(189, 149, 78, 0.15) !important;
-  background-color: #ffffff !important;
+  border-color: #F97316 !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25) !important;
+  background-color: #0F172A !important;
 }
 
 .custom-quote-submit {
   width: 100%;
-  background-color: #c5a059;
-  color: #1a1816;
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  color: #FFFFFF;
   border: none;
-  border-radius: 2px;
+  border-radius: 12px;
   padding: 14px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 6px;
-  transition: background-color 0.2s, transform 0.1s;
+  margin-top: 8px;
+  box-shadow: 0 10px 25px rgba(249, 115, 22, 0.35);
+  transition: all 0.2s ease;
 }
 
 .custom-quote-submit:hover {
-  background-color: #b89349;
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  box-shadow: 0 14px 30px rgba(249, 115, 22, 0.5);
+  transform: translateY(-2px);
+}
+
+.custom-quote-submit:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 640px) {
@@ -1495,7 +1508,7 @@ h1 em, h2 em {
     padding: 28px 20px;
   }
   .modal-title {
-    font-size: 32px;
+    font-size: 30px;
   }
   .form-row.two-col {
     grid-template-columns: 1fr;
