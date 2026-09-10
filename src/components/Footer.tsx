@@ -59,7 +59,7 @@ export const Footer = () => {
                     You & Me – Independent Voyage
                   </h3>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    {settings?.address || 'Chennai, Tamil Nadu, India'}
+                    {settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020'}
                   </p>
 
                   <div className="space-y-2.5 text-xs text-slate-300 pt-3 border-t border-slate-800">
@@ -79,7 +79,7 @@ export const Footer = () => {
 
                   <div className="pt-2">
                     <a
-                      href={`https://maps.google.com/?q=${encodeURIComponent(settings?.address || 'Chennai, Tamil Nadu')}`}
+                      href={`https://maps.google.com/?q=${encodeURIComponent(settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, India 600020')}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-xs font-bold text-white bg-orange-500 hover:bg-orange-600 px-4 py-2.5 rounded-xl hover:brightness-110 shadow-md transition-all"
@@ -138,7 +138,7 @@ export const Footer = () => {
             </Link>
             <p className="text-xs text-orange-400/90 font-serif italic mt-3">Travel South India Your Way.</p>
             <p className="text-xs text-slate-400 leading-relaxed mt-2">
-              {settings?.address || 'Chennai, Tamil Nadu, India'}<br />
+              {settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020'}<br />
               {settings?.contactEmail || 'youandmevoyage@gmail.com'}<br />
               {whatsappNum}
             </p>

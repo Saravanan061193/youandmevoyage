@@ -71,7 +71,7 @@ function ContactContent() {
                 <MapPin className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Address</strong>
-                  <span>{settings?.address || 'Chennai, Tamil Nadu, India'}</span>
+                  <span>{settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020'}</span>
                 </div>
               </div>
 

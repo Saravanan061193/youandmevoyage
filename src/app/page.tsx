@@ -41,7 +41,9 @@ function HomeContent() {
     telephone: '+91 63814 20556',
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Indira Nagar, Adyar',
       addressLocality: 'Chennai',
+      postalCode: '600020',
       addressRegion: 'Tamil Nadu',
       addressCountry: 'India',
     },
