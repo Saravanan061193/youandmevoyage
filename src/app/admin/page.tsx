@@ -78,7 +78,7 @@ export default function AdminPage() {
   const [previewOtp, setPreviewOtp] = useState('');
   const [forgotSubmitting, setForgotSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'safaris' | 'destinations' | 'inquiries' | 'reviews' | 'settings' | 'legal' | 'blogs' | 'reports' | 'about' | 'faqs' | 'itineraries'>('overview');
-  const [settingsSubTab, setSettingsSubTab] = useState<'basic' | 'social' | 'cloudinary' | 'currency' | 'seo' | 'banner' | 'sidebar'>('basic');
+  const [settingsSubTab, setSettingsSubTab] = useState<'basic' | 'social' | 'cloudinary' | 'seo' | 'banner'>('basic');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [cmsExpanded, setCmsExpanded] = useState(false);
 
@@ -4539,18 +4539,6 @@ export default function AdminPage() {
 
                 <button
                   type="button"
-                  onClick={() => setSettingsSubTab('currency')}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
-                    settingsSubTab === 'currency'
-                      ? 'bg-[#F97316] text-black font-bold shadow'
-                      : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
-                  }`}
-                >
-                  <Coins className="w-4 h-4" /> Currency Settings
-                </button>
-
-                <button
-                  type="button"
                   onClick={() => setSettingsSubTab('seo')}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                     settingsSubTab === 'seo'
@@ -4571,18 +4559,6 @@ export default function AdminPage() {
                   }`}
                 >
                   <ImageIcon className="w-4 h-4" /> Banner Settings
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSettingsSubTab('sidebar')}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
-                    settingsSubTab === 'sidebar'
-                      ? 'bg-[#F97316] text-black font-bold shadow'
-                      : 'bg-stone-900/60 text-stone-400 border border-stone-800 hover:text-stone-200'
-                  }`}
-                >
-                  <PanelLeft className="w-4 h-4" /> Sidebar Settings
                 </button>
               </div>
 
@@ -5010,66 +4986,7 @@ export default function AdminPage() {
                   </div>
                 )}
 
-                {/* 4. CURRENCY SETTINGS */}
-                {settingsSubTab === 'currency' && (
-                  <div className="space-y-4 w-full">
-                    <div className="border-b border-stone-800 pb-3">
-                      <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <Coins className="w-5 h-5 text-[#F97316]" /> Multi-Currency Rates & Defaults
-                      </h3>
-                      <p className="text-xs text-stone-400">Configure base USD exchange rates for automatic currency conversion</p>
-                    </div>
 
-                    <div className="flex flex-col gap-4 w-full">
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">USD → EUR € Rate</label>
-                        <input
-                          type="number"
-                          step="0.01"
-                          value={settings.usdToEur || 0.92}
-                          onChange={(e) => setSettings({ ...settings, usdToEur: e.target.value })}
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">USD → GBP £ Rate</label>
-                        <input
-                          type="number"
-                          step="0.01"
-                          value={settings.usdToGbp || 0.78}
-                          onChange={(e) => setSettings({ ...settings, usdToGbp: e.target.value })}
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">USD → NAD N$ Rate</label>
-                        <input
-                          type="number"
-                          step="0.1"
-                          value={settings.usdToNad || 18.5}
-                          onChange={(e) => setSettings({ ...settings, usdToNad: e.target.value })}
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">Default Display Currency</label>
-                        <select
-                          value={settings.defaultCurrency || 'USD'}
-                          onChange={(e) => setSettings({ ...settings, defaultCurrency: e.target.value })}
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        >
-                          <option value="USD">USD ($)</option>
-                          <option value="EUR">EUR (€)</option>
-                          <option value="GBP">GBP (£)</option>
-                          <option value="NAD">NAD (N$)</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                )}
 
                 {/* 5. SITE SEO SETTINGS */}
                 {settingsSubTab === 'seo' && (
@@ -5424,73 +5341,7 @@ export default function AdminPage() {
                   </div>
                 )}
 
-                {/* 7. SIDEBAR SETTINGS */}
-                {settingsSubTab === 'sidebar' && (
-                  <div className="space-y-6 w-full">
-                    <div className="border-b border-stone-800 pb-3">
-                      <h3 className="font-serif text-lg font-bold text-stone-100 flex items-center gap-2">
-                        <PanelLeft className="w-5 h-5 text-[#F97316]" /> Navigation Sidebar Layout & Preferences
-                      </h3>
-                      <p className="text-xs text-stone-400 font-sans">Configure left navigation sidebar mode, item visibility, and toggle settings</p>
-                    </div>
 
-                    <div className="space-y-4 text-xs w-full">
-                      <div className="p-4 bg-stone-900 border border-stone-800 rounded-xl space-y-3 w-full">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <strong className="text-stone-200 block text-sm font-semibold">Sidebar Display Mode</strong>
-                            <span className="text-[11px] text-stone-400">Toggle between expanded full view and compact icon rail mode</span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                            className="px-4 py-2 bg-gold-gradient text-stone-950 font-bold rounded-lg text-xs hover:brightness-110 shadow-md transition-all"
-                          >
-                            {sidebarCollapsed ? "Expand Sidebar View" : "Collapse to Compact Rail"}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="p-4 bg-stone-900 border border-stone-800 rounded-xl space-y-3 w-full">
-                        <strong className="text-stone-200 block border-b border-stone-800 pb-2 font-semibold">Active Sidebar Navigation Modules</strong>
-                        <div className="flex flex-col gap-3 text-stone-300 w-full">
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Overview Dashboard</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Safaris Collection</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Destinations</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Quote Requests</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Guest Reviews</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Blog Posts CMS</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Legal & Terms CMS</span>
-                          </label>
-                          <label className="flex items-center gap-2.5 cursor-pointer bg-stone-950/60 p-2.5 rounded-lg border border-stone-800 w-full">
-                            <input type="checkbox" defaultChecked className="accent-orange-500 w-4 h-4 rounded shrink-0" />
-                            <span>Site Settings & CMS</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
 
                 {/* Save Button Bar */}
                 <div className="pt-4 border-t border-stone-800 flex items-center justify-between">
