@@ -181,6 +181,13 @@ model SiteSettings {
   // Legal CMS
   termsContent            String?  @default("Welcome to You & Me – Independent Voyage. By booking a journey with us, you agree to our booking terms, deposit conditions, cancellation policies, and liability waivers. All private journeys include dedicated vehicle, experienced local companion/driver, and customizable routes.")
   privacyContent          String?  @default("You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and passport data required for bookings. We do not sell or share your data with third parties.")
+
+  // Lead Magnet eBook PDF Settings
+  leadMagnetTitle         String?  @default("Download Free: Ultimate South India Travel Guide")
+  leadMagnetSubtext       String?  @default("Route Maps · Best Season Charts · Boutique Hotel Price Breakdown")
+  leadMagnetButtonText    String?  @default("Get Free eBook PDF")
+  leadMagnetPdfUrl        String?  @default("https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf")
+  siteFavicon             String?  @default("")
   updatedAt               DateTime @updatedAt
 }
 

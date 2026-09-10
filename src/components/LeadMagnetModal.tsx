@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { X, Download, BookOpen, CheckCircle2, Star, Shield, Sparkles } from 'lucide-react';
+import { triggerPdfDownload } from '@/lib/downloadPdf';
 import { useCurrency } from './CurrencyContext';
 
 interface LeadMagnetModalProps {
@@ -84,15 +85,13 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
               We have processed your request for <strong>{formData.email}</strong>. Download your official guide directly below:
             </p>
             <div className="pt-2 flex flex-col gap-3 max-w-xs mx-auto">
-              <a
-                href={pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download="South_India_Travel_Guide.pdf"
-                className="w-full py-3.5 px-6 bg-orange-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-orange-600 transition-all flex items-center justify-center gap-2 shadow-lg"
+              <button
+                type="button"
+                onClick={() => triggerPdfDownload(pdfUrl, 'South_India_Travel_Guide.pdf')}
+                className="w-full py-3.5 px-6 bg-orange-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-orange-600 transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer"
               >
                 <Download className="w-4 h-4" /> Download PDF Guide
-              </a>
+              </button>
               <button
                 type="button"
                 onClick={onClose}

@@ -58,6 +58,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { ImageUploader } from '@/components/ImageUploader';
+import { triggerPdfDownload } from '@/lib/downloadPdf';
 
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -4720,14 +4721,13 @@ export default function AdminPage() {
                             <FileText className="w-4 h-4 text-[#F97316]" /> Lead Magnet eBook PDF & Banner Configuration
                           </h4>
                           {settings.leadMagnetPdfUrl && (
-                            <a
-                              href={settings.leadMagnetPdfUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 text-orange-400 font-bold text-[11px] rounded-lg hover:bg-orange-500/20 transition-all flex items-center gap-1.5"
+                            <button
+                              type="button"
+                              onClick={() => triggerPdfDownload(settings.leadMagnetPdfUrl, 'South_India_Travel_Guide.pdf')}
+                              className="px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 text-orange-400 font-bold text-[11px] rounded-lg hover:bg-orange-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
                             >
                               <Download className="w-3.5 h-3.5" /> Download Current Safari Guide PDF
-                            </a>
+                            </button>
                           )}
                         </div>
 
@@ -4821,15 +4821,13 @@ export default function AdminPage() {
                                   className="w-full bg-stone-950 border border-stone-800 text-stone-100 rounded-lg px-3.5 py-2 text-xs outline-none focus:border-orange-500 font-mono"
                                 />
                                 {settings.leadMagnetPdfUrl && (
-                                  <a
-                                    href={settings.leadMagnetPdfUrl}
-                                    target="_blank"
-                                    download="Safari-Guide.pdf"
-                                    rel="noopener noreferrer"
-                                    className="px-4 py-2 bg-stone-800 hover:bg-stone-700 text-orange-400 border border-orange-500/30 font-bold text-xs rounded-lg shrink-0 flex items-center gap-1.5 transition-all"
+                                  <button
+                                    type="button"
+                                    onClick={() => triggerPdfDownload(settings.leadMagnetPdfUrl, 'South_India_Travel_Guide.pdf')}
+                                    className="px-4 py-2 bg-stone-800 hover:bg-stone-700 text-orange-400 border border-orange-500/30 font-bold text-xs rounded-lg shrink-0 flex items-center gap-1.5 transition-all cursor-pointer"
                                   >
                                     <Download className="w-4 h-4" /> Download PDF
-                                  </a>
+                                  </button>
                                 )}
                               </div>
 
