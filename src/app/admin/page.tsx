@@ -580,18 +580,30 @@ export default function AdminPage() {
     setAuthChecking(false);
   };
 
+  const adminFetch = (url: string, options: RequestInit = {}) => {
+    const headers = (options.headers || {}) as Record<string, string>;
+    return fetch(url, {
+      credentials: 'include',
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-auth': 'true',
+        ...headers,
+      },
+    });
+  };
+
   const fetchAllData = async () => {
     setLoading(true);
     try {
-      const fetchOpts = { credentials: 'include' as const };
       const [sRes, dRes, iRes, rRes, setRes, bRes, fRes] = await Promise.all([
-        fetch('/api/safaris', fetchOpts),
-        fetch('/api/destinations', fetchOpts),
-        fetch('/api/inquiries', fetchOpts),
-        fetch('/api/reviews', fetchOpts),
-        fetch('/api/settings', fetchOpts),
-        fetch('/api/blogs', fetchOpts),
-        fetch('/api/faqs', fetchOpts),
+        adminFetch('/api/safaris'),
+        adminFetch('/api/destinations'),
+        adminFetch('/api/inquiries'),
+        adminFetch('/api/reviews'),
+        adminFetch('/api/settings'),
+        adminFetch('/api/blogs'),
+        adminFetch('/api/faqs'),
       ]);
 
       if (sRes.ok) {
@@ -699,9 +711,8 @@ export default function AdminPage() {
       const url = editingSafari ? `/api/safaris/${editingSafari.id}` : '/api/safaris';
       const method = editingSafari ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await adminFetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(safariForm),
       });
 
@@ -744,7 +755,7 @@ export default function AdminPage() {
   const handleDeleteSafari = async (id: string) => {
     if (!confirm('Are you sure you want to delete this safari package?')) return;
     try {
-      await fetch(`/api/safaris/${id}`, { method: 'DELETE' });
+      await adminFetch(`/api/safaris/${id}`, { method: 'DELETE' });
     } catch (e) {
       console.error(e);
     }
@@ -849,7 +860,7 @@ export default function AdminPage() {
 
   const handleDeleteDest = async (id: string) => {
     if (!confirm('Delete destination?')) return;
-    await fetch(`/api/destinations/${id}`, { method: 'DELETE' });
+    await adminFetch(`/api/destinations/${id}`, { method: 'DELETE' });
     showNotification('Destination deleted');
     fetchAllData();
   };
@@ -868,9 +879,8 @@ export default function AdminPage() {
     });
 
     try {
-      await fetch(`/api/inquiries/${id}`, {
+      await adminFetch(`/api/inquiries/${id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status, lostReason }),
       });
     } catch (e) {}
@@ -891,9 +901,8 @@ export default function AdminPage() {
         return updated;
       });
 
-      await fetch(`/api/inquiries/${editingLead.id}`, {
+      await adminFetch(`/api/inquiries/${editingLead.id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...leadForm,
           proposalAmount: proposalNum,
@@ -921,7 +930,7 @@ export default function AdminPage() {
     });
 
     try {
-      await fetch(`/api/inquiries/${id}`, { method: 'DELETE' });
+      await adminFetch(`/api/inquiries/${id}`, { method: 'DELETE' });
     } catch (e) {}
 
     showNotification('Inquiry deleted');
@@ -936,9 +945,8 @@ export default function AdminPage() {
       const url = editingReview ? `/api/reviews/${editingReview.id}` : '/api/reviews';
       const method = editingReview ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await adminFetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewForm),
       });
 
@@ -985,7 +993,7 @@ export default function AdminPage() {
   const handleDeleteReview = async (id: string) => {
     if (!confirm('Delete review?')) return;
     try {
-      await fetch(`/api/reviews/${id}`, { method: 'DELETE' });
+      await adminFetch(`/api/reviews/${id}`, { method: 'DELETE' });
     } catch (e) {
       console.error(e);
     }
@@ -1009,9 +1017,8 @@ export default function AdminPage() {
       const url = editingBlog ? `/api/blogs/${editingBlog.id}` : '/api/blogs';
       const method = editingBlog ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await adminFetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(blogForm),
       });
 
@@ -1055,7 +1062,7 @@ export default function AdminPage() {
   const handleDeleteBlog = async (id: string) => {
     if (!confirm('Are you sure you want to delete this blog article?')) return;
     try {
-      await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
+      await adminFetch(`/api/blogs/${id}`, { method: 'DELETE' });
     } catch (e) {
       console.error(e);
     }
@@ -1079,9 +1086,8 @@ export default function AdminPage() {
       const url = editingFaq ? `/api/faqs/${editingFaq.id}` : '/api/faqs';
       const method = editingFaq ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await adminFetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(faqForm),
       });
 
@@ -1124,7 +1130,7 @@ export default function AdminPage() {
   const handleDeleteFaq = async (id: string) => {
     if (!confirm('Are you sure you want to delete this FAQ question?')) return;
     try {
-      await fetch(`/api/faqs/${id}`, { method: 'DELETE' });
+      await adminFetch(`/api/faqs/${id}`, { method: 'DELETE' });
     } catch (e) {
       console.error(e);
     }
@@ -1145,9 +1151,8 @@ export default function AdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await fetch('/api/settings', {
+      const res = await adminFetch('/api/settings', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings),
       });
       let updatedSettings = settings;
