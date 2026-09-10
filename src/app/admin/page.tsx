@@ -1169,6 +1169,7 @@ export default function AdminPage() {
       }
       if (typeof window !== 'undefined') {
         localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+        window.dispatchEvent(new Event('site_settings_updated'));
       }
       const title = activeTab === 'legal' ? 'LEGAL CONTENT' : settingsSubTab.toUpperCase();
       showNotification(`${title} Settings updated!`);
@@ -1178,6 +1179,7 @@ export default function AdminPage() {
       console.error(e);
       if (typeof window !== 'undefined') {
         localStorage.setItem('site_settings_cache', JSON.stringify(settings));
+        window.dispatchEvent(new Event('site_settings_updated'));
       }
       const title = activeTab === 'legal' ? 'LEGAL CONTENT' : settingsSubTab.toUpperCase();
     } finally {
@@ -4690,6 +4692,7 @@ export default function AdminPage() {
                           value={settings.siteLogo || ''}
                           onChange={(val) => setSettings({ ...settings, siteLogo: val })}
                           recommendedSize="240 × 60 px (PNG/SVG Transparent)"
+                          maxDimension={600}
                         />
                       </div>
 
@@ -4699,6 +4702,7 @@ export default function AdminPage() {
                           value={settings.siteFavicon || ''}
                           onChange={(val) => setSettings({ ...settings, siteFavicon: val })}
                           recommendedSize="64 × 64 px or 32 × 32 px (.png, .ico, .svg)"
+                          maxDimension={200}
                         />
                       </div>
 

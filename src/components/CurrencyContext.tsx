@@ -22,10 +22,18 @@ const CurrencyContext = createContext<CurrencyContextType>({
 
 export const CurrencyProvider = ({ children }: { children: React.ReactNode }) => {
   const [currency] = useState<Currency>('INR');
-  const [settings, setSettings] = useState<any>({
-    usdToInr: 83.5,
-    weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
-    whatsappNumber: '+91 9994315778',
+  const [settings, setSettings] = useState<any>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem('site_settings_cache');
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return {
+      usdToInr: 83.5,
+      weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
+      whatsappNumber: '+91 9994315778',
+    };
   });
 
   const fetchSettings = async () => {
@@ -33,7 +41,24 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
       const res = await fetch('/api/settings');
       if (res.ok) {
         const data = await res.json();
-        setSettings(data);
+        let cachedLogo = '';
+        if (typeof window !== 'undefined') {
+          try {
+            const cached = localStorage.getItem('site_settings_cache');
+            if (cached) {
+              const parsed = JSON.parse(cached);
+              cachedLogo = parsed?.siteLogo || '';
+            }
+          } catch (e) {}
+        }
+        const merged = { ...data };
+        if (!merged.siteLogo && cachedLogo) {
+          merged.siteLogo = cachedLogo;
+        }
+        setSettings(merged);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('site_settings_cache', JSON.stringify(merged));
+        }
       }
     } catch (e) {
       console.error('Failed to load settings', e);
@@ -42,6 +67,24 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
 
   useEffect(() => {
     fetchSettings();
+
+    const handleSync = () => {
+      if (typeof window !== 'undefined') {
+        try {
+          const cached = localStorage.getItem('site_settings_cache');
+          if (cached) setSettings(JSON.parse(cached));
+        } catch (e) {}
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('site_settings_updated', handleSync);
+      window.addEventListener('storage', handleSync);
+      return () => {
+        window.removeEventListener('site_settings_updated', handleSync);
+        window.removeEventListener('storage', handleSync);
+      };
+    }
   }, []);
 
   useEffect(() => {

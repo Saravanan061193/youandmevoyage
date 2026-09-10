@@ -9,10 +9,11 @@ interface ImageUploaderProps {
   onChange: (val: string) => void;
   placeholder?: string;
   recommendedSize?: string;
+  maxDimension?: number;
 }
 
 // Client-side HTML5 Canvas Image Compressor
-const compressImage = (dataUrl: string, maxDimension = 1920, quality = 0.85): Promise<string> => {
+const compressImage = (dataUrl: string, maxDimension = 1200, quality = 0.85): Promise<string> => {
   return new Promise((resolve) => {
     if (typeof window === 'undefined') {
       resolve(dataUrl);
@@ -52,6 +53,17 @@ const compressImage = (dataUrl: string, maxDimension = 1920, quality = 0.85): Pr
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
 
+        // For PNG images, preserve PNG format to retain transparency
+        if (dataUrl.startsWith('data:image/png')) {
+          try {
+            const pngUrl = canvas.toDataURL('image/png');
+            if (pngUrl && pngUrl.startsWith('data:image/png')) {
+              resolve(pngUrl);
+              return;
+            }
+          } catch (e) {}
+        }
+
         // Try WebP compression first
         try {
           const webpUrl = canvas.toDataURL('image/webp', quality);
@@ -59,10 +71,9 @@ const compressImage = (dataUrl: string, maxDimension = 1920, quality = 0.85): Pr
             resolve(webpUrl);
             return;
           }
-        } catch (e) {
-          // fallback to JPEG
-        }
-        resolve(canvas.toDataURL('image/jpeg', quality));
+        } catch (e) {}
+
+        resolve(canvas.toDataURL('image/png'));
       } else {
         resolve(dataUrl);
       }
@@ -77,6 +88,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   value,
   onChange,
   recommendedSize,
+  maxDimension,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isCompressing, setIsCompressing] = useState(false);
@@ -112,7 +124,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           try {
             const rawDataUrl = event.target.result as string;
             // Auto-compress and optimize image
-            const optimizedDataUrl = await compressImage(rawDataUrl);
+            const optimizedDataUrl = await compressImage(rawDataUrl, maxDimension);
             onChange(optimizedDataUrl);
           } catch (err) {
             console.error('Image compression failed:', err);
