@@ -214,7 +214,20 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="max-w-7xl mx-auto border-t border-slate-800 mt-12 pt-6 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <span>© {new Date().getFullYear()} {settings?.siteTitle || 'You & Me – Independent Voyage'}. All rights reserved.</span>
+          <span className="flex items-center flex-wrap gap-1">
+            © {new Date().getFullYear()} {settings?.siteTitle || 'You & Me – Independent Voyage'}. All Rights Reserved.
+            <span className="inline-flex items-center gap-1 ml-1 text-slate-400">
+              ❤️ Developed by{' '}
+              <a
+                href="https://joydigital.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-400 hover:text-orange-300 font-bold hover:underline transition-colors"
+              >
+                Joydigital
+              </a>
+            </span>
+          </span>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link>
             <span className="text-slate-700">•</span>
