@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { Upload, Image as ImageIcon, Trash2, RefreshCw, CheckCircle2 } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { Upload, Image as ImageIcon, Trash2, RefreshCw, CheckCircle2, Loader2 } from 'lucide-react';
 
 interface ImageUploaderProps {
   label: string;
@@ -11,6 +11,67 @@ interface ImageUploaderProps {
   recommendedSize?: string;
 }
 
+// Client-side HTML5 Canvas Image Compressor
+const compressImage = (dataUrl: string, maxDimension = 1920, quality = 0.85): Promise<string> => {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined') {
+      resolve(dataUrl);
+      return;
+    }
+
+    // Skip compression for SVG vector graphics
+    if (dataUrl.startsWith('data:image/svg+xml')) {
+      resolve(dataUrl);
+      return;
+    }
+
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      let width = img.width;
+      let height = img.height;
+
+      // Scale dimensions if larger than maxDimension
+      if (width > maxDimension || height > maxDimension) {
+        if (width > height) {
+          height = Math.round((height * maxDimension) / width);
+          width = maxDimension;
+        } else {
+          width = Math.round((width * maxDimension) / height);
+          height = maxDimension;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        // High quality image smoothing
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Try WebP compression first
+        try {
+          const webpUrl = canvas.toDataURL('image/webp', quality);
+          if (webpUrl && webpUrl.startsWith('data:image/webp')) {
+            resolve(webpUrl);
+            return;
+          }
+        } catch (e) {
+          // fallback to JPEG
+        }
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      } else {
+        resolve(dataUrl);
+      }
+    };
+    img.onerror = () => resolve(dataUrl);
+    img.src = dataUrl;
+  });
+};
+
 export const ImageUploader: React.FC<ImageUploaderProps> = ({
   label,
   value,
@@ -18,13 +79,14 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   recommendedSize,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isCompressing, setIsCompressing] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // 1. Strict File Size Limit (Max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        alert('File size exceeds 5MB limit. Please choose a smaller image.');
+      // 1. Expanded File Size Limit (Max 25MB with auto-compression)
+      if (file.size > 25 * 1024 * 1024) {
+        alert('File size exceeds 25MB limit. Please choose an image smaller than 25MB.');
         return;
       }
 
@@ -43,12 +105,26 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         return;
       }
 
+      setIsCompressing(true);
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = async (event) => {
         if (event.target?.result) {
-          onChange(event.target.result as string);
+          try {
+            const rawDataUrl = event.target.result as string;
+            // Auto-compress and optimize image
+            const optimizedDataUrl = await compressImage(rawDataUrl);
+            onChange(optimizedDataUrl);
+          } catch (err) {
+            console.error('Image compression failed:', err);
+            onChange(event.target.result as string);
+          } finally {
+            setIsCompressing(false);
+          }
+        } else {
+          setIsCompressing(false);
         }
       };
+      reader.onerror = () => setIsCompressing(false);
       reader.readAsDataURL(file);
     }
   };
@@ -74,7 +150,18 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         className="hidden"
       />
 
-      {value ? (
+      {isCompressing ? (
+        /* Compression Loading State */
+        <div className="border-2 border-dashed border-orange-500/50 rounded-xl p-6 text-center bg-orange-950/20 space-y-2">
+          <Loader2 className="w-6 h-6 text-orange-500 animate-spin mx-auto" />
+          <span className="text-xs font-bold text-orange-400 block">
+            Compressing & Optimizing Image...
+          </span>
+          <span className="text-[10px] text-stone-400 block">
+            Auto-formatting for fast web display & high resolution
+          </span>
+        </div>
+      ) : value ? (
         /* Image Uploaded Active View */
         <div className="flex flex-col sm:flex-row items-center gap-4 pt-1">
           <div className="w-24 h-20 rounded-xl overflow-hidden border border-stone-700 bg-stone-950 shrink-0 relative shadow-md group">
@@ -98,7 +185,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500/15 text-orange-500 border border-orange-500/40 text-xs font-bold hover:bg-orange-500/30 transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500/15 text-orange-500 border border-orange-500/40 text-xs font-bold hover:bg-orange-500/30 transition-all cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5" /> Change Image
               </button>
@@ -106,7 +193,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
               <button
                 type="button"
                 onClick={() => onChange('')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-950/40 border border-rose-800/60 text-rose-300 text-xs font-semibold hover:bg-rose-900/60 hover:text-rose-200 transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-950/40 border border-rose-800/60 text-rose-300 text-xs font-semibold hover:bg-rose-900/60 hover:text-rose-200 transition-all cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" /> Remove Image
               </button>
@@ -127,7 +214,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
               Click to Upload Image File from Device
             </span>
             <span className="text-[10px] text-stone-400 block mt-0.5">
-              Supports PNG, JPG, WEBP, SVG (Max 5MB)
+              Supports PNG, JPG, WEBP, SVG (Auto-compressed / Max 25MB)
             </span>
           </div>
         </div>
@@ -135,4 +222,5 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
     </div>
   );
 };
+
 
