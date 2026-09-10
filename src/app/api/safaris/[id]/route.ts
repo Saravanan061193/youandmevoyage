@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     const dbPromise = prisma.safari.findUnique({
       where: { id: params.id },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const safari = await Promise.race([dbPromise, timeoutPromise]);
 
     if (safari) return NextResponse.json(safari);
@@ -102,7 +102,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       const dbPromise = prisma.safari.delete({
         where: { id: params.id },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       await Promise.race([dbPromise, timeoutPromise]);
     } catch (dbErr) {
       console.warn('DB safari delete failed/timed out:', dbErr);

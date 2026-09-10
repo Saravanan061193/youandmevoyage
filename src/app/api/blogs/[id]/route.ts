@@ -18,7 +18,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
           OR: [{ id: identifier }, { slug: identifier }],
         },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       blog = await Promise.race([dbPromise, timeoutPromise]);
     } catch (e) {
       console.warn('DB blog fetch failed:', e);
@@ -79,7 +79,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
           published: Boolean(published),
         },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       const dbRes: any = await Promise.race([dbPromise, timeoutPromise]);
       if (dbRes && dbRes.id) {
         updatedBlog = dbRes;
@@ -115,7 +115,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       const dbPromise = prisma.blogPost.delete({
         where: { id: params.id },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       await Promise.race([dbPromise, timeoutPromise]);
     } catch (dbErr) {
       console.warn('DB blog delete failed/timed out:', dbErr);

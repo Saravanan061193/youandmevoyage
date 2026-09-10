@@ -127,11 +127,11 @@ let inMemorySettingsCache: any = null;
 export async function GET() {
   try {
     const dbPromise = prisma.siteSettings.findFirst();
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
     if (settings) {
-      inMemorySettingsCache = { ...DEFAULT_SETTINGS, ...inMemorySettingsCache, ...settings };
+      inMemorySettingsCache = { ...DEFAULT_SETTINGS, ...settings };
       return NextResponse.json(inMemorySettingsCache);
     }
 
@@ -304,13 +304,13 @@ export async function PUT(request: Request) {
         }
       })();
 
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       settings = await Promise.race([dbPromise, timeoutPromise]);
     } catch (e) {
       console.warn('DB settings update failed or timed out:', e);
     }
 
-    inMemorySettingsCache = { ...(inMemorySettingsCache || DEFAULT_SETTINGS), ...updateData, ...(settings || {}) };
+    inMemorySettingsCache = { ...DEFAULT_SETTINGS, ...(inMemorySettingsCache || {}), ...updateData, ...(settings || {}) };
 
     return NextResponse.json(inMemorySettingsCache);
   } catch (error: any) {
