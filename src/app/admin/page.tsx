@@ -2438,7 +2438,6 @@ export default function AdminPage() {
                       <thead className="bg-stone-900 border-b border-stone-800 uppercase tracking-wider text-[10px] text-stone-400">
                         <tr>
                           <th className="p-4">Journey Title</th>
-                          <th className="p-4">Price (USD)</th>
                           <th className="p-4">Duration</th>
                           <th className="p-4">Category</th>
                           <th className="p-4">Region</th>
@@ -2448,7 +2447,7 @@ export default function AdminPage() {
                       <tbody className="divide-y divide-stone-800/60">
                         {safaris.length === 0 ? (
                           <tr>
-                            <td colSpan={6} className="p-8 text-center text-stone-500">No safaris available.</td>
+                            <td colSpan={5} className="p-8 text-center text-stone-500">No safaris available.</td>
                           </tr>
                         ) : (
                           safaris
@@ -2462,7 +2461,6 @@ export default function AdminPage() {
                                     <span className="text-[10px] text-primary">{safari.badge}</span>
                                   </div>
                                 </td>
-                                <td className="p-4 font-serif font-bold text-primary">${safari.priceUSD}</td>
                                 <td className="p-4">{safari.days}D / {safari.nights}N</td>
                                 <td className="p-4">{safari.category}</td>
                                 <td className="p-4">{safari.region}</td>
@@ -2583,17 +2581,7 @@ export default function AdminPage() {
                           />
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4">
-                          <div>
-                            <label className="block text-stone-400 font-semibold mb-1">Price per Person (USD $)</label>
-                            <input
-                              type="number"
-                              required
-                              value={safariForm.priceUSD}
-                              onChange={(e) => setSafariForm({ ...safariForm, priceUSD: e.target.value })}
-                              className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none font-serif font-bold text-primary"
-                            />
-                          </div>
+                        <div className="grid grid-cols-2 gap-4">
                           <div>
                             <label className="block text-stone-400 font-semibold mb-1">Days</label>
                             <input

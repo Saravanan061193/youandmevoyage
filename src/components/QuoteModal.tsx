@@ -19,7 +19,6 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
     phone: '',
     date: '',
     travelers: '2',
-    budget: '$2,000 – $3,500 per person',
     category: 'Tamil Nadu Temple & Cultural Journeys',
     message: '',
   });
@@ -48,7 +47,6 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
           phone: formData.phone,
           category: `${formData.category} (${formData.country ? formData.country : 'Global'})`,
           month: formData.date || 'October 2026',
-          duration: `Budget: ${formData.budget}`,
           travelers: formData.travelers,
           message: formData.message,
         }),
@@ -145,22 +143,6 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                       <option value="Food & Culinary Journeys">Food & Culinary Journeys</option>
                       <option value="Goa Beach & Portuguese Heritage">Goa Beach & Portuguese Heritage</option>
                       <option value="Karnataka Royal & Garden Trail">Karnataka Royal & Garden Trail</option>
-                    </select>
-                  </div>
-
-                  <div className="field-group">
-                    <div className="flex items-center justify-between">
-                      <label>ESTIMATED BUDGET PER PERSON</label>
-                      <span className="text-[10px] text-orange-400 font-bold">⭐ 4.9/5 Value Rated</span>
-                    </div>
-                    <select
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    >
-                      <option value="$1,000 - $2,000 per person">$1,000 – $2,000 per person</option>
-                      <option value="$2,000 - $3,500 per person">$2,000 – $3,500 per person</option>
-                      <option value="$3,500 - $5,000 per person">$3,500 – $5,000 per person</option>
-                      <option value="$5,000+ per person">$5,000+ per person</option>
                     </select>
                   </div>
 

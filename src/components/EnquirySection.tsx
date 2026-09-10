@@ -19,7 +19,6 @@ export const EnquirySection = () => {
     month: 'October 2026',
     duration: '7 - 10 Days',
     travelers: '2',
-    budget: '$4,000 - $6,500 per person',
     message: '',
   });
 
@@ -58,7 +57,7 @@ export const EnquirySection = () => {
           category: `${formData.category} (${formData.country ? formData.country : 'Global'})`,
           destination: formData.destination,
           month: formData.month,
-          duration: `${formData.duration} | Budget: ${formData.budget}`,
+          duration: formData.duration,
           travelers: formData.travelers,
           message: formData.message,
         }),
@@ -106,7 +105,7 @@ export const EnquirySection = () => {
             </h2>
 
             <p className="text-slate-300 text-sm leading-relaxed">
-              Every journey crafted by You & Me – Independent Voyage is tailor-made to your timeline, budget, and travel preferences. Complete our quick 3-step form to receive a complimentary custom itinerary.
+              Every journey crafted by You & Me – Independent Voyage is tailor-made to your timeline and travel preferences. Complete our quick 3-step form to receive a complimentary custom itinerary.
             </p>
 
             {/* Strategic Social Proof Card */}
@@ -187,7 +186,6 @@ export const EnquirySection = () => {
                       month: 'October 2026',
                       duration: '7 - 10 Days',
                       travelers: '2',
-                      budget: '$1,500 - $3,000 per person',
                       message: '',
                     });
                   }}
@@ -266,39 +264,18 @@ export const EnquirySection = () => {
                       </select>
                     </div>
 
-                    {/* Travel Month & Budget Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                          Target Travel Month
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="e.g. October 2026"
-                          value={formData.month}
-                          onChange={(e) => setFormData({ ...formData, month: e.target.value })}
-                          className="w-full bg-slate-900 border border-slate-800 focus:border-orange-500 rounded-xl px-3.5 py-3 text-slate-100 text-sm focus:outline-none transition-colors"
-                        />
-                      </div>
-
-                      <div>
-                        <div className="flex items-center justify-between mb-1.5">
-                          <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                            Estimated Budget p.p.
-                          </label>
-                          <span className="text-[10px] text-orange-400 font-bold">⭐ 4.9/5 Rating</span>
-                        </div>
-                        <select
-                          value={formData.budget}
-                          onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                          className="w-full bg-slate-900 border border-slate-800 focus:border-orange-500 rounded-xl px-3.5 py-3 text-slate-100 text-sm focus:outline-none transition-colors"
-                        >
-                          <option value="$1,000 - $2,000 per person">$1,000 – $2,000 per person</option>
-                          <option value="$2,000 - $3,500 per person">$2,000 – $3,500 per person</option>
-                          <option value="$3,500 - $5,000 per person">$3,500 – $5,000 per person</option>
-                          <option value="$5,000+ per person">$5,000+ per person</option>
-                        </select>
-                      </div>
+                    {/* Travel Month Grid */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                        Target Travel Month
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. October 2026"
+                        value={formData.month}
+                        onChange={(e) => setFormData({ ...formData, month: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 focus:border-orange-500 rounded-xl px-3.5 py-3 text-slate-100 text-sm focus:outline-none transition-colors"
+                      />
                     </div>
 
                     <button

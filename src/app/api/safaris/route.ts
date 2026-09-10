@@ -15,7 +15,6 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
-    const maxBudget = searchParams.get('maxBudget');
     const region = searchParams.get('region');
 
     const where: any = {};
@@ -25,9 +24,6 @@ export async function GET(request: Request) {
     }
     if (region && region !== 'All') {
       where.region = region;
-    }
-    if (maxBudget) {
-      where.priceUSD = { lte: parseFloat(maxBudget) };
     }
 
     const dbPromise = prisma.safari.findMany({
@@ -43,9 +39,6 @@ export async function GET(request: Request) {
     }
     if (region && region !== 'All') {
       memoryList = memoryList.filter((s) => s.region.toLowerCase() === region.toLowerCase());
-    }
-    if (maxBudget) {
-      memoryList = memoryList.filter((s) => s.priceUSD <= parseFloat(maxBudget));
     }
 
     if (safaris && Array.isArray(safaris) && safaris.length > 0) {

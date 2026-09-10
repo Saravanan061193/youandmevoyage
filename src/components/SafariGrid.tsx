@@ -17,7 +17,6 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
 
   // Filters
   const [category, setCategory] = useState<string>('All');
-  const [maxBudget, setMaxBudget] = useState<number>(1000000);
   const [region, setRegion] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
@@ -60,7 +59,6 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
 
   const handleReset = () => {
     setCategory('All');
-    setMaxBudget(1000000);
     setRegion('All');
     setSearchQuery('');
   };
@@ -101,11 +99,10 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   // Reset pagination on filter change
   useEffect(() => {
     setCurrentPage(1);
-  }, [category, maxBudget, region, searchQuery]);
+  }, [category, region, searchQuery]);
 
   const filteredSafaris = safaris.filter((safari) => {
     if (category !== 'All' && safari.category !== category) return false;
-    if (safari.priceUSD > maxBudget) return false;
     if (region !== 'All' && safari.region !== region) return false;
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
@@ -127,7 +124,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
     currentPage * itemsPerPage
   );
 
-  const hasActiveFilters = category !== 'All' || maxBudget < 1000000 || region !== 'All' || searchQuery !== '';
+  const hasActiveFilters = category !== 'All' || region !== 'All' || searchQuery !== '';
 
   return (
     <section id="journeys" className="section-wrap py-16">
