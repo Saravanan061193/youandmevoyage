@@ -35,14 +35,9 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
               <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-lg sm:text-xl flex items-center justify-center shadow-md ring-2 ring-orange-400/40 shrink-0 group-hover:scale-105 transition-transform">
                 YM
               </span>
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-sm sm:text-lg font-serif tracking-tight leading-none group-hover:text-orange-400 transition-colors">
-                  {settings?.siteTitle && !settings.siteTitle.includes('Namibia') ? settings.siteTitle : "You & Me"}
-                </span>
-                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-orange-400 font-sans font-extrabold mt-0.5 sm:mt-1">
-                  INDEPENDENT VOYAGE
-                </span>
-              </div>
+              <span className="text-white font-bold text-sm sm:text-lg font-serif tracking-tight leading-none group-hover:text-orange-400 transition-colors">
+                {settings?.siteTitle && !settings.siteTitle.includes('Namibia') ? settings.siteTitle : "You & Me – Independent Voyage"}
+              </span>
             </div>
           )}
         </Link>

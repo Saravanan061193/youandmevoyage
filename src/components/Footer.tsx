@@ -126,14 +126,9 @@ export const Footer = () => {
                 <span className="w-10 h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-xl flex items-center justify-center shadow-md shrink-0">
                   YM
                 </span>
-                <div className="flex flex-col">
-                  <span className="font-serif text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
-                    {settings?.siteTitle || 'You & Me'}
-                  </span>
-                  <span className="text-[9.5px] font-bold font-sans tracking-widest uppercase text-orange-400 mt-0.5">
-                    Independent Voyage
-                  </span>
-                </div>
+                <span className="font-serif text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
+                  {settings?.siteTitle || 'You & Me – Independent Voyage'}
+                </span>
               </div>
             </Link>
             <p className="text-xs text-orange-400/90 font-serif italic mt-3">Travel South India Your Way.</p>
