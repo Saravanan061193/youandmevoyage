@@ -66,7 +66,7 @@ export const StickyFloatingCTA = ({ onOpenQuoteModal, onOpenLeadMagnetModal }: S
         <div className="flex items-center gap-2 shrink-0">
           {/* WhatsApp Direct Chat */}
           <a
-            href="https://wa.me/916381420556?text=Hi%20You%20%26%20Me%2C%20I%20would%20like%20to%20inquire%20about%20a%20bespoke%20private%20journey."
+            href="https://wa.me/919994315778?text=Hi%20You%20%26%20Me%2C%20I%20would%20like%20to%20inquire%20about%20a%20bespoke%20private%20journey."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-400 text-xs font-semibold transition-all shadow-sm group"

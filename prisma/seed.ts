@@ -22,7 +22,7 @@ async function main() {
       siteTitle: 'You & Me – Independent Voyage',
       siteLogo: '',
       contactEmail: 'youandmevoyage@gmail.com',
-      whatsappNumber: '+91 63814 20556',
+      whatsappNumber: '+91 9994315778',
       instagramUrl: 'https://www.instagram.com/youandmevoyage/',
       facebookUrl: 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/',
       address: 'Chennai, Tamil Nadu, India',

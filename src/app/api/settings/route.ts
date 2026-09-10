@@ -10,7 +10,7 @@ const DEFAULT_SETTINGS = {
   siteLogo: '',
   siteFavicon: '',
   contactEmail: 'youandmevoyage@gmail.com',
-  whatsappNumber: '+91 63814 20556',
+  whatsappNumber: '+91 9994315778',
   weatherText: 'Chennai, Tamil Nadu: 30°C Sunny',
   adminPasscode: 'admin123',
 
@@ -61,7 +61,7 @@ const DEFAULT_SETTINGS = {
   // Google Maps Location Settings Defaults
   googleMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.498305719363!2d80.25268487507693!3d13.003923387313888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e7c992769d%3A0xbbfd1d36d4f9c158!2sIndira%20Nagar%2C%20Adyar%2C%20Chennai%2C%20Tamil%20Nadu%20600020!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
   officeAddress: 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020',
-  officePhone: '+91 63814 20556',
+  officePhone: '+91 9994315778',
   showGoogleMapInFooter: true,
   aboutHeroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85',
   aboutCompanyStoryTitle: 'Our Story: Independent Travel Companions',

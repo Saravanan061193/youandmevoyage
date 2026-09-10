@@ -133,8 +133,8 @@ model SiteSettings {
   // Basic Settings
   siteTitle               String?  @default("You & Me – Independent Voyage")
   siteLogo                String?  @default("") // Brand logo image URL
-  contactEmail            String?  @default("info@youandmevoyage.com")
-  whatsappNumber          String   @default("+91 98765 43210")
+  contactEmail            String?  @default("youandmevoyage@gmail.com")
+  whatsappNumber          String   @default("+91 9994315778")
   address                 String?  @default("Chennai, Tamil Nadu, India")
   weatherText             String   @default("South India: 28°C Pleasant")
   adminPasscode           String   @default("admin123")

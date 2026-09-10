@@ -34,7 +34,7 @@ export const LeadMagnetModal = ({ isOpen, onClose }: LeadMagnetModalProps) => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          phone: '+91 63814 20556',
+          phone: '+91 9994315778',
           category: `Lead Magnet: ${settings?.leadMagnetTitle || 'Ultimate South India Travel Guide PDF'}`,
           destination: 'Tamil Nadu & Kerala',
           message: 'Requested South India Travel Guide eBook download.',

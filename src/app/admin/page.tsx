@@ -4616,7 +4616,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">WhatsApp Hotline Number</label>
                         <input
                           type="text"
-                          value={settings.whatsappNumber || '+91 63814 20556'}
+                          value={settings.whatsappNumber || '+91 9994315778'}
                           onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />

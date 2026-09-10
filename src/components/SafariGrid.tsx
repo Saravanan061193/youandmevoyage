@@ -23,7 +23,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
+  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const fetchSafaris = async () => {

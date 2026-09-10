@@ -34,7 +34,7 @@ function SafariDetailContent() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [activeDayIndex, setActiveDayIndex] = useState(0);
 
-  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
+  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   useEffect(() => {

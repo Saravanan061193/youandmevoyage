@@ -14,7 +14,7 @@ export const SafariModal = ({ safari, onClose, onOpenQuoteModal }: SafariModalPr
   const { formatPrice, settings } = useCurrency();
   if (!safari) return null;
 
-  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
+  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   let inclusions: string[] = [];

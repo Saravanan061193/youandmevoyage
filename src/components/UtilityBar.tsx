@@ -6,7 +6,7 @@ import { useCurrency } from './CurrencyContext';
 
 export const UtilityBar = () => {
   const { settings } = useCurrency();
-  const whatsappNum = settings?.whatsappNumber || '+91 63814 20556';
+  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
   const contactEmail = settings?.contactEmail || 'youandmevoyage@gmail.com';
 

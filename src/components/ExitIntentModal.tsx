@@ -49,7 +49,7 @@ export const ExitIntentModal = ({ onOpenQuoteModal }: ExitIntentModalProps) => {
         body: JSON.stringify({
           name: formData.name,
           email: isEmail ? formData.emailOrPhone : 'exitintent@youandmevoyage.com',
-          phone: !isEmail ? formData.emailOrPhone : '+91 63814 20556',
+          phone: !isEmail ? formData.emailOrPhone : '+91 9994315778',
           category: `Exit-Intent Lead: ${formData.interest}`,
           destination: 'Tamil Nadu & Kerala',
           message: 'Captured via Exit-Intent Popup: Requested urgent 24-hour travel specialist consultation.',

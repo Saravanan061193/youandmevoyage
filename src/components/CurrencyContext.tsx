@@ -25,7 +25,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
   const [settings, setSettings] = useState<any>({
     usdToInr: 83.5,
     weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
-    whatsappNumber: '+91 63814 20556',
+    whatsappNumber: '+91 9994315778',
   });
 
   const fetchSettings = async () => {

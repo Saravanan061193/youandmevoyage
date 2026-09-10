@@ -60,7 +60,7 @@ function BuildYourTripContent() {
     phone: '',
   });
 
-  const whatsappNum = (settings?.whatsappNumber || '+91 63814 20556').replace(/[^0-9+]/g, '');
+  const whatsappNum = (settings?.whatsappNumber || '+91 9994315778').replace(/[^0-9+]/g, '');
 
   const availableDestinations = [
     'Chennai',

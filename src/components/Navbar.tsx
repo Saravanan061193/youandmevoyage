@@ -14,7 +14,7 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
   const { settings } = useCurrency();
-  const whatsappNumber = (settings?.whatsappNumber || '+91 63814 20556').replace(/[^0-9+]/g, '');
+  const whatsappNumber = (settings?.whatsappNumber || '+91 9994315778').replace(/[^0-9+]/g, '');
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-[#0F172A]/95 backdrop-blur-2xl transition-all shadow-md">
