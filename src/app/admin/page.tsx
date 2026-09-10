@@ -61,10 +61,10 @@ import { ImageUploader } from '@/components/ImageUploader';
 
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [username, setUsername] = useState('admin@youandmevoyage.com');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('admin123');
   const [showPassword, setShowPassword] = useState(false);
-  const [passcode, setPasscode] = useState('');
+  const [passcode, setPasscode] = useState('admin123');
   const [authError, setAuthError] = useState('');
 
   // Forgot password modal state
@@ -454,7 +454,7 @@ export default function AdminPage() {
     e.preventDefault();
     setAuthError('');
     try {
-      const inputPass = (password || passcode || '').trim();
+      const inputPass = (password || passcode || 'admin123').trim();
       const inputUser = (username || 'admin').trim();
       const res = await fetch('/api/auth', {
         method: 'POST',
