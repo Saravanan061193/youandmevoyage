@@ -22,11 +22,12 @@ const DEFAULT_SETTINGS = {
   xUrl: 'https://x.com',
   linkedinUrl: 'https://linkedin.com',
 
-  cloudinaryCloudName: 'youandmevoyage',
-  cloudinaryApiKey: '',
-  cloudinaryApiSecret: '',
+  cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME || 'zfvizmyg',
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY || '831486493558769',
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET || 'q7KP6TlLZwFLzyS0aTrbGMws5EI',
   cloudinaryUploadPreset: 'voyage_uploads',
-  enableCloudinary: false,
+  enableCloudinary: true,
+
 
   usdToEur: 0.92,
   usdToGbp: 0.78,

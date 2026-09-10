@@ -6,6 +6,7 @@ import { checkRateLimit, getClientIp } from '@/lib/rateLimit';
 import { sanitizeObject } from '@/lib/sanitize';
 import { InquirySchema } from '@/lib/validations';
 import { logAuditEvent } from '@/lib/auditLogger';
+import { sendInquiryNotificationEmail } from '@/lib/email';
 
 export async function GET(request: Request) {
   // Guard: Protect customer inquiries PII against unauthorized access
@@ -93,10 +94,35 @@ export async function POST(request: Request) {
       });
       addInMemoryInquiry(dbInquiry as any);
       logAuditEvent(request, 'SUBMIT_INQUIRY', 'INQUIRIES', 'SUCCESS', { resourceId: dbInquiry.id });
+      
+      // Send email notification in background
+      sendInquiryNotificationEmail({
+        name: dbInquiry.name,
+        email: dbInquiry.email,
+        phone: dbInquiry.phone || '',
+        category: dbInquiry.category || 'General Safari Inquiry',
+        destination: dbInquiry.destination || '',
+        travelers: dbInquiry.travelers,
+        duration: dbInquiry.duration || '',
+        message: dbInquiry.message || '',
+      }).catch((err) => console.error('[INQUIRY_EMAIL_TRIGGER_ERROR]', err));
+
       return NextResponse.json(dbInquiry, { status: 201 });
     } catch (dbErr) {
       const savedInMemory = addInMemoryInquiry(newInquiryObj);
       logAuditEvent(request, 'SUBMIT_INQUIRY', 'INQUIRIES', 'SUCCESS', { resourceId: newInquiryObj.id });
+      
+      sendInquiryNotificationEmail({
+        name: newInquiryObj.name,
+        email: newInquiryObj.email,
+        phone: newInquiryObj.phone || '',
+        category: newInquiryObj.category || 'General Safari Inquiry',
+        destination: newInquiryObj.destination || '',
+        travelers: newInquiryObj.travelers,
+        duration: newInquiryObj.duration || '',
+        message: newInquiryObj.message || '',
+      }).catch((err) => console.error('[INQUIRY_EMAIL_TRIGGER_ERROR]', err));
+
       return NextResponse.json(savedInMemory, { status: 201 });
     }
   } catch (error: any) {
