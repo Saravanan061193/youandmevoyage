@@ -21,6 +21,8 @@ import {
   ChevronUp,
 } from 'lucide-react';
 
+import { PageSpinner } from '@/components/PageSpinner';
+
 function JourneyDetailContent() {
   const params = useParams();
   const slug = params?.slug as string;
@@ -56,7 +58,7 @@ function JourneyDetailContent() {
     return (
       <main className="min-h-screen bg-white">
         <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
-        <div className="py-20 text-center text-slate-500 font-sans">Loading journey details...</div>
+        <PageSpinner message="Loading Journey Details..." />
         <Footer />
       </main>
     );

@@ -22,6 +22,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
+import { PageSpinner } from '@/components/PageSpinner';
 
 function SafariDetailContent() {
   const params = useParams();
@@ -76,8 +77,7 @@ function SafariDetailContent() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white text-slate-900 flex flex-col justify-center items-center p-6">
-        <div className="w-10 h-10 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mb-4" />
-        <p className="text-xs text-slate-500 font-sans">Loading Journey details...</p>
+        <PageSpinner message="Loading Journey Details..." />
       </div>
     );
   }

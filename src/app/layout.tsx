@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { GlobalLoader } from '@/components/GlobalLoader';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -29,7 +31,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased selection:bg-orange-500 selection:text-white bg-white text-slate-900">{children}</body>
+      <body className="antialiased selection:bg-orange-500 selection:text-white bg-white text-slate-900">
+        <Suspense fallback={null}>
+          <GlobalLoader />
+        </Suspense>
+        {children}
+      </body>
     </html>
   );
 }

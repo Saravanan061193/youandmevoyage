@@ -240,10 +240,20 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
       </div>
 
       <div className="w-full">
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {loading ? (
-              <div className="col-span-full p-10 text-center text-slate-500">Loading journeys...</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {loading ? (
+              [...Array(6)].map((_, idx) => (
+                <div key={idx} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm animate-pulse space-y-4 p-5">
+                  <div className="h-48 bg-slate-200 rounded-xl w-full" />
+                  <div className="h-5 bg-slate-200 rounded w-3/4" />
+                  <div className="h-4 bg-slate-100 rounded w-1/2" />
+                  <div className="h-4 bg-slate-100 rounded w-full" />
+                  <div className="pt-3 border-t border-slate-100 flex gap-2">
+                    <div className="h-9 bg-slate-200 rounded-lg flex-1" />
+                    <div className="h-9 bg-slate-200 rounded-lg w-28" />
+                  </div>
+                </div>
+              ))
             ) : filteredSafaris.length === 0 ? (
               <div className="col-span-full p-10 text-center text-slate-500">No journeys match the selected criteria.</div>
             ) : (

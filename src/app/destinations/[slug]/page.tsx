@@ -8,6 +8,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { MapPin, ArrowRight, MessageCircle, Check, Clock, Sparkles } from 'lucide-react';
+import { PageSpinner } from '@/components/PageSpinner';
 
 function DestinationDetailContent() {
   const params = useParams();
@@ -33,7 +34,7 @@ function DestinationDetailContent() {
     return (
       <main className="min-h-screen bg-white">
         <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
-        <div className="py-20 text-center text-slate-500 font-sans">Loading destination details...</div>
+        <PageSpinner message="Loading Destination Details..." />
         <Footer />
       </main>
     );
