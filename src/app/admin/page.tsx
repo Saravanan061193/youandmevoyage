@@ -257,6 +257,7 @@ export default function AdminPage() {
   const [inquiryStatusFilter, setInquiryStatusFilter] = useState('All');
   const [blogViewMode, setBlogViewMode] = useState<'list' | 'editor'>('list');
   const [safariViewMode, setSafariViewMode] = useState<'list' | 'editor'>('list');
+  const [safariSearchQuery, setSafariSearchQuery] = useState('');
 
   // Form Modals / Edit states
   const [editingSafari, setEditingSafari] = useState<any>(null);
@@ -270,6 +271,9 @@ export default function AdminPage() {
     badge: 'Bestseller',
     image: '',
     route: '',
+    startingLocation: 'Chennai',
+    endingLocation: 'Kochi',
+    bestTimeToTravel: 'October to April',
     accommodation: '',
     description: '',
     inclusions: '["Private Air-Conditioned Vehicle","English Speaking Driver-Companion","Heritage Hotels"]',
@@ -782,6 +786,9 @@ export default function AdminPage() {
       badge: safari.badge || '',
       image: safari.image,
       route: safari.route,
+      startingLocation: safari.startingLocation || 'Chennai',
+      endingLocation: safari.endingLocation || 'Kochi',
+      bestTimeToTravel: safari.bestTimeToTravel || 'October to April',
       accommodation: safari.accommodation,
       description: safari.description,
       inclusions: safari.inclusions,
@@ -2398,130 +2405,186 @@ export default function AdminPage() {
             <div>
               {safariViewMode === 'list' ? (
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="font-serif text-2xl font-bold">Journeys Collection Manager</h2>
-                      <p className="text-xs text-stone-400">Add, update prices, manage itineraries, or set SEO settings for custom journeys</p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setEditingSafari(null);
-                        setSafariForm({
-                          title: '',
-                          priceUSD: '1800',
-                          days: '7',
-                          nights: '6',
-                          category: 'Customized Private',
-                          region: 'Tamil Nadu',
-                          badge: 'Bestseller',
-                          image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-                          route: 'Chennai → Mahabalipuram → Pondicherry → Thanjavur → Madurai → Munnar → Alleppey → Kochi',
-                          accommodation: 'Heritage Mansions & Backwater Resorts',
-                          description: 'Custom private trip through South India with dedicated driver-companion.',
-                          inclusions: '["Private AC vehicle & dedicated driver-companion","Heritage lodging & luxury resort stays","Daily breakfast"]',
-                          exclusions: '["International flights","Personal expenses & tips"]',
-                          metaTitle: '',
-                          metaDescription: '',
-                          keywords: '',
-                        });
-                        setSafariViewMode('editor');
-                      }}
-                      className="flex items-center gap-2 rounded-lg bg-gold-gradient px-4 py-2 text-xs font-semibold text-stone-950 shadow-md hover:brightness-110"
-                    >
-                      <Plus className="w-4 h-4" /> Add New Journey Package
-                    </button>
-                  </div>
+                  {(() => {
+                    const filteredAdminSafaris = safaris.filter((safari) => {
+                      if (!safariSearchQuery.trim()) return true;
+                      const q = safariSearchQuery.trim().toLowerCase();
+                      return (
+                        safari.title?.toLowerCase().includes(q) ||
+                        safari.category?.toLowerCase().includes(q) ||
+                        safari.region?.toLowerCase().includes(q) ||
+                        safari.route?.toLowerCase().includes(q) ||
+                        safari.startingLocation?.toLowerCase().includes(q) ||
+                        safari.endingLocation?.toLowerCase().includes(q)
+                      );
+                    });
 
-                  {/* Table */}
-                  <div className="bg-[#141210] border border-stone-800 rounded-xl overflow-hidden shadow-lg">
-                    <table className="w-full text-left text-xs text-stone-300">
-                      <thead className="bg-stone-900 border-b border-stone-800 uppercase tracking-wider text-[10px] text-stone-400">
-                        <tr>
-                          <th className="p-4">Journey Title</th>
-                          <th className="p-4">Duration</th>
-                          <th className="p-4">Category</th>
-                          <th className="p-4">Region</th>
-                          <th className="p-4 text-right">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-stone-800/60">
-                        {safaris.length === 0 ? (
-                          <tr>
-                            <td colSpan={5} className="p-8 text-center text-stone-500">No safaris available.</td>
-                          </tr>
-                        ) : (
-                          safaris
-                            .slice((safariPage - 1) * 5, safariPage * 5)
-                            .map((safari) => (
-                              <tr key={safari.id} className="hover:bg-stone-900/40 transition-colors">
-                                <td className="p-4 font-semibold text-stone-100 flex items-center gap-3">
-                                  <img src={safari.image} alt={safari.title} className="w-10 h-10 object-cover rounded" />
-                                  <div>
-                                    <div className="font-bold text-stone-200">{safari.title}</div>
-                                    <span className="text-[10px] text-primary">{safari.badge}</span>
-                                  </div>
-                                </td>
-                                <td className="p-4">{safari.days}D / {safari.nights}N</td>
-                                <td className="p-4">{safari.category}</td>
-                                <td className="p-4">{safari.region}</td>
-                                <td className="p-4 text-right space-x-2">
-                                  <Link href={`/safari/${safari.id}`} target="_blank" className="p-1.5 text-stone-400 hover:text-primary inline-block">
-                                    <Eye className="w-4 h-4" />
-                                  </Link>
-                                  <button
-                                    onClick={() => openSafariEdit(safari)}
-                                    className="p-1.5 text-stone-300 hover:text-primary"
-                                  >
-                                    <Edit className="w-4 h-4" />
-                                  </button>
-                                  <button
-                                    onClick={() => handleDeleteSafari(safari.id)}
-                                    className="p-1.5 text-rose-400 hover:text-rose-300"
-                                  >
-                                    <Trash2 className="w-4 h-4" />
-                                  </button>
-                                </td>
+                    const totalPages = Math.max(1, Math.ceil(filteredAdminSafaris.length / 5));
+                    const paginatedSafaris = filteredAdminSafaris.slice((safariPage - 1) * 5, safariPage * 5);
+
+                    return (
+                      <>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                          <div>
+                            <h2 className="font-serif text-2xl font-bold">Journeys Collection Manager</h2>
+                            <p className="text-xs text-stone-400">Add, update prices, manage itineraries, or set SEO settings for custom journeys</p>
+                          </div>
+
+                          <div className="flex items-center gap-3">
+                            {/* Search Box Input */}
+                            <div className="relative">
+                              <Search className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+                              <input
+                                type="text"
+                                value={safariSearchQuery}
+                                onChange={(e) => {
+                                  setSafariSearchQuery(e.target.value);
+                                  setSafariPage(1);
+                                }}
+                                placeholder="Search journey package title, category..."
+                                className="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg pl-9 pr-8 py-2 text-xs outline-none focus:border-[#F97316] w-64 sm:w-72 shadow-inner"
+                              />
+                              {safariSearchQuery && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setSafariSearchQuery('');
+                                    setSafariPage(1);
+                                  }}
+                                  className="absolute right-2.5 top-2 text-stone-400 hover:text-stone-200"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              )}
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setEditingSafari(null);
+                                setSafariForm({
+                                  title: '',
+                                  priceUSD: '1800',
+                                  days: '7',
+                                  nights: '6',
+                                  category: 'Customized Private',
+                                  region: 'Tamil Nadu',
+                                  badge: 'Bestseller',
+                                  image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+                                  route: 'Chennai → Mahabalipuram → Pondicherry → Thanjavur → Madurai → Munnar → Alleppey → Kochi',
+                                  startingLocation: 'Chennai',
+                                  endingLocation: 'Kochi',
+                                  bestTimeToTravel: 'October to April',
+                                  accommodation: 'Heritage Mansions & Backwater Resorts',
+                                  description: 'Custom private trip through South India with dedicated driver-companion.',
+                                  inclusions: '["Private AC vehicle & dedicated driver-companion","Heritage lodging & luxury resort stays","Daily breakfast"]',
+                                  exclusions: '["International flights","Personal expenses & tips"]',
+                                  metaTitle: '',
+                                  metaDescription: '',
+                                  keywords: '',
+                                });
+                                setSafariViewMode('editor');
+                              }}
+                              className="flex items-center gap-2 rounded-lg bg-gold-gradient px-4 py-2 text-xs font-semibold text-stone-950 shadow-md hover:brightness-110 shrink-0"
+                            >
+                              <Plus className="w-4 h-4" /> Add New Journey Package
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Table */}
+                        <div className="bg-[#141210] border border-stone-800 rounded-xl overflow-hidden shadow-lg">
+                          <table className="w-full text-left text-xs text-stone-300">
+                            <thead className="bg-stone-900 border-b border-stone-800 uppercase tracking-wider text-[10px] text-stone-400">
+                              <tr>
+                                <th className="p-4">Journey Title</th>
+                                <th className="p-4">Duration</th>
+                                <th className="p-4">Category</th>
+                                <th className="p-4">Region</th>
+                                <th className="p-4 text-right">Actions</th>
                               </tr>
-                            ))
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
+                            </thead>
+                            <tbody className="divide-y divide-stone-800/60">
+                              {filteredAdminSafaris.length === 0 ? (
+                                <tr>
+                                  <td colSpan={5} className="p-8 text-center text-stone-500">
+                                    {safariSearchQuery ? `No journeys found matching "${safariSearchQuery}".` : 'No safaris available.'}
+                                  </td>
+                                </tr>
+                              ) : (
+                                paginatedSafaris.map((safari) => (
+                                  <tr key={safari.id} className="hover:bg-stone-900/40 transition-colors">
+                                    <td className="p-4 font-semibold text-stone-100 flex items-center gap-3">
+                                      <img src={safari.image} alt={safari.title} className="w-10 h-10 object-cover rounded" />
+                                      <div>
+                                        <div className="font-bold text-stone-200">{safari.title}</div>
+                                        <span className="text-[10px] text-primary">{safari.badge}</span>
+                                      </div>
+                                    </td>
+                                    <td className="p-4">{safari.days}D / {safari.nights}N</td>
+                                    <td className="p-4">{safari.category}</td>
+                                    <td className="p-4">{safari.region}</td>
+                                    <td className="p-4 text-right space-x-2">
+                                      <Link href={`/safari/${safari.id}`} target="_blank" className="p-1.5 text-stone-400 hover:text-primary inline-block">
+                                        <Eye className="w-4 h-4" />
+                                      </Link>
+                                      <button
+                                        onClick={() => openSafariEdit(safari)}
+                                        className="p-1.5 text-stone-300 hover:text-primary"
+                                      >
+                                        <Edit className="w-4 h-4" />
+                                      </button>
+                                      <button
+                                        onClick={() => handleDeleteSafari(safari.id)}
+                                        className="p-1.5 text-rose-400 hover:text-rose-300"
+                                      >
+                                        <Trash2 className="w-4 h-4" />
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
 
-                  {/* Safaris Pagination */}
-                  {Math.ceil(safaris.length / 5) > 1 && (
-                    <div className="flex items-center justify-between bg-[#141210] border border-stone-800 p-4 rounded-xl text-xs">
-                      <span className="text-stone-400">
-                        Page <strong className="text-stone-200">{safariPage}</strong> of{' '}
-                        <strong className="text-stone-200">{Math.ceil(safaris.length / 5)}</strong> ({safaris.length} total)
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setSafariPage((p) => Math.max(1, p - 1))}
-                          disabled={safariPage === 1}
-                          className="px-3 py-1.5 rounded bg-stone-900 border border-stone-800 text-stone-300 disabled:opacity-40"
-                        >
-                          ← Prev
-                        </button>
-                        {Array.from({ length: Math.ceil(safaris.length / 5) }, (_, i) => i + 1).map((p) => (
-                          <button
-                            key={p}
-                            onClick={() => setSafariPage(p)}
-                            className={`w-7 h-7 rounded font-bold ${safariPage === p ? 'bg-primary text-black' : 'bg-stone-900 border border-stone-800 text-stone-300'}`}
-                          >
-                            {p}
-                          </button>
-                        ))}
-                        <button
-                          onClick={() => setSafariPage((p) => Math.min(Math.ceil(safaris.length / 5), p + 1))}
-                          disabled={safariPage === Math.ceil(safaris.length / 5)}
-                          className="px-3 py-1.5 rounded bg-stone-900 border border-stone-800 text-stone-300 disabled:opacity-40"
-                        >
-                          Next →
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                        {/* Safaris Pagination */}
+                        {totalPages > 1 && (
+                          <div className="flex items-center justify-between bg-[#141210] border border-stone-800 p-4 rounded-xl text-xs">
+                            <span className="text-stone-400">
+                              Page <strong className="text-stone-200">{safariPage}</strong> of{' '}
+                              <strong className="text-stone-200">{totalPages}</strong> ({filteredAdminSafaris.length} total)
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => setSafariPage((p) => Math.max(1, p - 1))}
+                                disabled={safariPage === 1}
+                                className="px-3 py-1.5 rounded bg-stone-900 border border-stone-800 text-stone-300 disabled:opacity-40"
+                              >
+                                ← Prev
+                              </button>
+                              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                                <button
+                                  key={p}
+                                  onClick={() => setSafariPage(p)}
+                                  className={`w-7 h-7 rounded font-bold ${safariPage === p ? 'bg-primary text-black' : 'bg-stone-900 border border-stone-800 text-stone-300'}`}
+                                >
+                                  {p}
+                                </button>
+                              ))}
+                              <button
+                                onClick={() => setSafariPage((p) => Math.min(totalPages, p + 1))}
+                                disabled={safariPage === totalPages}
+                                className="px-3 py-1.5 rounded bg-stone-900 border border-stone-800 text-stone-300 disabled:opacity-40"
+                              >
+                                Next →
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               ) : (
                 /* DEDICATED FULL-PAGE SAFARI EDITOR WORKSPACE & SEO STUDIO (NO POPUP MODAL!) */
@@ -2782,6 +2845,39 @@ export default function AdminPage() {
                             placeholder="Chennai → Mahabalipuram → Pondicherry → Thanjavur → Madurai → Munnar → Alleppey"
                             className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
                           />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                          <div>
+                            <label className="block text-stone-400 font-semibold mb-1">Starting Location</label>
+                            <input
+                              type="text"
+                              value={safariForm.startingLocation}
+                              onChange={(e) => setSafariForm({ ...safariForm, startingLocation: e.target.value })}
+                              placeholder="e.g. Chennai"
+                              className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-stone-400 font-semibold mb-1">Ending Location</label>
+                            <input
+                              type="text"
+                              value={safariForm.endingLocation}
+                              onChange={(e) => setSafariForm({ ...safariForm, endingLocation: e.target.value })}
+                              placeholder="e.g. Kochi"
+                              className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-stone-400 font-semibold mb-1">Best Season</label>
+                            <input
+                              type="text"
+                              value={safariForm.bestTimeToTravel}
+                              onChange={(e) => setSafariForm({ ...safariForm, bestTimeToTravel: e.target.value })}
+                              placeholder="e.g. October to April"
+                              className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded-lg text-stone-100 outline-none"
+                            />
+                          </div>
                         </div>
 
                         <div>

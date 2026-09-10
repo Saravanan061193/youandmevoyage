@@ -31,7 +31,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
-    const { title, priceUSD, days, nights, category, region, badge, image, route, accommodation, description, inclusions, exclusions, metaTitle, metaDescription, keywords } = body;
+    const { title, priceUSD, days, nights, category, region, badge, image, route, startingLocation, endingLocation, bestTimeToTravel, accommodation, description, inclusions, exclusions, metaTitle, metaDescription, keywords } = body;
 
     let safari: SafariItem | null = null;
     try {
@@ -47,6 +47,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
           badge: badge || undefined,
           image,
           route,
+          startingLocation: startingLocation || undefined,
+          endingLocation: endingLocation || undefined,
+          bestTimeToTravel: bestTimeToTravel || undefined,
           accommodation,
           description,
           inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
@@ -75,6 +78,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       badge,
       image,
       route,
+      startingLocation,
+      endingLocation,
+      bestTimeToTravel,
       accommodation,
       description,
       inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
