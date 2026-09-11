@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { ChevronDown, HelpCircle, Search, MessageSquare, ArrowRight } from 'lucide-react';
 import { useCurrency } from './CurrencyContext';
 
+import { safeJsonParse } from '@/lib/json';
+
 export interface FAQItem {
   id: string;
   question: string;
@@ -82,7 +84,7 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
     const loadFaqs = () => {
       if (settings?.siteFaqs) {
         try {
-          const parsed = typeof settings.siteFaqs === 'string' ? JSON.parse(settings.siteFaqs) : settings.siteFaqs;
+          const parsed = typeof settings.siteFaqs === 'string' ? safeJsonParse(settings.siteFaqs, []) : settings.siteFaqs;
           if (Array.isArray(parsed) && parsed.length > 0) {
             setFaqs(cleanFaqList(parsed));
             return;

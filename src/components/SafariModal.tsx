@@ -4,6 +4,8 @@ import React from 'react';
 import { X, Check, Minus, Clock, MapPin, Trees, Calendar, MessageCircle } from 'lucide-react';
 import { useCurrency } from './CurrencyContext';
 
+import { safeParseList } from '@/lib/json';
+
 interface SafariModalProps {
   safari: any | null;
   onClose: () => void;
@@ -17,18 +19,8 @@ export const SafariModal = ({ safari, onClose, onOpenQuoteModal }: SafariModalPr
   const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
-  let inclusions: string[] = [];
-  let exclusions: string[] = [];
-  try {
-    inclusions = typeof safari.inclusions === 'string' ? JSON.parse(safari.inclusions) : safari.inclusions || [];
-  } catch (e) {
-    inclusions = [safari.inclusions];
-  }
-  try {
-    exclusions = typeof safari.exclusions === 'string' ? JSON.parse(safari.exclusions) : safari.exclusions || [];
-  } catch (e) {
-    exclusions = [safari.exclusions];
-  }
+  const inclusions: string[] = safeParseList(safari.inclusions);
+  const exclusions: string[] = safeParseList(safari.exclusions);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 overflow-y-auto">

@@ -94,18 +94,10 @@ function SafariDetailContent() {
     );
   }
 
-  let inclusions: string[] = [];
-  let exclusions: string[] = [];
-  try {
-    inclusions = typeof safari.inclusions === 'string' ? JSON.parse(safari.inclusions) : safari.inclusions || [];
-  } catch (e) {
-    inclusions = safari.inclusions ? [safari.inclusions] : [];
-  }
-  try {
-    exclusions = typeof safari.exclusions === 'string' ? JSON.parse(safari.exclusions) : safari.exclusions || [];
-  } catch (e) {
-    exclusions = safari.exclusions ? [safari.exclusions] : [];
-  }
+import { safeParseList } from '@/lib/json';
+
+  const inclusions: string[] = safeParseList(safari.inclusions);
+  const exclusions: string[] = safeParseList(safari.exclusions);
 
   // Sample day-by-day itinerary timeline data
   const dayItems = [

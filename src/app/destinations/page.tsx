@@ -7,6 +7,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { MapPin, ArrowRight, Clock, Sparkles } from 'lucide-react';
+import { safeParseList } from '@/lib/json';
 
 function DestinationsListingContent() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -47,7 +48,7 @@ function DestinationsListingContent() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {destinations.map((dest) => {
-              const highlightsList = typeof dest.highlights === 'string' ? JSON.parse(dest.highlights || '[]') : (dest.highlights || []);
+              const highlightsList = safeParseList(dest.highlights);
               return (
                 <div
                   key={dest.id}
