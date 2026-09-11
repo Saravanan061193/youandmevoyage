@@ -174,12 +174,25 @@ export const Footer = () => {
                 </span>
               </div>
             </Link>
-            <p className="text-xs text-orange-400/90 font-serif italic mt-3">Travel South India Your Way.</p>
-            <p className="text-xs text-slate-400 leading-relaxed mt-2">
-              {settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020'}<br />
-              {settings?.contactEmail || 'youandmevoyage@gmail.com'}<br />
-              {whatsappNum}
-            </p>
+            <p className="text-xs text-orange-400/90 font-serif italic mt-3 mb-2.5">Travel South India Your Way.</p>
+            <div className="space-y-2 text-xs text-slate-300">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+                <span className="leading-relaxed">{settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020'}</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-orange-400 shrink-0" />
+                <a href={`mailto:${settings?.contactEmail || 'youandmevoyage@gmail.com'}`} className="hover:text-orange-400 transition-colors">
+                  {settings?.contactEmail || 'youandmevoyage@gmail.com'}
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-orange-400 shrink-0" />
+                <a href={`tel:${whatsappNum.replace(/\s+/g, '')}`} className="hover:text-orange-400 transition-colors">
+                  {whatsappNum}
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col gap-2.5 text-xs text-slate-300">
