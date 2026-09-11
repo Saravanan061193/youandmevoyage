@@ -94,6 +94,9 @@ const DEFAULT_SETTINGS = {
     '⭐ TripAdvisor Travelers\' Choice Award 2025',
     '🏆 South India Tourism Excellence Award 2024'
   ]),
+  aboutMetaTitle: 'About Us | You & Me Independent Voyage - Custom South India Tours',
+  aboutMetaDescription: 'Discover the story behind You & Me Independent Voyage. We provide unhurried private driver journeys across Tamil Nadu and Kerala.',
+  aboutKeywords: 'South India private tours, custom Kerala itineraries, Tamil Nadu driver',
   aboutCtaHeadline: 'Ready to Plan Your Custom South India Journey?',
   aboutCtaSubheadline: 'Speak with our travel specialists to receive a custom itinerary proposal.',
   aboutCtaButtonText: 'Request Custom Itinerary Quote',
@@ -131,7 +134,7 @@ export async function GET() {
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
     if (settings) {
-      const merged = { ...DEFAULT_SETTINGS, ...settings, ...(inMemorySettingsCache || {}) };
+      const merged = { ...DEFAULT_SETTINGS, ...(inMemorySettingsCache || {}), ...settings };
       if (!merged.siteLogo && inMemorySettingsCache?.siteLogo) {
         merged.siteLogo = inMemorySettingsCache.siteLogo;
       }

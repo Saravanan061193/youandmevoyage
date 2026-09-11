@@ -170,6 +170,62 @@ function JourneyDetailContent() {
             </p>
           </div>
 
+          {/* Day-by-Day Daily Itineraries Section */}
+          {(() => {
+            const list = safeParseList(journey.itineraries);
+            if (!Array.isArray(list) || list.length === 0) return null;
+            return (
+              <div className="space-y-6 pt-4 border-t border-slate-200">
+                <h3 className="font-serif text-2xl font-bold text-slate-900">Day-by-Day Itinerary Schedule</h3>
+                <div className="space-y-4">
+                  {list.map((dayItem: any, idx: number) => {
+                    const isExp = expandedDay === idx;
+                    return (
+                      <div key={idx} className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                        <button
+                          type="button"
+                          onClick={() => setExpandedDay(isExp ? null : idx)}
+                          className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-orange-50/50 transition-colors"
+                        >
+                          <div className="flex items-center gap-4">
+                            <span className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 font-serif font-bold text-sm flex items-center justify-center shrink-0">
+                              {dayItem.dayNumber || `0${idx + 1}`}
+                            </span>
+                            <div>
+                              <span className="text-[10px] text-orange-600 font-bold uppercase tracking-wider block">
+                                {dayItem.daysLabel || `Day ${idx + 1}`}
+                              </span>
+                              <h4 className="font-serif text-base sm:text-lg font-bold text-slate-900">{dayItem.title}</h4>
+                            </div>
+                          </div>
+                          {isExp ? <ChevronUp className="w-5 h-5 text-orange-500 shrink-0" /> : <ChevronDown className="w-5 h-5 text-slate-400 shrink-0" />}
+                        </button>
+
+                        {(isExp || idx === 0) && (
+                          <div className="px-6 pb-6 pt-2 space-y-4 text-xs sm:text-sm text-slate-700 border-t border-slate-100 bg-slate-50/50">
+                            {dayItem.image && (
+                              <img
+                                src={dayItem.image}
+                                alt={dayItem.title}
+                                className="w-full h-48 sm:h-64 object-cover rounded-xl border border-slate-200 shadow-sm"
+                              />
+                            )}
+                            <p className="leading-relaxed">{dayItem.description}</p>
+                            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-orange-600 pt-1">
+                              {dayItem.duration && <span>⏱ {dayItem.duration}</span>}
+                              {dayItem.mealPlan && <span>🍽 {dayItem.mealPlan}</span>}
+                              {dayItem.accommodation && <span>🏨 {dayItem.accommodation}</span>}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* Inclusions & Exclusions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
             <div className="space-y-3">

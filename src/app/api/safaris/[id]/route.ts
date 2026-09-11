@@ -31,7 +31,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
-    const { title, priceUSD, days, nights, category, region, badge, image, route, startingLocation, endingLocation, bestTimeToTravel, accommodation, description, inclusions, exclusions, metaTitle, metaDescription, keywords } = body;
+    const { title, priceUSD, days, nights, category, region, badge, image, route, startingLocation, endingLocation, bestTimeToTravel, accommodation, description, inclusions, exclusions, itineraries, metaTitle, metaDescription, keywords } = body;
 
     let safari: SafariItem | null = null;
     try {
@@ -54,6 +54,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
           description,
           inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
           exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
+          itineraries: typeof itineraries === 'string' ? itineraries : JSON.stringify(itineraries || []),
           metaTitle: metaTitle || undefined,
           metaDescription: metaDescription || undefined,
           keywords: keywords || undefined,
@@ -85,6 +86,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       description,
       inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
       exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
+      itineraries: typeof itineraries === 'string' ? itineraries : JSON.stringify(itineraries || []),
       metaTitle,
       metaDescription,
       keywords,

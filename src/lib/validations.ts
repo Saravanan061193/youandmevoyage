@@ -60,6 +60,7 @@ export const SafariSchema = z.object({
   description: z.string().nullable().optional().default(''),
   inclusions: z.union([z.string(), z.array(z.any())]).transform((val) => (typeof val === 'string' ? val : JSON.stringify(val || []))).optional().default('[]'),
   exclusions: z.union([z.string(), z.array(z.any())]).transform((val) => (typeof val === 'string' ? val : JSON.stringify(val || []))).optional().default('[]'),
+  itineraries: z.union([z.string(), z.array(z.any())]).transform((val) => (typeof val === 'string' ? val : JSON.stringify(val || []))).optional().default('[]'),
   metaTitle: z.string().nullable().optional().default(''),
   metaDescription: z.string().nullable().optional().default(''),
   keywords: z.string().nullable().optional().default(''),

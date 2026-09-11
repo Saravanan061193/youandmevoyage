@@ -1623,3 +1623,36 @@ body {
     min-height: 720px;
   }
 }
+
+/* GOOGLE TRANSLATE & LANGUAGE SELECTOR CONTRAST OVERRIDES */
+.goog-te-banner-frame, iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+.goog-te-combo {
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+  border: 1px solid #334155 !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.goog-te-combo option {
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+}
+
+.skiptranslate {
+  font-size: 0px !important;
+}
+
+.skiptranslate > iframe {
+  display: none !important;
+}

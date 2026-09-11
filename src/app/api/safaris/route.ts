@@ -88,6 +88,7 @@ export async function POST(request: Request) {
       description,
       inclusions,
       exclusions,
+      itineraries,
       metaTitle,
       metaDescription,
       keywords,
@@ -120,10 +121,10 @@ export async function POST(request: Request) {
           description: description || '',
           inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
           exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
+          itineraries: typeof itineraries === 'string' ? itineraries : JSON.stringify(itineraries || []),
           metaTitle: metaTitle || undefined,
           metaDescription: metaDescription || undefined,
           keywords: keywords || undefined,
-
         },
       });
       const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
@@ -155,6 +156,7 @@ export async function POST(request: Request) {
         description: description || '',
         inclusions: typeof inclusions === 'string' ? inclusions : JSON.stringify(inclusions || []),
         exclusions: typeof exclusions === 'string' ? exclusions : JSON.stringify(exclusions || []),
+        itineraries: typeof itineraries === 'string' ? itineraries : JSON.stringify(itineraries || []),
         metaTitle: metaTitle || null,
         metaDescription: metaDescription || null,
         keywords: keywords || null,

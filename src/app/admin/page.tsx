@@ -291,6 +291,7 @@ export default function AdminPage() {
     description: '',
     inclusions: '["Private Air-Conditioned Vehicle","English Speaking Driver-Companion","Heritage Hotels"]',
     exclusions: '["Flights","Personal Expenses","Tips"]',
+    itineraries: '[]',
     metaTitle: '',
     metaDescription: '',
     keywords: '',
@@ -838,6 +839,7 @@ export default function AdminPage() {
       description: safari.description,
       inclusions: safari.inclusions,
       exclusions: safari.exclusions,
+      itineraries: safari.itineraries || '[]',
       metaTitle: safari.metaTitle || '',
       metaDescription: safari.metaDescription || '',
       keywords: safari.keywords || '',
@@ -1216,7 +1218,7 @@ export default function AdminPage() {
         localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
         window.dispatchEvent(new Event('site_settings_updated'));
       }
-      const title = activeTab === 'legal' ? 'LEGAL CONTENT' : settingsSubTab.toUpperCase();
+      const title = activeTab === 'legal' ? 'LEGAL CONTENT' : activeTab === 'about' ? 'ABOUT PAGE' : settingsSubTab.toUpperCase();
       showNotification(`${title} Settings updated!`);
       setSaveSuccessModal(`${title} Settings have been saved successfully and live-synced to the website!`);
       fetchAllData();
@@ -1226,7 +1228,7 @@ export default function AdminPage() {
         localStorage.setItem('site_settings_cache', JSON.stringify(settings));
         window.dispatchEvent(new Event('site_settings_updated'));
       }
-      const title = activeTab === 'legal' ? 'LEGAL CONTENT' : settingsSubTab.toUpperCase();
+      const title = activeTab === 'legal' ? 'LEGAL CONTENT' : activeTab === 'about' ? 'ABOUT PAGE' : settingsSubTab.toUpperCase();
     } finally {
       setSaving(false);
     }
@@ -1932,20 +1934,6 @@ export default function AdminPage() {
                     <Sparkles className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
                     {!sidebarCollapsed && <span>Experiences CMS</span>}
                   </button>
-
-                  {/* Sub 5: Home Signature Itineraries */}
-                  <button
-                    onClick={() => setActiveTab('itineraries')}
-                    title="Home Signature Itineraries"
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                      activeTab === 'itineraries'
-                        ? 'bg-primary text-black font-bold'
-                        : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
-                    } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
-                  >
-                    <Clock className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
-                    {!sidebarCollapsed && <span>Home Itineraries</span>}
-                  </button>
                 </div>
               )}
             </div>
@@ -2604,6 +2592,7 @@ export default function AdminPage() {
                                   description: 'Custom private trip through South India with dedicated driver-companion.',
                                   inclusions: '["Private AC vehicle & dedicated driver-companion","Heritage lodging & luxury resort stays","Daily breakfast"]',
                                   exclusions: '["International flights","Personal expenses & tips"]',
+                                  itineraries: '[]',
                                   metaTitle: '',
                                   metaDescription: '',
                                   keywords: '',
@@ -3027,6 +3016,219 @@ export default function AdminPage() {
                             placeholder="Detailed overview describing the private journey experience across Tamil Nadu and Kerala..."
                             className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-stone-100 outline-none resize-none leading-relaxed"
                           />
+                        </div>
+
+                        {/* Day-by-Day Daily Itineraries Builder */}
+                        <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-6 shadow-xl">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
+                            <div>
+                              <h3 className="font-serif text-lg font-bold text-[#F97316] flex items-center gap-2">
+                                <Clock className="w-5 h-5 text-[#F97316]" /> Package Daily Itineraries ({(() => {
+                                  try {
+                                    const parsed = typeof safariForm.itineraries === 'string' ? JSON.parse(safariForm.itineraries) : safariForm.itineraries;
+                                    return Array.isArray(parsed) ? parsed.length : 0;
+                                  } catch (e) { return 0; }
+                                })()} Days)
+                              </h3>
+                              <p className="text-xs text-stone-400 mt-0.5">
+                                Add & edit day-by-day stops for this {safariForm.days || '0'}-Day tour package.
+                              </p>
+                            </div>
+
+                            <div className="flex flex-wrap items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const count = parseInt(safariForm.days || '1', 10) || 1;
+                                  const generated = Array.from({ length: count }, (_, i) => {
+                                    const dayNum = String(i + 1).padStart(2, '0');
+                                    return {
+                                      dayNumber: dayNum,
+                                      daysLabel: `Day ${dayNum}`,
+                                      title: i === 0 ? 'Arrival & Orientation' : `Day ${dayNum} Exploration`,
+                                      description: `Detailed itinerary for Day ${dayNum} of this private journey...`,
+                                      duration: '3 hrs · 100 km',
+                                      mealPlan: 'Breakfast & Dinner',
+                                      accommodation: safariForm.accommodation || 'Heritage Stay / Hotel',
+                                      image: safariForm.image || '',
+                                    };
+                                  });
+                                  setSafariForm({ ...safariForm, itineraries: JSON.stringify(generated) });
+                                  showNotification(`Generated ${count}-Day itinerary template!`);
+                                }}
+                                className="px-3 py-1.5 bg-stone-800 border border-stone-700 hover:border-[#F97316] text-[#F97316] text-xs font-bold rounded-lg transition-all flex items-center gap-1.5"
+                              >
+                                <Sparkles className="w-3.5 h-3.5" /> Auto-Generate {safariForm.days || 'N'} Days Template
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  let current: any[] = [];
+                                  try {
+                                    current = typeof safariForm.itineraries === 'string' ? JSON.parse(safariForm.itineraries) : safariForm.itineraries || [];
+                                  } catch (e) {}
+                                  const nextDayNum = String(current.length + 1).padStart(2, '0');
+                                  const newItem = {
+                                    dayNumber: nextDayNum,
+                                    daysLabel: `Day ${nextDayNum}`,
+                                    title: '',
+                                    description: '',
+                                    duration: '',
+                                    mealPlan: '',
+                                    accommodation: '',
+                                    image: '',
+                                  };
+                                  setSafariForm({ ...safariForm, itineraries: JSON.stringify([...current, newItem]) });
+                                }}
+                                className="px-3.5 py-1.5 bg-[#F97316] hover:brightness-110 text-stone-950 text-xs font-bold rounded-lg shadow transition-all flex items-center gap-1.5"
+                              >
+                                <Plus className="w-3.5 h-3.5" /> Add Day Step
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Itinerary Day Cards */}
+                          <div className="space-y-4">
+                            {(() => {
+                              let list: any[] = [];
+                              try {
+                                list = typeof safariForm.itineraries === 'string' ? JSON.parse(safariForm.itineraries) : safariForm.itineraries || [];
+                              } catch (e) {}
+
+                              if (!Array.isArray(list) || list.length === 0) {
+                                return (
+                                  <div className="p-8 text-center bg-stone-900/60 border border-dashed border-stone-800 rounded-xl space-y-2">
+                                    <Clock className="w-8 h-8 text-stone-600 mx-auto" />
+                                    <p className="text-xs text-stone-400 font-medium">No daily itinerary items added yet for this journey.</p>
+                                    <p className="text-[11px] text-stone-500">Click <strong>"Auto-Generate {safariForm.days || 'N'} Days Template"</strong> above to auto-create slots based on package days count ({safariForm.days || 1} Days).</p>
+                                  </div>
+                                );
+                              }
+
+                              return list.map((item: any, idx: number) => (
+                                <div key={idx} className="bg-stone-900 border border-stone-800 rounded-xl p-4 space-y-4 relative">
+                                  <div className="flex items-center justify-between border-b border-stone-800 pb-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="w-6 h-6 rounded-full bg-orange-500/20 text-[#F97316] font-mono text-xs font-bold flex items-center justify-center">
+                                        {idx + 1}
+                                      </span>
+                                      <input
+                                        type="text"
+                                        value={item.daysLabel || `Day ${String(idx + 1).padStart(2, '0')}`}
+                                        onChange={(e) => {
+                                          const updated = [...list];
+                                          updated[idx] = { ...updated[idx], daysLabel: e.target.value };
+                                          setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                        }}
+                                        placeholder="Day 01 / Days 01–02"
+                                        className="bg-stone-950 border border-stone-700 px-2 py-1 rounded text-xs text-orange-400 font-bold w-32 outline-none"
+                                      />
+                                    </div>
+
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        const updated = list.filter((_, i) => i !== idx);
+                                        setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                      }}
+                                      className="text-stone-500 hover:text-rose-400 text-xs flex items-center gap-1 font-semibold"
+                                      title="Delete Day"
+                                    >
+                                      <Trash2 className="w-3.5 h-3.5" /> Delete Day
+                                    </button>
+                                  </div>
+
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                                    <div>
+                                      <label className="block text-stone-400 font-semibold mb-1">Day Title *</label>
+                                      <input
+                                        type="text"
+                                        value={item.title || ''}
+                                        onChange={(e) => {
+                                          const updated = [...list];
+                                          updated[idx] = { ...updated[idx], title: e.target.value };
+                                          setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                        }}
+                                        placeholder="e.g. Arrival in Chennai & Historic Shore Temples"
+                                        className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 outline-none"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-stone-400 font-semibold mb-1">Duration & Distance</label>
+                                      <input
+                                        type="text"
+                                        value={item.duration || ''}
+                                        onChange={(e) => {
+                                          const updated = [...list];
+                                          updated[idx] = { ...updated[idx], duration: e.target.value };
+                                          setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                        }}
+                                        placeholder="e.g. 2 hrs · 100 km"
+                                        className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 outline-none"
+                                      />
+                                    </div>
+
+                                    <div className="md:col-span-2">
+                                      <label className="block text-stone-400 font-semibold mb-1">Day Activity Description</label>
+                                      <textarea
+                                        rows={2}
+                                        value={item.description || ''}
+                                        onChange={(e) => {
+                                          const updated = [...list];
+                                          updated[idx] = { ...updated[idx], description: e.target.value };
+                                          setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                        }}
+                                        placeholder="Describe daily sightseeing, drive routes, activities..."
+                                        className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 outline-none resize-y"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-stone-400 font-semibold mb-1">Meal Plan</label>
+                                      <input
+                                        type="text"
+                                        value={item.mealPlan || ''}
+                                        onChange={(e) => {
+                                          const updated = [...list];
+                                          updated[idx] = { ...updated[idx], mealPlan: e.target.value };
+                                          setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                        }}
+                                        placeholder="e.g. Breakfast & Dinner"
+                                        className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 outline-none"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-stone-400 font-semibold mb-1">Accommodation Stay</label>
+                                      <input
+                                        type="text"
+                                        value={item.accommodation || ''}
+                                        onChange={(e) => {
+                                          const updated = [...list];
+                                          updated[idx] = { ...updated[idx], accommodation: e.target.value };
+                                          setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                        }}
+                                        placeholder="e.g. Palais de Mahe · French Quarter"
+                                        className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 outline-none"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <ImageUploader
+                                    label="Day Featured Image URL"
+                                    value={item.image || ''}
+                                    onChange={(val) => {
+                                      const updated = [...list];
+                                      updated[idx] = { ...updated[idx], image: val };
+                                      setSafariForm({ ...safariForm, itineraries: JSON.stringify(updated) });
+                                    }}
+                                  />
+                                </div>
+                              ));
+                            })()}
+                          </div>
                         </div>
                       </div>
 
@@ -6087,147 +6289,7 @@ export default function AdminPage() {
             </div>
           )}
 
-          {/* 11. HOME SIGNATURE ITINERARIES TAB */}
-          {activeTab === 'itineraries' && (
-            <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#141210] border border-stone-800 p-6 rounded-2xl shadow-xl">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-[10px] font-bold uppercase tracking-wider mb-2">
-                    <Sparkles className="w-3 h-3" /> Home Page Section Studio
-                  </div>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100">Signature Itineraries CMS</h2>
-                  <p className="text-xs text-stone-400 mt-1">Manage the 10-Day South India Explorer timeline section on the homepage in real-time</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    let nextNum = '06';
-                    try {
-                      const items = typeof settings?.homeItineraries === 'string' ? JSON.parse(settings.homeItineraries) : settings?.homeItineraries;
-                      if (Array.isArray(items)) {
-                        const len = items.length + 1;
-                        nextNum = len < 10 ? `0${len}` : `${len}`;
-                      }
-                    } catch (e) {}
-                    setEditingItineraryIndex(null);
-                    setItineraryForm({
-                      dayNumber: nextNum,
-                      daysLabel: `Day ${nextNum}`,
-                      title: '',
-                      description: '',
-                      duration: '4 hrs · 300 km',
-                      mealPlan: 'Full Board',
-                      accommodation: '',
-                      accommodationSub: '',
-                      image: '',
-                    });
-                    setItineraryModalOpen(true);
-                  }}
-                  className="gold-button text-xs px-5 py-3 rounded-xl shadow-lg shrink-0"
-                >
-                  <Plus className="w-4 h-4" /> Add Itinerary Day Step
-                </button>
-              </div>
 
-              {/* Section Headline & Copy Form */}
-              <form onSubmit={handleSaveSettings} className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
-                <h3 className="font-serif text-lg font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                  <Layout className="w-4 h-4 text-[#F97316]" /> Section Header Text
-                </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div>
-                    <label className="text-xs text-stone-400 font-semibold block mb-1">Headline</label>
-                    <input
-                      type="text"
-                      value={settings?.homeItineraryHeadline || ''}
-                      onChange={(e) => setSettings({ ...settings, homeItineraryHeadline: e.target.value })}
-                      placeholder="10-day classic South India explorer"
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#F97316]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-stone-400 font-semibold mb-1">Section Intro Subcopy</label>
-                    <input
-                      type="text"
-                      value={settings?.homeItineraryCopy || ''}
-                      onChange={(e) => setSettings({ ...settings, homeItineraryCopy: e.target.value })}
-                      placeholder="One signature journey. Five distinct landscapes..."
-                      className="w-full bg-stone-900 border border-stone-700 p-3 rounded-lg text-sm text-stone-100 outline-none focus:border-[#F97316]"
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-end pt-2">
-                  <button
-                    type="submit"
-                    disabled={saving}
-                    className="gold-button text-xs px-5 py-2.5 rounded-lg"
-                  >
-                    {saving ? 'Saving...' : 'Save Section Headlines'}
-                  </button>
-                </div>
-              </form>
-
-              {/* Day-by-Day Timeline List */}
-              <div className="space-y-4">
-                <h3 className="font-serif text-xl font-bold text-stone-200 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-[#F97316]" /> Timeline Day Steps ({homeItineraryItemsList.length})
-                </h3>
-
-                <div className="space-y-3">
-                  {homeItineraryItemsList.map((step: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="bg-[#141210] border border-stone-800 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 hover:border-[#F97316]/50 transition-all shadow-lg"
-                    >
-                      <div className="flex items-center gap-4">
-                        <img
-                          src={step.image || 'https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=300&q=80'}
-                          alt={step.title}
-                          className="w-20 h-20 rounded-xl object-cover border border-stone-700 shrink-0"
-                        />
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="bg-[#F97316]/20 border border-[#F97316] text-[#F97316] text-[10px] font-bold px-2 py-0.5 rounded font-mono">
-                              {step.dayNumber || `0${idx + 1}`}
-                            </span>
-                            <span className="text-xs font-semibold text-stone-400">{step.daysLabel}</span>
-                          </div>
-                          <h4 className="font-serif text-lg font-bold text-stone-100">{step.title}</h4>
-                          <p className="text-xs text-stone-400 line-clamp-1">{step.description}</p>
-                          <div className="flex flex-wrap items-center gap-3 text-[11px] text-orange-400/90 pt-1">
-                            <span>⏱ {step.duration}</span>
-                            <span>🍽 {step.mealPlan}</span>
-                            <span>🏨 {step.accommodation}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setEditingItineraryIndex(idx);
-                            setItineraryForm({ ...step });
-                            setItineraryModalOpen(true);
-                          }}
-                          className="px-3 py-2 bg-stone-900 border border-stone-700 rounded-lg text-xs font-bold text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-1.5"
-                        >
-                          <Edit className="w-3.5 h-3.5" /> Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteHomeItineraryStep(idx)}
-                          className="px-3 py-2 bg-rose-950/40 border border-rose-900/60 rounded-lg text-xs font-bold text-rose-400 hover:bg-rose-900/60 transition-colors flex items-center gap-1.5"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" /> Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* 12. EXPERIENCES CMS TAB */}
           {activeTab === 'experiences' && (

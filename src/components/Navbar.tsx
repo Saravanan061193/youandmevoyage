@@ -183,8 +183,10 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-b border-slate-800 bg-[#0F172A] px-6 py-5 flex flex-col gap-3.5 text-slate-200 animate-in slide-in-from-top-2 max-h-[85vh] overflow-y-auto">
-          <div className="py-2 border-b border-slate-800 flex items-center justify-between">
-            <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Language:</span>
+          <div className="py-2.5 border-b border-slate-800 flex items-center justify-between">
+            <span className="text-xs uppercase font-bold text-orange-400 tracking-wider flex items-center gap-1.5 font-mono">
+              LANGUAGE:
+            </span>
             <LanguageSwitcher variant="full" />
           </div>
 

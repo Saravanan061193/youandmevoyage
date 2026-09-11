@@ -124,17 +124,17 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-1.5 text-xs font-bold text-stone-900 hover:text-amber-800 transition-colors py-1.5 px-2.5 rounded-lg bg-stone-100/90 border border-stone-200/90 hover:bg-stone-200/80 shadow-xs"
-          title="Translate Website / Sprache wählen"
+          className="flex items-center gap-1.5 text-xs font-bold text-white bg-slate-800/90 hover:bg-slate-700 border border-slate-700 hover:border-orange-400/60 transition-colors py-1.5 px-2.5 rounded-lg shadow-sm"
+          title="Translate Website / Select Language"
         >
           <span className="text-sm leading-none">{activeLanguage.flag}</span>
-          <span className="uppercase tracking-wider font-extrabold text-stone-900">{activeLanguage.code}</span>
-          <ChevronDown className={`w-3.5 h-3.5 text-stone-600 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <span className="uppercase tracking-wider font-extrabold text-white">{activeLanguage.code}</span>
+          <ChevronDown className={`w-3.5 h-3.5 text-orange-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-48 rounded-xl bg-white border border-stone-200 shadow-xl z-50 py-1.5 text-stone-800 animate-in fade-in slide-in-from-top-1 duration-150">
-            <div className="px-3 py-1.5 text-[10px] font-bold tracking-wider uppercase text-stone-400 border-b border-stone-100 flex items-center justify-between">
+          <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#0F172A] border border-slate-700 shadow-2xl z-50 py-1.5 text-white animate-in fade-in slide-in-from-top-1 duration-150">
+            <div className="px-3 py-1.5 text-[10px] font-bold tracking-wider uppercase text-orange-400 border-b border-slate-800 flex items-center justify-between">
               <span>Select Language</span>
               <span>Sprache</span>
             </div>
@@ -145,8 +145,8 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
                   <button
                     key={lang.code}
                     onClick={() => changeLanguage(lang.code)}
-                    className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left transition-colors hover:bg-amber-50/80 ${
-                      isSelected ? 'bg-amber-50/60 text-amber-900 font-semibold' : 'text-stone-700'
+                    className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left transition-colors ${
+                      isSelected ? 'bg-orange-500/20 text-orange-400 font-bold' : 'text-slate-200 hover:bg-slate-800 hover:text-white'
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
@@ -154,11 +154,11 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
                       <span>
                         <span className="block font-medium">{lang.nativeName}</span>
                         {lang.name !== lang.nativeName && (
-                          <span className="block text-[10px] text-stone-400 font-normal">{lang.name}</span>
+                          <span className="block text-[10px] text-slate-400 font-normal">{lang.name}</span>
                         )}
                       </span>
                     </span>
-                    {isSelected && <Check className="w-3.5 h-3.5 text-amber-700" />}
+                    {isSelected && <Check className="w-3.5 h-3.5 text-orange-400" />}
                   </button>
                 );
               })}
@@ -175,19 +175,19 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium border border-stone-200/80 rounded-lg hover:border-amber-700/50 hover:bg-amber-50/40 transition-all text-stone-800 shadow-sm"
+        className="flex items-center gap-2.5 px-3.5 py-2 text-xs sm:text-sm font-semibold border border-slate-700 bg-slate-900/90 text-white hover:bg-slate-800 hover:border-orange-400/60 transition-all rounded-xl shadow-md"
       >
-        <Globe className="w-4 h-4 text-amber-800" />
+        <Globe className="w-4 h-4 text-orange-400" />
         <span className="text-base leading-none">{activeLanguage.flag}</span>
-        <span>{activeLanguage.nativeName}</span>
-        <ChevronDown className={`w-3.5 h-3.5 text-stone-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-white font-bold tracking-wide">{activeLanguage.name} ({activeLanguage.code.toUpperCase()})</span>
+        <ChevronDown className={`w-3.5 h-3.5 text-orange-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 lg:right-0 lg:left-auto mt-2 w-52 rounded-xl bg-white border border-stone-200 shadow-xl z-50 py-1.5 text-stone-800">
-          <div className="px-3 py-1.5 text-[11px] font-bold tracking-wider uppercase text-stone-400 border-b border-stone-100 flex items-center justify-between">
+        <div className="absolute left-0 lg:right-0 lg:left-auto mt-2 w-56 rounded-xl bg-[#0F172A] border border-slate-700 shadow-2xl z-50 py-1.5 text-white animate-in fade-in slide-in-from-top-1 duration-150">
+          <div className="px-3.5 py-2 text-[11px] font-bold tracking-wider uppercase text-orange-400 border-b border-slate-800 flex items-center justify-between">
             <span>Website Language</span>
-            <Globe className="w-3 h-3 text-amber-700" />
+            <Globe className="w-3.5 h-3.5 text-orange-400" />
           </div>
           <div className="max-h-64 overflow-y-auto py-1">
             {LANGUAGES.map((lang) => {
@@ -196,8 +196,8 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
                 <button
                   key={lang.code}
                   onClick={() => changeLanguage(lang.code)}
-                  className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left transition-colors hover:bg-amber-50/80 ${
-                    isSelected ? 'bg-amber-50 text-amber-900 font-semibold' : 'text-stone-700'
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-left transition-colors ${
+                    isSelected ? 'bg-orange-500/20 text-orange-400 font-bold' : 'text-slate-200 hover:bg-slate-800 hover:text-white'
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
@@ -205,11 +205,11 @@ export const LanguageSwitcher: React.FC<{ variant?: 'compact' | 'full' | 'dropdo
                     <span>
                       <span className="block font-medium">{lang.nativeName}</span>
                       {lang.name !== lang.nativeName && (
-                        <span className="block text-[10px] text-stone-400 font-normal">{lang.name}</span>
+                        <span className="block text-[10px] text-slate-400 font-normal">{lang.name}</span>
                       )}
                     </span>
                   </span>
-                  {isSelected && <Check className="w-3.5 h-3.5 text-amber-700" />}
+                  {isSelected && <Check className="w-3.5 h-3.5 text-orange-400" />}
                 </button>
               );
             })}

@@ -32,6 +32,7 @@ export interface SafariItem {
   inclusions: string;
   exclusions: string;
   gallery?: string;
+  itineraries?: string;
   featured?: boolean;
   metaTitle?: string | null;
   metaDescription?: string | null;

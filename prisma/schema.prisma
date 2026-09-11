@@ -27,6 +27,7 @@ model Safari {
   inclusions      String   @default("[]") // JSON string of inclusions
   exclusions      String   @default("[]") // JSON string of exclusions
   gallery         String?  @default("[]") // JSON string of images
+  itineraries     String?  @default("[]") // JSON string of day-by-day itineraries
   metaTitle       String?  // SEO Meta Title
   metaDescription String? // SEO Meta Description
   keywords        String?  // SEO Meta Keywords
