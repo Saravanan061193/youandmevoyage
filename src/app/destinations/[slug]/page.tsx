@@ -40,8 +40,34 @@ function DestinationDetailContent() {
     );
   }
 
-  const highlightsList = typeof dest.highlights === 'string' ? JSON.parse(dest.highlights || '[]') : (dest.highlights || []);
-  const experiencesList = typeof dest.experiences === 'string' ? JSON.parse(dest.experiences || '[]') : (dest.experiences || []);
+const safeParseList = (value: any, fallbackDefault: any[] = []): any[] => {
+  if (!value) return fallbackDefault;
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return fallbackDefault;
+    if ((trimmed.startsWith('[') && trimmed.endsWith(']')) || (trimmed.startsWith('{') && trimmed.endsWith('}'))) {
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) return parsed;
+        return [parsed];
+      } catch (e) {
+        // Fallthrough
+      }
+    }
+    if (trimmed.includes('\n')) {
+      return trimmed.split('\n').map((s) => s.trim()).filter(Boolean);
+    }
+    if (trimmed.includes(',')) {
+      return trimmed.split(',').map((s) => s.trim()).filter(Boolean);
+    }
+    return [trimmed];
+  }
+  return fallbackDefault;
+};
+
+  const highlightsList = safeParseList(dest.highlights);
+  const experiencesList = safeParseList(dest.experiences);
 
   const whatsappText = encodeURIComponent(`Hi You & Me! I am interested in visiting ${dest.title}. Please provide details on customized itineraries.`);
 

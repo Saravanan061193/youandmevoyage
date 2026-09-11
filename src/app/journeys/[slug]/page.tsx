@@ -23,6 +23,32 @@ import {
 
 import { PageSpinner } from '@/components/PageSpinner';
 
+const safeParseList = (value: any, fallbackDefault: any[] = []): any[] => {
+  if (!value) return fallbackDefault;
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return fallbackDefault;
+    if ((trimmed.startsWith('[') && trimmed.endsWith(']')) || (trimmed.startsWith('{') && trimmed.endsWith('}'))) {
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) return parsed;
+        return [parsed];
+      } catch (e) {
+        // Fallthrough
+      }
+    }
+    if (trimmed.includes('\n')) {
+      return trimmed.split('\n').map((s) => s.trim()).filter(Boolean);
+    }
+    if (trimmed.includes(',')) {
+      return trimmed.split(',').map((s) => s.trim()).filter(Boolean);
+    }
+    return [trimmed];
+  }
+  return fallbackDefault;
+};
+
 function JourneyDetailContent() {
   const params = useParams();
   const slug = params?.slug as string;
@@ -64,9 +90,9 @@ function JourneyDetailContent() {
     );
   }
 
-  const inclusionsList = typeof journey.inclusions === 'string' ? JSON.parse(journey.inclusions || '[]') : (journey.inclusions || []);
-  const exclusionsList = typeof journey.exclusions === 'string' ? JSON.parse(journey.exclusions || '[]') : (journey.exclusions || []);
-  const galleryList = typeof journey.gallery === 'string' ? JSON.parse(journey.gallery || '[]') : (journey.gallery || [journey.image]);
+  const inclusionsList = safeParseList(journey.inclusions);
+  const exclusionsList = safeParseList(journey.exclusions);
+  const galleryList = safeParseList(journey.gallery, [journey.image]);
 
   const whatsappText = encodeURIComponent(
     `Hi, I am interested in the ${journey.title}. I would like to know more about availability and customization.`
