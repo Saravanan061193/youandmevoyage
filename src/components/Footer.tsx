@@ -196,18 +196,20 @@ export const Footer = () => {
           <div className="flex flex-col gap-2.5 text-xs text-slate-300">
             <span className="font-bold text-[#FFFFFF] uppercase tracking-wider text-xs mb-1 text-orange-400">Popular Destinations</span>
             {destinations && destinations.length > 0 ? (
-              destinations.map((dest) => {
-                const destSlug = dest.slug || dest.id || dest.title.toLowerCase().replace(/\s+/g, '-');
-                return (
-                  <Link
-                    key={dest.id || destSlug}
-                    href={`/destinations/${destSlug}`}
-                    className="hover:text-orange-400 transition-colors block py-0.5 font-medium"
-                  >
-                    {dest.title}
-                  </Link>
-                );
-              })
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                {destinations.map((dest) => {
+                  const destSlug = dest.slug || dest.id || dest.title.toLowerCase().replace(/\s+/g, '-');
+                  return (
+                    <Link
+                      key={dest.id || destSlug}
+                      href={`/destinations/${destSlug}`}
+                      className="hover:text-orange-400 transition-colors block py-0.5 font-medium"
+                    >
+                      {dest.title}
+                    </Link>
+                  );
+                })}
+              </div>
             ) : (
               <span className="text-xs text-slate-500 italic">No destinations added</span>
             )}
