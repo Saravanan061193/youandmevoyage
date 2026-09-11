@@ -87,6 +87,16 @@ export default function AdminPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [cmsExpanded, setCmsExpanded] = useState(false);
 
+  // Experience Modal state
+  const [showExperienceModal, setShowExperienceModal] = useState(false);
+  const [editingExperienceIndex, setEditingExperienceIndex] = useState<number | null>(null);
+  const [experienceForm, setExperienceForm] = useState({
+    title: '',
+    subtitle: '',
+    desc: '',
+    image: '',
+  });
+
   // Auto-expand CMS accordion when a CMS child tab is selected
   useEffect(() => {
     if (['blogs', 'faqs', 'about', 'legal', 'itineraries'].includes(activeTab)) {
@@ -1263,6 +1273,70 @@ export default function AdminPage() {
       fetchAllData();
     } catch (e) {
       console.error(e);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // --- EXPERIENCES POPUP MODAL CRUD ---
+  const handleSaveExperience = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      const defaultExps = [
+        {
+          title: 'Temple & Heritage Architecture',
+          subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
+          image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+          desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
+        },
+        {
+          title: 'South Indian Food & Culinary Trails',
+          subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
+          image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+          desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
+        },
+        {
+          title: 'Kerala Backwater Houseboat Cruises',
+          subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
+          image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
+          desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
+        },
+      ];
+      let list = safeParseList(settings?.siteExperiences, defaultExps);
+      const newEntry = {
+        title: experienceForm.title || 'Untitled Experience',
+        subtitle: experienceForm.subtitle || 'South India Tour Highlight',
+        desc: experienceForm.desc || '',
+        description: experienceForm.desc || '',
+        image: experienceForm.image || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+      };
+
+      if (editingExperienceIndex !== null && editingExperienceIndex >= 0 && editingExperienceIndex < list.length) {
+        list[editingExperienceIndex] = newEntry;
+      } else {
+        list.push(newEntry);
+      }
+
+      const updatedSettings = { ...settings, siteExperiences: JSON.stringify(list) };
+      setSettings(updatedSettings);
+
+      await adminFetch('/api/settings', {
+        method: 'PUT',
+        body: JSON.stringify(updatedSettings),
+      });
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+        window.dispatchEvent(new Event('site_settings_updated'));
+      }
+
+      showNotification(editingExperienceIndex !== null ? 'Experience updated & live-synced!' : 'New experience added & published live!');
+      setShowExperienceModal(false);
+      setEditingExperienceIndex(null);
+    } catch (err) {
+      console.error(err);
+      showNotification('Failed to save experience');
     } finally {
       setSaving(false);
     }
@@ -6169,38 +6243,9 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    const defaultExps = [
-                      {
-                        title: 'Temple & Heritage Architecture',
-                        subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
-                        image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-                        desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
-                      },
-                      {
-                        title: 'South Indian Food & Culinary Trails',
-                        subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
-                        image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
-                        desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
-                      },
-                      {
-                        title: 'Kerala Backwater Houseboat Cruises',
-                        subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
-                        image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
-                        desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
-                      },
-                    ];
-                    const list = safeParseList(settings?.siteExperiences, defaultExps);
-                    const updated = [
-                      ...list,
-                      {
-                        title: 'New South India Experience',
-                        subtitle: 'Authentic Local Encounter',
-                        desc: 'Describe the experience details here...',
-                        image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
-                      },
-                    ];
-                    setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
-                    showNotification('New experience added! Update details below and click Save.');
+                    setEditingExperienceIndex(null);
+                    setExperienceForm({ title: '', subtitle: '', desc: '', image: '' });
+                    setShowExperienceModal(true);
                   }}
                   className="gold-button text-xs px-5 py-3 rounded-xl shadow-lg shrink-0 flex items-center gap-1.5 cursor-pointer"
                 >
@@ -6251,77 +6296,95 @@ export default function AdminPage() {
                   ];
                   const list = safeParseList(settings?.siteExperiences, defaultExps);
                   return list.map((exp: any, idx: number) => (
-                    <div key={idx} className="bg-[#141210] border border-stone-800 rounded-2xl p-5 space-y-4 shadow-xl flex flex-col justify-between">
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider bg-orange-500/10 border border-orange-500/30 px-2 py-0.5 rounded">
+                    <div key={idx} className="bg-[#141210] border border-stone-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-stone-700 transition-all">
+                      <div className="relative h-44 overflow-hidden bg-stone-900">
+                        <img
+                          src={exp.image || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85'}
+                          alt={exp.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#141210] via-transparent to-transparent" />
+                        
+                        <div className="absolute top-3 left-3">
+                          <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider bg-black/70 backdrop-blur-md border border-orange-500/30 px-2.5 py-1 rounded-full shadow">
                             Experience #{idx + 1}
                           </span>
+                        </div>
+
+                        <div className="absolute top-3 right-3 flex items-center gap-1.5">
                           <button
                             type="button"
                             onClick={() => {
-                              const updated = list.filter((_: any, i: number) => i !== idx);
-                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
-                              showNotification('Experience removed');
+                              setEditingExperienceIndex(idx);
+                              setExperienceForm({
+                                title: exp.title || '',
+                                subtitle: exp.subtitle || '',
+                                desc: exp.desc || exp.description || '',
+                                image: exp.image || '',
+                              });
+                              setShowExperienceModal(true);
                             }}
-                            className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-stone-900 transition-colors cursor-pointer"
+                            className="bg-stone-900/90 text-orange-400 hover:text-orange-300 p-2 rounded-xl border border-stone-700 hover:border-orange-500 transition-all cursor-pointer shadow"
+                            title="Edit Experience"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              if (!confirm(`Delete "${exp.title || 'this experience'}"?`)) return;
+                              const updated = list.filter((_: any, i: number) => i !== idx);
+                              const updatedSettings = { ...settings, siteExperiences: JSON.stringify(updated) };
+                              setSettings(updatedSettings);
+                              try {
+                                await adminFetch('/api/settings', {
+                                  method: 'PUT',
+                                  body: JSON.stringify(updatedSettings),
+                                });
+                                if (typeof window !== 'undefined') {
+                                  localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+                                  window.dispatchEvent(new Event('site_settings_updated'));
+                                }
+                                showNotification('Experience deleted successfully!');
+                              } catch (e) {
+                                showNotification('Failed to delete experience');
+                              }
+                            }}
+                            className="bg-stone-900/90 text-rose-400 hover:text-rose-300 p-2 rounded-xl border border-stone-700 hover:border-rose-500 transition-all cursor-pointer shadow"
                             title="Delete Experience"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
+                      </div>
 
-                        <ImageUploader
-                          label="Experience Image"
-                          value={exp.image || ''}
-                          onChange={(val) => {
-                            const updated = [...list];
-                            updated[idx] = { ...updated[idx], image: val };
-                            setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
-                          }}
-                          recommendedSize="1200 × 800 px"
-                        />
-
-                        <div>
-                          <label className="text-[10px] text-stone-500 font-bold block mb-1">Title</label>
-                          <input
-                            type="text"
-                            value={exp.title || ''}
-                            onChange={(e) => {
-                              const updated = [...list];
-                              updated[idx] = { ...updated[idx], title: e.target.value };
-                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
-                            }}
-                            className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 text-xs outline-none focus:border-[#F97316]"
-                          />
+                      <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+                        <div className="space-y-1.5">
+                          <h4 className="font-serif text-lg font-bold text-stone-100 line-clamp-1">{exp.title}</h4>
+                          <p className="text-xs text-orange-400 font-semibold line-clamp-1">{exp.subtitle}</p>
+                          <p className="text-xs text-stone-400 font-sans line-clamp-3 leading-relaxed pt-1">
+                            {exp.desc || exp.description}
+                          </p>
                         </div>
 
-                        <div>
-                          <label className="text-[10px] text-stone-500 font-bold block mb-1">Subtitle</label>
-                          <input
-                            type="text"
-                            value={exp.subtitle || ''}
-                            onChange={(e) => {
-                              const updated = [...list];
-                              updated[idx] = { ...updated[idx], subtitle: e.target.value };
-                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                        <div className="pt-3 border-t border-stone-800 flex items-center justify-between">
+                          <span className="text-[10px] text-stone-500 font-mono">Live Sync Ready</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingExperienceIndex(idx);
+                              setExperienceForm({
+                                title: exp.title || '',
+                                subtitle: exp.subtitle || '',
+                                desc: exp.desc || exp.description || '',
+                                image: exp.image || '',
+                              });
+                              setShowExperienceModal(true);
                             }}
-                            className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 text-xs outline-none focus:border-[#F97316]"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="text-[10px] text-stone-500 font-bold block mb-1">Description</label>
-                          <textarea
-                            rows={3}
-                            value={exp.desc || exp.description || ''}
-                            onChange={(e) => {
-                              const updated = [...list];
-                              updated[idx] = { ...updated[idx], desc: e.target.value, description: e.target.value };
-                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
-                            }}
-                            className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 text-xs outline-none focus:border-[#F97316] resize-none"
-                          />
+                            className="text-xs text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1 cursor-pointer"
+                          >
+                            <Edit className="w-3.5 h-3.5" /> Edit Details
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -6354,6 +6417,93 @@ export default function AdminPage() {
                   {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save Experiences & Live Sync
                 </button>
               </div>
+
+              {/* EXPERIENCE POPUP FORM MODAL */}
+              {showExperienceModal && (
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                  <div className="bg-[#141210] border border-stone-800 rounded-2xl max-w-lg w-full p-6 space-y-5 shadow-2xl relative animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+                    <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+                      <div>
+                        <h3 className="font-serif text-xl font-bold text-stone-100 flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-[#F97316]" />
+                          {editingExperienceIndex !== null ? 'Edit Experience' : 'Add New Experience'}
+                        </h3>
+                        <p className="text-xs text-stone-400 mt-0.5">Fill in details below to publish live to /experiences page</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowExperienceModal(false)}
+                        className="text-stone-400 hover:text-stone-200 p-1.5 rounded-lg hover:bg-stone-900 transition-colors cursor-pointer"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    <form onSubmit={handleSaveExperience} className="space-y-4 text-xs">
+                      <div>
+                        <label className="text-stone-300 font-bold block mb-1">Experience Title *</label>
+                        <input
+                          type="text"
+                          required
+                          value={experienceForm.title}
+                          onChange={(e) => setExperienceForm({ ...experienceForm, title: e.target.value })}
+                          placeholder="e.g. Temple & Heritage Architecture"
+                          className="w-full bg-stone-950 border border-stone-700 p-2.5 rounded-lg text-stone-100 text-xs outline-none focus:border-[#F97316]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-stone-300 font-bold block mb-1">Subtitle / Tagline</label>
+                        <input
+                          type="text"
+                          value={experienceForm.subtitle}
+                          onChange={(e) => setExperienceForm({ ...experienceForm, subtitle: e.target.value })}
+                          placeholder="e.g. Soaring Dravidian Gopurams & 1000-Year UNESCO Temples"
+                          className="w-full bg-stone-950 border border-stone-700 p-2.5 rounded-lg text-stone-100 text-xs outline-none focus:border-[#F97316]"
+                        />
+                      </div>
+
+                      <div>
+                        <ImageUploader
+                          label="Experience Image URL"
+                          value={experienceForm.image}
+                          onChange={(val) => setExperienceForm({ ...experienceForm, image: val })}
+                          recommendedSize="1200 × 800 px landscape"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-stone-300 font-bold block mb-1">Description / Details</label>
+                        <textarea
+                          rows={4}
+                          value={experienceForm.desc}
+                          onChange={(e) => setExperienceForm({ ...experienceForm, desc: e.target.value })}
+                          placeholder="Describe the experience highlights, activities, and local interactions..."
+                          className="w-full bg-stone-950 border border-stone-700 p-2.5 rounded-lg text-stone-100 text-xs outline-none focus:border-[#F97316] resize-none"
+                        />
+                      </div>
+
+                      <div className="pt-3 flex items-center justify-end gap-3 border-t border-stone-800">
+                        <button
+                          type="button"
+                          onClick={() => setShowExperienceModal(false)}
+                          className="px-4 py-2.5 rounded-xl text-stone-400 hover:text-stone-200 bg-stone-900 border border-stone-800 text-xs font-semibold cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={saving}
+                          className="inline-flex items-center gap-2 rounded-xl bg-gold-gradient px-5 py-2.5 text-xs font-bold text-stone-950 shadow-md hover:brightness-110 transition-all cursor-pointer disabled:opacity-50"
+                        >
+                          {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                          {saving ? 'Saving...' : editingExperienceIndex !== null ? 'Update & Sync Live' : 'Add Experience & Sync Live'}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </main>
