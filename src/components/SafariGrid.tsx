@@ -102,19 +102,41 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   }, [category, region, searchQuery]);
 
   const filteredSafaris = safaris.filter((safari) => {
-    if (category !== 'All' && safari.category !== category) return false;
-    if (region !== 'All' && safari.region !== region) return false;
+    const textToSearch = `${safari.title || ''} ${safari.route || ''} ${safari.description || ''} ${safari.accommodation || ''} ${safari.region || ''} ${safari.category || ''} ${safari.startingLocation || ''} ${safari.endingLocation || ''}`.toLowerCase();
+
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
-      const matchesText =
-        safari.title?.toLowerCase().includes(q) ||
-        safari.route?.toLowerCase().includes(q) ||
-        safari.description?.toLowerCase().includes(q) ||
-        safari.accommodation?.toLowerCase().includes(q) ||
-        safari.region?.toLowerCase().includes(q) ||
-        safari.category?.toLowerCase().includes(q);
-      if (!matchesText) return false;
+      const words = q.split(/\s+/).filter((w) => w.length >= 3);
+
+      const matchesFull = textToSearch.includes(q);
+      const matchesWord = words.length > 0 && words.some((word) => textToSearch.includes(word));
+
+      if (!matchesFull && !matchesWord) return false;
     }
+
+    if (region !== 'All' && safari.region?.toLowerCase() !== region.toLowerCase()) {
+      return false;
+    }
+
+    if (category !== 'All' && safari.category?.toLowerCase() !== category.toLowerCase()) {
+      if (searchQuery.trim()) {
+        const q = searchQuery.trim().toLowerCase();
+        const words = q.split(/\s+/).filter((w) => w.length >= 3);
+
+        const sameCatAndQuery = safaris.filter((s) => {
+          if (s.category?.toLowerCase() !== category.toLowerCase()) return false;
+          const t = `${s.title || ''} ${s.route || ''} ${s.description || ''} ${s.region || ''} ${s.startingLocation || ''}`.toLowerCase();
+          return t.includes(q) || (words.length > 0 && words.some((w) => t.includes(w)));
+        });
+
+        if (sameCatAndQuery.length > 0) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+
     return true;
   });
 
