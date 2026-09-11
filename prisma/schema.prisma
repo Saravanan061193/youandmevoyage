@@ -182,6 +182,43 @@ model SiteSettings {
   termsContent            String?  @default("Welcome to You & Me – Independent Voyage. By booking a journey with us, you agree to our booking terms, deposit conditions, cancellation policies, and liability waivers. All private journeys include dedicated vehicle, experienced local companion/driver, and customizable routes.")
   privacyContent          String?  @default("You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and passport data required for bookings. We do not sell or share your data with third parties.")
 
+  // About Page CMS Settings
+  aboutHeroHeadline            String?  @default("Crafting Authentic South India Journeys")
+  aboutHeroSubheadline         String?  @default("Bespoke Private Escapes · Heritage Temples · Expert Local Companions")
+  aboutHeroImage               String?  @default("https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85")
+  aboutCompanyStoryTitle       String?  @default("Our Story: Independent Travel Companions")
+  aboutCompanyStorySubheadline  String?  @default("Engineered for travelers seeking authentic South Indian heritage")
+  aboutCompanyStoryContent     String?  @default("Founded in Chennai, You & Me – Independent Voyage was born out of a passion for authentic cultural journeys, pristine temple architecture, and serene backwater escapes. We provide unhurried, private, and deeply personal travel experiences with dedicated local driver companions tailored to your schedule.")
+  aboutCompanyStoryImage       String?  @default("https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85")
+  aboutMission                 String?  @default("To celebrate and share South India’s rich culture and serene landscapes through sustainable, personalized private driver journeys.")
+  aboutVision                  String?  @default("To set the gold standard for authentic, driver-assisted private travel in South India.")
+  aboutWhyChooseUs             String?  @default("[]")
+  aboutTeamMembers            String?  @default("[]")
+  aboutSustainabilityTitle     String?  @default("Eco-Conscious & Authentic Local Travel")
+  aboutSustainabilityContent   String?  @default("We honor the land and local communities by recommending eco-conscious heritage lodges, supporting local artisans, and promoting plastic-free travel practices across South India.")
+  aboutSustainabilityImage     String?  @default("https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85")
+  aboutSafetyTitle             String?  @default("Traveler Safety & 24/7 Local Support")
+  aboutSafetyContent           String?  @default("Your safety is our top priority. All private vehicles undergo thorough maintenance checks and are driven by verified, licensed local companions with 24/7 dispatch support.")
+  aboutCertifications          String?  @default("[]")
+  aboutAwards                  String?  @default("[]")
+  aboutMetaTitle               String?  @default("")
+  aboutMetaDescription         String?  @default("")
+  aboutKeywords                String?  @default("")
+  aboutCtaHeadline             String?  @default("Ready to Plan Your Custom South India Journey?")
+  aboutCtaSubheadline          String?  @default("Speak with our travel specialists to receive a custom itinerary proposal.")
+  aboutCtaButtonText           String?  @default("Request Custom Itinerary Quote")
+
+  // Google Maps Location Settings
+  googleMapEmbedUrl            String?  @default("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.498305719363!2d80.25268487507693!3d13.003923387313888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e7c992769d%3A0xbbfd1d36d4f9c158!2sIndira%20Nagar%2C%20Adyar%2C%20Chennai%2C%20Tamil%20Nadu%20600020!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin")
+  officeAddress                String?  @default("Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020")
+  officePhone                  String?  @default("+91 9994315778")
+  showGoogleMapInFooter        Boolean  @default(true)
+
+  // Home Page Signature Itinerary CMS
+  homeItineraryHeadline        String?  @default("10-day classic South India explorer")
+  homeItineraryCopy            String?  @default("One signature journey. Tamil Nadu temples, Chettinad heritage, Munnar tea hills, and Kerala backwaters in seamless sequence.")
+  homeItineraries              String?  @default("[]")
+
   // Lead Magnet eBook PDF Settings
   leadMagnetTitle         String?  @default("Download Free: Ultimate South India Travel Guide")
   leadMagnetSubtext       String?  @default("Route Maps · Best Season Charts · Boutique Hotel Price Breakdown")
