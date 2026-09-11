@@ -943,11 +943,11 @@ h1 em, h2 em {
   display: grid;
 }
 .review-card p {
-  min-height: 110px;
+  min-height: auto;
   font-family: var(--font-serif);
-  margin: 20px 0;
-  font-size: 21px;
-  line-height: 1.35;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.6;
   color: #f4efe6 !important; /* Crystal clear high-contrast white text */
   font-style: italic;
 }
