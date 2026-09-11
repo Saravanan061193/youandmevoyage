@@ -17,7 +17,7 @@ function ArticleDetailContent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/blogs')
+    fetch('/api/blogs', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data: any[]) => {
         if (Array.isArray(data)) {

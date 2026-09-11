@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   getInMemorySafaris,
@@ -165,6 +166,11 @@ export async function POST(request: Request) {
     }
 
     addInMemorySafari(createdSafari);
+
+    revalidatePath('/safari');
+    revalidatePath('/journeys');
+    revalidatePath('/');
+    revalidateTag('safaris');
 
     return NextResponse.json(createdSafari, { status: 201 });
   } catch (error: any) {

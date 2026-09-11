@@ -28,7 +28,7 @@ export default function TermsPage() {
     }
 
     // 2. Fetch fresh settings from API
-    fetch('/api/settings')
+    fetch('/api/settings', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (data && data.termsContent) {

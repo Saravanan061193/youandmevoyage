@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   updateInMemoryDestination,
@@ -11,6 +12,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     body = await request.json();
     const { title, subtitle, image, region, size, description } = body;
     const generatedSlug = body.slug || (title || 'destination').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+    let result = null;
 
     try {
       const dbPromise = prisma.destination.update({
@@ -29,14 +32,26 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       const dbRes: any = await Promise.race([dbPromise, timeoutPromise]);
       if (dbRes && dbRes.id) {
         updateInMemoryDestination(params.id, dbRes);
-        return NextResponse.json(dbRes);
+        result = dbRes;
       }
     } catch (dbErr) {}
 
-    const updated = updateInMemoryDestination(params.id, body) || { id: params.id, ...body };
-    return NextResponse.json(updated);
+    if (!result) {
+      result = updateInMemoryDestination(params.id, body) || { id: params.id, ...body };
+    }
+
+    revalidatePath('/destinations');
+    revalidatePath('/about');
+    revalidatePath('/');
+    revalidateTag('destinations');
+
+    return NextResponse.json(result);
   } catch (error: any) {
     const updated = updateInMemoryDestination(params.id, body) || { id: params.id, ...body };
+    revalidatePath('/destinations');
+    revalidatePath('/about');
+    revalidatePath('/');
+    revalidateTag('destinations');
     return NextResponse.json(updated);
   }
 }
@@ -47,9 +62,19 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     await prisma.destination.delete({
       where: { id: params.id },
     }).catch(() => {});
+
+    revalidatePath('/destinations');
+    revalidatePath('/about');
+    revalidatePath('/');
+    revalidateTag('destinations');
+
     return NextResponse.json({ success: true });
   } catch (error: any) {
     deleteInMemoryDestination(params.id);
+    revalidatePath('/destinations');
+    revalidatePath('/about');
+    revalidatePath('/');
+    revalidateTag('destinations');
     return NextResponse.json({ success: true });
   }
 }

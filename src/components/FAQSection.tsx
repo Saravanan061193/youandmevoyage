@@ -92,7 +92,7 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
         } catch (e) {}
       }
 
-      fetch('/api/faqs')
+      fetch('/api/faqs', { cache: 'no-store' })
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {

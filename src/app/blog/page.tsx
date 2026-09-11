@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
       }
     }
 
-    fetch('/api/blogs')
+    fetch('/api/blogs', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

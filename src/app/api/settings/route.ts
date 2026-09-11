@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireAdminAuth } from '@/lib/authGuard';
 import { sanitizeObject } from '@/lib/sanitize';
@@ -298,8 +299,16 @@ export async function PUT(request: Request) {
       ...updateData,
     };
 
+    revalidatePath('/', 'layout');
+    revalidatePath('/about');
+    revalidatePath('/terms');
+    revalidatePath('/privacy');
+    revalidateTag('settings');
+
     return NextResponse.json(inMemorySettingsCache);
   } catch (error: any) {
+    revalidatePath('/', 'layout');
+    revalidateTag('settings');
     return NextResponse.json(inMemorySettingsCache || DEFAULT_SETTINGS);
   }
 }

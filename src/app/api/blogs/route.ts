@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   getInMemoryBlogs,
@@ -128,6 +129,11 @@ export async function POST(request: Request) {
     }
 
     addInMemoryBlog(createdBlog);
+
+    revalidatePath('/blog');
+    revalidatePath('/travel-journal');
+    revalidatePath('/');
+    revalidateTag('blogs');
 
     return NextResponse.json(createdBlog, { status: 201 });
   } catch (error: any) {

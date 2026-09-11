@@ -20,7 +20,7 @@ export const DestinationsMasonry = () => {
       }
     }
 
-    fetch('/api/destinations')
+    fetch('/api/destinations', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

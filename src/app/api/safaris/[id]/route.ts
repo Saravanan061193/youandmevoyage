@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   getInMemorySafaris,
@@ -92,6 +93,11 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       keywords,
     });
 
+    revalidatePath('/safari');
+    revalidatePath('/journeys');
+    revalidatePath('/');
+    revalidateTag('safaris');
+
     return NextResponse.json(safari || memoryUpdated || { id: params.id, ...body });
   } catch (error: any) {
     return NextResponse.json({ id: params.id });
@@ -111,6 +117,11 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     }
 
     deleteInMemorySafari(params.id);
+
+    revalidatePath('/safari');
+    revalidatePath('/journeys');
+    revalidatePath('/');
+    revalidateTag('safaris');
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

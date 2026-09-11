@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { getInMemoryInquiries, addInMemoryInquiry } from '@/lib/inMemoryStore';
 import { requireAdminAuth } from '@/lib/authGuard';
@@ -107,6 +108,9 @@ export async function POST(request: Request) {
         message: dbInquiry.message || '',
       }).catch((err) => console.error('[INQUIRY_EMAIL_TRIGGER_ERROR]', err));
 
+      revalidatePath('/admin');
+      revalidateTag('inquiries');
+
       return NextResponse.json(dbInquiry, { status: 201 });
     } catch (dbErr) {
       const savedInMemory = addInMemoryInquiry(newInquiryObj);
@@ -122,6 +126,9 @@ export async function POST(request: Request) {
         duration: newInquiryObj.duration || '',
         message: newInquiryObj.message || '',
       }).catch((err) => console.error('[INQUIRY_EMAIL_TRIGGER_ERROR]', err));
+
+      revalidatePath('/admin');
+      revalidateTag('inquiries');
 
       return NextResponse.json(savedInMemory, { status: 201 });
     }

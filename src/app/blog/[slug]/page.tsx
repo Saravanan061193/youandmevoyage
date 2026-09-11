@@ -52,7 +52,7 @@ export default function SingleBlogPostPage() {
       }
     }
 
-    fetch(`/api/blogs/${slug}`)
+    fetch(`/api/blogs/${slug}`, { cache: 'no-store' })
       .then((res) => {
         if (!res.ok) throw new Error('Post not found');
         return res.json();
@@ -61,7 +61,7 @@ export default function SingleBlogPostPage() {
         if (data && data.title) {
           setPost(data);
         }
-        fetch('/api/blogs')
+        fetch('/api/blogs', { cache: 'no-store' })
           .then((r) => r.json())
           .then((all) => {
             if (Array.isArray(all)) {

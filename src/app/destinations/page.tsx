@@ -15,7 +15,7 @@ function DestinationsListingContent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/destinations')
+    fetch('/api/destinations', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setDestinations(data);

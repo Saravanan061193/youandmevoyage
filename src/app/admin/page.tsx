@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Lock,
   Plus,
@@ -63,6 +64,7 @@ import { triggerPdfDownload } from '@/lib/downloadPdf';
 import { safeParseList } from '@/lib/json';
 
 export default function AdminPage() {
+  const router = useRouter();
   const [authChecking, setAuthChecking] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -602,6 +604,7 @@ export default function AdminPage() {
     const headers = (options.headers || {}) as Record<string, string>;
     return fetch(url, {
       credentials: 'include',
+      cache: 'no-store',
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -791,6 +794,7 @@ export default function AdminPage() {
       setSafariViewMode('list');
       setEditingSafari(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
       alert('Network error while saving journey package.');
@@ -815,6 +819,7 @@ export default function AdminPage() {
     });
     showNotification('Safari deleted');
     fetchAllData();
+    router.refresh();
   };
 
   const openSafariEdit = (safari: any) => {
@@ -891,6 +896,7 @@ export default function AdminPage() {
       setDestModal(false);
       setEditingDest(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
       alert('Network error while saving destination.');
@@ -907,6 +913,7 @@ export default function AdminPage() {
     }
     showNotification('Destination deleted');
     fetchAllData();
+    router.refresh();
   };
 
   // --- INQUIRIES CRM HANDLERS ---
@@ -931,6 +938,7 @@ export default function AdminPage() {
 
     showNotification(`Lead stage changed to ${status}`);
     fetchAllData();
+    router.refresh();
   };
 
   const handleSaveLeadCrm = async (e: React.FormEvent) => {
@@ -958,6 +966,7 @@ export default function AdminPage() {
       setInquiryViewMode('list');
       setEditingLead(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -979,6 +988,7 @@ export default function AdminPage() {
 
     showNotification('Inquiry deleted');
     fetchAllData();
+    router.refresh();
   };
 
   // --- REVIEWS CRUD ---
@@ -1027,6 +1037,7 @@ export default function AdminPage() {
       setReviewModal(false);
       setEditingReview(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -1051,6 +1062,7 @@ export default function AdminPage() {
     });
     showNotification('Review deleted');
     fetchAllData();
+    router.refresh();
   };
 
   // --- BLOG POSTS CRUD ---
@@ -1096,6 +1108,7 @@ export default function AdminPage() {
       setBlogViewMode('list');
       setEditingBlog(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -1120,6 +1133,7 @@ export default function AdminPage() {
     });
     showNotification('Blog article deleted');
     fetchAllData();
+    router.refresh();
   };
 
   // --- FAQ CRUD ---
@@ -1164,6 +1178,7 @@ export default function AdminPage() {
       setFaqModal(false);
       setEditingFaq(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -1188,6 +1203,7 @@ export default function AdminPage() {
     });
     showNotification('FAQ question deleted');
     fetchAllData();
+    router.refresh();
   };
 
   // --- SETTINGS CMS ---
@@ -1219,6 +1235,7 @@ export default function AdminPage() {
       showNotification(`${title} Settings updated!`);
       setSaveSuccessModal(`${title} Settings have been saved successfully and live-synced to the website!`);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
       if (typeof window !== 'undefined') {
@@ -1270,6 +1287,7 @@ export default function AdminPage() {
       setItineraryModalOpen(false);
       setEditingItineraryIndex(null);
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -1333,6 +1351,7 @@ export default function AdminPage() {
       showNotification(editingExperienceIndex !== null ? 'Experience updated & live-synced!' : 'New experience added & published live!');
       setShowExperienceModal(false);
       setEditingExperienceIndex(null);
+      router.refresh();
     } catch (err) {
       console.error(err);
       showNotification('Failed to save experience');
@@ -1366,6 +1385,7 @@ export default function AdminPage() {
       showNotification('Itinerary day step deleted');
       setSaveSuccessModal('Itinerary day step deleted successfully!');
       fetchAllData();
+      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {

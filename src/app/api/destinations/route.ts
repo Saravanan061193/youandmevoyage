@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   getInMemoryDestinations,
@@ -86,6 +87,12 @@ export async function POST(request: Request) {
     }
 
     addInMemoryDestination(createdDest);
+
+    revalidatePath('/destinations');
+    revalidatePath('/about');
+    revalidatePath('/');
+    revalidateTag('destinations');
+
     return NextResponse.json(createdDest, { status: 201 });
   } catch (error: any) {
     const fallbackItem = {
@@ -99,6 +106,12 @@ export async function POST(request: Request) {
       createdAt: new Date().toISOString(),
     };
     addInMemoryDestination(fallbackItem);
+
+    revalidatePath('/destinations');
+    revalidatePath('/about');
+    revalidatePath('/');
+    revalidateTag('destinations');
+
     return NextResponse.json(fallbackItem, { status: 201 });
   }
 }

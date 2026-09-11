@@ -33,7 +33,7 @@ export const Footer = () => {
       }
 
       try {
-        const res = await fetch('/api/destinations');
+        const res = await fetch('/api/destinations', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data)) {

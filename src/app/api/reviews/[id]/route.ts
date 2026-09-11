@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   updateInMemoryReview,
@@ -42,6 +43,10 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       text,
     });
 
+    revalidatePath('/reviews');
+    revalidatePath('/');
+    revalidateTag('reviews');
+
     return NextResponse.json(updatedReview || memoryUpdated || { id: params.id, author, country, countryFlag, rating, text });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -61,6 +66,10 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     }
 
     deleteInMemoryReview(params.id);
+
+    revalidatePath('/reviews');
+    revalidatePath('/');
+    revalidateTag('reviews');
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

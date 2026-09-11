@@ -62,7 +62,7 @@ function JourneyDetailContent() {
   const whatsappNum = (settings?.whatsappNumber || '+91 9994315778').replace(/[^0-9+]/g, '');
 
   useEffect(() => {
-    fetch('/api/safaris')
+    fetch('/api/safaris', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data: any[]) => {
         if (Array.isArray(data)) {

@@ -55,7 +55,7 @@ export const BlogSection = () => {
   useEffect(() => {
     async function fetchBlogs() {
       try {
-        const res = await fetch('/api/blogs');
+        const res = await fetch('/api/blogs', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data) && data.length > 0) {

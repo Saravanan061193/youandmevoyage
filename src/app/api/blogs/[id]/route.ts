@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   getInMemoryBlogs,
@@ -103,6 +104,11 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       published: Boolean(published),
     });
 
+    revalidatePath('/blog');
+    revalidatePath('/travel-journal');
+    revalidatePath('/');
+    revalidateTag('blogs');
+
     return NextResponse.json(updatedBlog || memoryUpdated || { id: params.id, ...body });
   } catch (error: any) {
     return NextResponse.json({ id: params.id, ...await request.clone().json().catch(() => ({})) });
@@ -122,6 +128,11 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     }
 
     deleteInMemoryBlog(params.id);
+
+    revalidatePath('/blog');
+    revalidatePath('/travel-journal');
+    revalidatePath('/');
+    revalidateTag('blogs');
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

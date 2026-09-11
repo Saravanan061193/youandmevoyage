@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import {
   getInMemoryReviews,
@@ -83,6 +84,10 @@ export async function POST(request: Request) {
 
     // Always record in in-memory store
     addInMemoryReview(createdReview);
+
+    revalidatePath('/reviews');
+    revalidatePath('/');
+    revalidateTag('reviews');
 
     return NextResponse.json(createdReview, { status: 201 });
   } catch (error: any) {

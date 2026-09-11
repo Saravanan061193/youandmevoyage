@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { requireAdminAuth } from '@/lib/authGuard';
 import { sanitizeObject } from '@/lib/sanitize';
 import { FaqSchema } from '@/lib/validations';
@@ -65,6 +66,11 @@ export async function POST(request: Request) {
     };
     memoryFaqs.unshift(newFaq);
     logAuditEvent(request, 'CREATE_FAQ', 'FAQS', 'SUCCESS', { resourceId: newFaq.id });
+
+    revalidatePath('/');
+    revalidatePath('/contact');
+    revalidateTag('faqs');
+
     return NextResponse.json(newFaq, { status: 201 });
   } catch (e) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
@@ -83,8 +89,18 @@ export async function PUT(request: Request) {
     if (Array.isArray(body)) {
       memoryFaqs = sanitizeObject(body);
       logAuditEvent(request, 'UPDATE_FAQS', 'FAQS', 'SUCCESS');
+
+      revalidatePath('/');
+      revalidatePath('/contact');
+      revalidateTag('faqs');
+
       return NextResponse.json(memoryFaqs);
     }
+
+    revalidatePath('/');
+    revalidatePath('/contact');
+    revalidateTag('faqs');
+
     return NextResponse.json(memoryFaqs);
   } catch (e) {
     return NextResponse.json(memoryFaqs);

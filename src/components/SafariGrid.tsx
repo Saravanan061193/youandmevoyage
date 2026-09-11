@@ -27,7 +27,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
 
   const fetchSafaris = async () => {
     try {
-      const res = await fetch('/api/safaris');
+      const res = await fetch('/api/safaris', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {

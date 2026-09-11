@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { updateInMemoryInquiry, deleteInMemoryInquiry } from '@/lib/inMemoryStore';
 import { requireAdminAuth } from '@/lib/authGuard';
@@ -35,10 +36,18 @@ export async function PATCH(request: Request, { params }: { params: { id: string
       });
       updateInMemoryInquiry(params.id, sanitizedData);
       logAuditEvent(request, 'UPDATE_INQUIRY', 'INQUIRIES', 'SUCCESS', { resourceId: params.id });
+
+      revalidatePath('/admin');
+      revalidateTag('inquiries');
+
       return NextResponse.json(inquiry);
     } catch (dbErr) {
       const updatedInMemory = updateInMemoryInquiry(params.id, sanitizedData);
       logAuditEvent(request, 'UPDATE_INQUIRY', 'INQUIRIES', 'SUCCESS', { resourceId: params.id });
+
+      revalidatePath('/admin');
+      revalidateTag('inquiries');
+
       return NextResponse.json(updatedInMemory || { id: params.id, ...sanitizedData });
     }
   } catch (error: any) {
@@ -62,6 +71,10 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
     deleteInMemoryInquiry(params.id);
     logAuditEvent(request, 'DELETE_INQUIRY', 'INQUIRIES', 'SUCCESS', { resourceId: params.id });
+
+    revalidatePath('/admin');
+    revalidateTag('inquiries');
+
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to delete inquiry' }, { status: 500 });
