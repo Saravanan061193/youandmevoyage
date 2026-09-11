@@ -6348,17 +6348,66 @@ export default function AdminPage() {
                       <Plus className="w-3 h-3" /> Add Custom
                     </button>
                   </div>
-                  <select
-                    value={destForm.region}
-                    onChange={(e) => setDestForm({ ...destForm, region: e.target.value })}
-                    className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded text-stone-100 outline-none focus:border-[#F97316]"
-                  >
-                    {regionsList.map((reg) => (
-                      <option key={reg} value={reg}>
-                        {reg}
+
+                  {!showAddRegionInput && destForm.region !== '__ADD_NEW__' ? (
+                    <select
+                      value={destForm.region}
+                      onChange={(e) => {
+                        if (e.target.value === '__ADD_NEW__') {
+                          setShowAddRegionInput(true);
+                        } else {
+                          setDestForm({ ...destForm, region: e.target.value });
+                        }
+                      }}
+                      className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded text-stone-100 outline-none focus:border-[#F97316]"
+                    >
+                      {regionsList.map((reg) => (
+                        <option key={reg} value={reg}>
+                          {reg}
+                        </option>
+                      ))}
+                      <option value="__ADD_NEW__" className="text-[#F97316] font-bold">
+                        + Add New Region...
                       </option>
-                    ))}
-                  </select>
+                    </select>
+                  ) : (
+                    <div className="flex items-center gap-1">
+                      <input
+                        type="text"
+                        autoFocus
+                        value={newRegionName}
+                        onChange={(e) => setNewRegionName(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAddNewRegion();
+                          } else if (e.key === 'Escape') {
+                            setShowAddRegionInput(false);
+                            if (destForm.region === '__ADD_NEW__') setDestForm({ ...destForm, region: regionsList[0] || 'Tamil Nadu' });
+                          }
+                        }}
+                        placeholder="e.g. Tamil Nadu"
+                        className="w-full bg-stone-900 border border-[#F97316] p-2 rounded text-xs text-stone-100 outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleAddNewRegion()}
+                        className="px-2.5 py-2 bg-[#F97316] text-stone-950 font-bold rounded text-xs shrink-0 hover:brightness-110"
+                      >
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowAddRegionInput(false);
+                          if (destForm.region === '__ADD_NEW__') setDestForm({ ...destForm, region: regionsList[0] || 'Tamil Nadu' });
+                        }}
+                        className="px-2 py-2 bg-stone-800 text-stone-400 rounded text-xs shrink-0 hover:bg-stone-700"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label className="block text-stone-400 mb-1">Grid Size</label>
