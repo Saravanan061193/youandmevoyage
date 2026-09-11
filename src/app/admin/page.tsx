@@ -696,7 +696,7 @@ export default function AdminPage() {
             }
           } catch (e) {}
         }
-        const mergedSet = { ...fetchedSet, ...cachedSettings, ...fetchedSet };
+        const mergedSet = { ...cachedSettings, ...fetchedSet };
         if (!mergedSet.siteLogo && cachedSettings?.siteLogo) {
           mergedSet.siteLogo = cachedSettings.siteLogo;
         }

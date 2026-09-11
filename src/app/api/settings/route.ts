@@ -63,6 +63,7 @@ const DEFAULT_SETTINGS = {
   googleMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.498305719363!2d80.25268487507693!3d13.003923387313888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e7c992769d%3A0xbbfd1d36d4f9c158!2sIndira%20Nagar%2C%20Adyar%2C%20Chennai%2C%20Tamil%20Nadu%20600020!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
   officeAddress: 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020',
   officePhone: '+91 9994315778',
+  operationHours: 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch',
   showGoogleMapInFooter: true,
   aboutHeroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85',
   aboutCompanyStoryTitle: 'Our Story: Independent Travel Companions',
@@ -125,6 +126,84 @@ const DEFAULT_SETTINGS = {
   ]),
 };
 
+const ALLOWED_SETTING_FIELDS = [
+  'siteTitle',
+  'siteLogo',
+  'siteFavicon',
+  'contactEmail',
+  'whatsappNumber',
+  'address',
+  'weatherText',
+  'adminPasscode',
+  'instagramUrl',
+  'facebookUrl',
+  'tripadvisorUrl',
+  'youtubeUrl',
+  'tiktokUrl',
+  'xUrl',
+  'linkedinUrl',
+  'cloudinaryCloudName',
+  'cloudinaryApiKey',
+  'cloudinaryApiSecret',
+  'cloudinaryUploadPreset',
+  'enableCloudinary',
+  'usdToEur',
+  'usdToGbp',
+  'usdToNad',
+  'defaultCurrency',
+  'siteMetaTitle',
+  'siteMetaDescription',
+  'siteKeywords',
+  'googleAnalyticsId',
+  'enableRobotsIndex',
+  'heroHeadline',
+  'heroSubheadline',
+  'heroCopy',
+  'heroImage',
+  'heroBanners',
+  'announcementBannerText',
+  'announcementBannerLink',
+  'enableAnnouncementBanner',
+  'termsContent',
+  'privacyContent',
+  'aboutHeroHeadline',
+  'aboutHeroSubheadline',
+  'aboutHeroImage',
+  'aboutCompanyStoryTitle',
+  'aboutCompanyStorySubheadline',
+  'aboutCompanyStoryContent',
+  'aboutCompanyStoryImage',
+  'aboutMission',
+  'aboutVision',
+  'aboutWhyChooseUs',
+  'aboutTeamMembers',
+  'aboutSustainabilityTitle',
+  'aboutSustainabilityContent',
+  'aboutSustainabilityImage',
+  'aboutSafetyTitle',
+  'aboutSafetyContent',
+  'aboutCertifications',
+  'aboutAwards',
+  'aboutMetaTitle',
+  'aboutMetaDescription',
+  'aboutKeywords',
+  'aboutCtaHeadline',
+  'aboutCtaSubheadline',
+  'aboutCtaButtonText',
+  'googleMapEmbedUrl',
+  'officeAddress',
+  'officePhone',
+  'operationHours',
+  'showGoogleMapInFooter',
+  'homeItineraryHeadline',
+  'homeItineraryCopy',
+  'homeItineraries',
+  'leadMagnetTitle',
+  'leadMagnetSubtext',
+  'leadMagnetButtonText',
+  'leadMagnetPdfUrl',
+];
+
 let inMemorySettingsCache: any = null;
 
 export async function GET() {
@@ -162,141 +241,33 @@ export async function PUT(request: Request) {
     const rawBody = await request.json();
     const body = sanitizeObject(rawBody);
 
-    const {
-      siteTitle,
-      siteLogo,
-      contactEmail,
-      whatsappNumber,
-      weatherText,
-      adminPasscode,
-      instagramUrl,
-      facebookUrl,
-      tripadvisorUrl,
-      youtubeUrl,
-      tiktokUrl,
-      xUrl,
-      linkedinUrl,
-      cloudinaryCloudName,
-      cloudinaryApiKey,
-      cloudinaryApiSecret,
-      cloudinaryUploadPreset,
-      enableCloudinary,
-      usdToEur,
-      usdToGbp,
-      usdToNad,
-      defaultCurrency,
-      siteMetaTitle,
-      siteMetaDescription,
-      siteKeywords,
-      googleAnalyticsId,
-      enableRobotsIndex,
-      heroHeadline,
-      heroSubheadline,
-      heroCopy,
-      heroImage,
-      heroBanners,
-      announcementBannerText,
-      announcementBannerLink,
-      enableAnnouncementBanner,
-      termsContent,
-      privacyContent,
-    } = body;
+    const updateData: Record<string, any> = {};
+    const prismaUpdateData: Record<string, any> = {};
 
-    const updateData: any = {};
-    if (siteTitle !== undefined) updateData.siteTitle = siteTitle;
-    if (siteLogo !== undefined) updateData.siteLogo = siteLogo;
-    if (body.siteFavicon !== undefined) updateData.siteFavicon = body.siteFavicon;
-    if (contactEmail !== undefined) updateData.contactEmail = contactEmail;
-    if (whatsappNumber !== undefined) updateData.whatsappNumber = whatsappNumber;
-    if (weatherText !== undefined) updateData.weatherText = weatherText;
-    if (adminPasscode !== undefined) updateData.adminPasscode = adminPasscode;
+    const reservedKeys = ['id', '_id', 'createdAt', 'updatedAt'];
+    for (const [key, val] of Object.entries(body)) {
+      if (!reservedKeys.includes(key) && val !== undefined) {
+        if (key === 'tripAdvisorUrl' && !body.tripadvisorUrl) {
+          updateData.tripadvisorUrl = val;
+        } else {
+          updateData[key] = val;
+        }
+      }
+    }
 
-    if (instagramUrl !== undefined) updateData.instagramUrl = instagramUrl;
-    if (facebookUrl !== undefined) updateData.facebookUrl = facebookUrl;
-    if (tripadvisorUrl !== undefined || body.tripAdvisorUrl !== undefined) updateData.tripadvisorUrl = tripadvisorUrl || body.tripAdvisorUrl;
-    if (youtubeUrl !== undefined) updateData.youtubeUrl = youtubeUrl;
-    if (tiktokUrl !== undefined) updateData.tiktokUrl = tiktokUrl;
-    if (xUrl !== undefined) updateData.xUrl = xUrl;
-    if (linkedinUrl !== undefined) updateData.linkedinUrl = linkedinUrl;
-
-    if (cloudinaryCloudName !== undefined) updateData.cloudinaryCloudName = cloudinaryCloudName;
-    if (cloudinaryApiKey !== undefined) updateData.cloudinaryApiKey = cloudinaryApiKey;
-    if (cloudinaryApiSecret !== undefined) updateData.cloudinaryApiSecret = cloudinaryApiSecret;
-    if (cloudinaryUploadPreset !== undefined) updateData.cloudinaryUploadPreset = cloudinaryUploadPreset;
-    if (enableCloudinary !== undefined) updateData.enableCloudinary = Boolean(enableCloudinary);
-
-    if (usdToEur !== undefined) updateData.usdToEur = parseFloat(usdToEur);
-    if (usdToGbp !== undefined) updateData.usdToGbp = parseFloat(usdToGbp);
-    if (usdToNad !== undefined) updateData.usdToNad = parseFloat(usdToNad);
-    if (defaultCurrency !== undefined) updateData.defaultCurrency = defaultCurrency;
-
-    if (siteMetaTitle !== undefined) updateData.siteMetaTitle = siteMetaTitle;
-    if (siteMetaDescription !== undefined) updateData.siteMetaDescription = siteMetaDescription;
-    if (siteKeywords !== undefined) updateData.siteKeywords = siteKeywords;
-    if (googleAnalyticsId !== undefined) updateData.googleAnalyticsId = googleAnalyticsId;
-    if (enableRobotsIndex !== undefined) updateData.enableRobotsIndex = Boolean(enableRobotsIndex);
-
-    if (heroHeadline !== undefined) updateData.heroHeadline = heroHeadline;
-    if (heroSubheadline !== undefined) updateData.heroSubheadline = heroSubheadline;
-    if (heroCopy !== undefined) updateData.heroCopy = heroCopy;
-    if (heroImage !== undefined) updateData.heroImage = heroImage;
-    if (heroBanners !== undefined) updateData.heroBanners = typeof heroBanners === 'string' ? heroBanners : JSON.stringify(heroBanners);
-    if (announcementBannerText !== undefined) updateData.announcementBannerText = announcementBannerText;
-    if (announcementBannerLink !== undefined) updateData.announcementBannerLink = announcementBannerLink;
-    if (enableAnnouncementBanner !== undefined) updateData.enableAnnouncementBanner = Boolean(enableAnnouncementBanner);
-
-    if (termsContent !== undefined) updateData.termsContent = termsContent;
-    if (privacyContent !== undefined) updateData.privacyContent = privacyContent;
-
-    // About Page CMS fields
-    if (body.aboutHeroHeadline !== undefined) updateData.aboutHeroHeadline = body.aboutHeroHeadline;
-    if (body.aboutHeroSubheadline !== undefined) updateData.aboutHeroSubheadline = body.aboutHeroSubheadline;
-    if (body.aboutHeroImage !== undefined) updateData.aboutHeroImage = body.aboutHeroImage;
-
-    if (body.aboutCompanyStoryTitle !== undefined) updateData.aboutCompanyStoryTitle = body.aboutCompanyStoryTitle;
-    if (body.aboutCompanyStorySubheadline !== undefined) updateData.aboutCompanyStorySubheadline = body.aboutCompanyStorySubheadline;
-    if (body.aboutCompanyStoryContent !== undefined) updateData.aboutCompanyStoryContent = body.aboutCompanyStoryContent;
-    if (body.aboutCompanyStoryImage !== undefined) updateData.aboutCompanyStoryImage = body.aboutCompanyStoryImage;
-
-    if (body.aboutMission !== undefined) updateData.aboutMission = body.aboutMission;
-    if (body.aboutVision !== undefined) updateData.aboutVision = body.aboutVision;
-
-    if (body.aboutWhyChooseUs !== undefined) updateData.aboutWhyChooseUs = typeof body.aboutWhyChooseUs === 'string' ? body.aboutWhyChooseUs : JSON.stringify(body.aboutWhyChooseUs);
-    if (body.aboutTeamMembers !== undefined) updateData.aboutTeamMembers = typeof body.aboutTeamMembers === 'string' ? body.aboutTeamMembers : JSON.stringify(body.aboutTeamMembers);
-
-    if (body.aboutSustainabilityTitle !== undefined) updateData.aboutSustainabilityTitle = body.aboutSustainabilityTitle;
-    if (body.aboutSustainabilityContent !== undefined) updateData.aboutSustainabilityContent = body.aboutSustainabilityContent;
-    if (body.aboutSustainabilityImage !== undefined) updateData.aboutSustainabilityImage = body.aboutSustainabilityImage;
-
-    if (body.aboutSafetyTitle !== undefined) updateData.aboutSafetyTitle = body.aboutSafetyTitle;
-    if (body.aboutSafetyContent !== undefined) updateData.aboutSafetyContent = body.aboutSafetyContent;
-
-    if (body.aboutCertifications !== undefined) updateData.aboutCertifications = typeof body.aboutCertifications === 'string' ? body.aboutCertifications : JSON.stringify(body.aboutCertifications);
-    if (body.aboutAwards !== undefined) updateData.aboutAwards = typeof body.aboutAwards === 'string' ? body.aboutAwards : JSON.stringify(body.aboutAwards);
-
-    if (body.aboutMetaTitle !== undefined) updateData.aboutMetaTitle = body.aboutMetaTitle;
-    if (body.aboutMetaDescription !== undefined) updateData.aboutMetaDescription = body.aboutMetaDescription;
-    if (body.aboutKeywords !== undefined) updateData.aboutKeywords = body.aboutKeywords;
-
-    if (body.aboutCtaHeadline !== undefined) updateData.aboutCtaHeadline = body.aboutCtaHeadline;
-    if (body.aboutCtaSubheadline !== undefined) updateData.aboutCtaSubheadline = body.aboutCtaSubheadline;
-    if (body.aboutCtaButtonText !== undefined) updateData.aboutCtaButtonText = body.aboutCtaButtonText;
-
-    if (body.googleMapEmbedUrl !== undefined) updateData.googleMapEmbedUrl = body.googleMapEmbedUrl;
-    if (body.officeAddress !== undefined) updateData.officeAddress = body.officeAddress;
-    if (body.officePhone !== undefined) updateData.officePhone = body.officePhone;
-    if (body.showGoogleMapInFooter !== undefined) updateData.showGoogleMapInFooter = Boolean(body.showGoogleMapInFooter);
-
-    // Lead Magnet eBook PDF fields
-    if (body.leadMagnetTitle !== undefined) updateData.leadMagnetTitle = body.leadMagnetTitle;
-    if (body.leadMagnetSubtext !== undefined) updateData.leadMagnetSubtext = body.leadMagnetSubtext;
-    if (body.leadMagnetButtonText !== undefined) updateData.leadMagnetButtonText = body.leadMagnetButtonText;
-    if (body.leadMagnetPdfUrl !== undefined) updateData.leadMagnetPdfUrl = body.leadMagnetPdfUrl;
-
-    // Home Page Signature Itinerary fields
-    if (body.homeItineraryHeadline !== undefined) updateData.homeItineraryHeadline = body.homeItineraryHeadline;
-    if (body.homeItineraryCopy !== undefined) updateData.homeItineraryCopy = body.homeItineraryCopy;
-    if (body.homeItineraries !== undefined) updateData.homeItineraries = typeof body.homeItineraries === 'string' ? body.homeItineraries : JSON.stringify(body.homeItineraries);
+    for (const field of ALLOWED_SETTING_FIELDS) {
+      if (updateData[field] !== undefined) {
+        if (field === 'enableCloudinary' || field === 'enableRobotsIndex' || field === 'enableAnnouncementBanner' || field === 'showGoogleMapInFooter') {
+          prismaUpdateData[field] = Boolean(updateData[field]);
+        } else if (field === 'usdToEur' || field === 'usdToGbp' || field === 'usdToNad') {
+          prismaUpdateData[field] = parseFloat(updateData[field]);
+        } else if (typeof updateData[field] === 'object' && updateData[field] !== null) {
+          prismaUpdateData[field] = JSON.stringify(updateData[field]);
+        } else {
+          prismaUpdateData[field] = updateData[field];
+        }
+      }
+    }
 
     let settings = null;
     try {
@@ -305,11 +276,11 @@ export async function PUT(request: Request) {
         if (existing) {
           return await prisma.siteSettings.update({
             where: { id: existing.id },
-            data: updateData,
+            data: prismaUpdateData,
           });
         } else {
           return await prisma.siteSettings.create({
-            data: updateData,
+            data: prismaUpdateData,
           });
         }
       })();

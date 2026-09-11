@@ -50,7 +50,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
             }
           } catch (e) {}
         }
-        const merged = { ...data, ...cachedSettings, ...data };
+        const merged = { ...cachedSettings, ...data };
         if (!merged.siteLogo && cachedSettings?.siteLogo) {
           merged.siteLogo = cachedSettings.siteLogo;
         }
