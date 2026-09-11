@@ -88,14 +88,18 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
   }, []);
 
   useEffect(() => {
-    if (settings?.siteFavicon && typeof window !== 'undefined') {
-      let link: HTMLLinkElement | null = document.querySelector("link[rel*='icon']");
-      if (!link) {
-        link = document.createElement('link');
+    if (typeof window !== 'undefined' && settings?.siteFavicon) {
+      let iconLinks = document.querySelectorAll<HTMLLinkElement>("link[rel*='icon']");
+      if (iconLinks.length === 0) {
+        const link = document.createElement('link');
         link.rel = 'icon';
-        document.getElementsByTagName('head')[0].appendChild(link);
+        link.href = settings.siteFavicon;
+        document.head.appendChild(link);
+      } else {
+        iconLinks.forEach((link) => {
+          link.href = settings.siteFavicon;
+        });
       }
-      link.href = settings.siteFavicon;
     }
   }, [settings?.siteFavicon]);
 

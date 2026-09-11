@@ -20,8 +20,14 @@ const compressImage = (dataUrl: string, maxDimension = 1200, quality = 0.85): Pr
       return;
     }
 
-    // Skip compression for SVG vector graphics
-    if (dataUrl.startsWith('data:image/svg+xml')) {
+    // Skip compression for SVG vector graphics and ICO favicon icons
+    if (
+      dataUrl.startsWith('data:image/svg+xml') ||
+      dataUrl.startsWith('data:image/x-icon') ||
+      dataUrl.startsWith('data:image/vnd.microsoft.icon') ||
+      dataUrl.startsWith('data:image/ico') ||
+      dataUrl.startsWith('data:image/x-ico')
+    ) {
       resolve(dataUrl);
       return;
     }
@@ -110,15 +116,33 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         return;
       }
 
-      // 2. Strict MIME Type Validation
-      const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
-      if (!allowedMimeTypes.includes(file.type.toLowerCase())) {
-        alert('Invalid file type. Only JPG, PNG, WEBP, GIF, and SVG images are allowed.');
+      // 2. Strict MIME Type & Extension Validation (including ICO icons)
+      const allowedMimeTypes = [
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/webp',
+        'image/gif',
+        'image/svg+xml',
+        'image/x-icon',
+        'image/vnd.microsoft.icon',
+        'image/ico',
+        'image/x-ico',
+        'image/icon',
+      ];
+      const fileName = file.name.toLowerCase();
+      const allowedExts = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.ico'];
+      const fileExt = fileName.substring(fileName.lastIndexOf('.'));
+
+      const isMimeValid = file.type ? allowedMimeTypes.includes(file.type.toLowerCase()) : false;
+      const isExtValid = allowedExts.includes(fileExt);
+
+      if (!isMimeValid && !isExtValid) {
+        alert('Invalid file type. Only JPG, PNG, WEBP, GIF, SVG, and ICO images are allowed.');
         return;
       }
 
       // 3. Block Dangerous File Extensions
-      const fileName = file.name.toLowerCase();
       const forbiddenExts = ['.exe', '.js', '.html', '.htm', '.php', '.sh', '.bat', '.cmd', '.vbs', '.jar'];
       if (forbiddenExts.some((ext) => fileName.endsWith(ext))) {
         alert('Dangerous file type detected and blocked.');
@@ -166,7 +190,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}
-        accept="image/*"
+        accept="image/*,.ico,image/x-icon,image/vnd.microsoft.icon"
         className="hidden"
       />
 
