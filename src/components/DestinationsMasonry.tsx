@@ -8,10 +8,27 @@ export const DestinationsMasonry = () => {
   const [destinations, setDestinations] = useState<any[]>([]);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('site_destinations_cache');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setDestinations(parsed);
+          }
+        } catch (e) {}
+      }
+    }
+
     fetch('/api/destinations')
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) setDestinations(data);
+        if (Array.isArray(data) && data.length > 0) {
+          setDestinations(data);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('site_destinations_cache', JSON.stringify(data));
+          }
+        }
       })
       .catch((e) => console.error(e));
   }, []);

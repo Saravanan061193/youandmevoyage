@@ -127,7 +127,7 @@ let inMemorySettingsCache: any = null;
 export async function GET() {
   try {
     const dbPromise = prisma.siteSettings.findFirst();
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
     if (settings) {

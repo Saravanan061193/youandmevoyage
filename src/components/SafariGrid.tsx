@@ -26,12 +26,16 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const fetchSafaris = async () => {
-    setLoading(true);
     try {
       const res = await fetch('/api/safaris');
       if (res.ok) {
         const data = await res.json();
-        setSafaris(data);
+        if (Array.isArray(data) && data.length > 0) {
+          setSafaris(data);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('site_safaris_cache', JSON.stringify(data));
+          }
+        }
       }
     } catch (e) {
       console.error('Failed to fetch journeys', e);
@@ -41,6 +45,18 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   };
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('site_safaris_cache');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setSafaris(parsed);
+            setLoading(false);
+          }
+        } catch (e) {}
+      }
+    }
     fetchSafaris();
   }, []);
 
