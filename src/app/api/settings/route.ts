@@ -66,11 +66,11 @@ const DEFAULT_SETTINGS = {
   officePhone: '+91 9994315778',
   operationHours: 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch',
   showGoogleMapInFooter: true,
-  aboutHeroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85',
+  aboutHeroImage: '/images/our_story_fleet.jpg',
   aboutCompanyStoryTitle: 'Our Story: Independent Travel Companions',
   aboutCompanyStorySubheadline: 'Engineered for travelers seeking authentic South Indian heritage',
   aboutCompanyStoryContent: 'Founded in Chennai, You & Me – Independent Voyage was born out of a passion for authentic cultural journeys, pristine temple architecture, and serene backwater escapes. We provide unhurried, private, and deeply personal travel experiences with dedicated local driver companions tailored to your schedule.',
-  aboutCompanyStoryImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+  aboutCompanyStoryImage: '/images/our_story_fleet.jpg',
   aboutMission: 'To celebrate and share South India’s rich culture and serene landscapes through sustainable, personalized private driver journeys.',
   aboutVision: 'To set the gold standard for authentic, driver-assisted private travel in South India.',
   aboutWhyChooseUs: JSON.stringify([

@@ -103,7 +103,7 @@ export default function AboutPage() {
       <section className="relative bg-[#0F172A] text-white py-24 px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={settings?.aboutHeroImage || settings?.heroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85'}
+            src={settings?.aboutHeroImage || settings?.heroImage || '/images/our_story_fleet.jpg'}
             alt={settings?.aboutHeroHeadline || 'You & Me Independent Voyage'}
             className="w-full h-full object-cover opacity-35 filter brightness-90"
           />
@@ -170,7 +170,7 @@ export default function AboutPage() {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src={settings?.aboutCompanyStoryImage || settings?.aboutHeroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85'}
+                src={settings?.aboutCompanyStoryImage || settings?.aboutHeroImage || '/images/our_story_fleet.jpg'}
                 alt="South India Heritage Story"
                 className="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700"
               />
