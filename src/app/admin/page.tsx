@@ -703,8 +703,14 @@ export default function AdminPage() {
         if (!mergedSet.siteLogo && cachedSettings?.siteLogo) {
           mergedSet.siteLogo = cachedSettings.siteLogo;
         }
+        if (!mergedSet.siteLogo && settings?.siteLogo) {
+          mergedSet.siteLogo = settings.siteLogo;
+        }
         if (!mergedSet.siteFavicon && cachedSettings?.siteFavicon) {
           mergedSet.siteFavicon = cachedSettings.siteFavicon;
+        }
+        if (!mergedSet.siteFavicon && settings?.siteFavicon) {
+          mergedSet.siteFavicon = settings.siteFavicon;
         }
         setSettings(mergedSet);
         if (typeof window !== 'undefined') {

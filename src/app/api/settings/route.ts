@@ -210,7 +210,7 @@ let inMemorySettingsCache: any = null;
 export async function GET() {
   try {
     const dbPromise = prisma.siteSettings.findFirst();
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
     const merged = {
@@ -218,12 +218,20 @@ export async function GET() {
       ...(settings || {}),
       ...(inMemorySettingsCache || {}),
     };
+
+    if (!merged.siteLogo && settings?.siteLogo) {
+      merged.siteLogo = settings.siteLogo;
+    }
     if (!merged.siteLogo && inMemorySettingsCache?.siteLogo) {
       merged.siteLogo = inMemorySettingsCache.siteLogo;
+    }
+    if (!merged.siteFavicon && settings?.siteFavicon) {
+      merged.siteFavicon = settings.siteFavicon;
     }
     if (!merged.siteFavicon && inMemorySettingsCache?.siteFavicon) {
       merged.siteFavicon = inMemorySettingsCache.siteFavicon;
     }
+
     inMemorySettingsCache = merged;
     return NextResponse.json(inMemorySettingsCache);
   } catch (error: any) {
@@ -275,6 +283,13 @@ export async function PUT(request: Request) {
       const dbPromise = (async () => {
         const existing = await prisma.siteSettings.findFirst();
         if (existing) {
+          // Preserve existing logo and favicon if not provided in request or empty
+          if (!prismaUpdateData.siteLogo && existing.siteLogo) {
+            prismaUpdateData.siteLogo = existing.siteLogo;
+          }
+          if (!prismaUpdateData.siteFavicon && existing.siteFavicon) {
+            prismaUpdateData.siteFavicon = existing.siteFavicon;
+          }
           return await prisma.siteSettings.update({
             where: { id: existing.id },
             data: prismaUpdateData,
@@ -286,7 +301,7 @@ export async function PUT(request: Request) {
         }
       })();
 
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 12000));
       settings = await Promise.race([dbPromise, timeoutPromise]);
     } catch (e) {
       console.warn('DB settings update failed or timed out:', e);
@@ -298,6 +313,13 @@ export async function PUT(request: Request) {
       ...(inMemorySettingsCache || {}),
       ...updateData,
     };
+
+    if (!inMemorySettingsCache.siteLogo && settings?.siteLogo) {
+      inMemorySettingsCache.siteLogo = settings.siteLogo;
+    }
+    if (!inMemorySettingsCache.siteFavicon && settings?.siteFavicon) {
+      inMemorySettingsCache.siteFavicon = settings.siteFavicon;
+    }
 
     revalidatePath('/', 'layout');
     revalidatePath('/about');
