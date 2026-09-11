@@ -23,6 +23,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { PageSpinner } from '@/components/PageSpinner';
+import { safeParseList } from '@/lib/json';
 
 function SafariDetailContent() {
   const params = useParams();
@@ -93,8 +94,6 @@ function SafariDetailContent() {
       </div>
     );
   }
-
-import { safeParseList } from '@/lib/json';
 
   const inclusions: string[] = safeParseList(safari.inclusions);
   const exclusions: string[] = safeParseList(safari.exclusions);
