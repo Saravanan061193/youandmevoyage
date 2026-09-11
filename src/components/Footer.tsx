@@ -83,7 +83,7 @@ export const Footer = () => {
 
   return (
     <>
-      <footer id="contact" className="footer bg-[#0F172A] text-slate-300 pt-16 pb-12 border-t border-slate-800">
+      <footer id="contact" className="footer bg-[#0F172A] text-slate-300 pt-16 pb-28 sm:pb-24 border-t border-slate-800 relative z-20">
         {/* GOOGLE MAP LOCATION CARD */}
         {showMap && (
           <div className="max-w-7xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
@@ -318,7 +318,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="max-w-7xl mx-auto border-t border-slate-800 mt-12 pt-6 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto border-t border-slate-800 mt-12 pt-6 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 relative z-30">
           <span className="flex items-center flex-wrap gap-1">
             © {new Date().getFullYear()} {settings?.siteTitle || 'You & Me – Independent Voyage'}. All Rights Reserved.
             <span className="inline-flex items-center gap-1 ml-1 text-slate-400">
@@ -327,26 +327,26 @@ export const Footer = () => {
                 href="https://joydigital.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-400 hover:text-orange-300 font-bold hover:underline transition-colors"
+                className="text-orange-400 hover:text-orange-300 font-bold hover:underline transition-colors cursor-pointer relative z-30"
               >
                 Joydigital
               </a>
             </span>
           </span>
-          <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link>
+          <div className="flex items-center gap-6 relative z-30">
+            <Link href="/privacy" className="hover:text-orange-400 transition-colors font-medium cursor-pointer py-1 px-1 relative z-30">Privacy Policy</Link>
             <span className="text-slate-700">•</span>
-            <Link href="/terms" className="hover:text-orange-400 transition-colors">Terms & Conditions</Link>
+            <Link href="/terms" className="hover:text-orange-400 transition-colors font-medium cursor-pointer py-1 px-1 relative z-30">Terms & Conditions</Link>
           </div>
         </div>
       </footer>
 
       {/* Floating Sticky Circular Action Buttons: Direct Call on TOP, WhatsApp on BOTTOM */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3">
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3 pointer-events-none">
         {/* Call Round Button */}
         <a
           href={`tel:${whatsappNum.replace(/[^0-9+]/g, '')}`}
-          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-[0_10px_30px_rgba(249,115,22,0.6)] hover:scale-110 active:scale-95 transition-all ring-4 ring-orange-500/20 group relative"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-[0_10px_30px_rgba(249,115,22,0.6)] hover:scale-110 active:scale-95 transition-all ring-4 ring-orange-500/20 group relative pointer-events-auto cursor-pointer"
           aria-label="Call Us Directly"
           title={`Call Us ${whatsappNum}`}
         >
@@ -361,7 +361,7 @@ export const Footer = () => {
           href={`https://wa.me/${whatsappClean}?text=${encodeURIComponent('Hi You & Me! I would like to inquire about a customized South India journey.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-[0_10px_30px_rgba(37,211,102,0.6)] hover:scale-110 active:scale-95 transition-all ring-4 ring-[#25D366]/20 group relative"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-[0_10px_30px_rgba(37,211,102,0.6)] hover:scale-110 active:scale-95 transition-all ring-4 ring-[#25D366]/20 group relative pointer-events-auto cursor-pointer"
           aria-label="Chat on WhatsApp"
           title="WhatsApp Us"
         >

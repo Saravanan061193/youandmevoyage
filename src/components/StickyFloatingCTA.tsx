@@ -33,8 +33,8 @@ export const StickyFloatingCTA = ({ onOpenQuoteModal, onOpenLeadMagnetModal }: S
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-3xl animate-in fade-in slide-in-from-bottom-6 duration-300">
-      <div className="bg-[#0F172A]/90 backdrop-blur-2xl border border-orange-500/40 rounded-full p-2 pl-4 sm:pl-6 pr-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex items-center justify-between gap-3 text-slate-100 ring-1 ring-orange-500/20 transition-all hover:border-orange-500/70">
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-3xl animate-in fade-in slide-in-from-bottom-6 duration-300 pointer-events-none">
+      <div className="bg-[#0F172A]/90 backdrop-blur-2xl border border-orange-500/40 rounded-full p-2 pl-4 sm:pl-6 pr-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex items-center justify-between gap-3 text-slate-100 ring-1 ring-orange-500/20 transition-all hover:border-orange-500/70 pointer-events-auto">
         
         {/* Rating & Social Proof badge */}
         <a
