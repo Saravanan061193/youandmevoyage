@@ -16,10 +16,10 @@ export async function GET() {
     const dbPromise = prisma.destination.findMany({
       orderBy: { order: 'asc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
     const destinations = await Promise.race([dbPromise, timeoutPromise]);
 
-    if (destinations && Array.isArray(destinations) && destinations.length > 0) {
+    if (destinations !== null && Array.isArray(destinations)) {
       setInMemoryDestinations(destinations as any);
       return NextResponse.json(destinations);
     }

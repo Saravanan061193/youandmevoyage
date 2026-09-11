@@ -53,18 +53,18 @@ const compressImage = (dataUrl: string, maxDimension = 1200, quality = 0.85): Pr
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
 
-        // For PNG images, preserve PNG format to retain transparency
+        // For PNG images, use PNG if lightweight (< 350KB), otherwise use transparent WebP
         if (dataUrl.startsWith('data:image/png')) {
           try {
             const pngUrl = canvas.toDataURL('image/png');
-            if (pngUrl && pngUrl.startsWith('data:image/png')) {
+            if (pngUrl && pngUrl.length < 350000) {
               resolve(pngUrl);
               return;
             }
           } catch (e) {}
         }
 
-        // Try WebP compression first
+        // Try WebP compression (preserves transparency with ~90% smaller payload)
         try {
           const webpUrl = canvas.toDataURL('image/webp', quality);
           if (webpUrl && webpUrl.startsWith('data:image/webp')) {
@@ -73,7 +73,15 @@ const compressImage = (dataUrl: string, maxDimension = 1200, quality = 0.85): Pr
           }
         } catch (e) {}
 
-        resolve(canvas.toDataURL('image/png'));
+        try {
+          const pngUrl = canvas.toDataURL('image/png');
+          if (pngUrl) {
+            resolve(pngUrl);
+            return;
+          }
+        } catch (e) {}
+
+        resolve(dataUrl);
       } else {
         resolve(dataUrl);
       }

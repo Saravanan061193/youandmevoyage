@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   MessageCircle,
@@ -16,6 +16,51 @@ import { useCurrency } from './CurrencyContext';
 
 export const Footer = () => {
   const { settings } = useCurrency();
+  const [destinations, setDestinations] = useState<any[]>([]);
+
+  useEffect(() => {
+    const loadDestinations = async () => {
+      if (typeof window !== 'undefined') {
+        const cached = localStorage.getItem('site_destinations_cache');
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              setDestinations(parsed);
+            }
+          } catch (e) {}
+        }
+      }
+
+      try {
+        const res = await fetch('/api/destinations');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            setDestinations(data);
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('site_destinations_cache', JSON.stringify(data));
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Failed to load destinations for footer:', e);
+      }
+    };
+
+    loadDestinations();
+
+    const handleSync = () => loadDestinations();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('destinations_updated', handleSync);
+      window.addEventListener('storage', handleSync);
+      return () => {
+        window.removeEventListener('destinations_updated', handleSync);
+        window.removeEventListener('storage', handleSync);
+      };
+    }
+  }, []);
+
   const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
@@ -150,12 +195,27 @@ export const Footer = () => {
 
           <div className="flex flex-col gap-2.5 text-xs text-slate-300">
             <span className="font-bold text-[#FFFFFF] uppercase tracking-wider text-xs mb-1 text-orange-400">Popular Destinations</span>
-            <Link href="/destinations/chennai" className="hover:text-orange-400 transition-colors">Chennai & Heritage</Link>
-            <Link href="/destinations/mahabalipuram" className="hover:text-orange-400 transition-colors">Mahabalipuram Shore Temples</Link>
-            <Link href="/destinations/pondicherry" className="hover:text-orange-400 transition-colors">Pondicherry French Quarter</Link>
-            <Link href="/destinations/madurai" className="hover:text-orange-400 transition-colors">Madurai Meenakshi Temple</Link>
-            <Link href="/destinations/munnar" className="hover:text-orange-400 transition-colors">Munnar Tea Gardens</Link>
-            <Link href="/destinations/alleppey" className="hover:text-orange-400 transition-colors">Alleppey Houseboats</Link>
+            {destinations && destinations.length > 0 ? (
+              destinations.map((dest) => {
+                const destSlug = dest.slug || dest.id || dest.title.toLowerCase().replace(/\s+/g, '-');
+                return (
+                  <Link
+                    key={dest.id || destSlug}
+                    href={`/destinations/${destSlug}`}
+                    className="hover:text-orange-400 transition-colors flex items-center gap-1 group"
+                  >
+                    <span>{dest.title}</span>
+                    {dest.subtitle ? (
+                      <span className="text-[10px] text-slate-400 italic font-normal truncate max-w-[140px] group-hover:text-orange-300/80">
+                        · {dest.subtitle}
+                      </span>
+                    ) : null}
+                  </Link>
+                );
+              })
+            ) : (
+              <span className="text-xs text-slate-500 italic">No destinations added</span>
+            )}
           </div>
 
           <div className="flex flex-col gap-3">

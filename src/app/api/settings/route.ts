@@ -131,7 +131,14 @@ export async function GET() {
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
     if (settings) {
-      inMemorySettingsCache = { ...DEFAULT_SETTINGS, ...settings };
+      const merged = { ...DEFAULT_SETTINGS, ...(inMemorySettingsCache || {}), ...settings };
+      if (!settings.siteLogo && inMemorySettingsCache?.siteLogo) {
+        merged.siteLogo = inMemorySettingsCache.siteLogo;
+      }
+      if (!settings.siteFavicon && inMemorySettingsCache?.siteFavicon) {
+        merged.siteFavicon = inMemorySettingsCache.siteFavicon;
+      }
+      inMemorySettingsCache = merged;
       return NextResponse.json(inMemorySettingsCache);
     }
 

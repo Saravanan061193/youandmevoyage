@@ -638,7 +638,14 @@ export default function AdminPage() {
           });
         }
       }
-      if (dRes.ok) setDestinations(await dRes.json());
+      if (dRes.ok) {
+        const dData = await dRes.json();
+        setDestinations(dData);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('site_destinations_cache', JSON.stringify(dData));
+          window.dispatchEvent(new Event('destinations_updated'));
+        }
+      }
       if (iRes.ok) {
         const inqData = await iRes.json();
         if (Array.isArray(inqData)) {
@@ -664,7 +671,32 @@ export default function AdminPage() {
         const cached = localStorage.getItem('site_reviews_cache');
         if (cached) setReviews(JSON.parse(cached));
       }
-      if (setRes.ok) setSettings(await setRes.json());
+      if (setRes.ok) {
+        const fetchedSet = await setRes.json();
+        let cachedLogo = '';
+        let cachedFavicon = '';
+        if (typeof window !== 'undefined') {
+          try {
+            const cached = localStorage.getItem('site_settings_cache');
+            if (cached) {
+              const parsed = JSON.parse(cached);
+              cachedLogo = parsed?.siteLogo || '';
+              cachedFavicon = parsed?.siteFavicon || '';
+            }
+          } catch (e) {}
+        }
+        const mergedSet = { ...fetchedSet };
+        if (!mergedSet.siteLogo && cachedLogo) {
+          mergedSet.siteLogo = cachedLogo;
+        }
+        if (!mergedSet.siteFavicon && cachedFavicon) {
+          mergedSet.siteFavicon = cachedFavicon;
+        }
+        setSettings(mergedSet);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('site_settings_cache', JSON.stringify(mergedSet));
+        }
+      }
       if (bRes && bRes.ok) {
         const blogData = await bRes.json();
         if (Array.isArray(blogData)) {
@@ -833,6 +865,7 @@ export default function AdminPage() {
         }
         if (typeof window !== 'undefined') {
           localStorage.setItem('site_destinations_cache', JSON.stringify(updated));
+          window.dispatchEvent(new Event('destinations_updated'));
         }
         return updated;
       });
@@ -854,6 +887,7 @@ export default function AdminPage() {
           : [fallbackItem, ...prev];
         if (typeof window !== 'undefined') {
           localStorage.setItem('site_destinations_cache', JSON.stringify(updated));
+          window.dispatchEvent(new Event('destinations_updated'));
         }
         return updated;
       });
@@ -868,6 +902,9 @@ export default function AdminPage() {
   const handleDeleteDest = async (id: string) => {
     if (!confirm('Delete destination?')) return;
     await adminFetch(`/api/destinations/${id}`, { method: 'DELETE' });
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('destinations_updated'));
+    }
     showNotification('Destination deleted');
     fetchAllData();
   };
@@ -1162,11 +1199,18 @@ export default function AdminPage() {
         method: 'PUT',
         body: JSON.stringify(settings),
       });
-      let updatedSettings = settings;
+      let updatedSettings = { ...settings };
       if (res.ok) {
-        updatedSettings = await res.json();
-        setSettings(updatedSettings);
+        const resData = await res.json();
+        updatedSettings = { ...settings, ...resData };
       }
+      if (!updatedSettings.siteLogo && settings.siteLogo) {
+        updatedSettings.siteLogo = settings.siteLogo;
+      }
+      if (!updatedSettings.siteFavicon && settings.siteFavicon) {
+        updatedSettings.siteFavicon = settings.siteFavicon;
+      }
+      setSettings(updatedSettings);
       if (typeof window !== 'undefined') {
         localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
         window.dispatchEvent(new Event('site_settings_updated'));
