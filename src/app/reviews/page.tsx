@@ -14,7 +14,7 @@ function ReviewsContent() {
   const [reviews, setReviews] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('/api/reviews')
+    fetch('/api/reviews', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setReviews(data);

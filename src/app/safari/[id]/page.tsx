@@ -42,7 +42,7 @@ function SafariDetailContent() {
   useEffect(() => {
     if (!safariId) return;
 
-    fetch(`/api/safaris/${safariId}`)
+    fetch(`/api/safaris/${safariId}`, { cache: 'no-store' })
       .then((res) => {
         if (!res.ok) throw new Error('Safari not found');
         return res.json();

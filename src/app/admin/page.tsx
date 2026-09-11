@@ -1273,9 +1273,8 @@ export default function AdminPage() {
 
       setSettings(updatedSettings);
 
-      const res = await fetch('/api/settings', {
+      const res = await adminFetch('/api/settings', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedSettings),
       });
 
@@ -1378,9 +1377,8 @@ export default function AdminPage() {
 
       setSettings(updatedSettings);
 
-      await fetch('/api/settings', {
+      await adminFetch('/api/settings', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedSettings),
       });
 
