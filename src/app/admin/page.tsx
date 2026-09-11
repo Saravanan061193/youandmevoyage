@@ -1844,6 +1844,20 @@ export default function AdminPage() {
                     {!sidebarCollapsed && <span>Legal & Terms</span>}
                   </button>
 
+                  {/* Sub 5: Experiences CMS */}
+                  <button
+                    onClick={() => setActiveTab('experiences')}
+                    title="Experiences Page"
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                      activeTab === 'experiences'
+                        ? 'bg-primary text-black font-bold'
+                        : 'text-stone-400 hover:bg-stone-900 hover:text-stone-200'
+                    } ${sidebarCollapsed ? 'justify-center px-2' : ''}`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5 shrink-0 text-[#F97316]" />
+                    {!sidebarCollapsed && <span>Experiences CMS</span>}
+                  </button>
+
                   {/* Sub 5: Home Signature Itineraries */}
                   <button
                     onClick={() => setActiveTab('itineraries')}
@@ -6298,6 +6312,205 @@ export default function AdminPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* 12. EXPERIENCES CMS TAB */}
+          {activeTab === 'experiences' && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#141210] border border-stone-800 p-6 rounded-2xl shadow-xl">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-[10px] font-bold uppercase tracking-wider mb-2">
+                    <Sparkles className="w-3 h-3" /> Experiences Page Studio
+                  </div>
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100">Authentic Experiences CMS</h2>
+                  <p className="text-xs text-stone-400 mt-1">Manage the experiences cards displayed live on the /experiences page</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const defaultExps = [
+                      {
+                        title: 'Temple & Heritage Architecture',
+                        subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
+                        image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+                        desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
+                      },
+                      {
+                        title: 'South Indian Food & Culinary Trails',
+                        subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
+                        image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+                        desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
+                      },
+                      {
+                        title: 'Kerala Backwater Houseboat Cruises',
+                        subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
+                        image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
+                        desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
+                      },
+                    ];
+                    const list = safeParseList(settings?.siteExperiences, defaultExps);
+                    const updated = [
+                      ...list,
+                      {
+                        title: 'New South India Experience',
+                        subtitle: 'Authentic Local Encounter',
+                        desc: 'Describe the experience details here...',
+                        image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+                      },
+                    ];
+                    setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                    showNotification('New experience added! Update details below and click Save.');
+                  }}
+                  className="gold-button text-xs px-5 py-3 rounded-xl shadow-lg shrink-0 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" /> Add New Experience
+                </button>
+              </div>
+
+              {/* Experiences Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {(() => {
+                  const defaultExps = [
+                    {
+                      title: 'Temple & Heritage Architecture',
+                      subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
+                      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
+                    },
+                    {
+                      title: 'South Indian Food & Culinary Trails',
+                      subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
+                      image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
+                    },
+                    {
+                      title: 'Kerala Backwater Houseboat Cruises',
+                      subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
+                      image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
+                    },
+                    {
+                      title: 'Local Village & Artisan Encounters',
+                      subtitle: 'Silk Weavers, Athangudi Tile Studios & Potters',
+                      image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Engage directly with Kanchipuram silk weavers, antique dealers, and traditional Kathakali performing artists.',
+                    },
+                    {
+                      title: 'Hill Stations & Tea Plantation Walks',
+                      subtitle: 'Misty Valleys & Bungalow Stays in Munnar',
+                      image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Stroll through endless green tea estates in the Western Ghats, visit tea processing factories, and breathe cool mountain air.',
+                    },
+                    {
+                      title: 'Ayurveda & Holistic Wellness',
+                      subtitle: 'Authentic Herbal Treatments & Quiet Retreats',
+                      image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Rejuvenate with traditional Ayurvedic oil therapies, yoga sessions, and quiet sanctuary resorts across Kerala.',
+                    },
+                  ];
+                  const list = safeParseList(settings?.siteExperiences, defaultExps);
+                  return list.map((exp: any, idx: number) => (
+                    <div key={idx} className="bg-[#141210] border border-stone-800 rounded-2xl p-5 space-y-4 shadow-xl flex flex-col justify-between">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider bg-orange-500/10 border border-orange-500/30 px-2 py-0.5 rounded">
+                            Experience #{idx + 1}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = list.filter((_: any, i: number) => i !== idx);
+                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                              showNotification('Experience removed');
+                            }}
+                            className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-stone-900 transition-colors cursor-pointer"
+                            title="Delete Experience"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        <ImageUploader
+                          label="Experience Image"
+                          value={exp.image || ''}
+                          onChange={(val) => {
+                            const updated = [...list];
+                            updated[idx] = { ...updated[idx], image: val };
+                            setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                          }}
+                          recommendedSize="1200 × 800 px"
+                        />
+
+                        <div>
+                          <label className="text-[10px] text-stone-500 font-bold block mb-1">Title</label>
+                          <input
+                            type="text"
+                            value={exp.title || ''}
+                            onChange={(e) => {
+                              const updated = [...list];
+                              updated[idx] = { ...updated[idx], title: e.target.value };
+                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                            }}
+                            className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 text-xs outline-none focus:border-[#F97316]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[10px] text-stone-500 font-bold block mb-1">Subtitle</label>
+                          <input
+                            type="text"
+                            value={exp.subtitle || ''}
+                            onChange={(e) => {
+                              const updated = [...list];
+                              updated[idx] = { ...updated[idx], subtitle: e.target.value };
+                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                            }}
+                            className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 text-xs outline-none focus:border-[#F97316]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[10px] text-stone-500 font-bold block mb-1">Description</label>
+                          <textarea
+                            rows={3}
+                            value={exp.desc || exp.description || ''}
+                            onChange={(e) => {
+                              const updated = [...list];
+                              updated[idx] = { ...updated[idx], desc: e.target.value, description: e.target.value };
+                              setSettings({ ...settings, siteExperiences: JSON.stringify(updated) });
+                            }}
+                            className="w-full bg-stone-950 border border-stone-700 p-2 rounded text-stone-100 text-xs outline-none focus:border-[#F97316] resize-none"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ));
+                })()}
+              </div>
+
+              {/* Save Bar */}
+              <div className="flex items-center justify-between bg-[#141210] border border-stone-800 p-4 rounded-2xl shadow-xl">
+                <span className="text-[11px] text-stone-500 font-mono">Changes live-sync to /experiences page</span>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      setSaving(true);
+                      await saveSettingsAPI(settings);
+                      showNotification('Experiences updated & published live successfully!');
+                    } catch (err) {
+                      showNotification('Failed to save experiences');
+                    } finally {
+                      setSaving(false);
+                    }
+                  }}
+                  disabled={saving}
+                  className="inline-flex items-center gap-2 rounded-xl bg-gold-gradient px-6 py-3 text-sm font-bold text-stone-950 shadow-md hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer"
+                >
+                  {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save Experiences & Live Sync
+                </button>
               </div>
             </div>
           )}
