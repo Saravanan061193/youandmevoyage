@@ -276,7 +276,7 @@ export const Footer = () => {
 
           <div className="flex flex-col gap-3">
             <span className="font-bold text-[#FFFFFF] uppercase tracking-wider text-xs text-orange-400">Follow the Journey</span>
-            <div className="flex items-center gap-3 mt-1.5">
+            <div className="flex items-center gap-3 mt-1.5 flex-wrap">
               {/* Instagram Official Logo */}
               <a
                 href={instagramUrl}
@@ -319,6 +319,22 @@ export const Footer = () => {
                 <svg className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
                   <path d="M19.324 7.648a4.965 4.965 0 0 0-4.307-2.474c-.958 0-1.849.278-2.61.761a4.978 4.978 0 0 0-2.612-.761 4.966 4.966 0 0 0-4.307 2.474C2.511 8.878 2 10.384 2 12c0 3.033 1.95 5.617 4.717 6.554L4 21.333h3.5l1.833-2.133c.833.3 1.733.467 2.667.467s1.833-.167 2.667-.467L16.5 21.333H20l-2.717-2.779C20.05 17.617 22 15.033 22 12c0-1.616-.511-3.122-3.476-4.352zm-12.824 7.352a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm11 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM6.5 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
                 </svg>
+              </a>
+
+              {/* Le Routard Official Travel Guide Logo */}
+              <a
+                href="https://www.routard.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Le Routard Guide"
+                title="Recommended on Le Routard Guide"
+                className="w-10 h-10 rounded-xl bg-white p-0.5 flex items-center justify-center transition-all shadow-md hover:scale-110 active:scale-95 group overflow-hidden border border-slate-700 shrink-0"
+              >
+                <img
+                  src="/images/routard_logo.png"
+                  alt="Le Routard Guide"
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform"
+                />
               </a>
             </div>
 
