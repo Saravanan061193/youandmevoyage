@@ -25,6 +25,19 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
+  const getCleanAccommodationSummary = (accText: string | undefined | null): string => {
+    if (!accText) return 'Heritage Stay / Boutique Hotel';
+    const clean = accText.trim();
+    if (clean.length > 90) {
+      const firstSentence = clean.split('.')[0];
+      if (firstSentence && firstSentence.length <= 90 && firstSentence.length > 10) {
+        return firstSentence.trim() + '...';
+      }
+      return clean.slice(0, 85).trim() + '...';
+    }
+    return clean;
+  };
+
   const fetchSafaris = async () => {
     try {
       const res = await fetch('/api/safaris', { cache: 'no-store' });
@@ -338,15 +351,17 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
                         </div>
                       </div>
 
-                      <p className="text-xs text-slate-600 flex items-start gap-1.5 pt-1 line-clamp-2">
+                      <p className="text-xs text-slate-600 flex items-start gap-1.5 pt-1 min-w-0 overflow-hidden">
                         <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0 mt-0.5" />
-                        <span>{safari.route}</span>
+                        <span className="line-clamp-2 min-w-0 flex-1 block" title={safari.route}>{safari.route}</span>
                       </p>
 
-                      <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
-                        <Palmtree className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>{safari.accommodation}</span>
-                      </p>
+                      <div className="text-[11px] text-slate-500 flex items-start gap-1.5 min-w-0 overflow-hidden pt-1">
+                        <Palmtree className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span className="truncate block font-normal text-slate-600 min-w-0 flex-1" title={safari.accommodation}>
+                          {getCleanAccommodationSummary(safari.accommodation)}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="pt-3 border-t border-slate-100 flex items-center gap-2">

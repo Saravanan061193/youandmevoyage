@@ -27,26 +27,10 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
                 src={settings.siteLogo}
                 alt={settings?.siteTitle || "You & Me – Independent Voyage"}
                 className="h-10 sm:h-12 w-auto max-w-[180px] sm:max-w-[240px] object-contain drop-shadow-md"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
               />
-              <div className="hidden items-center gap-2 sm:gap-3">
-                <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-lg sm:text-xl flex items-center justify-center shadow-md ring-2 ring-orange-400/40 shrink-0">
-                  YM
-                </span>
-                <span className="text-white font-bold text-sm sm:text-lg font-serif tracking-tight leading-none group-hover:text-orange-400 transition-colors">
-                  {settings?.siteTitle || "You & Me – Independent Voyage"}
-                </span>
-              </div>
             </div>
           ) : (
             <div className="flex items-center gap-2 sm:gap-3">
-              <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-lg sm:text-xl flex items-center justify-center shadow-md ring-2 ring-orange-400/40 shrink-0 group-hover:scale-105 transition-transform">
-                YM
-              </span>
               <span className="text-white font-bold text-sm sm:text-lg font-serif tracking-tight leading-none group-hover:text-orange-400 transition-colors">
                 {settings?.siteTitle || "You & Me – Independent Voyage"}
               </span>

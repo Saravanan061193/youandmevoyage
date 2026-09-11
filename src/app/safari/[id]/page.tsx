@@ -247,7 +247,7 @@ function SafariDetailContent() {
             </div>
             <div>
               <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold block mb-1">Accommodation Tier</span>
-              <p className="text-sm text-slate-900 font-medium">{safari.accommodation}</p>
+              <p className="text-sm text-slate-900 font-medium whitespace-pre-line leading-relaxed max-h-40 overflow-y-auto pr-1">{safari.accommodation}</p>
             </div>
           </div>
         </div>

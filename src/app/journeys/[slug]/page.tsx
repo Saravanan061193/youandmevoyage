@@ -151,9 +151,9 @@ function JourneyDetailContent() {
           </div>
           <div className="flex items-center gap-2">
             <Palmtree className="w-4 h-4 text-orange-400 shrink-0" />
-            <div>
+            <div className="min-w-0">
               <span className="text-slate-400 block text-[10px] uppercase">Stays</span>
-              <strong className="text-white truncate block">{journey.accommodation}</strong>
+              <strong className="text-white truncate block" title={journey.accommodation}>{journey.accommodation}</strong>
             </div>
           </div>
         </div>

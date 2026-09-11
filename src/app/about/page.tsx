@@ -200,29 +200,27 @@ export default function AboutPage() {
       </section>
 
       {/* 2. MISSION & VISION STATEMENTS */}
-      {(settings?.aboutMission || settings?.aboutVision) && (
-        <section className="py-12 bg-orange-50/60 border-y border-orange-100 px-6">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            {settings?.aboutMission && (
-              <div className="bg-white p-8 rounded-3xl border border-orange-100 shadow-sm space-y-3">
-                <div className="flex items-center gap-2 text-orange-600 font-serif text-xl font-bold">
-                  <Target className="w-6 h-6" /> Our Mission
-                </div>
-                <p className="text-slate-700 text-sm leading-relaxed">{settings.aboutMission}</p>
-              </div>
-            )}
-
-            {settings?.aboutVision && (
-              <div className="bg-white p-8 rounded-3xl border border-orange-100 shadow-sm space-y-3">
-                <div className="flex items-center gap-2 text-orange-600 font-serif text-xl font-bold">
-                  <Globe2 className="w-6 h-6" /> Our Vision
-                </div>
-                <p className="text-slate-700 text-sm leading-relaxed">{settings.aboutVision}</p>
-              </div>
-            )}
+      <section className="py-12 bg-orange-50/60 border-y border-orange-100 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white p-8 rounded-3xl border border-orange-100 shadow-sm space-y-3">
+            <div className="flex items-center gap-2 text-orange-600 font-serif text-xl font-bold">
+              <Target className="w-6 h-6" /> Our Mission
+            </div>
+            <p className="text-slate-700 text-sm leading-relaxed">
+              {settings?.aboutMission || 'To offer authentic, unhurried, 100% private road travel experiences across South India with courteous local driver companions who prioritize guest safety, comfort, and deep cultural immersion.'}
+            </p>
           </div>
-        </section>
-      )}
+
+          <div className="bg-white p-8 rounded-3xl border border-orange-100 shadow-sm space-y-3">
+            <div className="flex items-center gap-2 text-orange-600 font-serif text-xl font-bold">
+              <Globe2 className="w-6 h-6" /> Our Vision
+            </div>
+            <p className="text-slate-700 text-sm leading-relaxed">
+              {settings?.aboutVision || 'To be the premier and most revered private travel companion brand for discerning travelers exploring the architectural marvels of Tamil Nadu and the serene natural beauty of Kerala.'}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* 3. CORE VALUES & WHY CHOOSE US HIGHLIGHTS */}
       <section className="bg-[#0F172A] text-white py-20 px-6">
@@ -248,40 +246,34 @@ export default function AboutPage() {
       </section>
 
       {/* 4. SUSTAINABILITY & SAFETY PROTOCOLS */}
-      {(settings?.aboutSustainabilityContent || settings?.aboutSafetyContent) && (
-        <section className="py-20 px-6 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {settings?.aboutSustainabilityContent && (
-              <div className="p-8 rounded-3xl bg-emerald-50/50 border border-emerald-100 space-y-4">
-                <div className="flex items-center gap-2 text-emerald-700 font-serif text-2xl font-bold">
-                  <Heart className="w-6 h-6" /> {settings?.aboutSustainabilityTitle || 'Eco-Conscious & Authentic Local Travel'}
-                </div>
-                <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
-                  {settings.aboutSustainabilityContent}
-                </p>
-                {settings?.aboutSustainabilityImage && (
-                  <img
-                    src={settings.aboutSustainabilityImage}
-                    alt="Sustainability & Local Culture"
-                    className="w-full h-48 object-cover rounded-2xl shadow"
-                  />
-                )}
-              </div>
-            )}
-
-            {settings?.aboutSafetyContent && (
-              <div className="p-8 rounded-3xl bg-orange-50/50 border border-orange-100 space-y-4">
-                <div className="flex items-center gap-2 text-orange-700 font-serif text-2xl font-bold">
-                  <ShieldCheck className="w-6 h-6" /> {settings?.aboutSafetyTitle || 'Traveler Safety & 24/7 Local Support'}
-                </div>
-                <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
-                  {settings.aboutSafetyContent}
-                </p>
-              </div>
+      <section className="py-20 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="p-8 rounded-3xl bg-emerald-50/50 border border-emerald-100 space-y-4">
+            <div className="flex items-center gap-2 text-emerald-700 font-serif text-2xl font-bold">
+              <Heart className="w-6 h-6" /> {settings?.aboutSustainabilityTitle || 'Eco-Conscious & Authentic Local Travel'}
+            </div>
+            <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
+              {settings?.aboutSustainabilityContent || 'We prioritize small-footprint road travel, supporting family-owned heritage homestays, local craft artisans, and authentic regional dining spots throughout Tamil Nadu and Kerala. Your journey directly supports local communities.'}
+            </p>
+            {settings?.aboutSustainabilityImage && (
+              <img
+                src={settings.aboutSustainabilityImage}
+                alt="Sustainability & Local Culture"
+                className="w-full h-48 object-cover rounded-2xl shadow"
+              />
             )}
           </div>
-        </section>
-      )}
+
+          <div className="p-8 rounded-3xl bg-orange-50/50 border border-orange-100 space-y-4">
+            <div className="flex items-center gap-2 text-orange-700 font-serif text-2xl font-bold">
+              <ShieldCheck className="w-6 h-6" /> {settings?.aboutSafetyTitle || 'Traveler Safety & 24/7 Local Support'}
+            </div>
+            <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
+              {settings?.aboutSafetyContent || 'Your comfort and peace of mind are non-negotiable. Every private AC vehicle undergoes rigorous safety checks, and our driver companions are trained in defensive driving, route navigation, and guest care.'}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* 5. CERTIFICATIONS & AWARDS */}
       {(certificationsList.length > 0 || awardsList.length > 0) && (

@@ -88,9 +88,9 @@ export const SafariModal = ({ safari, onClose, onOpenQuoteModal }: SafariModalPr
             </div>
             <div>
               <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block mb-1">Accommodation Tier</span>
-              <p className="text-sm text-slate-200 font-medium flex items-center gap-2">
-                <Trees className="w-4 h-4 text-orange-400 shrink-0" />
-                {safari.accommodation}
+              <p className="text-sm text-slate-200 font-medium flex items-start gap-2 max-h-32 overflow-y-auto pr-1">
+                <Trees className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+                <span className="whitespace-pre-line leading-snug">{safari.accommodation}</span>
               </p>
             </div>
           </div>
