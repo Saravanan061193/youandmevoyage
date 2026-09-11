@@ -76,3 +76,22 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+export async function POST(request: Request, context: { params: { id: string } }) {
+  return PUT(request, context);
+}
+
+export async function PATCH(request: Request, context: { params: { id: string } }) {
+  return PUT(request, context);
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Allow': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, x-admin-auth',
+    },
+  });
+}

@@ -115,3 +115,22 @@ export async function POST(request: Request) {
     return NextResponse.json(fallbackItem, { status: 201 });
   }
 }
+
+export async function PUT(request: Request) {
+  return POST(request);
+}
+
+export async function PATCH(request: Request) {
+  return POST(request);
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Allow': 'GET, POST, PUT, PATCH, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, x-admin-auth',
+    },
+  });
+}

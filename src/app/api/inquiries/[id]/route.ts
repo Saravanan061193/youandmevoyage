@@ -80,3 +80,26 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     return NextResponse.json({ error: 'Failed to delete inquiry' }, { status: 500 });
   }
 }
+
+export async function GET(request: Request, context: { params: { id: string } }) {
+  return PATCH(request, context);
+}
+
+export async function POST(request: Request, context: { params: { id: string } }) {
+  return PATCH(request, context);
+}
+
+export async function PUT(request: Request, context: { params: { id: string } }) {
+  return PATCH(request, context);
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Allow': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, x-admin-auth',
+    },
+  });
+}
