@@ -154,25 +154,36 @@ export const Footer = () => {
           <div>
             <Link href="/" className="flex items-center gap-3 group">
               {settings?.siteLogo ? (
-                <img
-                  src={settings.siteLogo}
-                  alt={settings?.siteTitle || 'You & Me – Independent Voyage'}
-                  className="h-10 w-auto object-contain max-w-[220px]"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                    if (fallback) fallback.style.display = 'flex';
-                  }}
-                />
-              ) : null}
-              <div className={`flex items-center gap-2.5 ${settings?.siteLogo ? 'hidden' : ''}`}>
-                <span className="w-10 h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-xl flex items-center justify-center shadow-md shrink-0">
-                  YM
-                </span>
-                <span className="font-serif text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
-                  {settings?.siteTitle || 'You & Me – Independent Voyage'}
-                </span>
-              </div>
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src={settings.siteLogo}
+                    alt={settings?.siteTitle || 'You & Me – Independent Voyage'}
+                    className="h-10 sm:h-12 w-auto object-contain max-w-[220px] drop-shadow-md"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                  <div className="hidden items-center gap-2.5">
+                    <span className="w-10 h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-xl flex items-center justify-center shadow-md shrink-0">
+                      YM
+                    </span>
+                    <span className="font-serif text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
+                      {settings?.siteTitle || 'You & Me – Independent Voyage'}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2.5">
+                  <span className="w-10 h-10 rounded-xl bg-orange-500 text-white font-serif font-black text-xl flex items-center justify-center shadow-md shrink-0">
+                    YM
+                  </span>
+                  <span className="font-serif text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
+                    {settings?.siteTitle || 'You & Me – Independent Voyage'}
+                  </span>
+                </div>
+              )}
             </Link>
             <p className="text-xs text-orange-400/90 font-serif italic mt-3 mb-2.5">Travel South India Your Way.</p>
             <div className="space-y-2 text-xs text-slate-300">

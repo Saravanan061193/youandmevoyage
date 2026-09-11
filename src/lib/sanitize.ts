@@ -4,8 +4,24 @@
  */
 export function sanitizeString(input: string): string {
   if (!input || typeof input !== 'string') return '';
-  
-  return input
+
+  const trimmed = input.trim();
+
+  // Preserve Data URLs (e.g. data:image/png;base64,... or data:image/svg+xml...) and font Data URLs
+  if (trimmed.startsWith('data:image/') || trimmed.startsWith('data:font/')) {
+    if (trimmed.toLowerCase().includes('<script') || trimmed.toLowerCase().includes('javascript:')) {
+      return '';
+    }
+    return trimmed;
+  }
+
+  // Preserve valid external/internal URLs (e.g. http://, https://, /)
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) {
+    if (trimmed.toLowerCase().startsWith('javascript:')) return '';
+    return trimmed;
+  }
+
+  return trimmed
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
     .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
     .replace(/on\w+="[^"]*"/gi, '')
