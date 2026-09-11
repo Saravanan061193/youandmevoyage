@@ -249,10 +249,12 @@ export default function AdminPage() {
 
   // Admin pagination states
   const [safariPage, setSafariPage] = useState(1);
+  const [destPage, setDestPage] = useState(1);
   const [inquiryPage, setInquiryPage] = useState(1);
   const [reviewPage, setReviewPage] = useState(1);
   const [blogPage, setBlogPage] = useState(1);
   const [faqPage, setFaqPage] = useState(1);
+  const [destSearchQuery, setDestSearchQuery] = useState('');
   const [inquirySearchQuery, setInquirySearchQuery] = useState('');
   const [inquiryStatusFilter, setInquiryStatusFilter] = useState('All');
   const [blogViewMode, setBlogViewMode] = useState<'list' | 'editor'>('list');
@@ -3069,70 +3071,177 @@ export default function AdminPage() {
           )}
 
           {/* TAB 3: DESTINATIONS */}
-          {activeTab === 'destinations' && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="font-serif text-2xl font-bold">Destinations Manager</h2>
-                  <p className="text-xs text-stone-400">Manage the 5 regional destinations displayed in the masonry section</p>
-                </div>
-                <button
-                  onClick={() => {
-                    setEditingDest(null);
-                    setDestForm({
-                      title: '',
-                      subtitle: '',
-                      image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
-                      region: 'Central',
-                      size: 'short',
-                      description: '',
-                    });
-                    setDestModal(true);
-                  }}
-                  className="flex items-center gap-2 rounded-lg bg-gold-gradient px-4 py-2 text-xs font-semibold text-stone-950"
-                >
-                  <Plus className="w-4 h-4" /> Add Destination
-                </button>
-              </div>
+          {activeTab === 'destinations' && (() => {
+            const filteredDestinations = destinations.filter((dest) => {
+              if (!destSearchQuery.trim()) return true;
+              const q = destSearchQuery.toLowerCase();
+              return (
+                (dest.title || '').toLowerCase().includes(q) ||
+                (dest.subtitle || '').toLowerCase().includes(q) ||
+                (dest.region || '').toLowerCase().includes(q) ||
+                (dest.description || '').toLowerCase().includes(q)
+              );
+            });
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {destinations.map((dest) => (
-                  <div key={dest.id} className="bg-[#141210] border border-stone-800 rounded-xl overflow-hidden shadow-lg">
-                    <img src={dest.image} alt={dest.title} className="h-40 w-full object-cover" />
-                    <div className="p-4 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <strong className="font-serif font-bold text-stone-100">{dest.title}</strong>
-                        <span className="text-[10px] bg-stone-800 text-stone-400 px-2 py-0.5 rounded">{dest.size}</span>
+            const DEST_PER_PAGE = 6;
+            const totalDestPages = Math.max(1, Math.ceil(filteredDestinations.length / DEST_PER_PAGE));
+            const safeDestPage = Math.min(destPage, totalDestPages);
+            const paginatedDestinations = filteredDestinations.slice((safeDestPage - 1) * DEST_PER_PAGE, safeDestPage * DEST_PER_PAGE);
+
+            return (
+              <div className="space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h2 className="font-serif text-2xl font-bold flex items-center gap-2">
+                      <MapPin className="w-6 h-6 text-[#F97316]" /> Destinations Manager
+                    </h2>
+                    <p className="text-xs text-stone-400">Manage regional destinations displayed across your website ({filteredDestinations.length} total)</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setEditingDest(null);
+                      setDestForm({
+                        title: '',
+                        subtitle: '',
+                        image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
+                        region: 'Tamil Nadu',
+                        size: 'short',
+                        description: '',
+                      });
+                      setDestModal(true);
+                    }}
+                    className="flex items-center gap-2 rounded-lg bg-gold-gradient px-4 py-2.5 text-xs font-bold text-stone-950 hover:brightness-110 transition-all shadow-md shrink-0 cursor-pointer"
+                  >
+                    <Plus className="w-4 h-4" /> Add Destination
+                  </button>
+                </div>
+
+                {/* Search Bar */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#141210] p-4 border border-stone-800 rounded-xl shadow-md">
+                  <div className="relative flex-1 w-full">
+                    <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      placeholder="Search destinations by title, region, or description..."
+                      value={destSearchQuery}
+                      onChange={(e) => {
+                        setDestSearchQuery(e.target.value);
+                        setDestPage(1);
+                      }}
+                      className="w-full bg-stone-900 border border-stone-700/80 rounded-lg pl-10 pr-4 py-2 text-xs text-stone-100 placeholder:text-stone-500 outline-none focus:border-[#F97316] transition-colors"
+                    />
+                  </div>
+                  {destSearchQuery && (
+                    <button
+                      onClick={() => {
+                        setDestSearchQuery('');
+                        setDestPage(1);
+                      }}
+                      className="text-xs text-[#F97316] hover:underline font-semibold shrink-0 cursor-pointer"
+                    >
+                      Clear Search
+                    </button>
+                  )}
+                </div>
+
+                {/* Grid View (6 per page) */}
+                {paginatedDestinations.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {paginatedDestinations.map((dest) => (
+                      <div key={dest.id} className="bg-[#141210] border border-stone-800 rounded-xl overflow-hidden shadow-lg group hover:border-stone-700 transition-all">
+                        <div className="h-44 w-full overflow-hidden relative">
+                          <img src={dest.image} alt={dest.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                          <span className="absolute top-2.5 right-2.5 text-[10px] uppercase font-bold bg-black/70 text-orange-400 border border-orange-500/30 px-2.5 py-0.5 rounded-full backdrop-blur-md">
+                            {dest.region || 'South India'}
+                          </span>
+                        </div>
+                        <div className="p-4 space-y-2">
+                          <div className="flex items-center justify-between">
+                            <strong className="font-serif font-bold text-stone-100 text-base">{dest.title}</strong>
+                            <span className="text-[10px] bg-stone-800 text-stone-400 px-2 py-0.5 rounded font-mono uppercase">{dest.size || 'short'}</span>
+                          </div>
+                          <p className="text-xs text-stone-400 line-clamp-2">{dest.subtitle}</p>
+                          <div className="flex justify-end gap-3 pt-3 border-t border-stone-800/80">
+                            <button
+                              onClick={() => {
+                                setEditingDest(dest);
+                                setDestForm({
+                                  title: dest.title,
+                                  subtitle: dest.subtitle,
+                                  image: dest.image,
+                                  region: dest.region,
+                                  size: dest.size,
+                                  description: dest.description || '',
+                                });
+                                setDestModal(true);
+                              }}
+                              className="inline-flex items-center gap-1 text-xs text-[#F97316] hover:underline font-bold cursor-pointer"
+                            >
+                              <Edit className="w-3.5 h-3.5" /> Edit
+                            </button>
+                            <button onClick={() => handleDeleteDest(dest.id)} className="inline-flex items-center gap-1 text-xs text-rose-400 hover:underline font-bold cursor-pointer">
+                              <Trash2 className="w-3.5 h-3.5" /> Delete
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                      <p className="text-xs text-stone-400">{dest.subtitle}</p>
-                      <div className="flex justify-end gap-2 pt-2 border-t border-stone-800">
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bg-[#141210] border border-stone-800 rounded-xl p-12 text-center text-stone-400 space-y-3">
+                    <MapPin className="w-8 h-8 text-stone-600 mx-auto" />
+                    <p className="text-sm font-semibold">No destinations found matching &quot;{destSearchQuery}&quot;</p>
+                    <button
+                      onClick={() => setDestSearchQuery('')}
+                      className="text-xs text-[#F97316] hover:underline font-bold"
+                    >
+                      Clear search filter
+                    </button>
+                  </div>
+                )}
+
+                {/* Pagination Controls (Max 6 per page) */}
+                {totalDestPages > 1 && (
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-stone-800">
+                    <span className="text-xs text-stone-400">
+                      Showing <strong className="text-stone-200">{(safeDestPage - 1) * DEST_PER_PAGE + 1}</strong> to{' '}
+                      <strong className="text-stone-200">{Math.min(safeDestPage * DEST_PER_PAGE, filteredDestinations.length)}</strong> of{' '}
+                      <strong className="text-stone-200">{filteredDestinations.length}</strong> destinations
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        disabled={safeDestPage === 1}
+                        onClick={() => setDestPage((p) => Math.max(1, p - 1))}
+                        className="px-3 py-1.5 rounded-lg bg-stone-900 border border-stone-700 text-xs font-semibold text-stone-200 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-stone-800 transition-colors"
+                      >
+                        Previous
+                      </button>
+                      {Array.from({ length: totalDestPages }, (_, i) => i + 1).map((pg) => (
                         <button
-                          onClick={() => {
-                            setEditingDest(dest);
-                            setDestForm({
-                              title: dest.title,
-                              subtitle: dest.subtitle,
-                              image: dest.image,
-                              region: dest.region,
-                              size: dest.size,
-                              description: dest.description || '',
-                            });
-                            setDestModal(true);
-                          }}
-                          className="text-xs text-primary underline"
+                          key={pg}
+                          onClick={() => setDestPage(pg)}
+                          className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${
+                            safeDestPage === pg
+                              ? 'bg-[#F97316] text-black font-extrabold shadow-md'
+                              : 'bg-stone-900 border border-stone-700 text-stone-300 hover:bg-stone-800'
+                          }`}
                         >
-                          Edit
+                          {pg}
                         </button>
-                        <button onClick={() => handleDeleteDest(dest.id)} className="text-xs text-rose-400 underline">
-                          Delete
-                        </button>
-                      </div>
+                      ))}
+                      <button
+                        disabled={safeDestPage === totalDestPages}
+                        onClick={() => setDestPage((p) => Math.min(totalDestPages, p + 1))}
+                        className="px-3 py-1.5 rounded-lg bg-stone-900 border border-stone-700 text-xs font-semibold text-stone-200 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-stone-800 transition-colors"
+                      >
+                        Next
+                      </button>
                     </div>
                   </div>
-                ))}
+                )}
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* TAB 4: INQUIRIES & LEAD CRM MANAGER */}
           {activeTab === 'inquiries' && (
