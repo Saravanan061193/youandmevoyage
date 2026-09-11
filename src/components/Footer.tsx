@@ -202,14 +202,9 @@ export const Footer = () => {
                   <Link
                     key={dest.id || destSlug}
                     href={`/destinations/${destSlug}`}
-                    className="hover:text-orange-400 transition-colors flex items-center gap-1 group"
+                    className="hover:text-orange-400 transition-colors block py-0.5 font-medium"
                   >
-                    <span>{dest.title}</span>
-                    {dest.subtitle ? (
-                      <span className="text-[10px] text-slate-400 italic font-normal truncate max-w-[140px] group-hover:text-orange-300/80">
-                        · {dest.subtitle}
-                      </span>
-                    ) : null}
+                    {dest.title}
                   </Link>
                 );
               })
