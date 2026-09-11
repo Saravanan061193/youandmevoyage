@@ -46,6 +46,7 @@ export async function POST(request: Request) {
     }
     body = sanitizeObject(parseResult.data);
     const { title, subtitle, image, region, size, description } = body;
+    const generatedSlug = body.slug || (title || 'destination').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '-' + Date.now().toString(36);
 
     let createdDest: DestinationItem | null = null;
 
@@ -53,6 +54,7 @@ export async function POST(request: Request) {
       const dbPromise = prisma.destination.create({
         data: {
           title,
+          slug: generatedSlug,
           subtitle: subtitle || '',
           image: image || 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
           region: region || 'Tamil Nadu',
@@ -73,9 +75,10 @@ export async function POST(request: Request) {
       createdDest = {
         id: `dest-${Date.now()}`,
         title,
+        slug: generatedSlug,
         subtitle,
         image: image || 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
-        region: region || 'Central',
+        region: region || 'Tamil Nadu',
         size: size || 'short',
         description: description || '',
         createdAt: new Date().toISOString(),

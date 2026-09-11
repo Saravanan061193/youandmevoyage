@@ -10,12 +10,14 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   try {
     body = await request.json();
     const { title, subtitle, image, region, size, description } = body;
+    const generatedSlug = body.slug || (title || 'destination').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
     try {
       const dbPromise = prisma.destination.update({
         where: { id: params.id },
         data: {
           title,
+          slug: generatedSlug,
           subtitle,
           image,
           region,
