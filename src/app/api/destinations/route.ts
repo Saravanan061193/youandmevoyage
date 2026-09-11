@@ -41,7 +41,8 @@ export async function POST(request: Request) {
     const rawBody = await request.json();
     const parseResult = DestinationSchema.safeParse(rawBody);
     if (!parseResult.success) {
-      return NextResponse.json({ error: 'Invalid destination payload' }, { status: 400 });
+      console.warn('Destination validation error:', parseResult.error.format());
+      return NextResponse.json({ error: 'Invalid destination payload. Check inputs.' }, { status: 400 });
     }
     body = sanitizeObject(parseResult.data);
     const { title, subtitle, image, region, size, description } = body;
@@ -52,19 +53,21 @@ export async function POST(request: Request) {
       const dbPromise = prisma.destination.create({
         data: {
           title,
-          subtitle,
+          subtitle: subtitle || '',
           image: image || 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85',
-          region: region || 'Central',
+          region: region || 'Tamil Nadu',
           size: size || 'short',
           description: description || '',
         },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
       const dbRes: any = await Promise.race([dbPromise, timeoutPromise]);
       if (dbRes && dbRes.id) {
         createdDest = dbRes;
       }
-    } catch (dbErr) {}
+    } catch (dbErr) {
+      console.warn('Prisma destination create failed:', dbErr);
+    }
 
     if (!createdDest) {
       createdDest = {

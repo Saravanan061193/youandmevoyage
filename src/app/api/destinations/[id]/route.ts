@@ -23,7 +23,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
           description,
         },
       });
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
       const dbRes: any = await Promise.race([dbPromise, timeoutPromise]);
       if (dbRes && dbRes.id) {
         updateInMemoryDestination(params.id, dbRes);

@@ -840,21 +840,25 @@ export default function AdminPage() {
       const url = editingDest ? `/api/destinations/${editingDest.id}` : '/api/destinations';
       const method = editingDest ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const payload = {
+        ...destForm,
+        size: (destForm.size || 'short').toLowerCase(),
+      };
+
+      const res = await adminFetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(destForm),
+        body: JSON.stringify(payload),
       });
 
-      let savedItem: any = null;
-      if (res.ok) {
-        savedItem = await res.json();
-      } else {
-        savedItem = {
-          id: editingDest ? editingDest.id : `dest-${Date.now()}`,
-          ...destForm,
-        };
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        showNotification(`Error: ${errData.error || 'Failed to save destination'}`);
+        alert(`Could not save destination: ${errData.error || 'Invalid payload or server error'}`);
+        setSaving(false);
+        return;
       }
+
+      const savedItem = await res.json();
 
       setDestinations((prev) => {
         let updated;
@@ -877,23 +881,7 @@ export default function AdminPage() {
       fetchAllData();
     } catch (e) {
       console.error(e);
-      const fallbackItem = {
-        id: editingDest ? editingDest.id : `dest-${Date.now()}`,
-        ...destForm,
-      };
-      setDestinations((prev) => {
-        const updated = editingDest
-          ? prev.map((d) => (d.id === editingDest.id ? { ...d, ...fallbackItem } : d))
-          : [fallbackItem, ...prev];
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('site_destinations_cache', JSON.stringify(updated));
-          window.dispatchEvent(new Event('destinations_updated'));
-        }
-        return updated;
-      });
-      setSaveSuccessModal('Destination details saved successfully!');
-      setDestModal(false);
-      setEditingDest(null);
+      alert('Network error while saving destination.');
     } finally {
       setSaving(false);
     }

@@ -66,12 +66,15 @@ export const SafariSchema = z.object({
 });
 
 export const DestinationSchema = z.object({
-  title: z.string().min(1).max(200),
+  title: z.string().min(1, 'Title is required').max(200),
   subtitle: z.string().max(300).optional().default(''),
-  image: z.string().max(5000000).optional().default(''),
-  region: z.string().max(100).default('Central'),
-  size: z.enum(['large', 'tall', 'short']).default('short'),
-  description: z.string().max(3000).optional().default(''),
+  image: z.string().max(10000000).optional().default(''),
+  region: z.string().max(100).optional().default('Tamil Nadu'),
+  size: z.union([z.string(), z.enum(['large', 'tall', 'short'])]).transform((val) => {
+    const s = String(val || 'short').toLowerCase();
+    return ['large', 'tall', 'short'].includes(s) ? s : 'short';
+  }).default('short'),
+  description: z.string().max(5000).optional().default(''),
 });
 
 export const BlogSchema = z.object({
