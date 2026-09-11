@@ -170,7 +170,7 @@ export default function AboutPage() {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src={settings?.aboutCompanyStoryImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85'}
+                src={settings?.aboutCompanyStoryImage || settings?.aboutHeroImage || 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85'}
                 alt="South India Heritage Story"
                 className="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700"
               />
