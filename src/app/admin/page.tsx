@@ -3782,6 +3782,27 @@ export default function AdminPage() {
                           ))}
                         </div>
 
+                        {/* Quoted Deal Amount ($ USD) Field */}
+                        <div className="pt-3 border-t border-stone-800 space-y-2">
+                          <label className="text-stone-300 font-bold flex items-center justify-between text-xs">
+                            <span className="flex items-center gap-1.5">
+                              <DollarSign className="w-4 h-4 text-emerald-400" /> Quoted Amount ($ USD)
+                            </span>
+                            <span className="text-[10px] text-stone-500 font-mono font-normal">Optional</span>
+                          </label>
+                          <div className="relative">
+                            <span className="absolute left-3.5 top-2.5 text-stone-500 font-bold text-sm">$</span>
+                            <input
+                              type="number"
+                              step="50"
+                              value={leadForm.proposalAmount}
+                              onChange={(e) => setLeadForm({ ...leadForm, proposalAmount: e.target.value })}
+                              placeholder="e.g. 2500"
+                              className="w-full bg-stone-900 border border-stone-700 text-stone-100 rounded-xl pl-8 pr-4 py-2.5 text-sm outline-none focus:border-[#F97316] font-mono font-bold"
+                            />
+                          </div>
+                        </div>
+
                         {/* Lost Reason Input Field (Visible when Lost is selected) */}
                         {leadForm.status === 'Lost' && (
                           <div className="pt-2 space-y-1.5">
@@ -3800,78 +3821,21 @@ export default function AdminPage() {
                         )}
                       </div>
 
-                      {/* 2. Proposal Quoted Value ($ USD) */}
-                      <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
-                        <div className="flex items-center justify-between border-b border-stone-800 pb-3">
-                          <h3 className="font-serif text-base font-bold text-stone-200 flex items-center gap-2">
-                            <DollarSign className="w-4 h-4 text-emerald-400" /> Proposal Deal Amount
-                          </h3>
-                          <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-mono font-bold">
-                            USD ($)
-                          </span>
-                        </div>
-
-                        <div>
-                          <label className="text-stone-400 font-semibold block mb-1">Total Quoted Value ($ USD)</label>
-                          <div className="relative">
-                            <span className="absolute left-3.5 top-2.5 text-stone-500 font-bold text-sm">$</span>
-                            <input
-                              type="number"
-                              step="50"
-                              value={leadForm.proposalAmount}
-                              onChange={(e) => setLeadForm({ ...leadForm, proposalAmount: e.target.value })}
-                              placeholder="e.g. 4850"
-                              className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-xl pl-8 pr-4 py-2.5 text-base outline-none focus:border-primary font-serif font-bold"
-                            />
-                          </div>
-                          <p className="text-[10px] text-stone-500 mt-1.5 leading-relaxed">
-                            Total cost quoted for this safari proposal. Populates sales reports.
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* 3. Schedule Follow-Up & Internal Notes */}
-                      <div className="bg-[#141210] border border-stone-800 rounded-2xl p-6 space-y-4 shadow-xl">
-                        <h3 className="font-serif text-base font-bold text-stone-200 border-b border-stone-800 pb-3 flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-purple-400" /> Follow-up & Activity Log
-                        </h3>
-
-                        <div>
-                          <label className="text-stone-400 font-semibold block mb-1">Follow-up Reminder Date</label>
-                          <input
-                            type="date"
-                            value={leadForm.followupDate}
-                            onChange={(e) => setLeadForm({ ...leadForm, followupDate: e.target.value })}
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-xl p-2.5 outline-none focus:border-primary font-mono text-xs"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="text-stone-400 font-semibold block mb-1">Internal Team CRM Notes</label>
-                          <textarea
-                            rows={4}
-                            value={leadForm.crmNotes}
-                            onChange={(e) => setLeadForm({ ...leadForm, crmNotes: e.target.value })}
-                            placeholder="Log phone calls, WhatsApp messages, custom quotes..."
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-xl p-2.5 outline-none focus:border-primary text-xs leading-relaxed resize-none"
-                          />
-                        </div>
-                      </div>
-
                       {/* Action Bar */}
                       <div className="flex items-center justify-end gap-3 pt-2">
                         <button
                           type="button"
                           onClick={() => setInquiryViewMode('list')}
-                          className="px-4 py-2.5 bg-stone-800 text-stone-300 text-xs font-semibold rounded-xl hover:bg-stone-700"
+                          className="px-5 py-3 bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
-                          className="px-5 py-2.5 bg-gold-gradient text-stone-950 text-xs font-bold rounded-xl shadow-lg hover:brightness-110 flex items-center gap-2"
+                          disabled={saving}
+                          className="gold-button text-xs px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 cursor-pointer"
                         >
-                          <Save className="w-4 h-4" /> Save CRM Record
+                          <Save className="w-4 h-4" /> Save Record
                         </button>
                       </div>
                     </div>
