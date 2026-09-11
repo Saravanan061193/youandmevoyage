@@ -41,19 +41,21 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
       const res = await fetch('/api/settings');
       if (res.ok) {
         const data = await res.json();
-        let cachedLogo = '';
+        let cachedSettings: any = {};
         if (typeof window !== 'undefined') {
           try {
             const cached = localStorage.getItem('site_settings_cache');
             if (cached) {
-              const parsed = JSON.parse(cached);
-              cachedLogo = parsed?.siteLogo || '';
+              cachedSettings = JSON.parse(cached);
             }
           } catch (e) {}
         }
-        const merged = { ...data };
-        if (!merged.siteLogo && cachedLogo) {
-          merged.siteLogo = cachedLogo;
+        const merged = { ...data, ...cachedSettings, ...data };
+        if (!merged.siteLogo && cachedSettings?.siteLogo) {
+          merged.siteLogo = cachedSettings.siteLogo;
+        }
+        if (!merged.siteFavicon && cachedSettings?.siteFavicon) {
+          merged.siteFavicon = cachedSettings.siteFavicon;
         }
         setSettings(merged);
         if (typeof window !== 'undefined') {

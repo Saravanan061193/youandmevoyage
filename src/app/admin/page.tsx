@@ -687,24 +687,21 @@ export default function AdminPage() {
       }
       if (setRes.ok) {
         const fetchedSet = await setRes.json();
-        let cachedLogo = '';
-        let cachedFavicon = '';
+        let cachedSettings: any = {};
         if (typeof window !== 'undefined') {
           try {
             const cached = localStorage.getItem('site_settings_cache');
             if (cached) {
-              const parsed = JSON.parse(cached);
-              cachedLogo = parsed?.siteLogo || '';
-              cachedFavicon = parsed?.siteFavicon || '';
+              cachedSettings = JSON.parse(cached);
             }
           } catch (e) {}
         }
-        const mergedSet = { ...fetchedSet };
-        if (!mergedSet.siteLogo && cachedLogo) {
-          mergedSet.siteLogo = cachedLogo;
+        const mergedSet = { ...fetchedSet, ...cachedSettings, ...fetchedSet };
+        if (!mergedSet.siteLogo && cachedSettings?.siteLogo) {
+          mergedSet.siteLogo = cachedSettings.siteLogo;
         }
-        if (!mergedSet.siteFavicon && cachedFavicon) {
-          mergedSet.siteFavicon = cachedFavicon;
+        if (!mergedSet.siteFavicon && cachedSettings?.siteFavicon) {
+          mergedSet.siteFavicon = cachedSettings.siteFavicon;
         }
         setSettings(mergedSet);
         if (typeof window !== 'undefined') {

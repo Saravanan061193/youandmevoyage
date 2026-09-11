@@ -133,19 +133,19 @@ export async function GET() {
     const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
-    if (settings) {
-      const merged = { ...DEFAULT_SETTINGS, ...(inMemorySettingsCache || {}), ...settings };
-      if (!merged.siteLogo && inMemorySettingsCache?.siteLogo) {
-        merged.siteLogo = inMemorySettingsCache.siteLogo;
-      }
-      if (!merged.siteFavicon && inMemorySettingsCache?.siteFavicon) {
-        merged.siteFavicon = inMemorySettingsCache.siteFavicon;
-      }
-      inMemorySettingsCache = merged;
-      return NextResponse.json(inMemorySettingsCache);
+    const merged = {
+      ...DEFAULT_SETTINGS,
+      ...(settings || {}),
+      ...(inMemorySettingsCache || {}),
+    };
+    if (!merged.siteLogo && inMemorySettingsCache?.siteLogo) {
+      merged.siteLogo = inMemorySettingsCache.siteLogo;
     }
-
-    return NextResponse.json(inMemorySettingsCache || DEFAULT_SETTINGS);
+    if (!merged.siteFavicon && inMemorySettingsCache?.siteFavicon) {
+      merged.siteFavicon = inMemorySettingsCache.siteFavicon;
+    }
+    inMemorySettingsCache = merged;
+    return NextResponse.json(inMemorySettingsCache);
   } catch (error: any) {
     return NextResponse.json(inMemorySettingsCache || DEFAULT_SETTINGS);
   }
@@ -320,7 +320,12 @@ export async function PUT(request: Request) {
       console.warn('DB settings update failed or timed out:', e);
     }
 
-    inMemorySettingsCache = { ...DEFAULT_SETTINGS, ...(settings || {}), ...(inMemorySettingsCache || {}), ...updateData };
+    inMemorySettingsCache = {
+      ...DEFAULT_SETTINGS,
+      ...(settings || {}),
+      ...(inMemorySettingsCache || {}),
+      ...updateData,
+    };
 
     return NextResponse.json(inMemorySettingsCache);
   } catch (error: any) {
