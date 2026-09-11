@@ -60,6 +60,7 @@ import {
 } from 'lucide-react';
 import { ImageUploader } from '@/components/ImageUploader';
 import { triggerPdfDownload } from '@/lib/downloadPdf';
+import { safeParseList } from '@/lib/json';
 
 export default function AdminPage() {
   const [authChecking, setAuthChecking] = useState(true);
@@ -81,7 +82,7 @@ export default function AdminPage() {
   const [forgotError, setForgotError] = useState('');
   const [previewOtp, setPreviewOtp] = useState('');
   const [forgotSubmitting, setForgotSubmitting] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'safaris' | 'destinations' | 'inquiries' | 'reviews' | 'settings' | 'legal' | 'blogs' | 'reports' | 'about' | 'faqs' | 'itineraries'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'safaris' | 'destinations' | 'inquiries' | 'reviews' | 'settings' | 'legal' | 'blogs' | 'reports' | 'about' | 'faqs' | 'itineraries' | 'experiences'>('overview');
   const [settingsSubTab, setSettingsSubTab] = useState<'basic' | 'social' | 'cloudinary' | 'seo' | 'banner'>('basic');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [cmsExpanded, setCmsExpanded] = useState(false);
@@ -6336,7 +6337,10 @@ export default function AdminPage() {
                   onClick={async () => {
                     try {
                       setSaving(true);
-                      await saveSettingsAPI(settings);
+                      await adminFetch('/api/settings', {
+                        method: 'PUT',
+                        body: JSON.stringify(settings),
+                      });
                       showNotification('Experiences updated & published live successfully!');
                     } catch (err) {
                       showNotification('Failed to save experiences');
