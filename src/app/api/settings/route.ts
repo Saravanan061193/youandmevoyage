@@ -60,7 +60,7 @@ const DEFAULT_SETTINGS = {
   aboutCompanyStoryTitle: 'Our Story: Independent Travel Companions',
   aboutCompanyStorySubheadline: 'Engineered for travelers seeking authentic South Indian heritage',
   aboutCompanyStoryContent: 'Founded in Chennai, You & Me – Independent Voyage was born out of a passion for authentic cultural journeys, pristine temple architecture, and serene backwater escapes. We provide unhurried, private, and deeply personal travel experiences with dedicated local driver companions tailored to your schedule.',
-  aboutCompanyStoryImage: '/images/innova_crysta_fleet.png',
+  aboutCompanyStoryImage: '/images/our_story_fleet.jpg',
   aboutMission: 'To celebrate and share South India’s rich culture and serene landscapes through sustainable, personalized private driver journeys.',
   aboutVision: 'To set the gold standard for authentic, driver-assisted private travel in South India.',
   aboutWhyChooseUs: JSON.stringify([]),

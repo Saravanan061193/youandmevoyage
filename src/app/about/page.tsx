@@ -177,8 +177,8 @@ export default function AboutPage() {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src={settings?.aboutCompanyStoryImage || '/images/innova_crysta_fleet.png'}
-                alt="South India Private Tour Innova Fleet Story"
+                src={settings?.aboutCompanyStoryImage || '/images/our_story_fleet.jpg'}
+                alt="South India Heritage Story & Luxury Fleet"
                 className="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
