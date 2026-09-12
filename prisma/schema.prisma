@@ -180,8 +180,8 @@ model SiteSettings {
   enableAnnouncementBanner Boolean @default(true)
 
   // Legal CMS
-  termsContent            String?  @default("Welcome to You & Me – Independent Voyage. By booking a journey with us, you agree to our booking terms, deposit conditions, cancellation policies, and liability waivers. All private journeys include dedicated vehicle, experienced local companion/driver, and customizable routes.")
-  privacyContent          String?  @default("You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and passport data required for bookings. We do not sell or share your data with third parties.")
+  termsContent            String?  @default("")
+  privacyContent          String?  @default("")
 
   // About Page CMS Settings
   aboutHeroHeadline            String?  @default("Crafting Authentic South India Journeys")
@@ -227,6 +227,7 @@ model SiteSettings {
   leadMagnetButtonText    String?  @default("Get Free eBook PDF")
   leadMagnetPdfUrl        String?  @default("https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf")
   siteFavicon             String?  @default("")
+  siteExperiences         String?  @default("[]")
   updatedAt               DateTime @updatedAt
 }
 

@@ -190,14 +190,18 @@ export async function GET() {
     const fallbackPrivacy = 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.';
 
     const termsContent =
-      inMemorySettingsCache?.termsContent ||
-      settings?.termsContent ||
-      fallbackTerms;
+      inMemorySettingsCache?.termsContent !== undefined && inMemorySettingsCache?.termsContent !== null && inMemorySettingsCache?.termsContent !== ''
+        ? inMemorySettingsCache.termsContent
+        : settings?.termsContent !== undefined && settings?.termsContent !== null && settings?.termsContent !== ''
+        ? settings.termsContent
+        : fallbackTerms;
 
     const privacyContent =
-      inMemorySettingsCache?.privacyContent ||
-      settings?.privacyContent ||
-      fallbackPrivacy;
+      inMemorySettingsCache?.privacyContent !== undefined && inMemorySettingsCache?.privacyContent !== null && inMemorySettingsCache?.privacyContent !== ''
+        ? inMemorySettingsCache.privacyContent
+        : settings?.privacyContent !== undefined && settings?.privacyContent !== null && settings?.privacyContent !== ''
+        ? settings.privacyContent
+        : fallbackPrivacy;
 
     const merged = {
       ...DEFAULT_SETTINGS,
