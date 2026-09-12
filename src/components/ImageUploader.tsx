@@ -181,11 +181,18 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
                   onChange(cloudData.secure_url);
                   return; // Exit early on success
                 } else {
+                  const errBody = await uploadRes.text();
+                  alert('Cloudinary Upload Failed! Status: ' + uploadRes.status + ' - ' + errBody);
                   console.warn('Cloudinary upload failed, falling back to base64. Status:', uploadRes.status);
                 }
-              } catch (cloudErr) {
+              } catch (cloudErr: any) {
+                alert('Cloudinary Upload Error Exception: ' + cloudErr.message);
                 console.error('Cloudinary upload error, falling back to base64:', cloudErr);
               }
+            } else {
+               if (enableCloudinary) {
+                  alert('Cloudinary is enabled but missing cloudName (' + cloudinaryCloudName + ') or preset (' + cloudinaryUploadPreset + ')');
+               }
             }
             
             // Fallback to base64 if Cloudinary is disabled or failed
