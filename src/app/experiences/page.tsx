@@ -7,6 +7,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { QuoteModal } from '@/components/QuoteModal';
 import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
+import { SEOHelper } from '@/components/SEOHelper';
 import { safeParseList } from '@/lib/json';
 
 const DEFAULT_EXPERIENCES: any[] = [];
@@ -19,6 +20,12 @@ function ExperiencesContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Authentic South Indian Experiences | You & Me – Independent Voyage"
+        description="Discover handpicked experiences across South India, including Chettinad culinary feasts, temple rituals, tea estate walks, and private backwater cruises."
+        keywords="South India Experiences, Chettinad Food Feast, Temple Rituals, Alleppey Houseboat Cruise, Munnar Tea Estate Walk"
+        canonicalUrl="https://youandmevoyage.com/experiences"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Header */}

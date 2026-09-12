@@ -9,6 +9,7 @@ import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { MapPin, ArrowRight, MessageCircle, Check, Clock, Sparkles } from 'lucide-react';
 import { PageSpinner } from '@/components/PageSpinner';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function DestinationDetailContent() {
   const params = useParams();
@@ -74,6 +75,13 @@ const safeParseList = (value: any, fallbackDefault: any[] = []): any[] => {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title={dest.metaTitle || `${dest.title} Travel Guide | You & Me Voyage`}
+        description={dest.metaDescription || dest.description || `Explore ${dest.title} - custom South India travel destination.`}
+        canonicalUrl={`https://youandmevoyage.com/destinations/${slug}`}
+        ogImage={dest.image}
+        keywords={dest.keywords}
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Banner */}

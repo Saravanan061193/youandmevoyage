@@ -20,6 +20,7 @@ import {
   ArrowLeft,
   Send,
 } from 'lucide-react';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function BuildYourTripContent() {
   const { settings } = useCurrency();
@@ -189,6 +190,12 @@ I would love to receive a customized itinerary proposal!`;
     return encodeURIComponent(text);
   };  return (
     <main className="min-h-screen bg-white text-slate-900 selection:bg-orange-500 selection:text-white">
+      <SEOHelper
+        title="Custom South India Trip Planner | You & Me – Independent Voyage"
+        description="Design your custom private journey across Tamil Nadu & Kerala. Choose destinations, accommodation, driver companion, and travel style."
+        canonicalUrl="https://youandmevoyage.com/build-your-trip"
+        keywords="Custom South India trip planner, Tailor made Tamil Nadu tour, Custom Kerala itinerary, Private driver tour planner"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">

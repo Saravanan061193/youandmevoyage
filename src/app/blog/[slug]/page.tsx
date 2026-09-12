@@ -20,6 +20,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
+import { SEOHelper } from '@/components/SEOHelper';
 
 export default function SingleBlogPostPage() {
   const params = useParams();
@@ -268,9 +269,13 @@ export default function SingleBlogPostPage() {
 
   return (
     <CurrencyProvider>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+      <SEOHelper
+        title={post.metaTitle || `${post.title} | You & Me – Independent Voyage`}
+        description={post.metaDescription || post.excerpt || `Read ${post.title} on You & Me Independent Voyage blog.`}
+        canonicalUrl={`https://youandmevoyage.com/blog/${slug}`}
+        ogImage={post.coverImage}
+        keywords={post.keywords}
+        schema={jsonLdData}
       />
       <main className="min-h-screen bg-[#0F172A] text-slate-100 flex flex-col selection:bg-orange-500 selection:text-white">
         <UtilityBar />

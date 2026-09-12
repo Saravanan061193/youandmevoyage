@@ -5,6 +5,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
+import { SEOHelper } from '@/components/SEOHelper';
 import { Star, Quote, ExternalLink, ShieldCheck, Heart } from 'lucide-react';
 
 function ReviewsContent() {
@@ -24,6 +25,12 @@ function ReviewsContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Guest Reviews & Testimonials | You & Me – Independent Voyage"
+        description="Read 4.9★ rated TripAdvisor guest reviews and testimonials from international travelers who experienced South India with You & Me Independent Voyage."
+        keywords="You & Me Reviews, South India Tour Reviews, TripAdvisor You & Me Voyage, Guest Testimonials Tamil Nadu Kerala"
+        canonicalUrl="https://youandmevoyage.com/reviews"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Header */}

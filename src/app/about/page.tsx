@@ -25,6 +25,7 @@ import { Footer } from '@/components/Footer';
 import { FAQSection } from '@/components/FAQSection';
 import { QuoteModal } from '@/components/QuoteModal';
 import { useCurrency } from '@/components/CurrencyContext';
+import { SEOHelper } from '@/components/SEOHelper';
 
 export default function AboutPage() {
   const { settings } = useCurrency();
@@ -97,6 +98,12 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans">
+      <SEOHelper
+        title={settings?.aboutMetaTitle || 'About Us | You & Me – Independent Voyage'}
+        description={settings?.aboutMetaDescription || 'Learn about You & Me – Independent Voyage, our passion for South India road trip travel, private driver companions, and boutique heritage stays.'}
+        keywords={settings?.aboutKeywords || 'About You & Me Independent Voyage, South India Travel Companion, Private Driver Tamil Nadu, Kerala Tour Specialist'}
+        canonicalUrl="https://youandmevoyage.com/about"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteOpen(true)} />
 
       {/* Hero Banner Section */}

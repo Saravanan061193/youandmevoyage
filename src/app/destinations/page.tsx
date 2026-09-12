@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
+import { SEOHelper } from '@/components/SEOHelper';
 import { MapPin, ArrowRight, Clock, Sparkles } from 'lucide-react';
 import { safeParseList } from '@/lib/json';
 
@@ -26,6 +27,12 @@ function DestinationsListingContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Destinations Across Tamil Nadu & Kerala | You & Me – Independent Voyage"
+        description="Explore top destinations in South India including Chennai, Mahabalipuram, Pondicherry, Thanjavur, Madurai, Chettinad, Munnar, and Alleppey backwaters."
+        keywords="South India Destinations, Tamil Nadu Temples, Kerala Backwaters, Munnar Tea Gardens, Pondicherry French Quarter"
+        canonicalUrl="https://youandmevoyage.com/destinations"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Header */}

@@ -7,6 +7,7 @@ import { UtilityBar } from '@/components/UtilityBar';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
+import { SEOHelper } from '@/components/SEOHelper';
 
 export default function PrivacyPage() {
   const [content, setContent] = useState<string>('');
@@ -52,6 +53,11 @@ export default function PrivacyPage() {
   return (
     <CurrencyProvider>
       <main className="min-h-screen bg-white text-slate-900 selection:bg-orange-500 selection:text-white flex flex-col">
+        <SEOHelper
+          title="Privacy Policy | You & Me – Independent Voyage"
+          description="Read our privacy policy regarding data collection, client confidentiality, and security for South India tour bookings."
+          canonicalUrl="https://youandmevoyage.com/privacy"
+        />
         <UtilityBar />
         <Navbar onOpenQuoteModal={() => {}} />
 

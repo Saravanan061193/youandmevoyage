@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { MapPin, Phone, Mail, Clock, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function ContactContent() {
   const { settings } = useCurrency();
@@ -44,6 +45,12 @@ function ContactContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Contact Us | You & Me – Independent Voyage"
+        description="Get in touch with You & Me – Independent Voyage. Plan your custom South India private journey, driver tour, or luxury vacation across Tamil Nadu and Kerala."
+        canonicalUrl="https://youandmevoyage.com/contact"
+        keywords="Contact You & Me Voyage, South India tour contact, Tamil Nadu driver tour contact, Kerala travel agency contact"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Header */}

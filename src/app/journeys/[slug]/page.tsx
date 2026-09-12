@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 
 import { PageSpinner } from '@/components/PageSpinner';
+import { SEOHelper } from '@/components/SEOHelper';
 
 const safeParseList = (value: any, fallbackDefault: any[] = []): any[] => {
   if (!value) return fallbackDefault;
@@ -100,6 +101,13 @@ function JourneyDetailContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title={journey.metaTitle || `${journey.title} | You & Me – Independent Voyage`}
+        description={journey.metaDescription || journey.description || `Explore ${journey.title} - private South India tour.`}
+        canonicalUrl={`https://youandmevoyage.com/journeys/${slug}`}
+        ogImage={journey.image}
+        keywords={journey.keywords}
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Banner */}

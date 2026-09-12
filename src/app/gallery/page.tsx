@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { X, ZoomIn, MapPin } from 'lucide-react';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function GalleryContent() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -74,6 +75,12 @@ function GalleryContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Photo Gallery | You & Me – Independent Voyage"
+        description="Explore our visual journey through Tamil Nadu and Kerala. Photos of temples, backwaters, tea gardens, French quarters, and local culture."
+        canonicalUrl="https://youandmevoyage.com/gallery"
+        keywords="South India photo gallery, Tamil Nadu pictures, Kerala houseboat photos, Munnar tea plantation photos, Madurai temple photos"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Header */}

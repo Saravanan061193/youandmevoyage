@@ -7,6 +7,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { BookOpen, Clock, ArrowRight, User } from 'lucide-react';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function TravelJournalContent() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -25,6 +26,12 @@ function TravelJournalContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Travel Journal & Guides | You & Me – Independent Voyage"
+        description="South India travel guides, cultural advice, temple route tips, Kerala backwater itineraries, and private driver tour inspiration."
+        canonicalUrl="https://youandmevoyage.com/travel-journal"
+        keywords="South India travel journal, Tamil Nadu travel guide, Kerala travel advice, driver tour guide South India"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Header */}

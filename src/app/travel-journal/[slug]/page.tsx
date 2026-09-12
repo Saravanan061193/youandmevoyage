@@ -8,6 +8,7 @@ import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { Clock, User, ArrowLeft, ArrowRight, MessageSquare } from 'lucide-react';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function ArticleDetailContent() {
   const params = useParams();
@@ -43,6 +44,13 @@ function ArticleDetailContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title={post.metaTitle || `${post.title} | You & Me – Independent Voyage`}
+        description={post.metaDescription || post.excerpt || `Read ${post.title} on You & Me Independent Voyage.`}
+        canonicalUrl={`https://youandmevoyage.com/travel-journal/${slug}`}
+        ogImage={post.coverImage}
+        keywords={post.keywords}
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Cover */}

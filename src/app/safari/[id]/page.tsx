@@ -24,6 +24,7 @@ import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { PageSpinner } from '@/components/PageSpinner';
 import { safeParseList } from '@/lib/json';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function SafariDetailContent() {
   const params = useParams();
@@ -113,6 +114,13 @@ function SafariDetailContent() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-orange-500 selection:text-white">
+      <SEOHelper
+        title={safari.metaTitle || `${safari.title} | You & Me – Independent Voyage`}
+        description={safari.metaDescription || safari.description || `Explore ${safari.title} - private South India tour.`}
+        canonicalUrl={`https://youandmevoyage.com/safari/${safariId}`}
+        ogImage={safari.image}
+        keywords={safari.keywords}
+      />
       <UtilityBar />
       <Navbar onOpenQuoteModal={() => setIsQuoteOpen(true)} />
 

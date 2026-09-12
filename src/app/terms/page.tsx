@@ -7,6 +7,7 @@ import { UtilityBar } from '@/components/UtilityBar';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
+import { SEOHelper } from '@/components/SEOHelper';
 
 export default function TermsPage() {
   const [content, setContent] = useState<string>('');
@@ -52,6 +53,11 @@ export default function TermsPage() {
   return (
     <CurrencyProvider>
       <main className="min-h-screen bg-white text-slate-900 selection:bg-orange-500 selection:text-white flex flex-col">
+        <SEOHelper
+          title="Terms & Conditions | You & Me – Independent Voyage"
+          description="Read our terms and conditions for private tour bookings, driver companion services, payments, and cancellations in South India."
+          canonicalUrl="https://youandmevoyage.com/terms"
+        />
         <UtilityBar />
         <Navbar onOpenQuoteModal={() => {}} />
 

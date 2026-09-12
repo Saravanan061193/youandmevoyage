@@ -6,12 +6,19 @@ import { Footer } from '@/components/Footer';
 import { SafariGrid } from '@/components/SafariGrid';
 import { CurrencyProvider } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
+import { SEOHelper } from '@/components/SEOHelper';
 
 function JourneysListingContent() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      <SEOHelper
+        title="Custom South India Private Journeys | You & Me – Independent Voyage"
+        description="Browse curated private itineraries across Tamil Nadu and Kerala with dedicated driver companions, luxury houseboats, and heritage hotel stays."
+        keywords="South India Journeys, Private Driver Tours, Tamil Nadu Itineraries, Kerala Backwaters Trip, Custom Tour Packages India"
+        canonicalUrl="https://youandmevoyage.com/journeys"
+      />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
       {/* Hero Banner */}

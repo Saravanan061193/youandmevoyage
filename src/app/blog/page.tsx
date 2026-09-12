@@ -7,6 +7,7 @@ import { UtilityBar } from '@/components/UtilityBar';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CurrencyProvider } from '@/components/CurrencyContext';
+import { SEOHelper } from '@/components/SEOHelper';
 
 export default function BlogIndexPage() {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -82,6 +83,12 @@ export default function BlogIndexPage() {
   return (
     <CurrencyProvider>
       <main className="min-h-screen bg-[#0F172A] text-slate-100 flex flex-col selection:bg-orange-500 selection:text-white font-sans">
+        <SEOHelper
+          title="South India Travel Journal & Guides | You & Me – Independent Voyage"
+          description="Read travel guides, itinerary tips, temple etiquette, and culinary secrets curated by local companions at You & Me Independent Voyage."
+          keywords="South India Travel Blog, Tamil Nadu Travel Guide, Kerala Itinerary Tips, Chettinad Food Guide, Temple Etiquette India"
+          canonicalUrl="https://youandmevoyage.com/blog"
+        />
         <UtilityBar />
         <Navbar onOpenQuoteModal={() => {}} />
 
