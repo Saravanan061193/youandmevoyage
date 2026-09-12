@@ -169,6 +169,11 @@ export default function SingleBlogPostPage() {
 
   const renderFormattedContent = (content: string) => {
     if (!content) return null;
+
+    if (/<[a-z][\s\S]*>/i.test(content)) {
+      return <div className="blog-content" dangerouslySetInnerHTML={{ __html: content }} />;
+    }
+
     const blocks = content.split(/\n\n+/);
 
     return blocks.map((block, idx) => {
@@ -342,9 +347,13 @@ export default function SingleBlogPostPage() {
             />
           </div>
 
-          {/* Article Body Content with Markdown parser */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-10 text-slate-300 text-base leading-relaxed shadow-2xl font-sans space-y-4">
-            {renderFormattedContent(post.content)}
+          {/* Article Body Content */}
+          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-10 text-slate-300 text-base leading-relaxed shadow-2xl font-sans blog-content">
+            {/<[a-z][\s\S]*>/i.test(post.content || '') ? (
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            ) : (
+              renderFormattedContent(post.content)
+            )}
           </div>
 
           {/* Author Box */}

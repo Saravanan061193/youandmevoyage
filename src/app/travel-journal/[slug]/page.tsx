@@ -91,7 +91,7 @@ function ArticleDetailContent() {
           </p>
 
           <div
-            className="space-y-4 text-sm sm:text-base whitespace-pre-line"
+            className="space-y-4 text-sm sm:text-base blog-content"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
