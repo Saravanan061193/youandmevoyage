@@ -45,18 +45,7 @@ const CurrencyContext = createContext<CurrencyContextType>({
 
 export const CurrencyProvider = ({ children }: { children: React.ReactNode }) => {
   const [currency] = useState<Currency>('INR');
-  const [settings, setSettings] = useState<any>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const cached = localStorage.getItem('site_settings_cache');
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          return { ...DEFAULT_SETTINGS, ...parsed };
-        }
-      } catch (e) {}
-    }
-    return DEFAULT_SETTINGS;
-  });
+  const [settings, setSettings] = useState<any>(DEFAULT_SETTINGS);
 
   const fetchSettings = async () => {
     try {
@@ -69,7 +58,11 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
         setSettings((prev: any) => ({ ...DEFAULT_SETTINGS, ...prev, ...cleanData }));
         if (typeof window !== 'undefined') {
           const existing = JSON.parse(localStorage.getItem('site_settings_cache') || '{}');
-          localStorage.setItem('site_settings_cache', JSON.stringify({ ...existing, ...cleanData }));
+          try {
+            localStorage.setItem('site_settings_cache', JSON.stringify({ ...existing, ...cleanData }));
+          } catch (e) {
+            console.warn('Could not save settings to localStorage (quota exceeded?):', e);
+          }
         }
       }
     } catch (e) {
@@ -78,6 +71,19 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem('site_settings_cache');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          const cleanParsed = Object.fromEntries(
+            Object.entries(parsed || {}).filter(([_, v]) => keepValue(v))
+          );
+          setSettings((prev: any) => ({ ...DEFAULT_SETTINGS, ...prev, ...cleanParsed }));
+        }
+      } catch (e) {}
+    }
+
     fetchSettings();
 
     const handleSync = () => {

@@ -1256,9 +1256,40 @@ export default function AdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
+      const payloadSettings = { ...settings };
+      try {
+        const parsedHB = typeof payloadSettings.heroBanners === 'string' ? JSON.parse(payloadSettings.heroBanners) : payloadSettings.heroBanners;
+        if (!Array.isArray(parsedHB) || parsedHB.length === 0) {
+          const defaultBanners = [
+            {
+              id: 1,
+              headline: settings.heroHeadline || 'Travel South India Your Way',
+              subheadline: settings.heroSubheadline || 'PRIVATE JOURNEYS · AUTHENTIC EXPERIENCES · EXPERIENCED LOCAL COMPANIONS',
+              copy: settings.heroCopy || 'Thoughtfully crafted itineraries across Tamil Nadu, Kerala, and South India tailored specifically to your speed and preferences.',
+              image: settings.heroImage || '/images/thanjavur_periya_kovil.png',
+            },
+            {
+              id: 2,
+              headline: 'Serene Backwaters & Houseboat Cruises of Kerala',
+              subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES',
+              copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons.',
+              image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
+            },
+            {
+              id: 3,
+              headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
+              subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
+              copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
+              image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
+            },
+          ];
+          payloadSettings.heroBanners = JSON.stringify(defaultBanners);
+        }
+      } catch (e) {}
+
       const res = await adminFetch('/api/settings', {
         method: 'PUT',
-        body: JSON.stringify(settings),
+        body: JSON.stringify(payloadSettings),
       });
       let updatedSettings = { ...settings };
       if (res.ok) {
@@ -1279,6 +1310,11 @@ export default function AdminPage() {
             updatedSettings[bf] = resData[bf];
           }
         }
+      } else {
+        const errText = await res.text();
+        alert(`Failed to save settings to server. Please try again or check if images are too large. Error: ${res.status} ${errText}`);
+        setSaving(false);
+        return;
       }
       if (!updatedSettings.siteLogo && settings.siteLogo) {
         updatedSettings.siteLogo = settings.siteLogo;
@@ -1288,7 +1324,7 @@ export default function AdminPage() {
       }
       setSettings(updatedSettings);
       if (typeof window !== 'undefined') {
-        localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+        try { localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings)); } catch(e){}
         window.dispatchEvent(new Event('site_settings_updated'));
       }
       const title = activeTab === 'legal' ? 'LEGAL CONTENT' : activeTab === 'about' ? 'ABOUT PAGE' : settingsSubTab.toUpperCase();
@@ -1340,7 +1376,7 @@ export default function AdminPage() {
       }
 
       if (typeof window !== 'undefined') {
-        localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+        try { localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings)); } catch(e){}
       }
 
       showNotification('Home itinerary day step saved!');
@@ -2978,7 +3014,7 @@ export default function AdminPage() {
                           </div>
                         </div>
 
-                        <ImageUploader
+                        <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                           label="Journey Cover Image"
                           value={safariForm.image}
                           onChange={(val) => setSafariForm({ ...safariForm, image: val })}
@@ -3253,7 +3289,7 @@ export default function AdminPage() {
                                     </div>
                                   </div>
 
-                                  <ImageUploader
+                                  <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                                     label="Day Featured Image URL"
                                     value={item.image || ''}
                                     onChange={(val) => {
@@ -4539,7 +4575,7 @@ export default function AdminPage() {
                           </div>
                         </div>
 
-                        <ImageUploader
+                        <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                           label="Article Cover Image"
                           value={blogForm.coverImage}
                           onChange={(val) => setBlogForm({ ...blogForm, coverImage: val })}
@@ -4926,7 +4962,7 @@ export default function AdminPage() {
                     </div>
                     <div className="flex flex-col gap-4 w-full">
                       <div className="w-full">
-                        <ImageUploader
+                        <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                           label="Website Brand Logo Image"
                           value={settings.siteLogo || ''}
                           onChange={(val) => setSettings({ ...settings, siteLogo: val })}
@@ -4936,7 +4972,7 @@ export default function AdminPage() {
                       </div>
 
                       <div className="w-full">
-                        <ImageUploader
+                        <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                           label="Website Favicon Icon (.ico / .png / .svg)"
                           value={settings.siteFavicon || ''}
                           onChange={(val) => setSettings({ ...settings, siteFavicon: val })}
@@ -5492,7 +5528,7 @@ export default function AdminPage() {
                                   </div>
 
                                   <div className="w-full">
-                                    <ImageUploader
+                                    <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                                       label="Hero Slide Background Image"
                                       value={banner.image || ''}
                                       onChange={(val) => updateBannerItem(index, 'image', val)}
@@ -5507,48 +5543,7 @@ export default function AdminPage() {
                       })()}
                     </div>
 
-                    {/* Top Announcement Banner Section */}
-                    <div className="border-t border-stone-800 pt-6 space-y-4 w-full">
-                      <div className="flex items-center justify-between w-full">
-                        <h4 className="font-serif text-sm font-bold text-stone-200">Promotional Top Announcement Banner</h4>
-                        <span className="text-[10px] text-stone-400 font-mono">Applies to all site headers</span>
-                      </div>
 
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">Banner Announcement Text</label>
-                        <input
-                          type="text"
-                          value={settings.announcementBannerText || ''}
-                          onChange={(e) => setSettings({ ...settings, announcementBannerText: e.target.value })}
-                          placeholder="🔥 Special Offer: Save 15% on 2026 Private Fly-in Safaris!"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">Banner Redirect Target Link</label>
-                        <input
-                          type="text"
-                          value={settings.announcementBannerLink || ''}
-                          onChange={(e) => setSettings({ ...settings, announcementBannerLink: e.target.value })}
-                          placeholder="/safari/classic-namibia-expedition"
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
-
-                      <div className="pt-2 flex items-center gap-3 w-full">
-                        <input
-                          type="checkbox"
-                          id="enableAnnouncementBanner"
-                          checked={settings.enableAnnouncementBanner ?? true}
-                          onChange={(e) => setSettings({ ...settings, enableAnnouncementBanner: e.target.checked })}
-                          className="w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
-                        />
-                        <label htmlFor="enableAnnouncementBanner" className="text-xs text-stone-300 font-medium cursor-pointer">
-                          Display Top Promotional Banner across all site pages
-                        </label>
-                      </div>
-                    </div>
                   </div>
                 )}
 
@@ -5803,7 +5798,7 @@ export default function AdminPage() {
                       </div>
 
                       <div>
-                        <ImageUploader
+                        <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                           label="Experience Image URL"
                           value={experienceForm.image}
                           onChange={(val) => setExperienceForm({ ...experienceForm, image: val })}
@@ -5874,7 +5869,7 @@ export default function AdminPage() {
                   className="w-full bg-stone-900 border border-stone-700 p-2.5 rounded text-stone-100 outline-none"
                 />
               </div>
-              <ImageUploader
+              <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                 label="Destination Image"
                 value={destForm.image}
                 onChange={(val) => setDestForm({ ...destForm, image: val })}
@@ -6258,7 +6253,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <ImageUploader
+                <ImageUploader cloudinaryCloudName={settings.cloudinaryCloudName} cloudinaryUploadPreset={settings.cloudinaryUploadPreset} enableCloudinary={settings.enableCloudinary}
                   label="Day Step Feature Image"
                   value={itineraryForm.image}
                   onChange={(val) => setItineraryForm({ ...itineraryForm, image: val })}
@@ -6311,3 +6306,4 @@ export default function AdminPage() {
     </div>
   );
 }
+

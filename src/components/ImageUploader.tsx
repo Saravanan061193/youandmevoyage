@@ -10,6 +10,9 @@ interface ImageUploaderProps {
   placeholder?: string;
   recommendedSize?: string;
   maxDimension?: number;
+  cloudinaryCloudName?: string;
+  cloudinaryUploadPreset?: string;
+  enableCloudinary?: boolean;
 }
 
 // Client-side HTML5 Canvas Image Compressor
@@ -103,6 +106,9 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   onChange,
   recommendedSize,
   maxDimension,
+  cloudinaryCloudName,
+  cloudinaryUploadPreset,
+  enableCloudinary = true,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isCompressing, setIsCompressing] = useState(false);
@@ -157,6 +163,32 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
             const rawDataUrl = event.target.result as string;
             // Auto-compress and optimize image
             const optimizedDataUrl = await compressImage(rawDataUrl, maxDimension);
+            
+            // If Cloudinary is enabled and configured, upload directly to Cloudinary
+            if (enableCloudinary && cloudinaryCloudName && cloudinaryUploadPreset) {
+              try {
+                const formData = new FormData();
+                formData.append('file', optimizedDataUrl);
+                formData.append('upload_preset', cloudinaryUploadPreset);
+
+                const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`, {
+                  method: 'POST',
+                  body: formData,
+                });
+
+                if (uploadRes.ok) {
+                  const cloudData = await uploadRes.json();
+                  onChange(cloudData.secure_url);
+                  return; // Exit early on success
+                } else {
+                  console.warn('Cloudinary upload failed, falling back to base64. Status:', uploadRes.status);
+                }
+              } catch (cloudErr) {
+                console.error('Cloudinary upload error, falling back to base64:', cloudErr);
+              }
+            }
+            
+            // Fallback to base64 if Cloudinary is disabled or failed
             onChange(optimizedDataUrl);
           } catch (err) {
             console.error('Image compression failed:', err);

@@ -67,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,7 +77,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased selection:bg-orange-500 selection:text-white bg-white text-slate-900">
+      <body className="antialiased selection:bg-orange-500 selection:text-white bg-white text-slate-900" suppressHydrationWarning>
         <Suspense fallback={null}>
           <GlobalLoader />
         </Suspense>

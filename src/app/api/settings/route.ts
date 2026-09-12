@@ -6,6 +6,30 @@ import { requireAdminAuth } from '@/lib/authGuard';
 import { sanitizeObject } from '@/lib/sanitize';
 import { logAuditEvent } from '@/lib/auditLogger';
 
+const DEFAULT_HERO_BANNERS = [
+  {
+    id: 1,
+    headline: 'Travel South India Your Way',
+    subheadline: 'PRIVATE JOURNEYS · AUTHENTIC EXPERIENCES · EXPERIENCED LOCAL COMPANIONS',
+    copy: 'Thoughtfully crafted itineraries across Tamil Nadu, Kerala, and South India tailored specifically to your speed and preferences.',
+    image: '/images/thanjavur_periya_kovil.png',
+  },
+  {
+    id: 2,
+    headline: 'Serene Backwaters & Houseboat Cruises of Kerala',
+    subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES',
+    copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons.',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
+  },
+  {
+    id: 3,
+    headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
+    subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
+    copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
+    image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
+  },
+];
+
 const DEFAULT_SETTINGS = {
   id: 'default-settings',
   siteTitle: 'You & Me – Independent Voyage',
@@ -46,7 +70,7 @@ const DEFAULT_SETTINGS = {
   heroSubheadline: 'Private journeys · Authentic experiences · Experienced local companions',
   heroCopy: 'Thoughtfully crafted itineraries across Tamil Nadu, Kerala, and South India tailored specifically to your speed and preferences.',
   heroImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=85',
-  heroBanners: JSON.stringify([]),
+  heroBanners: JSON.stringify(DEFAULT_HERO_BANNERS),
   announcementBannerText: '✨ Custom Private Tours for 2026 Season Now Open! Plan your Tamil Nadu & Kerala road trip today.',
   announcementBannerLink: '/build-your-trip',
   enableAnnouncementBanner: true,
@@ -213,32 +237,41 @@ export async function GET() {
     const fallbackPrivacy = 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.';
 
     const termsContent =
-      inMemorySettingsCache?.termsContent !== undefined && inMemorySettingsCache?.termsContent !== null && inMemorySettingsCache?.termsContent !== ''
-        ? inMemorySettingsCache.termsContent
-        : settings?.termsContent !== undefined && settings?.termsContent !== null && settings?.termsContent !== ''
+      settings?.termsContent !== undefined && settings?.termsContent !== null && settings?.termsContent !== ''
         ? settings.termsContent
+        : inMemorySettingsCache?.termsContent !== undefined && inMemorySettingsCache?.termsContent !== null && inMemorySettingsCache?.termsContent !== ''
+        ? inMemorySettingsCache.termsContent
         : fallbackTerms;
 
     const privacyContent =
-      inMemorySettingsCache?.privacyContent !== undefined && inMemorySettingsCache?.privacyContent !== null && inMemorySettingsCache?.privacyContent !== ''
-        ? inMemorySettingsCache.privacyContent
-        : settings?.privacyContent !== undefined && settings?.privacyContent !== null && settings?.privacyContent !== ''
+      settings?.privacyContent !== undefined && settings?.privacyContent !== null && settings?.privacyContent !== ''
         ? settings.privacyContent
+        : inMemorySettingsCache?.privacyContent !== undefined && inMemorySettingsCache?.privacyContent !== null && inMemorySettingsCache?.privacyContent !== ''
+        ? inMemorySettingsCache.privacyContent
         : fallbackPrivacy;
 
     const siteExperiences =
-      inMemorySettingsCache?.siteExperiences !== undefined && inMemorySettingsCache?.siteExperiences !== null
-        ? inMemorySettingsCache.siteExperiences
-        : settings?.siteExperiences !== undefined && settings?.siteExperiences !== null
+      settings?.siteExperiences !== undefined && settings?.siteExperiences !== null && settings?.siteExperiences !== ''
         ? settings.siteExperiences
+        : inMemorySettingsCache?.siteExperiences !== undefined && inMemorySettingsCache?.siteExperiences !== null
+        ? inMemorySettingsCache.siteExperiences
         : JSON.stringify([]);
 
-    const heroBanners =
-      inMemorySettingsCache?.heroBanners !== undefined && inMemorySettingsCache?.heroBanners !== null && inMemorySettingsCache?.heroBanners !== ''
-        ? inMemorySettingsCache.heroBanners
-        : settings?.heroBanners !== undefined && settings?.heroBanners !== null && settings?.heroBanners !== ''
+    let heroBanners =
+      settings?.heroBanners !== undefined && settings?.heroBanners !== null && settings?.heroBanners !== ''
         ? settings.heroBanners
-        : JSON.stringify([]);
+        : inMemorySettingsCache?.heroBanners !== undefined && inMemorySettingsCache?.heroBanners !== null && inMemorySettingsCache?.heroBanners !== ''
+        ? inMemorySettingsCache.heroBanners
+        : JSON.stringify(DEFAULT_HERO_BANNERS);
+
+    try {
+      const parsedHB = typeof heroBanners === 'string' ? JSON.parse(heroBanners) : heroBanners;
+      if (!Array.isArray(parsedHB) || parsedHB.length === 0) {
+        heroBanners = JSON.stringify(DEFAULT_HERO_BANNERS);
+      }
+    } catch (e) {
+      heroBanners = JSON.stringify(DEFAULT_HERO_BANNERS);
+    }
 
     // Strip null/undefined/empty-strings from cache but KEEP boolean false values
     const cleanCache = Object.fromEntries(
@@ -359,6 +392,7 @@ export async function PUT(request: Request) {
       }
     } catch (e) {
       console.error('DB settings update failed:', e);
+      return NextResponse.json({ error: 'Failed to save settings to database. File size might be too large or database connection failed.' }, { status: 500 });
     }
 
     // updateData (what user just saved) is highest priority

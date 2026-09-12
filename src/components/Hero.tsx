@@ -54,14 +54,38 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       .catch(() => {});
   }, []);
 
-  // Parse CMS hero banners or fallback to clean single banner
+  // Parse CMS hero banners or fallback to clean multi-banner slider
   const banners = useMemo(() => {
+    const DEFAULT_HERO_SLIDES = [
+      {
+        id: 1,
+        headline: settings?.heroHeadline || 'Travel South India Your Way',
+        subheadline: settings?.heroSubheadline || 'PRIVATE JOURNEYS · AUTHENTIC EXPERIENCES · EXPERIENCED LOCAL COMPANIONS',
+        copy: settings?.heroCopy || 'Thoughtfully crafted itineraries across Tamil Nadu, Kerala, and South India tailored specifically to your speed and preferences.',
+        image: settings?.heroImage || '/images/thanjavur_periya_kovil.png',
+      },
+      {
+        id: 2,
+        headline: 'Serene Backwaters & Houseboat Cruises of Kerala',
+        subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES',
+        copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons.',
+        image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
+      },
+      {
+        id: 3,
+        headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
+        subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
+        copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
+        image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
+      },
+    ];
+
     try {
       if (settings?.heroBanners) {
         const parsed = typeof settings.heroBanners === 'string' ? JSON.parse(settings.heroBanners) : settings.heroBanners;
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed.map((item) => ({
-            ...item,
+          return parsed.map((item, idx) => ({
+            id: item.id || idx + 1,
             image: item.image || settings?.heroImage || '/images/thanjavur_periya_kovil.png',
             headline: item.headline || settings?.heroHeadline || settings?.siteTitle || 'You & Me – Independent Voyage',
             subheadline: item.subheadline || settings?.heroSubheadline || 'SOUTH INDIA PRIVATE JOURNEYS',
@@ -71,15 +95,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       }
     } catch (e) {}
 
-    return [
-      {
-        id: 1,
-        image: settings?.heroImage || '/images/thanjavur_periya_kovil.png',
-        headline: settings?.heroHeadline || settings?.siteTitle || 'You & Me – Independent Voyage',
-        subheadline: settings?.heroSubheadline || 'SOUTH INDIA PRIVATE JOURNEYS',
-        copy: settings?.heroCopy || '',
-      }
-    ];
+    return DEFAULT_HERO_SLIDES;
   }, [settings?.heroBanners, settings?.heroHeadline, settings?.heroImage, settings?.heroSubheadline, settings?.heroCopy, settings?.siteTitle]);
 
   // Auto slide timer
