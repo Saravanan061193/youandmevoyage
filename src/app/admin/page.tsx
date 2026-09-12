@@ -700,6 +700,18 @@ export default function AdminPage() {
           } catch (e) {}
         }
         const mergedSet = { ...cachedSettings, ...fetchedSet };
+        if (fetchedSet?.termsContent) {
+          mergedSet.termsContent = fetchedSet.termsContent;
+        } else if (cachedSettings?.termsContent) {
+          mergedSet.termsContent = cachedSettings.termsContent;
+        }
+
+        if (fetchedSet?.privacyContent) {
+          mergedSet.privacyContent = fetchedSet.privacyContent;
+        } else if (cachedSettings?.privacyContent) {
+          mergedSet.privacyContent = cachedSettings.privacyContent;
+        }
+
         if (!mergedSet.siteLogo && cachedSettings?.siteLogo) {
           mergedSet.siteLogo = cachedSettings.siteLogo;
         }
@@ -711,18 +723,6 @@ export default function AdminPage() {
         }
         if (!mergedSet.siteFavicon && settings?.siteFavicon) {
           mergedSet.siteFavicon = settings.siteFavicon;
-        }
-        if (!mergedSet.termsContent && cachedSettings?.termsContent) {
-          mergedSet.termsContent = cachedSettings.termsContent;
-        }
-        if (!mergedSet.termsContent && settings?.termsContent) {
-          mergedSet.termsContent = settings.termsContent;
-        }
-        if (!mergedSet.privacyContent && cachedSettings?.privacyContent) {
-          mergedSet.privacyContent = cachedSettings.privacyContent;
-        }
-        if (!mergedSet.privacyContent && settings?.privacyContent) {
-          mergedSet.privacyContent = settings.privacyContent;
         }
         setSettings(mergedSet);
         if (typeof window !== 'undefined') {

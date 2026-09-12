@@ -50,8 +50,8 @@ const DEFAULT_SETTINGS = {
   announcementBannerText: '',
   announcementBannerLink: '',
   enableAnnouncementBanner: false,
-  termsContent: 'Welcome to You & Me – Independent Voyage. By booking a private tour package with us, you agree to our terms and conditions. All private tour packages include dedicated AC vehicle, experienced local driver companion, and full itinerary support.',
-  privacyContent: 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.',
+  termsContent: '',
+  privacyContent: '',
 
   // About Page CMS Settings Defaults
   aboutHeroHeadline: '',
@@ -186,10 +186,25 @@ export async function GET() {
     const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
+    const fallbackTerms = 'Welcome to You & Me – Independent Voyage. By booking a private tour package with us, you agree to our terms and conditions. All private tour packages include dedicated AC vehicle, experienced local driver companion, and full itinerary support.';
+    const fallbackPrivacy = 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.';
+
+    const termsContent =
+      inMemorySettingsCache?.termsContent ||
+      settings?.termsContent ||
+      fallbackTerms;
+
+    const privacyContent =
+      inMemorySettingsCache?.privacyContent ||
+      settings?.privacyContent ||
+      fallbackPrivacy;
+
     const merged = {
       ...DEFAULT_SETTINGS,
       ...(settings || {}),
       ...(inMemorySettingsCache || {}),
+      termsContent,
+      privacyContent,
     };
 
     if (!merged.siteLogo && settings?.siteLogo) {
@@ -203,18 +218,6 @@ export async function GET() {
     }
     if (!merged.siteFavicon && inMemorySettingsCache?.siteFavicon) {
       merged.siteFavicon = inMemorySettingsCache.siteFavicon;
-    }
-    if (!merged.termsContent && settings?.termsContent) {
-      merged.termsContent = settings.termsContent;
-    }
-    if (!merged.termsContent && inMemorySettingsCache?.termsContent) {
-      merged.termsContent = inMemorySettingsCache.termsContent;
-    }
-    if (!merged.privacyContent && settings?.privacyContent) {
-      merged.privacyContent = settings.privacyContent;
-    }
-    if (!merged.privacyContent && inMemorySettingsCache?.privacyContent) {
-      merged.privacyContent = inMemorySettingsCache.privacyContent;
     }
 
     inMemorySettingsCache = merged;
