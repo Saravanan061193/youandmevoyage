@@ -182,7 +182,7 @@ let inMemorySettingsCache: any = null;
 
 export async function GET() {
   try {
-    const dbPromise = prisma.siteSettings.findFirst();
+    const dbPromise = prisma.siteSettings.findFirst({ orderBy: { updatedAt: 'desc' } });
     const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
@@ -282,7 +282,8 @@ export async function PUT(request: Request) {
     let settings = null;
     try {
       const dbPromise = (async () => {
-        const existing = await prisma.siteSettings.findFirst();
+        const existing = await prisma.siteSettings.findFirst({ orderBy: { updatedAt: 'desc' } });
+        let res;
         if (existing) {
           // Preserve existing logo and favicon if not provided in request or empty
           if (!prismaUpdateData.siteLogo && existing.siteLogo) {
@@ -291,15 +292,21 @@ export async function PUT(request: Request) {
           if (!prismaUpdateData.siteFavicon && existing.siteFavicon) {
             prismaUpdateData.siteFavicon = existing.siteFavicon;
           }
-          return await prisma.siteSettings.update({
+          res = await prisma.siteSettings.update({
             where: { id: existing.id },
             data: prismaUpdateData,
           });
+          try {
+            await prisma.siteSettings.deleteMany({
+              where: { id: { not: existing.id } },
+            });
+          } catch (err) {}
         } else {
-          return await prisma.siteSettings.create({
+          res = await prisma.siteSettings.create({
             data: prismaUpdateData,
           });
         }
+        return res;
       })();
 
       const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 12000));

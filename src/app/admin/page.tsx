@@ -712,9 +712,9 @@ export default function AdminPage() {
           mergedSet.privacyContent = cachedSettings.privacyContent;
         }
 
-        if (fetchedSet?.siteExperiences) {
+        if (fetchedSet?.siteExperiences !== undefined && fetchedSet?.siteExperiences !== null) {
           mergedSet.siteExperiences = fetchedSet.siteExperiences;
-        } else if (cachedSettings?.siteExperiences) {
+        } else if (cachedSettings?.siteExperiences !== undefined && cachedSettings?.siteExperiences !== null) {
           mergedSet.siteExperiences = cachedSettings.siteExperiences;
         }
 
