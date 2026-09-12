@@ -3,14 +3,20 @@ import { Suspense } from 'react';
 import { GlobalLoader } from '@/components/GlobalLoader';
 import './globals.css';
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://youandmevoyage.com'),
-  title: {
-    default: 'You & Me – Independent Voyage | Custom South India Private Tours',
-    template: '%s | You & Me – Independent Voyage',
-  },
-  description: 'Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India.',
-  keywords: [
+import { prisma } from '@/lib/prisma';
+
+export async function generateMetadata(): Promise<Metadata> {
+  let settings = null;
+  try {
+    settings = await prisma.siteSettings.findFirst({ orderBy: { updatedAt: 'desc' } });
+  } catch (e) {
+    console.error('Failed to fetch SEO metadata:', e);
+  }
+
+  const title = settings?.siteMetaTitle || 'You & Me – Independent Voyage | Custom South India Private Tours';
+  const desc = settings?.siteMetaDescription || 'Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India.';
+  
+  let keywords = [
     'You & Me Independent Voyage',
     'South India Private Tours',
     'Tamil Nadu Driver Tour',
@@ -19,47 +25,63 @@ export const metadata: Metadata = {
     'Private Chauffeur Tour India',
     'Munnar Tea Gardens Tour',
     'Chettinad Heritage Trip',
-  ],
-  authors: [{ name: 'You & Me – Independent Voyage', url: 'https://youandmevoyage.com' }],
-  creator: 'You & Me – Independent Voyage',
-  publisher: 'You & Me – Independent Voyage',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+  ];
+  if (settings?.siteKeywords) {
+    keywords = settings.siteKeywords.split(',').map((k: string) => k.trim());
+  }
+
+  const logo = settings?.siteLogo || '/images/thanjavur_periya_kovil.png';
+  const index = settings?.enableRobotsIndex !== false;
+
+  return {
+    metadataBase: new URL('https://youandmevoyage.com'),
+    title: {
+      default: title,
+      template: '%s | You & Me – Independent Voyage',
     },
-  },
-  alternates: {
-    canonical: 'https://youandmevoyage.com',
-  },
-  openGraph: {
-    title: 'You & Me – Independent Voyage | Custom South India Private Tours',
-    description: 'Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India.',
-    url: 'https://youandmevoyage.com',
-    siteName: 'You & Me – Independent Voyage',
-    images: [
-      {
-        url: '/images/thanjavur_periya_kovil.png',
-        width: 1200,
-        height: 630,
-        alt: 'You & Me – Independent Voyage South India Heritage Tours',
+    description: desc,
+    keywords: keywords,
+    authors: [{ name: 'You & Me – Independent Voyage', url: 'https://youandmevoyage.com' }],
+    creator: 'You & Me – Independent Voyage',
+    publisher: 'You & Me – Independent Voyage',
+    robots: {
+      index: index,
+      follow: index,
+      googleBot: {
+        index: index,
+        follow: index,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'You & Me – Independent Voyage | Custom South India Private Tours',
-    description: 'Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India.',
-    images: ['/images/thanjavur_periya_kovil.png'],
-  },
-};
+    },
+    alternates: {
+      canonical: 'https://youandmevoyage.com',
+    },
+    openGraph: {
+      title: title,
+      description: desc,
+      url: 'https://youandmevoyage.com',
+      siteName: 'You & Me – Independent Voyage',
+      images: [
+        {
+          url: logo,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title,
+      description: desc,
+      images: [logo],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
