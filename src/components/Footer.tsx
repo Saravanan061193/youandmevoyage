@@ -108,7 +108,7 @@ export const Footer = () => {
                   <div className="space-y-2.5 text-xs text-slate-300 pt-3 border-t border-slate-800">
                     <div className="flex items-center gap-3">
                       <Phone className="w-4 h-4 text-orange-500 shrink-0" />
-                      <span>{settings?.officePhone || whatsappNum}</span>
+                      <span>{settings?.officePhone || settings?.whatsappNumber || '+91 9994315778'}</span>
                     </div>
                     {settings?.contactEmail && (
                       <div className="flex items-center gap-3">
@@ -118,7 +118,7 @@ export const Footer = () => {
                     )}
                     <div className="flex items-center gap-3">
                       <Clock className="w-4 h-4 text-orange-500 shrink-0" />
-                      <span>Mon – Sat: 08:30 – 19:30 (IST) · 24/7 Driver Support</span>
+                      <span>{settings?.operationHours || 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch'}</span>
                     </div>
                   </div>
 

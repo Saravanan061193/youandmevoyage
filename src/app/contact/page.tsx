@@ -86,7 +86,7 @@ function ContactContent() {
                 <Phone className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Phone / Call</strong>
-                  <span>{settings?.officePhone || whatsappNum}</span>
+                  <span>{settings?.officePhone || settings?.whatsappNumber || '+91 9994315778'}</span>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ function ContactContent() {
                     rel="noopener noreferrer"
                     className="text-orange-600 font-bold hover:underline"
                   >
-                    {whatsappNum} (Instant Response)
+                    {whatsappNum || '+91 9994315778'} (Instant Response)
                   </a>
                 </div>
               </div>
@@ -109,7 +109,7 @@ function ContactContent() {
                 <Mail className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Email</strong>
-                  <span>{settings?.contactEmail || ''}</span>
+                  <span>{settings?.contactEmail || 'youandmevoyage@gmail.com'}</span>
                 </div>
               </div>
 
@@ -117,7 +117,7 @@ function ContactContent() {
                 <Clock className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Office Hours</strong>
-                  <span>Mon – Sat: 08:30 – 19:30 (IST) · 24/7 Companion Support</span>
+                  <span>{settings?.operationHours || 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch'}</span>
                 </div>
               </div>
             </div>

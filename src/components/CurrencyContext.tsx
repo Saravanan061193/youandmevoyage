@@ -12,11 +12,33 @@ interface CurrencyContextType {
   reloadSettings: () => void;
 }
 
+const DEFAULT_SETTINGS: Record<string, any> = {
+  usdToInr: 83.5,
+  weatherText: '',
+  whatsappNumber: '+91 9994315778',
+  officePhone: '+91 9994315778',
+  officeAddress: 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020',
+  operationHours: 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch',
+  googleMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.498305719363!2d80.25268487507693!3d13.003923387313888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e7c992769d%3A0xbbfd1d36d4f9c158!2sIndira%20Nagar%2C%20Adyar%2C%20Chennai%2C%20Tamil%20Nadu%20600020!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
+  showGoogleMapInFooter: true,
+  siteTitle: 'You & Me – Independent Voyage',
+  contactEmail: 'youandmevoyage@gmail.com',
+  instagramUrl: 'https://www.instagram.com/youandmevoyage/',
+  facebookUrl: 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/',
+  tripadvisorUrl: 'https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html',
+};
+
+const keepValue = (v: any) => {
+  if (v === null || v === undefined) return false;
+  if (typeof v !== 'boolean' && v === '') return false;
+  return true;
+};
+
 const CurrencyContext = createContext<CurrencyContextType>({
   currency: 'INR',
   setCurrency: () => {},
   formatPrice: (price: number) => `₹${price.toLocaleString('en-IN')}`,
-  settings: null,
+  settings: DEFAULT_SETTINGS,
   reloadSettings: () => {},
 });
 
@@ -26,14 +48,13 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
     if (typeof window !== 'undefined') {
       try {
         const cached = localStorage.getItem('site_settings_cache');
-        if (cached) return JSON.parse(cached);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          return { ...DEFAULT_SETTINGS, ...parsed };
+        }
       } catch (e) {}
     }
-    return {
-      usdToInr: 83.5,
-      weatherText: '',
-      whatsappNumber: '',
-    };
+    return DEFAULT_SETTINGS;
   });
 
   const fetchSettings = async () => {
@@ -42,9 +63,9 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
       if (res.ok) {
         const data = await res.json();
         const cleanData = Object.fromEntries(
-          Object.entries(data || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+          Object.entries(data || {}).filter(([_, v]) => keepValue(v))
         );
-        setSettings((prev: any) => ({ ...prev, ...cleanData }));
+        setSettings((prev: any) => ({ ...DEFAULT_SETTINGS, ...prev, ...cleanData }));
         if (typeof window !== 'undefined') {
           const existing = JSON.parse(localStorage.getItem('site_settings_cache') || '{}');
           localStorage.setItem('site_settings_cache', JSON.stringify({ ...existing, ...cleanData }));
@@ -65,9 +86,9 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
           if (cached) {
             const parsed = JSON.parse(cached);
             const cleanParsed = Object.fromEntries(
-              Object.entries(parsed || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+              Object.entries(parsed || {}).filter(([_, v]) => keepValue(v))
             );
-            setSettings((prev: any) => ({ ...prev, ...cleanParsed }));
+            setSettings((prev: any) => ({ ...DEFAULT_SETTINGS, ...prev, ...cleanParsed }));
           }
         } catch (e) {}
       }
