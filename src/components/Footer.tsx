@@ -110,7 +110,7 @@ export const Footer = () => {
                   <div className="space-y-2.5 text-xs text-slate-300 pt-3 border-t border-slate-800">
                     <div className="flex items-center gap-3">
                       <Phone className="w-4 h-4 text-orange-500 shrink-0" />
-                      <span>{settings?.officePhone || settings?.whatsappNumber || '+91 9994315778'}</span>
+                      <span>{settings?.officePhone && settings.officePhone.includes('63814') ? settings.officePhone : (settings?.officePhone ? `${settings.officePhone} / +91 63814 20556` : '+91 9994315778 / +91 63814 20556')}</span>
                     </div>
                     {settings?.contactEmail && (
                       <div className="flex items-center gap-3">

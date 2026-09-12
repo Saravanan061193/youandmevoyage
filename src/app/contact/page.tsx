@@ -86,7 +86,7 @@ function ContactContent() {
                 <Phone className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Phone / Call</strong>
-                  <span>{settings?.officePhone || settings?.whatsappNumber || '+91 9994315778'}</span>
+                  <span>{settings?.officePhone && settings.officePhone.includes('63814') ? settings.officePhone : (settings?.officePhone ? `${settings.officePhone} / +91 63814 20556` : '+91 9994315778 / +91 63814 20556')}</span>
                 </div>
               </div>
 

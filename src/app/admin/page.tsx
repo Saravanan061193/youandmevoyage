@@ -5021,12 +5021,23 @@ export default function AdminPage() {
                           </div>
 
                           <div className="w-full">
-                            <label className="text-xs text-stone-400 font-semibold block mb-1">Office Telephone / Hotline</label>
+                            <label className="text-xs text-stone-400 font-semibold block mb-1">Primary Office Telephone / Hotline</label>
                             <input
                               type="text"
                               value={settings.officePhone || ''}
                               onChange={(e) => setSettings({ ...settings, officePhone: e.target.value })}
-                              placeholder="+91 98400 00000 / +91 44 2345 6789"
+                              placeholder="+91 9994315778 / +91 63814 20556"
+                              className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
+                            />
+                          </div>
+
+                          <div className="w-full">
+                            <label className="text-xs text-stone-400 font-semibold block mb-1">Secondary Contact / Phone Number</label>
+                            <input
+                              type="text"
+                              value={settings.secondaryPhone || ''}
+                              onChange={(e) => setSettings({ ...settings, secondaryPhone: e.target.value })}
+                              placeholder="+91 63814 20556"
                               className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                             />
                           </div>
