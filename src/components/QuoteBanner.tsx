@@ -34,12 +34,9 @@ export const QuoteBanner = ({ onOpenQuoteModal }: QuoteBannerProps) => {
 
       <div className="quote-visual">
         <img
-          src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85"
-          alt="South India Temple & Cultural Heritage"
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.currentTarget.src = "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85";
-          }}
+          src="/images/private_driver_voyage_temple.jpg"
+          alt="Private South India Driver Journey & Cultural Heritage"
+          className="w-full h-full object-cover object-center"
         />
       </div>
     </section>
