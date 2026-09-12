@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { CurrencyProvider } from '@/components/CurrencyContext';
+import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { QuoteModal } from '@/components/QuoteModal';
 import { MapPin, ArrowRight, MessageCircle, Check, Clock, Sparkles } from 'lucide-react';
 import { PageSpinner } from '@/components/PageSpinner';
@@ -13,6 +13,7 @@ import { PageSpinner } from '@/components/PageSpinner';
 function DestinationDetailContent() {
   const params = useParams();
   const slug = params?.slug as string;
+  const { settings } = useCurrency();
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [dest, setDest] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
