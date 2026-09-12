@@ -381,10 +381,24 @@ export async function PUT(request: Request) {
         if (!prismaUpdateData.siteFavicon && existing.siteFavicon) {
           prismaUpdateData.siteFavicon = existing.siteFavicon;
         }
-        settings = await prisma.siteSettings.update({
-          where: { id: existing.id },
-          data: prismaUpdateData,
-        });
+
+        // Fix for MongoDB Atlas Free Tier "Pipeline length greater than 50 not supported"
+        // We only send the fields that have actually changed to keep the update small.
+        const changedData: any = {};
+        for (const key of Object.keys(prismaUpdateData)) {
+          if (prismaUpdateData[key] !== (existing as any)[key]) {
+            changedData[key] = prismaUpdateData[key];
+          }
+        }
+
+        if (Object.keys(changedData).length > 0) {
+          settings = await prisma.siteSettings.update({
+            where: { id: existing.id },
+            data: changedData,
+          });
+        } else {
+          settings = existing; // No changes needed
+        }
       } else {
         settings = await prisma.siteSettings.create({
           data: prismaUpdateData,
