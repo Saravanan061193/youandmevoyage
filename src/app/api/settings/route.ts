@@ -231,6 +231,13 @@ export async function GET() {
         ? settings.siteExperiences
         : JSON.stringify([]);
 
+    const heroBanners =
+      inMemorySettingsCache?.heroBanners !== undefined && inMemorySettingsCache?.heroBanners !== null && inMemorySettingsCache?.heroBanners !== '' && inMemorySettingsCache?.heroBanners !== '[]'
+        ? inMemorySettingsCache.heroBanners
+        : settings?.heroBanners !== undefined && settings?.heroBanners !== null && settings?.heroBanners !== '' && settings?.heroBanners !== '[]'
+        ? settings.heroBanners
+        : JSON.stringify([]);
+
     // Strip null/undefined/empty-strings from cache but KEEP boolean false values
     const cleanCache = Object.fromEntries(
       Object.entries(inMemorySettingsCache || {}).filter(([k, v]) => {
@@ -255,6 +262,7 @@ export async function GET() {
       termsContent,
       privacyContent,
       siteExperiences,
+      heroBanners,
     });
 
     if (!merged.operationHours || merged.operationHours.includes('08:00') || merged.operationHours.includes('08:30')) {
@@ -374,6 +382,11 @@ export async function PUT(request: Request) {
       inMemorySettingsCache.siteExperiences = typeof updateData.siteExperiences === 'object'
         ? JSON.stringify(updateData.siteExperiences)
         : updateData.siteExperiences;
+    }
+    if (updateData.heroBanners !== undefined) {
+      inMemorySettingsCache.heroBanners = typeof updateData.heroBanners === 'object'
+        ? JSON.stringify(updateData.heroBanners)
+        : updateData.heroBanners;
     }
 
     revalidatePath('/', 'layout');

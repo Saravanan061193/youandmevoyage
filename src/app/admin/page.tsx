@@ -732,6 +732,11 @@ export default function AdminPage() {
         } else if (cachedSettings?.siteExperiences !== undefined && cachedSettings?.siteExperiences !== null) {
           mergedSet.siteExperiences = cachedSettings.siteExperiences;
         }
+        if (fetchedSet?.heroBanners !== undefined && fetchedSet?.heroBanners !== null && fetchedSet?.heroBanners !== '' && fetchedSet?.heroBanners !== '[]') {
+          mergedSet.heroBanners = fetchedSet.heroBanners;
+        } else if (cachedSettings?.heroBanners !== undefined && cachedSettings?.heroBanners !== null && cachedSettings?.heroBanners !== '' && cachedSettings?.heroBanners !== '[]') {
+          mergedSet.heroBanners = cachedSettings.heroBanners;
+        }
 
         // Always prefer API value for boolean toggles (even if false)
         const boolFields = ['enableCloudinary','enableRobotsIndex','enableAnnouncementBanner','showGoogleMapInFooter'];
@@ -5358,7 +5363,7 @@ export default function AdminPage() {
                           bannerList = [];
                         }
 
-                        if (!Array.isArray(bannerList) && !settings.heroBanners) {
+                        if (!Array.isArray(bannerList) || bannerList.length === 0) {
                           bannerList = [
                             {
                               id: 1,
