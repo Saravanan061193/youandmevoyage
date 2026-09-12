@@ -1287,10 +1287,11 @@ export default function AdminPage() {
         window.dispatchEvent(new Event('site_settings_updated'));
       }
       const title = activeTab === 'legal' ? 'LEGAL CONTENT' : activeTab === 'about' ? 'ABOUT PAGE' : settingsSubTab.toUpperCase();
+      // PUT response is the source of truth — DO NOT call fetchAllData() here.
+      // fetchAllData() re-fetches from API which on Vercel serverless may hit a different
+      // instance with no cache and read stale MongoDB data, overwriting the freshly saved values.
       showNotification(`${title} Settings updated!`);
       setSaveSuccessModal(`${title} Settings have been saved successfully and live-synced to the website!`);
-      fetchAllData();
-      router.refresh();
     } catch (e) {
       console.error(e);
       if (typeof window !== 'undefined') {
@@ -1298,6 +1299,7 @@ export default function AdminPage() {
         window.dispatchEvent(new Event('site_settings_updated'));
       }
       const title = activeTab === 'legal' ? 'LEGAL CONTENT' : activeTab === 'about' ? 'ABOUT PAGE' : settingsSubTab.toUpperCase();
+      showNotification(`Failed to save ${title} settings. Please try again.`);
     } finally {
       setSaving(false);
     }
