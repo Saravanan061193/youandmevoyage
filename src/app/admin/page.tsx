@@ -5353,30 +5353,6 @@ export default function AdminPage() {
                             className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                           />
                         </div>
-
-                        <div className="w-full">
-                          <label className="text-xs text-stone-400 font-semibold block mb-1">Google Analytics Measurement ID</label>
-                          <input
-                            type="text"
-                            value={settings.googleAnalyticsId || ''}
-                            onChange={(e) => setSettings({ ...settings, googleAnalyticsId: e.target.value })}
-                            placeholder="G-DS12345678"
-                            className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="pt-2 flex items-center gap-3 border-t border-stone-800/80 w-full">
-                        <input
-                          type="checkbox"
-                          id="enableRobotsIndex"
-                          checked={settings.enableRobotsIndex ?? true}
-                          onChange={(e) => setSettings({ ...settings, enableRobotsIndex: e.target.checked })}
-                          className="w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
-                        />
-                        <label htmlFor="enableRobotsIndex" className="text-xs text-stone-300 font-medium cursor-pointer">
-                          Allow Search Engines to Index the Website (Robots Indexing Enabled)
-                        </label>
                       </div>
                     </div>
                   </div>
