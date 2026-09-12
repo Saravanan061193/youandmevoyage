@@ -4903,7 +4903,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Website Brand / Title</label>
                         <input
                           type="text"
-                          value={settings.siteTitle || 'You & Me – Independent Voyage'}
+                          value={settings.siteTitle || ''}
                           onChange={(e) => setSettings({ ...settings, siteTitle: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4913,7 +4913,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Contact Email Address</label>
                         <input
                           type="email"
-                          value={settings.contactEmail || 'youandmevoyage@gmail.com'}
+                          value={settings.contactEmail || ''}
                           onChange={(e) => setSettings({ ...settings, contactEmail: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4923,7 +4923,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">WhatsApp Hotline Number</label>
                         <input
                           type="text"
-                          value={settings.whatsappNumber || '+91 9994315778'}
+                          value={settings.whatsappNumber || ''}
                           onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -4933,7 +4933,7 @@ export default function AdminPage() {
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Top Bar Weather Text</label>
                         <input
                           type="text"
-                          value={settings.weatherText || 'Chennai, Tamil Nadu: 30°C Sunny'}
+                          value={settings.weatherText || ''}
                           onChange={(e) => setSettings({ ...settings, weatherText: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                         />
@@ -5326,7 +5326,7 @@ export default function AdminPage() {
                           bannerList = [];
                         }
 
-                        if (!Array.isArray(bannerList) || bannerList.length < 3) {
+                        if (!Array.isArray(bannerList) && !settings.heroBanners) {
                           bannerList = [
                             {
                               id: 1,
