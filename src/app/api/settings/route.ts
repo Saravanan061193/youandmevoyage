@@ -178,9 +178,13 @@ const ALLOWED_SETTING_FIELDS = [
   'siteExperiences',
 ];
 
+const BOOLEAN_FIELDS = new Set(['enableCloudinary', 'enableRobotsIndex', 'enableAnnouncementBanner', 'showGoogleMapInFooter']);
+
 function applyDefaults(target: Record<string, any>) {
   const result: Record<string, any> = { ...DEFAULT_SETTINGS, ...target };
   for (const [key, defaultVal] of Object.entries(DEFAULT_SETTINGS)) {
+    // Never overwrite boolean false with a default – false is a valid saved value
+    if (BOOLEAN_FIELDS.has(key)) continue;
     if ((result[key] === null || result[key] === undefined || result[key] === '') && defaultVal) {
       result[key] = defaultVal;
     }
@@ -220,16 +224,16 @@ export async function GET() {
         ? settings.siteExperiences
         : JSON.stringify([]);
 
-    const cleanSettings = Object.fromEntries(
-      Object.entries(settings || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
-    );
+    // Strip empty strings from cache but keep boolean false values
     const cleanCache = Object.fromEntries(
       Object.entries(inMemorySettingsCache || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
     );
+    // DB is authoritative – apply it LAST so it beats cache for any saved field
+    const dbSettingsRaw = settings || {};
 
     const merged = applyDefaults({
-      ...cleanSettings,
-      ...cleanCache,
+      ...cleanCache,   // lowest priority after defaults
+      ...dbSettingsRaw, // DB beats cache
       termsContent,
       privacyContent,
       siteExperiences,
@@ -325,10 +329,11 @@ export async function PUT(request: Request) {
       console.error('DB settings update failed:', e);
     }
 
+    // updateData (what user just saved) is highest priority
     inMemorySettingsCache = applyDefaults({
-      ...(settings || {}),
       ...(inMemorySettingsCache || {}),
-      ...updateData,
+      ...(settings || {}),   // DB saved result beats old cache
+      ...updateData,          // user's latest input beats everything
     });
 
     if (!inMemorySettingsCache.siteLogo && settings?.siteLogo) {
