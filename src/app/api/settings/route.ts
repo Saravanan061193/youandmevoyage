@@ -283,7 +283,14 @@ export async function PUT(request: Request) {
     for (const field of ALLOWED_SETTING_FIELDS) {
       if (updateData[field] !== undefined) {
         if (field === 'enableCloudinary' || field === 'enableRobotsIndex' || field === 'enableAnnouncementBanner' || field === 'showGoogleMapInFooter') {
-          prismaUpdateData[field] = Boolean(updateData[field]);
+          const v = updateData[field];
+          if (typeof v === 'boolean') {
+            prismaUpdateData[field] = v;
+          } else if (typeof v === 'string') {
+            prismaUpdateData[field] = v.toLowerCase() === 'true';
+          } else {
+            prismaUpdateData[field] = Boolean(v);
+          }
         } else if (field === 'usdToEur' || field === 'usdToGbp' || field === 'usdToNad') {
           const num = parseFloat(updateData[field]);
           prismaUpdateData[field] = isNaN(num) ? 1 : num;
@@ -318,19 +325,9 @@ export async function PUT(request: Request) {
       console.error('DB settings update failed:', e);
     }
 
-    const cleanUpdateData = Object.fromEntries(
-      Object.entries(updateData).filter(([_, v]) => v !== null && v !== undefined && v !== '')
-    );
-    const cleanDbSettings = Object.fromEntries(
-      Object.entries(settings || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
-    );
-    const cleanCache = Object.fromEntries(
-      Object.entries(inMemorySettingsCache || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
-    );
-
     inMemorySettingsCache = applyDefaults({
-      ...cleanDbSettings,
-      ...cleanCache,
+      ...(settings || {}),
+      ...(inMemorySettingsCache || {}),
       ...updateData,
     });
 
