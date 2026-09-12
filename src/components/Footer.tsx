@@ -199,6 +199,14 @@ export const Footer = () => {
                   </a>
                 </div>
               )}
+              {settings?.secondaryPhone && (
+                <div className="flex items-center gap-2.5">
+                  <Phone className="w-4 h-4 text-orange-400 shrink-0" />
+                  <a href={`tel:${settings.secondaryPhone.replace(/\s+/g, '')}`} className="hover:text-orange-400 transition-colors">
+                    {settings.secondaryPhone}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 
