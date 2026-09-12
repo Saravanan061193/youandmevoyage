@@ -1323,26 +1323,7 @@ export default function AdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const defaultExps = [
-        {
-          title: 'Temple & Heritage Architecture',
-          subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
-          image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-          desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
-        },
-        {
-          title: 'South Indian Food & Culinary Trails',
-          subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
-          image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
-          desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
-        },
-        {
-          title: 'Kerala Backwater Houseboat Cruises',
-          subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
-          image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
-          desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
-        },
-      ];
+      const defaultExps: any[] = [];
       let list = safeParseList(settings?.siteExperiences, defaultExps);
       const newEntry = {
         title: experienceForm.title || 'Untitled Experience',
@@ -5588,26 +5569,7 @@ export default function AdminPage() {
               {/* Experiences Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {(() => {
-                  const defaultExps: any[] = [
-                    {
-                      title: 'Temple & Heritage Architecture',
-                      subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
-                      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-                      desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
-                    },
-                    {
-                      title: 'South Indian Food & Culinary Trails',
-                      subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
-                      image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
-                      desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
-                    },
-                    {
-                      title: 'Kerala Backwater Houseboat Cruises',
-                      subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
-                      image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
-                      desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
-                    },
-                  ];
+                  const defaultExps: any[] = [];
                   const list = safeParseList(settings?.siteExperiences, defaultExps);
                   return list.map((exp: any, idx: number) => (
                     <div key={idx} className="bg-[#141210] border border-stone-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-stone-700 transition-all">

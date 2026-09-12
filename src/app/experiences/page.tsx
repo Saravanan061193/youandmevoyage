@@ -10,26 +10,7 @@ import { CurrencyProvider, useCurrency } from '@/components/CurrencyContext';
 import { SEOHelper } from '@/components/SEOHelper';
 import { safeParseList } from '@/lib/json';
 
-const DEFAULT_EXPERIENCES: any[] = [
-  {
-    title: 'Temple & Heritage Architecture',
-    subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
-    image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-    desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
-  },
-  {
-    title: 'South Indian Food & Culinary Trails',
-    subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
-    image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
-    desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
-  },
-  {
-    title: 'Kerala Backwater Houseboat Cruises',
-    subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
-    image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
-    desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
-  },
-];
+const DEFAULT_EXPERIENCES: any[] = [];
 
 function ExperiencesContent() {
   const { settings } = useCurrency();
