@@ -712,6 +712,12 @@ export default function AdminPage() {
           mergedSet.privacyContent = cachedSettings.privacyContent;
         }
 
+        if (fetchedSet?.siteExperiences) {
+          mergedSet.siteExperiences = fetchedSet.siteExperiences;
+        } else if (cachedSettings?.siteExperiences) {
+          mergedSet.siteExperiences = cachedSettings.siteExperiences;
+        }
+
         if (!mergedSet.siteLogo && cachedSettings?.siteLogo) {
           mergedSet.siteLogo = cachedSettings.siteLogo;
         }
@@ -1355,19 +1361,26 @@ export default function AdminPage() {
       const updatedSettings = { ...settings, siteExperiences: JSON.stringify(list) };
       setSettings(updatedSettings);
 
-      await adminFetch('/api/settings', {
+      const res = await adminFetch('/api/settings', {
         method: 'PUT',
         body: JSON.stringify(updatedSettings),
       });
 
+      let resData = updatedSettings;
+      if (res.ok) {
+        resData = await res.json();
+      }
+      setSettings(resData);
+
       if (typeof window !== 'undefined') {
-        localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+        localStorage.setItem('site_settings_cache', JSON.stringify(resData));
         window.dispatchEvent(new Event('site_settings_updated'));
       }
 
       showNotification(editingExperienceIndex !== null ? 'Experience updated & live-synced!' : 'New experience added & published live!');
       setShowExperienceModal(false);
       setEditingExperienceIndex(null);
+      fetchAllData();
       router.refresh();
     } catch (err) {
       console.error(err);
@@ -5575,7 +5588,26 @@ export default function AdminPage() {
               {/* Experiences Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {(() => {
-                  const defaultExps: any[] = [];
+                  const defaultExps: any[] = [
+                    {
+                      title: 'Temple & Heritage Architecture',
+                      subtitle: 'Soaring Dravidian Gopurams & 1000-Year UNESCO Temples',
+                      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Marvel at living temple rituals, granite stone carving traditions, and active Chola & Pallava architecture with expert local historians.',
+                    },
+                    {
+                      title: 'South Indian Food & Culinary Trails',
+                      subtitle: 'Banana Leaf Feasts, Chettinad Spices & Brass Filter Coffee',
+                      image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Embark on private food walks, home-style cooking classes with local hosts, and authentic regional thali discoveries.',
+                    },
+                    {
+                      title: 'Kerala Backwater Houseboat Cruises',
+                      subtitle: 'Tranquil Lagoons & Private Houseboat Cooking',
+                      image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
+                      desc: 'Unwind on traditional air-conditioned kettuvallam houseboats gliding gently past palm-shaded village canals.',
+                    },
+                  ];
                   const list = safeParseList(settings?.siteExperiences, defaultExps);
                   return list.map((exp: any, idx: number) => (
                     <div key={idx} className="bg-[#141210] border border-stone-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-stone-700 transition-all">
@@ -5619,15 +5651,21 @@ export default function AdminPage() {
                               const updatedSettings = { ...settings, siteExperiences: JSON.stringify(updated) };
                               setSettings(updatedSettings);
                               try {
-                                await adminFetch('/api/settings', {
+                                const res = await adminFetch('/api/settings', {
                                   method: 'PUT',
                                   body: JSON.stringify(updatedSettings),
                                 });
+                                let resData = updatedSettings;
+                                if (res.ok) {
+                                  resData = await res.json();
+                                }
+                                setSettings(resData);
                                 if (typeof window !== 'undefined') {
-                                  localStorage.setItem('site_settings_cache', JSON.stringify(updatedSettings));
+                                  localStorage.setItem('site_settings_cache', JSON.stringify(resData));
                                   window.dispatchEvent(new Event('site_settings_updated'));
                                 }
                                 showNotification('Experience deleted successfully!');
+                                fetchAllData();
                               } catch (e) {
                                 showNotification('Failed to delete experience');
                               }
@@ -5682,11 +5720,21 @@ export default function AdminPage() {
                   onClick={async () => {
                     try {
                       setSaving(true);
-                      await adminFetch('/api/settings', {
+                      const res = await adminFetch('/api/settings', {
                         method: 'PUT',
                         body: JSON.stringify(settings),
                       });
+                      let resData = settings;
+                      if (res.ok) {
+                        resData = await res.json();
+                      }
+                      setSettings(resData);
+                      if (typeof window !== 'undefined') {
+                        localStorage.setItem('site_settings_cache', JSON.stringify(resData));
+                        window.dispatchEvent(new Event('site_settings_updated'));
+                      }
                       showNotification('Experiences updated & published live successfully!');
+                      fetchAllData();
                     } catch (err) {
                       showNotification('Failed to save experiences');
                     } finally {
