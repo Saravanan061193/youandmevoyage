@@ -54,69 +54,33 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       .catch(() => {});
   }, []);
 
-  // Verified 3 default hero banners with distinct high-res South India images
-  const defaultBanners = useMemo(() => [
-    {
-      id: 1,
-      image: settings?.heroImage || '/images/thanjavur_periya_kovil.png',
-      headline: settings?.heroHeadline || 'Thanjavur Brihadeeswarar Temple & South India Heritage',
-      subheadline: settings?.heroSubheadline || 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE',
-      copy: settings?.heroCopy || 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), iconic coastal shore temples, and authentic cultural routes across South India.',
-    },
-    {
-      id: 2,
-      image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90',
-      headline: 'Serene Alleppey Backwaters & Houseboat Cruises',
-      subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES',
-      copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons at your own tempo.',
-    },
-    {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
-      headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
-      subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
-      copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
-    }
-  ], [settings?.heroImage, settings?.heroHeadline, settings?.heroSubheadline, settings?.heroCopy]);
-
-  // Robustly parse CMS hero banners ensuring at least 3 distinct working images
+  // Parse CMS hero banners or fallback to clean single banner
   const banners = useMemo(() => {
-    let list: any[] = defaultBanners;
     try {
       if (settings?.heroBanners) {
         const parsed = typeof settings.heroBanners === 'string' ? JSON.parse(settings.heroBanners) : settings.heroBanners;
         if (Array.isArray(parsed) && parsed.length > 0) {
-          list = [...parsed];
+          return parsed.map((item) => ({
+            ...item,
+            image: item.image || settings?.heroImage || '/images/thanjavur_periya_kovil.png',
+            headline: item.headline || settings?.heroHeadline || settings?.siteTitle || 'You & Me – Independent Voyage',
+            subheadline: item.subheadline || settings?.heroSubheadline || 'SOUTH INDIA PRIVATE JOURNEYS',
+            copy: item.copy || settings?.heroCopy || '',
+          }));
         }
       }
-    } catch (e) {
-      list = defaultBanners;
-    }
+    } catch (e) {}
 
-    // Fill missing slots so there are always at least 3 distinct slides
-    while (list.length < 3) {
-      list.push(defaultBanners[list.length % defaultBanners.length]);
-    }
-
-    // Ensure each slide has a valid, distinct image
-    return list.map((item, idx) => {
-      const fallback = defaultBanners[idx % defaultBanners.length];
-      const imageVal = (item.image && typeof item.image === 'string' && item.image.trim().length > 10)
-        ? item.image.trim()
-        : fallback.image;
-      
-      // If slide 2 or 3 repeats the exact same image URL as slide 1, replace with default distinct image
-      const finalImage = (idx > 0 && imageVal === list[0].image) ? fallback.image : imageVal;
-
-      return {
-        ...item,
-        image: finalImage,
-        headline: item.headline || fallback.headline,
-        subheadline: item.subheadline || fallback.subheadline,
-        copy: item.copy || fallback.copy,
-      };
-    });
-  }, [settings?.heroBanners, defaultBanners]);
+    return [
+      {
+        id: 1,
+        image: settings?.heroImage || '/images/thanjavur_periya_kovil.png',
+        headline: settings?.heroHeadline || settings?.siteTitle || 'You & Me – Independent Voyage',
+        subheadline: settings?.heroSubheadline || 'SOUTH INDIA PRIVATE JOURNEYS',
+        copy: settings?.heroCopy || '',
+      }
+    ];
+  }, [settings?.heroBanners, settings?.heroHeadline, settings?.heroImage, settings?.heroSubheadline, settings?.heroCopy, settings?.siteTitle]);
 
   // Auto slide timer
   useEffect(() => {
@@ -186,25 +150,28 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       {/* Dark gradient overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/95 via-[#0F172A]/40 to-transparent z-0 pointer-events-none" />
 
-      {/* Side Arrow Buttons (Left Carousel Navigation) */}
-      <button
-        type="button"
-        onClick={handlePrevSlide}
-        aria-label="Previous Slide"
-        className="absolute left-2 sm:left-6 top-[32%] sm:top-[36%] -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
-      >
-        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:-translate-x-1" />
-      </button>
+      {/* Side Arrow Buttons (Carousel Navigation) */}
+      {banners.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={handlePrevSlide}
+            aria-label="Previous Slide"
+            className="absolute left-2 sm:left-6 top-[32%] sm:top-[36%] -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
+          >
+            <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:-translate-x-1" />
+          </button>
 
-      {/* Side Arrow Buttons (Right Carousel Navigation) */}
-      <button
-        type="button"
-        onClick={handleNextSlide}
-        aria-label="Next Slide"
-        className="absolute right-2 sm:right-6 top-[32%] sm:top-[36%] -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
-      >
-        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:translate-x-1" />
-      </button>
+          <button
+            type="button"
+            onClick={handleNextSlide}
+            aria-label="Next Slide"
+            className="absolute right-2 sm:right-6 top-[32%] sm:top-[36%] -translate-y-1/2 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/85 hover:bg-orange-500 text-white backdrop-blur-md border-2 border-orange-500/40 hover:border-orange-400 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all hover:scale-115 active:scale-90 cursor-pointer group/btn"
+          >
+            <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 group-hover/btn:text-white transition-transform group-hover/btn:translate-x-1" />
+          </button>
+        </>
+      )}
 
       <div key={`content-${currentSlideIndex}`} className="hero-content z-10 relative max-w-3xl space-y-3 animate-fadeIn">
         <a
@@ -240,19 +207,21 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       </div>
 
       {/* Hero Carousel Navigation Dots */}
-      <div className="absolute top-8 right-8 z-50 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20 shadow-2xl">
-        {banners.map((_: any, idx: number) => (
-          <button
-            key={idx}
-            type="button"
-            onClick={() => setCurrentSlideIndex(idx)}
-            className={`h-2.5 rounded-full transition-all cursor-pointer ${
-              idx === currentSlideIndex ? 'bg-orange-500 w-7' : 'bg-white/40 hover:bg-white/80 w-2.5'
-            }`}
-            title={`Slide ${idx + 1}`}
-          />
-        ))}
-      </div>
+      {banners.length > 1 && (
+        <div className="absolute top-8 right-8 z-50 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20 shadow-2xl">
+          {banners.map((_: any, idx: number) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setCurrentSlideIndex(idx)}
+              className={`h-2.5 rounded-full transition-all cursor-pointer ${
+                idx === currentSlideIndex ? 'bg-orange-500 w-7' : 'bg-white/40 hover:bg-white/80 w-2.5'
+              }`}
+              title={`Slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="hero-caption hidden md:flex items-center gap-1.5 text-xs text-slate-300">
         <MapPin className="w-3.5 h-3.5 text-orange-400" /> Tamil Nadu & Kerala <span>South India</span>

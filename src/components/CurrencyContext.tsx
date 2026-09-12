@@ -31,8 +31,8 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
     }
     return {
       usdToInr: 83.5,
-      weatherText: 'Tamil Nadu & Kerala: 28°C Pleasant',
-      whatsappNumber: '+91 9994315778',
+      weatherText: '',
+      whatsappNumber: '',
     };
   });
 
@@ -41,25 +41,9 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
       const res = await fetch('/api/settings', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
-        let cachedSettings: any = {};
+        setSettings(data);
         if (typeof window !== 'undefined') {
-          try {
-            const cached = localStorage.getItem('site_settings_cache');
-            if (cached) {
-              cachedSettings = JSON.parse(cached);
-            }
-          } catch (e) {}
-        }
-        const merged = { ...cachedSettings, ...data };
-        if (!merged.siteLogo && cachedSettings?.siteLogo) {
-          merged.siteLogo = cachedSettings.siteLogo;
-        }
-        if (!merged.siteFavicon && cachedSettings?.siteFavicon) {
-          merged.siteFavicon = cachedSettings.siteFavicon;
-        }
-        setSettings(merged);
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('site_settings_cache', JSON.stringify(merged));
+          localStorage.setItem('site_settings_cache', JSON.stringify(data));
         }
       }
     } catch (e) {

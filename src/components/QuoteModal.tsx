@@ -3,12 +3,15 @@
 import React, { useState } from 'react';
 import { X, ArrowRight, ArrowLeft, CheckCircle2, Star, Lock, Sparkles, Send, MessageCircle } from 'lucide-react';
 
+import { useCurrency } from './CurrencyContext';
+
 interface QuoteModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
+  const { settings } = useCurrency();
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -91,7 +94,7 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
             </p>
             <div className="pt-3 flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
               <a
-                href={`https://wa.me/919994315778?text=${encodeURIComponent(`Hi You & Me! I just submitted a custom journey enquiry on your website.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Category:* ${formData.category}\n*Travel Date:* ${formData.date || 'Flexible'}\n*Travellers:* ${formData.travelers}\n*Notes:* ${formData.message}`)}`}
+                href={`https://wa.me/${(settings?.whatsappNumber || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi You & Me! I just submitted a custom journey enquiry on your website.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Category:* ${formData.category}\n*Travel Date:* ${formData.date || 'Flexible'}\n*Travellers:* ${formData.travelers}\n*Notes:* ${formData.message}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto py-3 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg flex-1 cursor-pointer"

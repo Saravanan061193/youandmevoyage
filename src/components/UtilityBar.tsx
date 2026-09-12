@@ -6,9 +6,9 @@ import { useCurrency } from './CurrencyContext';
 
 export const UtilityBar = () => {
   const { settings } = useCurrency();
-  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
+  const whatsappNum = settings?.whatsappNumber || '';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
-  const contactEmail = settings?.contactEmail || 'youandmevoyage@gmail.com';
+  const contactEmail = settings?.contactEmail || '';
 
   const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/youandmevoyage/';
   const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/';
@@ -21,27 +21,31 @@ export const UtilityBar = () => {
       <div className="mx-auto max-w-[1600px] flex items-center justify-between gap-4">
         {/* Left Side: Mail ID & WhatsApp Only */}
         <div className="flex items-center gap-4 sm:gap-6 truncate">
-          <a
-            href={`mailto:${contactEmail}`}
-            className="flex items-center gap-2 text-slate-300 hover:text-orange-400 font-semibold transition-colors truncate"
-            title="Send Email"
-          >
-            <Mail className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-            <span className="truncate lowercase text-[11.5px] tracking-normal font-sans">{contactEmail}</span>
-          </a>
+          {contactEmail && (
+            <a
+              href={`mailto:${contactEmail}`}
+              className="flex items-center gap-2 text-slate-300 hover:text-orange-400 font-semibold transition-colors truncate"
+              title="Send Email"
+            >
+              <Mail className="w-3.5 h-3.5 text-orange-400 shrink-0" />
+              <span className="truncate lowercase text-[11.5px] tracking-normal font-sans">{contactEmail}</span>
+            </a>
+          )}
 
-          <span className="text-slate-700 hidden sm:inline">•</span>
+          {contactEmail && whatsappNum && <span className="text-slate-700 hidden sm:inline">•</span>}
 
-          <a
-            href={`https://wa.me/${whatsappClean}?text=${encodeURIComponent('Hi You & Me! I would like to inquire about customized private journeys.')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-slate-300 hover:text-emerald-400 font-bold transition-colors shrink-0"
-            title="Chat on WhatsApp"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-            <span>WhatsApp {whatsappNum}</span>
-          </a>
+          {whatsappNum && (
+            <a
+              href={`https://wa.me/${whatsappClean}?text=${encodeURIComponent('Hi You & Me! I would like to inquire about customized private journeys.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-slate-300 hover:text-emerald-400 font-bold transition-colors shrink-0"
+              title="Chat on WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>WhatsApp {whatsappNum}</span>
+            </a>
+          )}
         </div>
 
         {/* Right Side: Official Brand Social Media Icons */}

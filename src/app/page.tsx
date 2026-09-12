@@ -38,7 +38,7 @@ function HomeContent() {
     name: 'You & Me – Independent Voyage',
     description: 'Bespoke private journeys, authentic experiences and driver-assisted road trips across Tamil Nadu and Kerala.',
     url: 'https://youandmevoyage.com',
-    telephone: '+91 9994315778',
+    telephone: settings?.whatsappNumber || '',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Indira Nagar, Adyar',

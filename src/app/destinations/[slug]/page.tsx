@@ -153,7 +153,7 @@ const safeParseList = (value: any, fallbackDefault: any[] = []): any[] => {
                 Build Trip Including {dest.title} <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href={`https://wa.me/+919994315778?text=${whatsappText}`}
+                href={`https://wa.me/${(settings?.whatsappNumber || '').replace(/[^0-9]/g, '')}?text=${whatsappText}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-all"

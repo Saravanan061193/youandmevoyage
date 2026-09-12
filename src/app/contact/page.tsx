@@ -21,7 +21,7 @@ function ContactContent() {
     message: '',
   });
 
-  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
+  const whatsappNum = settings?.whatsappNumber || '';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -102,7 +102,7 @@ function ContactContent() {
                 <Mail className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Email</strong>
-                  <span>{settings?.contactEmail || 'youandmevoyage@gmail.com'}</span>
+                  <span>{settings?.contactEmail || ''}</span>
                 </div>
               </div>
 

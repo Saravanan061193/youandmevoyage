@@ -59,7 +59,7 @@ function JourneyDetailContent() {
   const [loading, setLoading] = useState(true);
   const [expandedDay, setExpandedDay] = useState<number | null>(null);
 
-  const whatsappNum = (settings?.whatsappNumber || '+91 9994315778').replace(/[^0-9+]/g, '');
+  const whatsappNum = (settings?.whatsappNumber || '').replace(/[^0-9+]/g, '');
 
   useEffect(() => {
     fetch('/api/safaris', { cache: 'no-store' })

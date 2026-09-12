@@ -61,7 +61,7 @@ export const Footer = () => {
     }
   }, []);
 
-  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
+  const whatsappNum = settings?.whatsappNumber || '';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/youandmevoyage/';
@@ -110,10 +110,12 @@ export const Footer = () => {
                       <Phone className="w-4 h-4 text-orange-500 shrink-0" />
                       <span>{settings?.officePhone || whatsappNum}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-4 h-4 text-orange-500 shrink-0" />
-                      <span>{settings?.contactEmail || 'youandmevoyage@gmail.com'}</span>
-                    </div>
+                    {settings?.contactEmail && (
+                      <div className="flex items-center gap-3">
+                        <Mail className="w-4 h-4 text-orange-500 shrink-0" />
+                        <span>{settings.contactEmail}</span>
+                      </div>
+                    )}
                     <div className="flex items-center gap-3">
                       <Clock className="w-4 h-4 text-orange-500 shrink-0" />
                       <span>Mon – Sat: 08:30 – 19:30 (IST) · 24/7 Driver Support</span>
@@ -173,20 +175,24 @@ export const Footer = () => {
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{settings?.officeAddress || settings?.address || 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020'}</span>
+                <span className="leading-relaxed">{settings?.officeAddress || settings?.address || ''}</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-orange-400 shrink-0" />
-                <a href={`mailto:${settings?.contactEmail || 'youandmevoyage@gmail.com'}`} className="hover:text-orange-400 transition-colors">
-                  {settings?.contactEmail || 'youandmevoyage@gmail.com'}
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-orange-400 shrink-0" />
-                <a href={`tel:${whatsappNum.replace(/\s+/g, '')}`} className="hover:text-orange-400 transition-colors">
-                  {whatsappNum}
-                </a>
-              </div>
+              {settings?.contactEmail && (
+                <div className="flex items-center gap-2.5">
+                  <Mail className="w-4 h-4 text-orange-400 shrink-0" />
+                  <a href={`mailto:${settings.contactEmail}`} className="hover:text-orange-400 transition-colors">
+                    {settings.contactEmail}
+                  </a>
+                </div>
+              )}
+              {whatsappNum && (
+                <div className="flex items-center gap-2.5">
+                  <Phone className="w-4 h-4 text-orange-400 shrink-0" />
+                  <a href={`tel:${whatsappNum.replace(/\s+/g, '')}`} className="hover:text-orange-400 transition-colors">
+                    {whatsappNum}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 

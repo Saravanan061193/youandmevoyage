@@ -6,50 +6,10 @@ import Image from 'next/image';
 import { BookOpen, Clock, User, ArrowRight, Sparkles } from 'lucide-react';
 import { BlogItem } from '@/lib/inMemoryStore';
 
-const FALLBACK_BLOGS: BlogItem[] = [
-  {
-    id: 'blog-1',
-    title: 'Best Places to Visit in Tamil Nadu: A Curated Road Trip Guide',
-    slug: 'best-places-to-visit-in-tamil-nadu-road-trip-guide',
-    excerpt: 'Discover UNESCO temples, coastal French enclaves, heritage Chettinad mansions, and spiritual cities across Tamil Nadu.',
-    content: '',
-    coverImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-    author: 'Arun Kumar',
-    authorRole: 'Senior South India Travel Companion',
-    category: 'Travel Guide',
-    readTime: '6 min read',
-    published: true,
-  },
-  {
-    id: 'blog-2',
-    title: 'The Ultimate 10-Day Tamil Nadu & Kerala Private Itinerary',
-    slug: 'ultimate-10-day-tamil-nadu-kerala-itinerary',
-    excerpt: 'Combine temple majesty with emerald tea hills and serene backwater houseboats on this seamlessly planned private route.',
-    content: '',
-    coverImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
-    author: 'Meera Nair',
-    authorRole: 'Itinerary Planner',
-    category: 'Itinerary',
-    readTime: '7 min read',
-    published: true,
-  },
-  {
-    id: 'blog-3',
-    title: 'A Traveler Guide to Authentic South Indian Food & Culinary Traditions',
-    slug: 'traveler-guide-authentic-south-indian-food-traditions',
-    excerpt: 'From crispy filter coffee morning rituals to spicy Chettinad banana leaf feasts and Kerala backwater seafood curries.',
-    content: '',
-    coverImage: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
-    author: 'Sathish Kumar',
-    authorRole: 'Founder & Travel Companion',
-    category: 'Food & Culture',
-    readTime: '5 min read',
-    published: true,
-  },
-];
+const FALLBACK_BLOGS: BlogItem[] = [];
 
 export const BlogSection = () => {
-  const [blogs, setBlogs] = useState<BlogItem[]>(FALLBACK_BLOGS);
+  const [blogs, setBlogs] = useState<BlogItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -58,18 +18,25 @@ export const BlogSection = () => {
         const res = await fetch('/api/blogs', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
+          if (Array.isArray(data)) {
             setBlogs(data.slice(0, 3));
+          } else {
+            setBlogs([]);
           }
         }
       } catch (err) {
         console.error('Failed to fetch blogs for homepage section:', err);
+        setBlogs([]);
       } finally {
         setLoading(false);
       }
     }
     fetchBlogs();
   }, []);
+
+  if (!loading && blogs.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F172A] text-slate-100 border-t border-slate-800 relative overflow-hidden">

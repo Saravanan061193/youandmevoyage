@@ -36,7 +36,7 @@ function SafariDetailContent() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [activeDayIndex, setActiveDayIndex] = useState(0);
 
-  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
+  const whatsappNum = settings?.whatsappNumber || '';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   useEffect(() => {
@@ -100,69 +100,16 @@ function SafariDetailContent() {
 
   const parsedItineraries: any[] = safeParseList(safari.itineraries);
 
-  const dayItems = parsedItineraries.length > 0
-    ? parsedItineraries.map((item: any, idx: number) => ({
-        dayNumber: item.dayNumber || String(idx + 1).padStart(2, '0'),
-        label: item.daysLabel || `Day ${String(idx + 1).padStart(2, '0')}`,
-        title: item.title || `Day ${idx + 1} Exploration`,
-        description: item.description || '',
-        duration: item.duration || '',
-        meals: item.mealPlan || '',
-        stay: item.accommodation || safari.accommodation || 'Heritage Stay / Hotel',
-        image: item.image || safari.image,
-      }))
-    : [
-        {
-          dayNumber: '01',
-          label: 'Day 01',
-          title: 'Arrival in Chennai & Coastal Heritage Welcome',
-          description: 'Touch down in Chennai where your personal private driver companion will greet you. Travel to Mahabalipuram to explore UNESCO sea shore temples.',
-          duration: '1.5 hrs · 55 km',
-          meals: 'Dinner included',
-          stay: safari.accommodation || 'Heritage Beach Resort',
-          image: safari.image,
-        },
-        {
-          dayNumber: '02',
-          label: `Days 02–0${Math.min(3, safari.days)}`,
-          title: 'Pondicherry French Quarter & Temple Trails of Thanjavur',
-          description: 'Wander French colonial bougainvillea streets in Pondicherry and explore the 1,000-year-old Chola Brihadeeswarar Temple.',
-          duration: '4 hrs · 180 km',
-          meals: 'Full Board',
-          stay: 'Palais de Mahe / Heritage Mansion',
-          image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-        },
-        {
-          dayNumber: '03',
-          label: `Days 04–0${Math.min(5, safari.days)}`,
-          title: 'Chettinad Heritage Palaces & Authentic Banana Leaf Feasts',
-          description: 'Explore grand merchant mansions, Athangudi handmade tiles, and private culinary spice demonstrations in Chettinad.',
-          duration: '2.5 hrs · 90 km',
-          meals: 'Breakfast & Traditional Thali Lunch',
-          stay: 'Visalam Chettinad Palace',
-          image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85',
-        },
-        {
-          dayNumber: '04',
-          label: `Days 06–0${Math.min(safari.days - 1, 8)}`,
-          title: 'Munnar Tea Plantations & Misty Mountain Retreat',
-          description: 'Ascend into the Western Ghats to stroll through tea gardens, visit processing factories, and enjoy crisp mountain air.',
-          duration: '4.5 hrs · 160 km',
-          meals: 'Full Board',
-          stay: 'Tea Estate Bungalow Munnar',
-          image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
-        },
-        {
-          dayNumber: '05',
-          label: `Days 0${safari.days} Departure`,
-          title: 'Kerala Backwater Houseboat & Fort Kochi Departure',
-          description: 'Cruise tranquil village lagoons on an AC houseboat in Alleppey before transferring to Kochi airport.',
-          duration: '2 hrs · 65 km',
-          meals: 'Breakfast & Houseboat Lunch',
-          stay: 'Private Houseboat / Fort Kochi Heritage',
-          image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
-        },
-      ];
+  const dayItems = parsedItineraries.map((item: any, idx: number) => ({
+    dayNumber: item.dayNumber || String(idx + 1).padStart(2, '0'),
+    label: item.daysLabel || `Day ${String(idx + 1).padStart(2, '0')}`,
+    title: item.title || `Day ${idx + 1} Exploration`,
+    description: item.description || '',
+    duration: item.duration || '',
+    meals: item.mealPlan || '',
+    stay: item.accommodation || safari.accommodation || 'Heritage Stay / Hotel',
+    image: item.image || safari.image,
+  }));
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-orange-500 selection:text-white">

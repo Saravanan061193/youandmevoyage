@@ -13,70 +13,21 @@ export interface FAQItem {
   category?: string;
 }
 
-const DEFAULT_FAQS: FAQItem[] = [
-  {
-    id: 'faq-1',
-    question: 'What is included in a You & Me Independent Voyage private journey?',
-    answer: 'All our private journeys include a dedicated AC vehicle with an experienced local companion/driver, boutique hotel or houseboat accommodations, daily breakfast, fuel, tolls, parking, driver allowances, and 24/7 personal travel support.',
-    category: 'Booking & Inclusions',
-  },
-  {
-    id: 'faq-2',
-    question: 'When is the best time of year to visit South India?',
-    answer: 'The winter season (October to March) offers pleasant, clear weather across Tamil Nadu temples and Kerala backwaters. Monsoon (June to September) brings lush scenery and tranquil houseboat experiences in Alleppey.',
-    category: 'Journey Planning',
-  },
-  {
-    id: 'faq-3',
-    question: 'Are private driver journeys suitable for families, couples, or solo travellers?',
-    answer: 'Yes! Because our journeys are 100% private, the tempo, daily schedule, sightseeing stops, and meal choices are completely customized to your group’s comfort and preferences.',
-    category: 'Journey Planning',
-  },
-  {
-    id: 'faq-4',
-    question: 'What vehicle options and safety protocols are provided?',
-    answer: 'We provide clean, modern air-conditioned sedans, SUVs, and Tempo Travellers (such as Toyota Innova Crysta & Etios) driven by experienced, English-speaking local companions with deep regional knowledge.',
-    category: 'Safety & Comfort',
-  },
-  {
-    id: 'faq-5',
-    question: 'How far in advance should we book a custom South India journey?',
-    answer: 'We recommend booking 2 to 6 months in advance, especially for high-season travel (October to March), to ensure reservation at preferred boutique heritage hotels and luxury houseboats.',
-    category: 'Booking & Inclusions',
-  },
-];
+const DEFAULT_FAQS: FAQItem[] = [];
 
 export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpenQuoteModal }) => {
   const { settings } = useCurrency();
-  const [faqs, setFaqs] = useState<FAQItem[]>(DEFAULT_FAQS);
+  const [faqs, setFaqs] = useState<FAQItem[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
   useEffect(() => {
-    // Purge old Namibia/Discovery Safaris cached entries from localStorage
-    if (typeof window !== 'undefined') {
-      const cached = localStorage.getItem('site_faqs_cache');
-      if (cached && (cached.includes('Namibia') || cached.includes('Discovery Safaris'))) {
-        localStorage.removeItem('site_faqs_cache');
-      }
-    }
-
     const cleanFaqList = (list: FAQItem[]) => {
       return list.map((item) => {
-        let q = item.question
-          .replace(/Discovery Safaris/gi, 'You & Me – Independent Voyage')
-          .replace(/Namibia/gi, 'South India')
-          .replace(/safari/gi, 'journey');
-        let a = item.answer
-          .replace(/Discovery Safaris/gi, 'You & Me – Independent Voyage')
-          .replace(/Namibia/gi, 'South India')
-          .replace(/safari/gi, 'journey')
-          .replace(/4x4 land cruiser/gi, 'dedicated AC vehicle')
-          .replace(/Etosha/gi, 'Tamil Nadu & Kerala')
-          .replace(/Windhoek/gi, 'Chennai')
-          .replace(/Sossusvlei/gi, 'Pondicherry');
-        let c = (item.category || 'General').replace(/Safari Planning/gi, 'Journey Planning');
+        let q = item.question || '';
+        let a = item.answer || '';
+        let c = item.category || 'General';
         return { ...item, question: q, answer: a, category: c };
       });
     };
@@ -95,14 +46,14 @@ export const FAQSection: React.FC<{ onOpenQuoteModal?: () => void }> = ({ onOpen
       fetch('/api/faqs', { cache: 'no-store' })
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
-          if (Array.isArray(data) && data.length > 0) {
+          if (Array.isArray(data)) {
             setFaqs(cleanFaqList(data));
           } else {
-            setFaqs(DEFAULT_FAQS);
+            setFaqs([]);
           }
         })
         .catch(() => {
-          setFaqs(DEFAULT_FAQS);
+          setFaqs([]);
         });
     };
 

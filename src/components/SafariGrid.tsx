@@ -22,7 +22,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  const whatsappNum = settings?.whatsappNumber || '+91 9994315778';
+  const whatsappNum = settings?.whatsappNumber || '';
   const whatsappClean = whatsappNum.replace(/[^0-9]/g, '');
 
   const getCleanAccommodationSummary = (accText: string | undefined | null): string => {
@@ -43,7 +43,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
       const res = await fetch('/api/safaris', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setSafaris(data);
           if (typeof window !== 'undefined') {
             localStorage.setItem('site_safaris_cache', JSON.stringify(data));
