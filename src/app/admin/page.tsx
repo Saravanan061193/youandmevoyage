@@ -4968,15 +4968,6 @@ export default function AdminPage() {
                         />
                       </div>
 
-                      <div className="w-full">
-                        <label className="text-xs text-stone-400 font-semibold block mb-1">Top Bar Weather Text</label>
-                        <input
-                          type="text"
-                          value={settings.weatherText || ''}
-                          onChange={(e) => setSettings({ ...settings, weatherText: e.target.value })}
-                          className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
-                        />
-                      </div>
 
                       <div className="w-full">
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Admin Passcode</label>
