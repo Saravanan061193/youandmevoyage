@@ -390,9 +390,9 @@ export async function PUT(request: Request) {
           data: prismaUpdateData,
         });
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error('DB settings update failed:', e);
-      return NextResponse.json({ error: 'Failed to save settings to database. File size might be too large or database connection failed.' }, { status: 500 });
+      return NextResponse.json({ error: `DB settings update failed: ${e.message || String(e)}` }, { status: 500 });
     }
 
     // updateData (what user just saved) is highest priority
