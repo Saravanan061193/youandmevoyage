@@ -11,12 +11,14 @@ import {
   Mail,
   Clock,
   Navigation,
+  Compass,
 } from 'lucide-react';
 import { useCurrency } from './CurrencyContext';
 
 export const Footer = () => {
   const { settings } = useCurrency();
   const [destinations, setDestinations] = useState<any[]>([]);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const loadDestinations = async () => {
@@ -155,17 +157,21 @@ export const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Link href="/" className="flex items-center gap-3 group">
-              {settings?.siteLogo ? (
+              {settings?.siteLogo && !logoError ? (
                 <div className="flex items-center gap-2.5">
                   <img
                     src={settings.siteLogo}
                     alt={settings?.siteTitle || 'You & Me – Independent Voyage'}
+                    onError={() => setLogoError(true)}
                     className="h-10 sm:h-12 w-auto object-contain max-w-[220px] drop-shadow-md"
                   />
                 </div>
               ) : (
                 <div className="flex items-center gap-2.5">
-                  <span className="font-serif text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white shadow-md shrink-0 border border-orange-400/40 group-hover:scale-105 transition-transform">
+                    <Compass className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors leading-tight">
                     {settings?.siteTitle || 'You & Me – Independent Voyage'}
                   </span>
                 </div>
