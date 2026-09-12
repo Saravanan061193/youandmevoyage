@@ -180,12 +180,19 @@ const ALLOWED_SETTING_FIELDS = [
 
 const BOOLEAN_FIELDS = new Set(['enableCloudinary', 'enableRobotsIndex', 'enableAnnouncementBanner', 'showGoogleMapInFooter']);
 
+function isEmptyValue(v: any, isBooleanField: boolean): boolean {
+  if (v === null || v === undefined) return true;
+  if (!isBooleanField && v === '') return true;
+  return false;
+}
+
 function applyDefaults(target: Record<string, any>) {
   const result: Record<string, any> = { ...DEFAULT_SETTINGS, ...target };
   for (const [key, defaultVal] of Object.entries(DEFAULT_SETTINGS)) {
-    // Never overwrite boolean false with a default – false is a valid saved value
-    if (BOOLEAN_FIELDS.has(key)) continue;
-    if ((result[key] === null || result[key] === undefined || result[key] === '') && defaultVal) {
+    const isBool = BOOLEAN_FIELDS.has(key);
+    // For boolean fields: only apply default when value is null/undefined (not when false)
+    // For string fields: apply default when null/undefined/empty-string
+    if (isEmptyValue(result[key], isBool) && defaultVal !== undefined) {
       result[key] = defaultVal;
     }
   }
@@ -224,16 +231,27 @@ export async function GET() {
         ? settings.siteExperiences
         : JSON.stringify([]);
 
-    // Strip empty strings from cache but keep boolean false values
+    // Strip null/undefined/empty-strings from cache but KEEP boolean false values
     const cleanCache = Object.fromEntries(
-      Object.entries(inMemorySettingsCache || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+      Object.entries(inMemorySettingsCache || {}).filter(([k, v]) => {
+        if (v === null || v === undefined) return false;
+        if (typeof v !== 'boolean' && v === '') return false;
+        return true;
+      })
     );
     // DB is authoritative – apply it LAST so it beats cache for any saved field
-    const dbSettingsRaw = settings || {};
+    // Also keep DB boolean false values (don't strip them)
+    const cleanDb = Object.fromEntries(
+      Object.entries(settings || {}).filter(([k, v]) => {
+        if (v === null || v === undefined) return false;
+        if (typeof v !== 'boolean' && v === '') return false;
+        return true;
+      })
+    );
 
     const merged = applyDefaults({
-      ...cleanCache,   // lowest priority after defaults
-      ...dbSettingsRaw, // DB beats cache
+      ...cleanCache,  // lowest priority after defaults
+      ...cleanDb,     // DB beats cache (authoritative)
       termsContent,
       privacyContent,
       siteExperiences,

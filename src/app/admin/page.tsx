@@ -690,52 +690,62 @@ export default function AdminPage() {
       }
       if (setRes.ok) {
         const fetchedSet = await setRes.json();
+
+        // Keep boolean false values - only strip null/undefined/empty-string (not false)
+        const keepValue = (v: any) => {
+          if (v === null || v === undefined) return false;
+          if (typeof v !== 'boolean' && v === '') return false;
+          return true;
+        };
+
         let cachedSettings: any = {};
         if (typeof window !== 'undefined') {
           try {
             const cached = localStorage.getItem('site_settings_cache');
-            if (cached) {
-              cachedSettings = JSON.parse(cached);
-            }
+            if (cached) cachedSettings = JSON.parse(cached);
           } catch (e) {}
         }
+
         const cleanCachedSettings = Object.fromEntries(
-          Object.entries(cachedSettings || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+          Object.entries(cachedSettings || {}).filter(([_, v]) => keepValue(v))
         );
         const cleanFetchedSet = Object.fromEntries(
-          Object.entries(fetchedSet || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+          Object.entries(fetchedSet || {}).filter(([_, v]) => keepValue(v))
         );
-        const mergedSet = { ...cleanCachedSettings, ...cleanFetchedSet };
-        if (fetchedSet?.termsContent) {
+
+        // API is authoritative - fetchedSet overrides localStorage cache
+        const mergedSet: any = { ...cleanCachedSettings, ...cleanFetchedSet };
+
+        // Always prefer API values for these special fields
+        if (fetchedSet?.termsContent !== undefined && fetchedSet?.termsContent !== null) {
           mergedSet.termsContent = fetchedSet.termsContent;
         } else if (cachedSettings?.termsContent) {
           mergedSet.termsContent = cachedSettings.termsContent;
         }
-
-        if (fetchedSet?.privacyContent) {
+        if (fetchedSet?.privacyContent !== undefined && fetchedSet?.privacyContent !== null) {
           mergedSet.privacyContent = fetchedSet.privacyContent;
         } else if (cachedSettings?.privacyContent) {
           mergedSet.privacyContent = cachedSettings.privacyContent;
         }
-
         if (fetchedSet?.siteExperiences !== undefined && fetchedSet?.siteExperiences !== null) {
           mergedSet.siteExperiences = fetchedSet.siteExperiences;
         } else if (cachedSettings?.siteExperiences !== undefined && cachedSettings?.siteExperiences !== null) {
           mergedSet.siteExperiences = cachedSettings.siteExperiences;
         }
 
-        if (!mergedSet.siteLogo && cachedSettings?.siteLogo) {
-          mergedSet.siteLogo = cachedSettings.siteLogo;
+        // Always prefer API value for boolean toggles (even if false)
+        const boolFields = ['enableCloudinary','enableRobotsIndex','enableAnnouncementBanner','showGoogleMapInFooter'];
+        for (const bf of boolFields) {
+          if (fetchedSet?.[bf] !== undefined && fetchedSet?.[bf] !== null) {
+            mergedSet[bf] = fetchedSet[bf];
+          }
         }
-        if (!mergedSet.siteLogo && settings?.siteLogo) {
-          mergedSet.siteLogo = settings.siteLogo;
-        }
-        if (!mergedSet.siteFavicon && cachedSettings?.siteFavicon) {
-          mergedSet.siteFavicon = cachedSettings.siteFavicon;
-        }
-        if (!mergedSet.siteFavicon && settings?.siteFavicon) {
-          mergedSet.siteFavicon = settings.siteFavicon;
-        }
+
+        if (!mergedSet.siteLogo && cachedSettings?.siteLogo) mergedSet.siteLogo = cachedSettings.siteLogo;
+        if (!mergedSet.siteLogo && settings?.siteLogo) mergedSet.siteLogo = settings.siteLogo;
+        if (!mergedSet.siteFavicon && cachedSettings?.siteFavicon) mergedSet.siteFavicon = cachedSettings.siteFavicon;
+        if (!mergedSet.siteFavicon && settings?.siteFavicon) mergedSet.siteFavicon = settings.siteFavicon;
+
         setSettings(mergedSet);
         if (typeof window !== 'undefined') {
           localStorage.setItem('site_settings_cache', JSON.stringify(mergedSet));
@@ -1248,10 +1258,22 @@ export default function AdminPage() {
       let updatedSettings = { ...settings };
       if (res.ok) {
         const resData = await res.json();
+        // Keep boolean false — only strip null/undefined/empty-string
         const cleanResData = Object.fromEntries(
-          Object.entries(resData || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+          Object.entries(resData || {}).filter(([_, v]) => {
+            if (v === null || v === undefined) return false;
+            if (typeof v !== 'boolean' && v === '') return false;
+            return true;
+          })
         );
         updatedSettings = { ...settings, ...cleanResData };
+        // Force-apply boolean toggles from API (even if false)
+        const boolFields = ['enableCloudinary','enableRobotsIndex','enableAnnouncementBanner','showGoogleMapInFooter'];
+        for (const bf of boolFields) {
+          if (resData?.[bf] !== undefined && resData?.[bf] !== null) {
+            updatedSettings[bf] = resData[bf];
+          }
+        }
       }
       if (!updatedSettings.siteLogo && settings.siteLogo) {
         updatedSettings.siteLogo = settings.siteLogo;
