@@ -21,29 +21,17 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-[#0F172A]/95 backdrop-blur-2xl transition-all shadow-md">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-3 py-2.5 sm:px-6 lg:px-8 sm:py-3.5 gap-2">
         {/* Brand Mark with Dynamic Logo (Links to /) */}
-        <Link href="/" className="brand-mark flex items-center gap-2 sm:gap-3 group shrink-0 max-w-[65%] xs:max-w-[70%] sm:max-w-none">
+        <Link href="/" className="brand-mark flex items-center group shrink-0">
           {settings?.siteLogo && !logoError ? (
-            <div className="flex items-center gap-2 max-w-[140px] xs:max-w-[180px] sm:max-w-[260px]">
-              <img
-                src={settings.siteLogo}
-                alt={settings?.siteTitle || "You & Me – Independent Voyage"}
-                onError={() => setLogoError(true)}
-                className="h-8 xs:h-9 sm:h-11 w-auto max-w-full object-contain drop-shadow-md"
-              />
-            </div>
+            <img
+              src={settings.siteLogo}
+              alt={settings?.siteTitle || "Brand Logo"}
+              onError={() => setLogoError(true)}
+              className="h-9 xs:h-11 sm:h-14 lg:h-16 w-auto max-w-[160px] xs:max-w-[200px] sm:max-w-[280px] lg:max-w-[340px] object-contain drop-shadow-md"
+            />
           ) : (
-            <div className="flex items-center gap-2 sm:gap-2.5">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white font-extrabold text-xs shadow-md shrink-0 border border-orange-400/40 group-hover:scale-105 transition-transform">
-                <Compass className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white" />
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-white font-bold text-xs sm:text-base font-serif tracking-tight group-hover:text-orange-400 transition-colors line-clamp-2">
-                  {settings?.siteTitle || "You & Me – Independent Voyage"}
-                </span>
-                <span className="text-[9px] sm:text-[10px] text-orange-400/90 font-mono font-medium tracking-wide hidden sm:block">
-                  South India Private Tours
-                </span>
-              </div>
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white shadow-md shrink-0 border border-orange-400/40 group-hover:scale-105 transition-transform">
+              <Compass className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
           )}
         </Link>
