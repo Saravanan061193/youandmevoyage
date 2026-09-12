@@ -732,9 +732,9 @@ export default function AdminPage() {
         } else if (cachedSettings?.siteExperiences !== undefined && cachedSettings?.siteExperiences !== null) {
           mergedSet.siteExperiences = cachedSettings.siteExperiences;
         }
-        if (fetchedSet?.heroBanners !== undefined && fetchedSet?.heroBanners !== null && fetchedSet?.heroBanners !== '' && fetchedSet?.heroBanners !== '[]') {
+        if (fetchedSet?.heroBanners !== undefined && fetchedSet?.heroBanners !== null && fetchedSet?.heroBanners !== '') {
           mergedSet.heroBanners = fetchedSet.heroBanners;
-        } else if (cachedSettings?.heroBanners !== undefined && cachedSettings?.heroBanners !== null && cachedSettings?.heroBanners !== '' && cachedSettings?.heroBanners !== '[]') {
+        } else if (cachedSettings?.heroBanners !== undefined && cachedSettings?.heroBanners !== null && cachedSettings?.heroBanners !== '') {
           mergedSet.heroBanners = cachedSettings.heroBanners;
         }
 

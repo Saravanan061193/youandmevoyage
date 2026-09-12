@@ -234,9 +234,9 @@ export async function GET() {
         : JSON.stringify([]);
 
     const heroBanners =
-      inMemorySettingsCache?.heroBanners !== undefined && inMemorySettingsCache?.heroBanners !== null && inMemorySettingsCache?.heroBanners !== '' && inMemorySettingsCache?.heroBanners !== '[]'
+      inMemorySettingsCache?.heroBanners !== undefined && inMemorySettingsCache?.heroBanners !== null && inMemorySettingsCache?.heroBanners !== ''
         ? inMemorySettingsCache.heroBanners
-        : settings?.heroBanners !== undefined && settings?.heroBanners !== null && settings?.heroBanners !== '' && settings?.heroBanners !== '[]'
+        : settings?.heroBanners !== undefined && settings?.heroBanners !== null && settings?.heroBanners !== ''
         ? settings.heroBanners
         : JSON.stringify([]);
 

@@ -7,6 +7,17 @@ export function sanitizeString(input: string): string {
 
   const trimmed = input.trim();
 
+  // Handle JSON array/object strings (e.g. heroBanners, siteExperiences) safely without corrupting base64 image data
+  if ((trimmed.startsWith('[') && trimmed.endsWith(']')) || (trimmed.startsWith('{') && trimmed.endsWith('}'))) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      const sanitized = sanitizeObject(parsed);
+      return JSON.stringify(sanitized);
+    } catch (e) {
+      // Fall through if not valid JSON
+    }
+  }
+
   // Preserve Data URLs (e.g. data:image/png;base64,... or data:image/svg+xml...) and font Data URLs
   if (trimmed.startsWith('data:image/') || trimmed.startsWith('data:font/')) {
     if (trimmed.toLowerCase().includes('<script') || trimmed.toLowerCase().includes('javascript:')) {

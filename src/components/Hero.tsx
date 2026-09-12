@@ -144,7 +144,7 @@ export const Hero = ({ onOpenQuoteModal, onFilterSearch }: HeroProps) => {
       <div
         key={`bg-${currentSlideIndex}`}
         className="hero-image transition-all duration-700 ease-in-out animate-fadeIn"
-        style={{ backgroundImage: `url('${bgImage}')` }}
+        style={{ backgroundImage: bgImage ? `url(${JSON.stringify(bgImage)})` : undefined }}
       />
 
       {/* Dark gradient overlay for text readability */}
