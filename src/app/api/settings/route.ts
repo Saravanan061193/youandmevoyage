@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
@@ -45,16 +46,12 @@ const DEFAULT_SETTINGS = {
   heroSubheadline: 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE',
   heroCopy: 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), iconic coastal shore temples, and authentic cultural routes across South India.',
   heroImage: '/images/thanjavur_periya_kovil.png',
-  heroBanners: JSON.stringify([
-    { id: 1, headline: 'Thanjavur Brihadeeswarar Temple & Great Chola Heritage', subheadline: 'THANJAI PERIYA KOVIL · UNESCO WORLD HERITAGE · CHOLA ARCHITECTURE', image: '/images/thanjavur_periya_kovil.png', copy: 'Explore the magnificent 1,000-year-old Thanjavur Big Temple (Thanjai Periya Kovil), pristine shore temples, and heritage routes across South India.' },
-    { id: 2, headline: 'Serene Alleppey Backwaters & Houseboat Cruises', subheadline: 'KERALA BACKWATERS · HOUSEBOATS · PRIVATE CRUISES', image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=90', copy: 'Drift along palm-fringed canal waters, enjoy freshly cooked Kerala delicacies, and wake up to emerald lagoons at your own tempo.' },
-    { id: 3, headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails', subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS', image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90', copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.' },
-  ]),
+  heroBanners: JSON.stringify([]),
   announcementBannerText: '✨ Custom Private Tours for 2026 Season Now Open! Plan your Tamil Nadu & Kerala road trip today.',
   announcementBannerLink: '/build-your-trip',
   enableAnnouncementBanner: true,
-  termsContent: 'Welcome to You & Me – Independent Voyage. By booking a journey with us, you agree to our booking terms, deposit conditions, cancellation policies, and liability waivers.',
-  privacyContent: 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and passport data.',
+  termsContent: '',
+  privacyContent: '',
 
   // About Page CMS Settings Defaults
   aboutHeroHeadline: 'Crafting Authentic South India Journeys',
@@ -73,29 +70,15 @@ const DEFAULT_SETTINGS = {
   aboutCompanyStoryImage: '/images/our_story_fleet.jpg',
   aboutMission: 'To celebrate and share South India’s rich culture and serene landscapes through sustainable, personalized private driver journeys.',
   aboutVision: 'To set the gold standard for authentic, driver-assisted private travel in South India.',
-  aboutWhyChooseUs: JSON.stringify([
-    { id: 1, title: '100% Private Driver Journeys', desc: 'No shared buses. Your private AC vehicle, expert local driver companion, and flexible pace.' },
-    { id: 2, title: 'Experienced Local Companions', desc: 'Drivers with deep regional route knowledge, safety training, and attentive hospitality.' },
-    { id: 3, title: 'Handpicked Boutique Hotels', desc: 'Curated heritage stays, resort villas, and luxury houseboats across Tamil Nadu & Kerala.' },
-    { id: 4, title: 'Uncompromising Safety', desc: '24/7 personal customer support and insured modern fleet vehicles.' }
-  ]),
-  aboutTeamMembers: JSON.stringify([
-    { id: 1, name: 'Sathish Kannan', role: 'Founder & Lead Travel Companion', bio: 'With over 12 years across Tamil Nadu & Kerala routes, Sathish ensures seamless private travel experiences.', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85' },
-  ]),
+  aboutWhyChooseUs: JSON.stringify([]),
+  aboutTeamMembers: JSON.stringify([]),
   aboutSustainabilityTitle: 'Eco-Conscious & Authentic Local Travel',
   aboutSustainabilityContent: 'We honor the land and local communities by recommending eco-conscious heritage lodges, supporting local artisans, and promoting plastic-free travel practices across South India.',
   aboutSustainabilityImage: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
   aboutSafetyTitle: 'Traveler Safety & 24/7 Local Support',
   aboutSafetyContent: 'Your safety is our top priority. All private vehicles undergo thorough maintenance checks and are driven by verified, licensed local companions with 24/7 dispatch support.',
-  aboutCertifications: JSON.stringify([
-    'Registered South India Private Tour Companion Operator',
-    'TripAdvisor Travelers\' Choice Rated Partner',
-    'Tamil Nadu & Kerala Heritage Route Specialist'
-  ]),
-  aboutAwards: JSON.stringify([
-    '⭐ TripAdvisor Travelers\' Choice Award 2025',
-    '🏆 South India Tourism Excellence Award 2024'
-  ]),
+  aboutCertifications: JSON.stringify([]),
+  aboutAwards: JSON.stringify([]),
   aboutMetaTitle: 'About Us | You & Me Independent Voyage - Custom South India Tours',
   aboutMetaDescription: 'Discover the story behind You & Me Independent Voyage. We provide unhurried private driver journeys across Tamil Nadu and Kerala.',
   aboutKeywords: 'South India private tours, custom Kerala itineraries, Tamil Nadu driver',
@@ -112,19 +95,7 @@ const DEFAULT_SETTINGS = {
   // Home Page Signature Itinerary CMS
   homeItineraryHeadline: '10-day classic South India explorer',
   homeItineraryCopy: 'One signature journey. Tamil Nadu temples, Chettinad heritage, Munnar tea hills, and Kerala backwaters in seamless sequence.',
-  homeItineraries: JSON.stringify([
-    {
-      dayNumber: '01',
-      daysLabel: 'Day 01',
-      title: 'Arrival in Chennai & Historic City Walk',
-      description: 'Welcome to South India. Meet your private driver companion at Chennai airport and check into your heritage hotel.',
-      duration: '45 min · 20 km',
-      mealPlan: 'Dinner',
-      accommodation: 'Taj Connemara',
-      accommodationSub: 'Heritage Hotel · Chennai',
-      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=85',
-    },
-  ]),
+  homeItineraries: JSON.stringify([]),
 };
 
 const ALLOWED_SETTING_FIELDS = [

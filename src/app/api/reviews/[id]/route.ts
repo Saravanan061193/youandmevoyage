@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { prisma } from '@/lib/prisma';
@@ -83,6 +84,11 @@ export async function POST(request: Request, context: { params: { id: string } }
 
 export async function PATCH(request: Request, context: { params: { id: string } }) {
   return PUT(request, context);
+}
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  // Mock fallback or DB lookup
+  return NextResponse.json({ id: params.id, author: 'Reviewer' });
 }
 
 export async function OPTIONS() {
