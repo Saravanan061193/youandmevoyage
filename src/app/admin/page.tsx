@@ -699,7 +699,13 @@ export default function AdminPage() {
             }
           } catch (e) {}
         }
-        const mergedSet = { ...cachedSettings, ...fetchedSet };
+        const cleanCachedSettings = Object.fromEntries(
+          Object.entries(cachedSettings || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+        );
+        const cleanFetchedSet = Object.fromEntries(
+          Object.entries(fetchedSet || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+        );
+        const mergedSet = { ...cleanCachedSettings, ...cleanFetchedSet };
         if (fetchedSet?.termsContent) {
           mergedSet.termsContent = fetchedSet.termsContent;
         } else if (cachedSettings?.termsContent) {
@@ -1242,7 +1248,10 @@ export default function AdminPage() {
       let updatedSettings = { ...settings };
       if (res.ok) {
         const resData = await res.json();
-        updatedSettings = { ...settings, ...resData };
+        const cleanResData = Object.fromEntries(
+          Object.entries(resData || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+        );
+        updatedSettings = { ...settings, ...cleanResData };
       }
       if (!updatedSettings.siteLogo && settings.siteLogo) {
         updatedSettings.siteLogo = settings.siteLogo;

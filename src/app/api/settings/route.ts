@@ -8,21 +8,22 @@ import { logAuditEvent } from '@/lib/auditLogger';
 
 const DEFAULT_SETTINGS = {
   id: 'default-settings',
-  siteTitle: '',
+  siteTitle: 'You & Me – Independent Voyage',
   siteLogo: '',
   siteFavicon: '',
-  contactEmail: '',
-  whatsappNumber: '',
-  weatherText: '',
+  contactEmail: 'youandmevoyage@gmail.com',
+  whatsappNumber: '+91 9994315778',
+  address: 'Chennai, Tamil Nadu, India',
+  weatherText: 'South India: 28°C Pleasant',
   adminPasscode: 'admin123',
 
-  instagramUrl: '',
-  facebookUrl: '',
-  tripadvisorUrl: '',
-  youtubeUrl: '',
-  tiktokUrl: '',
-  xUrl: '',
-  linkedinUrl: '',
+  instagramUrl: 'https://www.instagram.com/youandmevoyage/',
+  facebookUrl: 'https://www.facebook.com/p/Youme-independent-voyage-100064363920653/',
+  tripadvisorUrl: 'https://www.tripadvisor.in/Attraction_Review-g304556-d21279654-Reviews-You_Me_Independent_Voyage-Chennai_Madras_Chennai_District_Tamil_Nadu.html',
+  youtubeUrl: 'https://youtube.com',
+  tiktokUrl: 'https://tiktok.com',
+  xUrl: 'https://x.com',
+  linkedinUrl: 'https://linkedin.com',
 
   cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME || 'zfvizmyg',
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY || '831486493558769',
@@ -30,71 +31,70 @@ const DEFAULT_SETTINGS = {
   cloudinaryUploadPreset: 'voyage_uploads',
   enableCloudinary: true,
 
-
-  usdToEur: 1,
-  usdToGbp: 1,
-  usdToNad: 1,
+  usdToEur: 0.92,
+  usdToGbp: 0.78,
+  usdToNad: 83.5,
   defaultCurrency: 'USD',
 
-  siteMetaTitle: '',
-  siteMetaDescription: '',
-  siteKeywords: '',
-  googleAnalyticsId: '',
+  siteMetaTitle: 'You & Me – Independent Voyage | Custom South India Private Tours',
+  siteMetaDescription: 'Private journeys, authentic local experiences, and custom driver-assisted itineraries across Tamil Nadu and Kerala.',
+  siteKeywords: 'South India private tours, Tamil Nadu driver, Kerala custom itinerary, private travel South India',
+  googleAnalyticsId: 'G-YM12345678',
   enableRobotsIndex: true,
 
-  heroHeadline: '',
-  heroSubheadline: '',
-  heroCopy: '',
-  heroImage: '',
+  heroHeadline: 'Travel South India Your Way',
+  heroSubheadline: 'Private journeys · Authentic experiences · Experienced local companions',
+  heroCopy: 'Thoughtfully crafted itineraries across Tamil Nadu, Kerala, and South India tailored specifically to your speed and preferences.',
+  heroImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=85',
   heroBanners: JSON.stringify([]),
-  announcementBannerText: '',
-  announcementBannerLink: '',
-  enableAnnouncementBanner: false,
+  announcementBannerText: '✨ Custom Private Tours for 2026 Season Now Open! Plan your Tamil Nadu & Kerala road trip today.',
+  announcementBannerLink: '/build-your-trip',
+  enableAnnouncementBanner: true,
   termsContent: '',
   privacyContent: '',
 
   // About Page CMS Settings Defaults
-  aboutHeroHeadline: '',
-  aboutHeroSubheadline: '',
-
-  // Google Maps Location Settings Defaults
-  googleMapEmbedUrl: '',
-  officeAddress: '',
-  officePhone: '',
-  operationHours: '',
-  showGoogleMapInFooter: false,
-  aboutHeroImage: '',
-  aboutCompanyStoryTitle: '',
-  aboutCompanyStorySubheadline: '',
-  aboutCompanyStoryContent: '',
-  aboutCompanyStoryImage: '',
-  aboutMission: '',
-  aboutVision: '',
+  aboutHeroHeadline: 'Crafting Authentic South India Journeys',
+  aboutHeroSubheadline: 'Bespoke Private Escapes · Heritage Temples · Expert Local Companions',
+  aboutHeroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85',
+  aboutCompanyStoryTitle: 'Our Story: Independent Travel Companions',
+  aboutCompanyStorySubheadline: 'Engineered for travelers seeking authentic South Indian heritage',
+  aboutCompanyStoryContent: 'Founded in Chennai, You & Me – Independent Voyage was born out of a passion for authentic cultural journeys, pristine temple architecture, and serene backwater escapes. We provide unhurried, private, and deeply personal travel experiences with dedicated local driver companions tailored to your schedule.',
+  aboutCompanyStoryImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85',
+  aboutMission: 'To celebrate and share South India’s rich culture and serene landscapes through sustainable, personalized private driver journeys.',
+  aboutVision: 'To set the gold standard for authentic, driver-assisted private travel in South India.',
   aboutWhyChooseUs: JSON.stringify([]),
   aboutTeamMembers: JSON.stringify([]),
-  aboutSustainabilityTitle: '',
-  aboutSustainabilityContent: '',
-  aboutSustainabilityImage: '',
-  aboutSafetyTitle: '',
-  aboutSafetyContent: '',
+  aboutSustainabilityTitle: 'Eco-Conscious & Authentic Local Travel',
+  aboutSustainabilityContent: 'We honor the land and local communities by recommending eco-conscious heritage lodges, supporting local artisans, and promoting plastic-free travel practices across South India.',
+  aboutSustainabilityImage: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=85',
+  aboutSafetyTitle: 'Traveler Safety & 24/7 Local Support',
+  aboutSafetyContent: 'Your safety is our top priority. All private vehicles undergo thorough maintenance checks and are driven by verified, licensed local companions with 24/7 dispatch support.',
   aboutCertifications: JSON.stringify([]),
   aboutAwards: JSON.stringify([]),
   aboutMetaTitle: '',
   aboutMetaDescription: '',
   aboutKeywords: '',
-  aboutCtaHeadline: '',
-  aboutCtaSubheadline: '',
-  aboutCtaButtonText: '',
+  aboutCtaHeadline: 'Ready to Plan Your Custom South India Journey?',
+  aboutCtaSubheadline: 'Speak with our travel specialists to receive a custom itinerary proposal.',
+  aboutCtaButtonText: 'Request Custom Itinerary Quote',
+
+  // Google Maps Location Settings Defaults
+  googleMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.498305719363!2d80.25268487507693!3d13.003923387313888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e7c992769d%3A0xbbfd1d36d4f9c158!2sIndira%20Nagar%2C%20Adyar%2C%20Chennai%2C%20Tamil%20Nadu%20600020!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
+  officeAddress: 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020',
+  officePhone: '+91 9994315778',
+  operationHours: 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch',
+  showGoogleMapInFooter: true,
 
   // Lead Magnet eBook PDF Settings
-  leadMagnetTitle: '',
-  leadMagnetSubtext: '',
-  leadMagnetButtonText: '',
-  leadMagnetPdfUrl: '',
+  leadMagnetTitle: 'Download Free: Ultimate South India Travel Guide',
+  leadMagnetSubtext: 'Route Maps · Best Season Charts · Boutique Hotel Price Breakdown',
+  leadMagnetButtonText: 'Get Free eBook PDF',
+  leadMagnetPdfUrl: 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf',
 
   // Home Page Signature Itinerary CMS
-  homeItineraryHeadline: '',
-  homeItineraryCopy: '',
+  homeItineraryHeadline: '10-day classic South India explorer',
+  homeItineraryCopy: 'One signature journey. Tamil Nadu temples, Chettinad heritage, Munnar tea hills, and Kerala backwaters in seamless sequence.',
   homeItineraries: JSON.stringify([]),
   siteExperiences: JSON.stringify([]),
 };
@@ -178,6 +178,16 @@ const ALLOWED_SETTING_FIELDS = [
   'siteExperiences',
 ];
 
+function applyDefaults(target: Record<string, any>) {
+  const result = { ...DEFAULT_SETTINGS, ...target };
+  for (const [key, defaultVal] of Object.entries(DEFAULT_SETTINGS)) {
+    if ((result[key] === null || result[key] === undefined || result[key] === '') && defaultVal) {
+      result[key] = defaultVal;
+    }
+  }
+  return result;
+}
+
 let inMemorySettingsCache: any = null;
 
 export async function GET() {
@@ -210,14 +220,20 @@ export async function GET() {
         ? settings.siteExperiences
         : JSON.stringify([]);
 
-    const merged = {
-      ...DEFAULT_SETTINGS,
-      ...(settings || {}),
-      ...(inMemorySettingsCache || {}),
+    const cleanSettings = Object.fromEntries(
+      Object.entries(settings || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+    );
+    const cleanCache = Object.fromEntries(
+      Object.entries(inMemorySettingsCache || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+    );
+
+    const merged = applyDefaults({
+      ...cleanSettings,
+      ...cleanCache,
       termsContent,
       privacyContent,
       siteExperiences,
-    };
+    });
 
     if (!merged.siteLogo && settings?.siteLogo) {
       merged.siteLogo = settings.siteLogo;
@@ -235,7 +251,7 @@ export async function GET() {
     inMemorySettingsCache = merged;
     return NextResponse.json(inMemorySettingsCache);
   } catch (error: any) {
-    return NextResponse.json(inMemorySettingsCache || DEFAULT_SETTINGS);
+    return NextResponse.json(applyDefaults(inMemorySettingsCache || {}));
   }
 }
 
@@ -315,12 +331,21 @@ export async function PUT(request: Request) {
       console.error('DB settings update failed:', e);
     }
 
-    inMemorySettingsCache = {
-      ...DEFAULT_SETTINGS,
-      ...(settings || {}),
-      ...(inMemorySettingsCache || {}),
+    const cleanUpdateData = Object.fromEntries(
+      Object.entries(updateData).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+    );
+    const cleanDbSettings = Object.fromEntries(
+      Object.entries(settings || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+    );
+    const cleanCache = Object.fromEntries(
+      Object.entries(inMemorySettingsCache || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+    );
+
+    inMemorySettingsCache = applyDefaults({
+      ...cleanDbSettings,
+      ...cleanCache,
       ...updateData,
-    };
+    });
 
     if (!inMemorySettingsCache.siteLogo && settings?.siteLogo) {
       inMemorySettingsCache.siteLogo = settings.siteLogo;
@@ -350,7 +375,7 @@ export async function PUT(request: Request) {
   } catch (error: any) {
     revalidatePath('/', 'layout');
     revalidateTag('settings');
-    return NextResponse.json(inMemorySettingsCache || DEFAULT_SETTINGS);
+    return NextResponse.json(applyDefaults(inMemorySettingsCache || {}));
   }
 }
 

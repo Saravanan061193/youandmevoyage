@@ -15,6 +15,14 @@ export function sanitizeString(input: string): string {
     return trimmed;
   }
 
+  // Extract src URL from iframe embed snippet if user pasted full HTML iframe code
+  if (trimmed.toLowerCase().includes('<iframe') && trimmed.includes('src=')) {
+    const srcMatch = trimmed.match(/src=["']([^"']+)["']/i);
+    if (srcMatch && srcMatch[1]) {
+      return srcMatch[1].trim();
+    }
+  }
+
   // Preserve valid external/internal URLs (e.g. http://, https://, /)
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) {
     if (trimmed.toLowerCase().startsWith('javascript:')) return '';

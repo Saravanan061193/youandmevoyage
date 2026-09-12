@@ -41,9 +41,13 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
       const res = await fetch('/api/settings', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
-        setSettings(data);
+        const cleanData = Object.fromEntries(
+          Object.entries(data || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+        );
+        setSettings((prev: any) => ({ ...prev, ...cleanData }));
         if (typeof window !== 'undefined') {
-          localStorage.setItem('site_settings_cache', JSON.stringify(data));
+          const existing = JSON.parse(localStorage.getItem('site_settings_cache') || '{}');
+          localStorage.setItem('site_settings_cache', JSON.stringify({ ...existing, ...cleanData }));
         }
       }
     } catch (e) {
@@ -58,7 +62,13 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
       if (typeof window !== 'undefined') {
         try {
           const cached = localStorage.getItem('site_settings_cache');
-          if (cached) setSettings(JSON.parse(cached));
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            const cleanParsed = Object.fromEntries(
+              Object.entries(parsed || {}).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+            );
+            setSettings((prev: any) => ({ ...prev, ...cleanParsed }));
+          }
         } catch (e) {}
       }
     };
