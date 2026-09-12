@@ -269,7 +269,8 @@ export async function PUT(request: Request) {
         if (field === 'enableCloudinary' || field === 'enableRobotsIndex' || field === 'enableAnnouncementBanner' || field === 'showGoogleMapInFooter') {
           prismaUpdateData[field] = Boolean(updateData[field]);
         } else if (field === 'usdToEur' || field === 'usdToGbp' || field === 'usdToNad') {
-          prismaUpdateData[field] = parseFloat(updateData[field]);
+          const num = parseFloat(updateData[field]);
+          prismaUpdateData[field] = isNaN(num) ? 1 : num;
         } else if (typeof updateData[field] === 'object' && updateData[field] !== null) {
           prismaUpdateData[field] = JSON.stringify(updateData[field]);
         } else {
@@ -304,7 +305,7 @@ export async function PUT(request: Request) {
       const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 12000));
       settings = await Promise.race([dbPromise, timeoutPromise]);
     } catch (e) {
-      console.warn('DB settings update failed or timed out:', e);
+      console.error('DB settings update failed:', e);
     }
 
     inMemorySettingsCache = {

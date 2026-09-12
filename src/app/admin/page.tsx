@@ -1339,22 +1339,24 @@ export default function AdminPage() {
         list.push(newEntry);
       }
 
-      const updatedSettings = { ...settings, siteExperiences: JSON.stringify(list) };
+      const experiencesJson = JSON.stringify(list);
+      const updatedSettings = { ...settings, siteExperiences: experiencesJson };
       setSettings(updatedSettings);
 
       const res = await adminFetch('/api/settings', {
         method: 'PUT',
-        body: JSON.stringify(updatedSettings),
+        body: JSON.stringify({ siteExperiences: experiencesJson }),
       });
 
       let resData = updatedSettings;
       if (res.ok) {
         resData = await res.json();
       }
-      setSettings(resData);
+      const finalSettings = { ...updatedSettings, ...resData, siteExperiences: experiencesJson };
+      setSettings(finalSettings);
 
       if (typeof window !== 'undefined') {
-        localStorage.setItem('site_settings_cache', JSON.stringify(resData));
+        localStorage.setItem('site_settings_cache', JSON.stringify(finalSettings));
         window.dispatchEvent(new Event('site_settings_updated'));
       }
 
@@ -5610,20 +5612,22 @@ export default function AdminPage() {
                             onClick={async () => {
                               if (!confirm(`Delete "${exp.title || 'this experience'}"?`)) return;
                               const updated = list.filter((_: any, i: number) => i !== idx);
-                              const updatedSettings = { ...settings, siteExperiences: JSON.stringify(updated) };
+                              const experiencesJson = JSON.stringify(updated);
+                              const updatedSettings = { ...settings, siteExperiences: experiencesJson };
                               setSettings(updatedSettings);
                               try {
                                 const res = await adminFetch('/api/settings', {
                                   method: 'PUT',
-                                  body: JSON.stringify(updatedSettings),
+                                  body: JSON.stringify({ siteExperiences: experiencesJson }),
                                 });
                                 let resData = updatedSettings;
                                 if (res.ok) {
                                   resData = await res.json();
                                 }
-                                setSettings(resData);
+                                const finalSettings = { ...updatedSettings, ...resData, siteExperiences: experiencesJson };
+                                setSettings(finalSettings);
                                 if (typeof window !== 'undefined') {
-                                  localStorage.setItem('site_settings_cache', JSON.stringify(resData));
+                                  localStorage.setItem('site_settings_cache', JSON.stringify(finalSettings));
                                   window.dispatchEvent(new Event('site_settings_updated'));
                                 }
                                 showNotification('Experience deleted successfully!');
@@ -5682,17 +5686,20 @@ export default function AdminPage() {
                   onClick={async () => {
                     try {
                       setSaving(true);
+                      const list = safeParseList(settings?.siteExperiences, []);
+                      const experiencesJson = JSON.stringify(list);
                       const res = await adminFetch('/api/settings', {
                         method: 'PUT',
-                        body: JSON.stringify(settings),
+                        body: JSON.stringify({ siteExperiences: experiencesJson }),
                       });
                       let resData = settings;
                       if (res.ok) {
                         resData = await res.json();
                       }
-                      setSettings(resData);
+                      const finalSettings = { ...settings, ...resData, siteExperiences: experiencesJson };
+                      setSettings(finalSettings);
                       if (typeof window !== 'undefined') {
-                        localStorage.setItem('site_settings_cache', JSON.stringify(resData));
+                        localStorage.setItem('site_settings_cache', JSON.stringify(finalSettings));
                         window.dispatchEvent(new Event('site_settings_updated'));
                       }
                       showNotification('Experiences updated & published live successfully!');
