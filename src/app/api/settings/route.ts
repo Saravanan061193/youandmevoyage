@@ -50,8 +50,8 @@ const DEFAULT_SETTINGS = {
   announcementBannerText: '',
   announcementBannerLink: '',
   enableAnnouncementBanner: false,
-  termsContent: '',
-  privacyContent: '',
+  termsContent: 'Welcome to You & Me – Independent Voyage. By booking a private tour package with us, you agree to our terms and conditions. All private tour packages include dedicated AC vehicle, experienced local driver companion, and full itinerary support.',
+  privacyContent: 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.',
 
   // About Page CMS Settings Defaults
   aboutHeroHeadline: '',
@@ -204,6 +204,18 @@ export async function GET() {
     if (!merged.siteFavicon && inMemorySettingsCache?.siteFavicon) {
       merged.siteFavicon = inMemorySettingsCache.siteFavicon;
     }
+    if (!merged.termsContent && settings?.termsContent) {
+      merged.termsContent = settings.termsContent;
+    }
+    if (!merged.termsContent && inMemorySettingsCache?.termsContent) {
+      merged.termsContent = inMemorySettingsCache.termsContent;
+    }
+    if (!merged.privacyContent && settings?.privacyContent) {
+      merged.privacyContent = settings.privacyContent;
+    }
+    if (!merged.privacyContent && inMemorySettingsCache?.privacyContent) {
+      merged.privacyContent = inMemorySettingsCache.privacyContent;
+    }
 
     inMemorySettingsCache = merged;
     return NextResponse.json(inMemorySettingsCache);
@@ -292,6 +304,12 @@ export async function PUT(request: Request) {
     }
     if (!inMemorySettingsCache.siteFavicon && settings?.siteFavicon) {
       inMemorySettingsCache.siteFavicon = settings.siteFavicon;
+    }
+    if (updateData.termsContent !== undefined) {
+      inMemorySettingsCache.termsContent = updateData.termsContent;
+    }
+    if (updateData.privacyContent !== undefined) {
+      inMemorySettingsCache.privacyContent = updateData.privacyContent;
     }
 
     revalidatePath('/', 'layout');
