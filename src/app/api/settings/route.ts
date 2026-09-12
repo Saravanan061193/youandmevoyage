@@ -179,7 +179,7 @@ const ALLOWED_SETTING_FIELDS = [
 ];
 
 function applyDefaults(target: Record<string, any>) {
-  const result = { ...DEFAULT_SETTINGS, ...target };
+  const result: Record<string, any> = { ...DEFAULT_SETTINGS, ...target };
   for (const [key, defaultVal] of Object.entries(DEFAULT_SETTINGS)) {
     if ((result[key] === null || result[key] === undefined || result[key] === '') && defaultVal) {
       result[key] = defaultVal;
