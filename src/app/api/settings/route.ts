@@ -96,6 +96,7 @@ const DEFAULT_SETTINGS = {
   homeItineraryHeadline: '10-day classic South India explorer',
   homeItineraryCopy: 'One signature journey. Tamil Nadu temples, Chettinad heritage, Munnar tea hills, and Kerala backwaters in seamless sequence.',
   homeItineraries: JSON.stringify([]),
+  siteExperiences: JSON.stringify([]),
 };
 
 const ALLOWED_SETTING_FIELDS = [
@@ -174,6 +175,7 @@ const ALLOWED_SETTING_FIELDS = [
   'leadMagnetSubtext',
   'leadMagnetButtonText',
   'leadMagnetPdfUrl',
+  'siteExperiences',
 ];
 
 let inMemorySettingsCache: any = null;
