@@ -5032,7 +5032,7 @@ export default function AdminPage() {
                               type="text"
                               value={settings.operationHours || ''}
                               onChange={(e) => setSettings({ ...settings, operationHours: e.target.value })}
-                              placeholder="Mon – Sat: 08:00 – 18:00 (CAT) · 24/7 Dispatch"
+                              placeholder="24/7 Support & Dispatch"
                               className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
                             />
                             <span className="text-[10px] text-stone-500 mt-1 block">Displayed live in website footer and contact cards</span>

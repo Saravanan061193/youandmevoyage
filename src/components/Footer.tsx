@@ -120,7 +120,7 @@ export const Footer = () => {
                     )}
                     <div className="flex items-center gap-3">
                       <Clock className="w-4 h-4 text-orange-500 shrink-0" />
-                      <span>{settings?.operationHours || 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch'}</span>
+                      <span>{settings?.operationHours && !settings.operationHours.includes('08:') ? settings.operationHours : '24/7 Support & Dispatch'}</span>
                     </div>
                   </div>
 

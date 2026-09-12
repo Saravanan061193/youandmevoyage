@@ -83,7 +83,7 @@ const DEFAULT_SETTINGS = {
   googleMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.498305719363!2d80.25268487507693!3d13.003923387313888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e7c992769d%3A0xbbfd1d36d4f9c158!2sIndira%20Nagar%2C%20Adyar%2C%20Chennai%2C%20Tamil%20Nadu%20600020!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
   officeAddress: 'Indira Nagar, Adyar, Chennai, Tamil Nadu, India - 600020',
   officePhone: '+91 9994315778',
-  operationHours: 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch',
+  operationHours: '24/7 Support & Dispatch',
   showGoogleMapInFooter: true,
 
   // Lead Magnet eBook PDF Settings
@@ -256,6 +256,10 @@ export async function GET() {
       privacyContent,
       siteExperiences,
     });
+
+    if (!merged.operationHours || merged.operationHours.includes('08:00') || merged.operationHours.includes('08:30')) {
+      merged.operationHours = '24/7 Support & Dispatch';
+    }
 
     if (!merged.siteLogo && settings?.siteLogo) {
       merged.siteLogo = settings.siteLogo;

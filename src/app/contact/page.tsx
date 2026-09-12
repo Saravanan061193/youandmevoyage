@@ -117,7 +117,7 @@ function ContactContent() {
                 <Clock className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-slate-900">Office Hours</strong>
-                  <span>{settings?.operationHours || 'Mon – Sat: 08:00 – 18:00 · 24/7 Dispatch'}</span>
+                  <span>{settings?.operationHours && !settings.operationHours.includes('08:') ? settings.operationHours : '24/7 Support & Dispatch'}</span>
                 </div>
               </div>
             </div>
