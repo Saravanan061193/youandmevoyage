@@ -144,6 +144,7 @@ const globalForStore = globalThis as unknown as {
   inMemoryGallery?: GalleryItemType[];
   inMemoryBlogs?: BlogItem[];
   inMemoryInquiries?: InquiryItem[];
+  inMemoryFaqs?: FaqItem[];
 };
 
 if (!globalForStore.inMemoryReviews) {
@@ -166,6 +167,9 @@ if (!globalForStore.inMemoryBlogs) {
 }
 if (!globalForStore.inMemoryInquiries) {
   globalForStore.inMemoryInquiries = [...DEFAULT_INQUIRIES];
+}
+if (!globalForStore.inMemoryFaqs) {
+  globalForStore.inMemoryFaqs = [];
 }
 
 // HELPERS
@@ -295,4 +299,40 @@ export function deleteInMemoryReview(id: string): boolean {
   const initialLen = globalForStore.inMemoryReviews!.length;
   globalForStore.inMemoryReviews = globalForStore.inMemoryReviews!.filter((r) => r.id !== id);
   return globalForStore.inMemoryReviews.length < initialLen;
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+  order?: number;
+  createdAt?: string;
+}
+
+export const DEFAULT_FAQS: FaqItem[] = [];
+
+export function getInMemoryFaqs(): FaqItem[] {
+  return globalForStore.inMemoryFaqs || [];
+}
+export function setInMemoryFaqs(items: FaqItem[]) {
+  globalForStore.inMemoryFaqs = items;
+}
+export function addInMemoryFaq(item: FaqItem): FaqItem {
+  if (!globalForStore.inMemoryFaqs) globalForStore.inMemoryFaqs = [];
+  globalForStore.inMemoryFaqs.unshift(item);
+  return item;
+}
+export function updateInMemoryFaq(id: string, updates: Partial<FaqItem>): FaqItem | null {
+  const list = globalForStore.inMemoryFaqs || [];
+  const index = list.findIndex((f: FaqItem) => f.id === id);
+  if (index === -1) return null;
+  list[index] = { ...list[index], ...updates };
+  return list[index];
+}
+export function deleteInMemoryFaq(id: string): boolean {
+  const list = globalForStore.inMemoryFaqs || [];
+  const initialLen = list.length;
+  globalForStore.inMemoryFaqs = list.filter((f: FaqItem) => f.id !== id);
+  return globalForStore.inMemoryFaqs.length < initialLen;
 }

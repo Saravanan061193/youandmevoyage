@@ -248,4 +248,14 @@ model BlogPost {
   updatedAt       DateTime @updatedAt
 }
 
+model Faq {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  question  String
+  answer    String
+  category  String   @default("Booking & Inclusions")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 
