@@ -19,6 +19,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   const [category, setCategory] = useState<string>('All');
   const [region, setRegion] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [durationFilter, setDurationFilter] = useState<string>('All');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
@@ -80,6 +81,9 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
     if (filterParams?.destination) {
       setSearchQuery(filterParams.destination);
     }
+    if (filterParams?.duration) {
+      setDurationFilter(filterParams.duration);
+    }
   }, [filterParams]);
 
   const toggleFavorite = (id: string) => {
@@ -90,6 +94,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
     setCategory('All');
     setRegion('All');
     setSearchQuery('');
+    setDurationFilter('All');
   };
 
   // Dynamically compute all categories and regions
@@ -128,7 +133,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
   // Reset pagination on filter change
   useEffect(() => {
     setCurrentPage(1);
-  }, [category, region, searchQuery]);
+  }, [category, region, searchQuery, durationFilter]);
 
   const filteredSafaris = safaris.filter((safari) => {
     const textToSearch = `${safari.title || ''} ${safari.route || ''} ${safari.description || ''} ${safari.accommodation || ''} ${safari.region || ''} ${safari.category || ''} ${safari.startingLocation || ''} ${safari.endingLocation || ''}`.toLowerCase();
@@ -166,6 +171,23 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
       }
     }
 
+    if (durationFilter && durationFilter !== 'All') {
+      const days = parseInt(safari.days, 10);
+      if (!isNaN(days)) {
+        if (durationFilter.includes('+')) {
+          const min = parseInt(durationFilter, 10);
+          if (days < min) return false;
+        } else {
+          const parts = durationFilter.replace(/days/i, '').trim().split(/[-–]/);
+          if (parts.length === 2) {
+            const min = parseInt(parts[0], 10);
+            const max = parseInt(parts[1], 10);
+            if (days < min || days > max) return false;
+          }
+        }
+      }
+    }
+
     return true;
   });
 
@@ -175,7 +197,7 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
     currentPage * itemsPerPage
   );
 
-  const hasActiveFilters = category !== 'All' || region !== 'All' || searchQuery !== '';
+  const hasActiveFilters = category !== 'All' || region !== 'All' || searchQuery !== '' || durationFilter !== 'All';
 
   return (
     <section id="journeys" className="section-wrap py-16">
