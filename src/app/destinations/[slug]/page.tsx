@@ -1,6 +1,6 @@
 import type { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
+import { prisma, isValidObjectId } from '@/lib/prisma';
 import { DestinationClient } from './DestinationClient';
 
 export async function generateMetadata(
@@ -8,9 +8,15 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const slug = params.slug;
-  const dest = await prisma.destination.findFirst({
-    where: { OR: [{ slug: slug }, { id: slug }] },
-  });
+  let dest = null;
+  try {
+    const isObjId = isValidObjectId(slug);
+    dest = await prisma.destination.findFirst({
+      where: isObjId ? { OR: [{ slug: slug }, { id: slug }] } : { slug: slug },
+    });
+  } catch (e) {
+    console.error('Failed to fetch destination metadata:', e);
+  }
 
   if (!dest) {
     return { title: 'Destination Not Found | You & Me – Independent Voyage' };
@@ -42,11 +48,12 @@ export default async function DestinationDetailPage({ params }: { params: { slug
   const slug = params.slug;
   let dest = null;
   try {
+    const isObjId = isValidObjectId(slug);
     dest = await prisma.destination.findFirst({
-      where: { OR: [{ slug: slug }, { id: slug }] },
+      where: isObjId ? { OR: [{ slug: slug }, { id: slug }] } : { slug: slug },
     });
   } catch (e) {
-    console.error(e);
+    console.error('Failed to fetch destination detail:', e);
   }
 
   if (!dest) {
@@ -55,3 +62,4 @@ export default async function DestinationDetailPage({ params }: { params: { slug
 
   return <DestinationClient dest={dest} slug={slug} />;
 }
+

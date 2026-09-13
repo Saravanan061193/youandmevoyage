@@ -19,3 +19,8 @@ export const prisma =
   });
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+
+export function isValidObjectId(id: string): boolean {
+  return typeof id === 'string' && /^[0-9a-fA-F]{24}$/.test(id);
+}
+

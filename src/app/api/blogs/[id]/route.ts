@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
-import { prisma } from '@/lib/prisma';
+import { prisma, isValidObjectId } from '@/lib/prisma';
 import {
   getInMemoryBlogs,
   updateInMemoryBlog,
@@ -15,10 +15,11 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     let blog = null;
     try {
+      const isObjId = isValidObjectId(identifier);
       const dbPromise = prisma.blogPost.findFirst({
-        where: {
-          OR: [{ id: identifier }, { slug: identifier }],
-        },
+        where: isObjId
+          ? { OR: [{ id: identifier }, { slug: identifier }] }
+          : { slug: identifier },
       });
       const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
       blog = await Promise.race([dbPromise, timeoutPromise]);
