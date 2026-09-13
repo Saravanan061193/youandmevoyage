@@ -1277,9 +1277,16 @@ export default function AdminPage() {
             },
             {
               id: 3,
-              headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
+              headline: 'Queen of Hill Stations: Ooty & Nilgiri Trails',
+              subheadline: 'OOTY HILLS · TEA ESTATES · HERITAGE TOY TRAIN',
+              copy: 'Breathe crisp mountain air amidst sprawling tea gardens, Ooty pine forests, and scenic Nilgiri mountain railway routes.',
+              image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=2200&q=90',
+            },
+            {
+              id: 4,
+              headline: 'Mist-Covered Hills of Munnar & Western Ghats',
               subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
-              copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
+              copy: 'Explore emerald tea plantations, aroma-rich spice hills, and pristine mountain viewpoints with private local drivers.',
               image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
             },
           ];
@@ -5233,9 +5240,16 @@ export default function AdminPage() {
                             },
                             {
                               id: 3,
-                              headline: 'Mist-Covered Hills of Munnar & Nilgiri Trails',
+                              headline: 'Queen of Hill Stations: Ooty & Nilgiri Trails',
+                              subheadline: 'OOTY HILLS · TEA ESTATES · HERITAGE TOY TRAIN',
+                              copy: 'Breathe crisp mountain air amidst sprawling tea gardens, Ooty pine forests, and scenic Nilgiri mountain railway routes.',
+                              image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=2200&q=90',
+                            },
+                            {
+                              id: 4,
+                              headline: 'Mist-Covered Hills of Munnar & Western Ghats',
                               subheadline: 'HILL STATIONS · TEA ESTATES · NATURE EXPEDITIONS',
-                              copy: 'Breathe crisp mountain air amidst sprawling tea gardens, spice plantations, and scenic Western Ghats private routes.',
+                              copy: 'Explore emerald tea plantations, aroma-rich spice hills, and pristine mountain viewpoints with private local drivers.',
                               image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2200&q=90',
                             },
                           ];
