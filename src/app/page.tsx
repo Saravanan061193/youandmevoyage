@@ -32,42 +32,12 @@ function HomeContent() {
   const [isLeadMagnetOpen, setIsLeadMagnetOpen] = useState(false);
   const [searchFilters, setSearchFilters] = useState<{ category: string; destination: string; duration: string } | null>(null);
 
-  // JSON-LD Schema
-  const schemaData = {
-    '@context': 'https://schema.org',
-    '@type': 'TravelAgency',
-    name: settings?.siteTitle || 'You & Me – Independent Voyage',
-    description: settings?.siteMetaDescription || 'Bespoke private journeys, authentic experiences and driver-assisted road trips across Tamil Nadu and Kerala.',
-    url: 'https://youandmevoyage.com',
-    telephone: settings?.whatsappNumber || '',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: settings?.officeAddress || 'Indira Nagar, Adyar',
-      addressLocality: 'Chennai',
-      postalCode: '600020',
-      addressRegion: 'Tamil Nadu',
-      addressCountry: 'India',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '215',
-    },
-  };
-
   const leadTitle = settings?.leadMagnetTitle || 'Download Free: South India Custom Travel Guide 2026';
   const leadSubtext = settings?.leadMagnetSubtext || 'Detailed Route Maps • Best Temple Timings • Chettinad & Kerala Food Recommendations';
   const leadButtonText = settings?.leadMagnetButtonText || 'Get Free Guide PDF';
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-orange-500 selection:text-white font-sans">
-      <SEOHelper
-        title={settings?.siteMetaTitle || settings?.siteTitle || 'You & Me – Independent Voyage | Custom South India Private Tours'}
-        description={settings?.siteMetaDescription || 'Bespoke private journeys, authentic local experiences, and custom driver-assisted road trips across Tamil Nadu, Kerala, and South India.'}
-        keywords={settings?.siteKeywords || 'You & Me Independent Voyage, South India Private Tours, Tamil Nadu Driver Tour, Kerala Backwater Houseboat, Custom South India Itinerary'}
-        canonicalUrl="https://youandmevoyage.com"
-        schema={schemaData}
-      />
       <UtilityBar />
       <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
       <Hero

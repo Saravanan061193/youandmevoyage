@@ -83,11 +83,40 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  let settings = null;
+  try {
+    settings = await prisma.siteSettings.findFirst({ orderBy: { updatedAt: 'desc' } });
+  } catch (e) {
+    console.error('Failed to fetch settings for layout schema:', e);
+  }
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: settings?.siteTitle || 'You & Me – Independent Voyage',
+    description: settings?.siteMetaDescription || 'Bespoke private journeys, authentic experiences and driver-assisted road trips across Tamil Nadu and Kerala.',
+    url: 'https://youandmevoyage.com',
+    telephone: settings?.whatsappNumber || '',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: settings?.officeAddress || 'Indira Nagar, Adyar',
+      addressLocality: 'Chennai',
+      postalCode: '600020',
+      addressRegion: 'Tamil Nadu',
+      addressCountry: 'India',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '215',
+    },
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -97,6 +126,10 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </head>
       <body className="antialiased selection:bg-orange-500 selection:text-white bg-white text-slate-900" suppressHydrationWarning>

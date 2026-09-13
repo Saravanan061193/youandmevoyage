@@ -163,7 +163,7 @@ export const Footer = () => {
                     src={settings.siteLogo}
                     alt={settings?.siteTitle || 'You & Me – Independent Voyage'}
                     onError={() => setLogoError(true)}
-                    className="h-10 sm:h-12 w-auto object-contain max-w-[220px] drop-shadow-md"
+                    className="h-10 sm:h-12 w-auto object-contain max-w-[220px] drop-shadow-md bg-white p-1.5 rounded-lg"
                   />
                 </div>
               ) : (

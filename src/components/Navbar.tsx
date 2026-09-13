@@ -27,7 +27,7 @@ export const Navbar = ({ onOpenQuoteModal }: NavbarProps) => {
               src={settings.siteLogo}
               alt={settings?.siteTitle || "Brand Logo"}
               onError={() => setLogoError(true)}
-              className="h-9 xs:h-11 sm:h-14 lg:h-16 w-auto max-w-[160px] xs:max-w-[200px] sm:max-w-[280px] lg:max-w-[340px] object-contain drop-shadow-md"
+              className="h-9 xs:h-11 sm:h-14 lg:h-16 w-auto max-w-[160px] xs:max-w-[200px] sm:max-w-[280px] lg:max-w-[340px] object-contain drop-shadow-md bg-white p-1.5 rounded-lg"
             />
           ) : (
             <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white shadow-md shrink-0 border border-orange-400/40 group-hover:scale-105 transition-transform">
