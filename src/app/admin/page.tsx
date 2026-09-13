@@ -1534,7 +1534,7 @@ export default function AdminPage() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="youandmevoyage@gmail.com"
+                  placeholder="Enter admin email"
                   className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-4 py-3 text-sm outline-none focus:border-primary font-sans"
                 />
                 <User className="w-4 h-4 text-stone-500 absolute left-3 top-3.5" />
@@ -1553,7 +1553,7 @@ export default function AdminPage() {
                     setPassword(e.target.value);
                     setPasscode(e.target.value);
                   }}
-                  placeholder="Default: 9994315778"
+                  placeholder="Enter your password"
                   className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-12 py-3 text-sm outline-none focus:border-primary font-sans"
                 />
                 <Lock className="w-4 h-4 text-stone-500 absolute left-3 top-3.5 pointer-events-none" />
