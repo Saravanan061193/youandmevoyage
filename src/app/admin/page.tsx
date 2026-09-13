@@ -495,8 +495,8 @@ export default function AdminPage() {
     e.preventDefault();
     setAuthError('');
     try {
-      const inputPass = (password || passcode || 'admin123').trim();
-      const inputUser = (username || 'admin').trim();
+      const inputPass = (password || passcode || '9994315778').trim();
+      const inputUser = (username || 'youandmevoyage@gmail.com').trim();
       const res = await fetch('/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -512,9 +512,7 @@ export default function AdminPage() {
         setAuthenticated(true);
         setAuthChecking(false);
         fetchAllData();
-      } else {
-        setAuthError(data.error || 'Invalid credentials. Default: admin / admin123');
-      }
+        setAuthError(data.error || 'Invalid credentials. Default: youandmevoyage@gmail.com / 9994315778');
     } catch (err: any) {
       setAuthError('Server error during login');
     }
@@ -1534,26 +1532,15 @@ export default function AdminPage() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="admin@youandmevoyage.com"
+                  placeholder="youandmevoyage@gmail.com"
                   className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-4 py-3 text-sm outline-none focus:border-primary font-sans"
                 />
                 <User className="w-4 h-4 text-stone-500 absolute left-3 top-3.5" />
               </div>
             </div>
-
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-xs text-stone-400 font-semibold">Password</label>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setForgotEmail(username || 'youandmevoyage@gmail.com');
-                    setShowForgotModal(true);
-                  }}
-                  className="text-xs text-primary hover:underline font-medium"
-                >
-                  Forgot Password?
-                </button>
               </div>
               <div className="relative">
                 <input
@@ -1564,7 +1551,7 @@ export default function AdminPage() {
                     setPassword(e.target.value);
                     setPasscode(e.target.value);
                   }}
-                  placeholder="Default: admin123"
+                  placeholder="Default: 9994315778"
                   className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg pl-9 pr-12 py-3 text-sm outline-none focus:border-primary font-sans"
                 />
                 <Lock className="w-4 h-4 text-stone-500 absolute left-3 top-3.5 pointer-events-none" />
@@ -1601,125 +1588,7 @@ export default function AdminPage() {
           </form>
         </div>
 
-        {/* FORGOT PASSWORD RESET MODAL */}
-        {showForgotModal && (
-          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-[#141210] border border-orange-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5 relative animate-in zoom-in-95">
-              <button
-                onClick={() => {
-                  setShowForgotModal(false);
-                  setForgotStep(1);
-                  setForgotError('');
-                  setForgotMsg('');
-                }}
-                className="absolute top-4 right-4 text-stone-400 hover:text-stone-200 p-1"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center mx-auto mb-3">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-stone-100">Reset Admin Password</h3>
-                <p className="text-xs text-stone-400 mt-1">
-                  {forgotStep === 1
-                    ? 'Enter your registered Admin Email address to receive a 6-digit confirmation code.'
-                    : `Enter the 6-digit code sent to ${forgotEmail} and set your new password.`}
-                </p>
-              </div>
-
-              {forgotError && (
-                <div className="p-3 bg-rose-950/60 border border-rose-800 text-rose-300 text-xs rounded-xl text-center">
-                  {forgotError}
-                </div>
-              )}
-
-              {forgotMsg && (
-                <div className="p-3 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs rounded-xl text-center space-y-1">
-                  <p>{forgotMsg}</p>
-                  {previewOtp && (
-                    <div className="mt-2 p-2 bg-stone-900 border border-orange-500/40 rounded-lg text-center">
-                      <span className="text-[10px] text-orange-400 uppercase tracking-widest block font-semibold">Dev Verification Code:</span>
-                      <strong className="font-mono text-lg text-orange-300 tracking-widest">{previewOtp}</strong>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* STEP 1: ENTER ADMIN EMAIL */}
-              {forgotStep === 1 ? (
-                <form onSubmit={handleSendForgotCode} className="space-y-4">
-                  <div>
-                    <label className="text-xs text-stone-400 font-semibold block mb-1">Admin Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      value={forgotEmail}
-                      onChange={(e) => setForgotEmail(e.target.value)}
-                      placeholder="info@discoverysafaris.com"
-                      className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={forgotSubmitting}
-                    className="w-full rounded-lg bg-gold-gradient py-3 text-sm font-semibold text-stone-950 shadow-md hover:brightness-110 transition-all disabled:opacity-50"
-                  >
-                    {forgotSubmitting ? 'Sending Security Code...' : 'Send Confirmation Code'}
-                  </button>
-                </form>
-              ) : (
-                /* STEP 2: ENTER 6-DIGIT OTP & NEW PASSWORD */
-                <form onSubmit={handleResetPasswordSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-xs text-stone-400 font-semibold block mb-1">6-Digit Verification Code</label>
-                    <input
-                      type="text"
-                      required
-                      maxLength={6}
-                      value={otpCodeInput}
-                      onChange={(e) => setOtpCodeInput(e.target.value)}
-                      placeholder="e.g. 849201"
-                      className="w-full bg-stone-900 border border-orange-500/50 text-orange-300 font-mono tracking-widest text-center text-lg rounded-lg py-2.5 outline-none focus:border-orange-400"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs text-stone-400 font-semibold block mb-1">New Admin Password</label>
-                    <input
-                      type="password"
-                      required
-                      minLength={6}
-                      value={newPasswordInput}
-                      onChange={(e) => setNewPasswordInput(e.target.value)}
-                      placeholder="Enter new password (min 6 chars)"
-                      className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-400"
-                    />
-                  </div>
-
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setForgotStep(1)}
-                      className="w-1/3 rounded-lg bg-stone-900 border border-stone-800 py-3 text-xs font-semibold text-stone-400 hover:text-stone-200"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={forgotSubmitting}
-                      className="w-2/3 rounded-lg bg-gold-gradient py-3 text-xs font-semibold text-stone-950 shadow-md hover:brightness-110 transition-all disabled:opacity-50"
-                    >
-                      {forgotSubmitting ? 'Updating...' : 'Update Password & Login'}
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-          </div>
-        )}
+        {/* FORGOT PASSWORD RESET MODAL REMOVED */}
       </div>
     );
   }

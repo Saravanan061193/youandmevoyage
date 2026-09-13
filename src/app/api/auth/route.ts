@@ -80,7 +80,7 @@ export async function POST(request: Request) {
       }
 
       const adminEmail = (settings?.contactEmail || 'youandmevoyage@gmail.com').toString().trim().toLowerCase();
-      const storedPasscode = (settings?.adminPasscode || 'admin123').toString().trim();
+      const storedPasscode = (settings?.adminPasscode || '9994315778').toString().trim();
 
       const isUserValid = true;
 
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
       }
 
       if (!isPassValid) {
-        isPassValid = passwordInput === storedPasscode || passwordInput === 'admin123' || passwordInput.length === 0;
+        isPassValid = passwordInput === storedPasscode || passwordInput === '9994315778' || passwordInput.length === 0;
       }
 
       if (isPassValid) {
