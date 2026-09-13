@@ -2003,16 +2003,7 @@ export default function AdminPage() {
                       This Month
                     </button>
 
-                    <button
-                      onClick={() => setDateFilter('custom')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 ${
-                        dateFilter === 'custom'
-                          ? 'bg-[#F97316] text-stone-950 font-bold shadow-md'
-                          : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
-                      }`}
-                    >
-                      <Calendar className="w-3.5 h-3.5" /> Custom
-                    </button>
+
 
                     <button
                       onClick={() => setDateFilter('all')}
@@ -2027,40 +2018,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                {/* Custom Date Range Picker when Custom filter selected */}
-                {dateFilter === 'custom' && (
-                  <div className="flex flex-wrap items-center gap-4 bg-[#141210] border border-stone-800 p-4 rounded-xl shadow-xl text-xs animate-fadeIn">
-                    <div className="flex items-center gap-2">
-                      <label className="text-stone-400 font-semibold">Start Date:</label>
-                      <input
-                        type="date"
-                        value={customStartDate}
-                        onChange={(e) => setCustomStartDate(e.target.value)}
-                        className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-1.5 rounded-lg outline-none focus:border-[#F97316]"
-                      />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <label className="text-stone-400 font-semibold">End Date:</label>
-                      <input
-                        type="date"
-                        value={customEndDate}
-                        onChange={(e) => setCustomEndDate(e.target.value)}
-                        className="bg-stone-900 border border-stone-700 text-stone-100 px-3 py-1.5 rounded-lg outline-none focus:border-[#F97316]"
-                      />
-                    </div>
-                    {(customStartDate || customEndDate) && (
-                      <button
-                        onClick={() => {
-                          setCustomStartDate('');
-                          setCustomEndDate('');
-                        }}
-                        className="text-[11px] text-rose-400 hover:underline font-semibold ml-auto"
-                      >
-                        Clear Date Range
-                      </button>
-                    )}
-                  </div>
-                )}
+
 
                 {/* Stat Metric Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
