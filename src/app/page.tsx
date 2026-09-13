@@ -23,7 +23,7 @@ import { QuoteModal } from '@/components/QuoteModal';
 import { StickyFloatingCTA } from '@/components/StickyFloatingCTA';
 import { ExitIntentModal } from '@/components/ExitIntentModal';
 import { LeadMagnetModal } from '@/components/LeadMagnetModal';
-import { SEOHelper } from '@/components/SEOHelper';
+
 
 function HomeContent() {
   const { settings } = useCurrency();
