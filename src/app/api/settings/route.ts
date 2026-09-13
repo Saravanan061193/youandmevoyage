@@ -233,8 +233,43 @@ export async function GET() {
     const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const settings = await Promise.race([dbPromise, timeoutPromise]);
 
-    const fallbackTerms = 'Welcome to You & Me – Independent Voyage. By booking a private tour package with us, you agree to our terms and conditions. All private tour packages include dedicated AC vehicle, experienced local driver companion, and full itinerary support.';
-    const fallbackPrivacy = 'You & Me – Independent Voyage values your privacy. We strictly protect your personal information, contact details, payment info, and booking requirements.';
+    const fallbackTerms = `<h2>1. Introduction & Booking Agreement</h2>
+<p>Welcome to <strong>You & Me – Independent Voyage</strong>. By booking a private tour package, custom driver-assisted itinerary, or local travel service with us, you agree to comply with and be bound by the following terms and conditions.</p>
+
+<h2>2. Booking & Payment Policies</h2>
+<p>• <strong>Deposit Requirement:</strong> A non-refundable booking deposit (typically 20% to 30% of total tour cost) is required at the time of reservation to secure private AC vehicle allocation, driver assignment, and hotel reservations.</p>
+<p>• <strong>Final Payment:</strong> The remaining balance must be paid prior to or upon arrival at the start of your journey in South India, as agreed in your itinerary quotation.</p>
+
+<h2>3. Private Driver Companion & Transport Services</h2>
+<p>• All private journeys include a dedicated, licensed, professional local driver companion, air-conditioned vehicle, fuel, highway toll fees, interstate permits, parking charges, and driver lodging/allowances.</p>
+<p>• Vehicle usage is for the itinerary specified. Additional unannounced long-distance side excursions outside the booked route may incur additional fuel and driver overtime charges.</p>
+
+<h2>4. Accommodation & Hotel Check-ins</h2>
+<p>• Hotel accommodations are reserved as specified in your itinerary proposal (Boutique Heritage Lodges, Luxury Resorts, or Tea Estate Bungalows).</p>
+<p>• Standard hotel check-in time is usually 12:00 PM or 2:00 PM, and check-out is 11:00 AM. Early check-in or late check-out is subject to hotel availability.</p>
+
+<h2>5. Cancellation & Refund Policy</h2>
+<p>• <strong>30+ Days Before Arrival:</strong> Full refund of deposit minus unrecoverable hotel blocking deposits and administrative processing fee.</p>
+<p>• <strong>15–29 Days Before Arrival:</strong> 50% refund of total tour package price.</p>
+
+<h2>6. Traveler Responsibility & Health Insurance</h2>
+<p>• All international travelers are required to hold a valid passport (minimum 6 months validity) and appropriate Indian Tourist Visa (e-Visa).</p>
+<p>• Comprehensive international travel and health insurance covering trip cancellation, medical emergencies, and personal belongings is strongly recommended for all guests.</p>`;
+
+    const fallbackPrivacy = `<h2>1. Information Collection</h2>
+<p>At <strong>You & Me – Independent Voyage</strong>, we value your privacy. We collect personal details that you provide when requesting a custom itinerary quote or booking a trip, including your name, email address, phone/WhatsApp number, travel dates, passenger count, and passport details required for hotel permits.</p>
+
+<h2>2. How We Use Your Personal Information</h2>
+<p>• To design tailored South India travel itineraries and respond to your quote inquiries.</p>
+<p>• To complete hotel reservations, houseboat bookings, local guide permits, and private vehicle dispatch.</p>
+<p>• To communicate booking confirmations, travel vouchers, driver contact details, and itinerary updates.</p>
+
+<h2>3. Data Protection & Non-Disclosure</h2>
+<p>• We strictly protect your personal information. We do <strong>NOT</strong> sell, rent, trade, or disclose your contact details or personal data to third-party marketing companies.</p>
+<p>• Information is shared strictly with verified local service providers (hotels, houseboats, guide dispatchers) necessary to execute your travel arrangements.</p>
+
+<h2>4. Contact Us</h2>
+<p>If you have any questions regarding your personal data or privacy preferences, please contact our team at <strong>youandmevoyage@gmail.com</strong> or via WhatsApp at <strong>+91 9994315778</strong>.</p>`;
 
     const termsContent =
       settings?.termsContent !== undefined && settings?.termsContent !== null && settings?.termsContent !== ''
@@ -375,11 +410,11 @@ export async function PUT(request: Request) {
     try {
       const existing = await prisma.siteSettings.findFirst({ orderBy: { updatedAt: 'desc' } });
       if (existing) {
-        if (!prismaUpdateData.siteLogo && existing.siteLogo) {
-          prismaUpdateData.siteLogo = existing.siteLogo;
-        }
-        if (!prismaUpdateData.siteFavicon && existing.siteFavicon) {
-          prismaUpdateData.siteFavicon = existing.siteFavicon;
+        // Merge ALL existing fields from DB so tabs saving specific fields won't wipe unsubmitted tab fields (e.g. terms, privacy, logos)
+        for (const field of ALLOWED_SETTING_FIELDS) {
+          if (prismaUpdateData[field] === undefined && (existing as any)[field] !== undefined && (existing as any)[field] !== null) {
+            prismaUpdateData[field] = (existing as any)[field];
+          }
         }
 
         // Fix for MongoDB Atlas Free Tier "Pipeline length greater than 50 not supported"
