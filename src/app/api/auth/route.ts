@@ -80,9 +80,11 @@ export async function POST(request: Request) {
       }
 
       const adminEmail = (settings?.contactEmail || 'youandmevoyage@gmail.com').toString().trim().toLowerCase();
-      const storedPasscode = (settings?.adminPasscode || '9994315778').toString().trim();
+      // If the database still holds the old default 'admin123', override it to '9994315778'
+      const rawStoredPasscode = settings?.adminPasscode || '9994315778';
+      const storedPasscode = (rawStoredPasscode === 'admin123' ? '9994315778' : rawStoredPasscode).toString().trim();
 
-      const isUserValid = true;
+      const isUserValid = (usernameInput === adminEmail || usernameInput === 'youandmevoyage@gmail.com');
 
       let isPassValid = false;
 
@@ -93,11 +95,11 @@ export async function POST(request: Request) {
       }
 
       if (!isPassValid) {
-        isPassValid = passwordInput === storedPasscode || passwordInput === '9994315778' || passwordInput.length === 0;
+        isPassValid = passwordInput === storedPasscode || passwordInput === '9994315778';
       }
 
-      if (isPassValid) {
-        const sessionToken = createSignedSessionToken(usernameInput || 'admin@youandmevoyage.com');
+      if (isUserValid && isPassValid) {
+        const sessionToken = createSignedSessionToken(usernameInput || 'youandmevoyage@gmail.com');
         logAuditEvent(request, 'LOGIN', 'ADMIN_PORTAL', 'SUCCESS', { adminUsername: usernameInput });
 
         const response = NextResponse.json({
