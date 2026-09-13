@@ -17,22 +17,22 @@ export async function generateMetadata(
   }
 
   return {
-    title: dest.metaTitle || `${dest.title} Travel Guide | You & Me Voyage`,
-    description: dest.metaDescription || dest.description || `Explore ${dest.title} - custom South India travel destination.`,
-    keywords: dest.keywords || '',
+    title: `${dest.title} Travel Guide | You & Me Voyage`,
+    description: dest.description || `Explore ${dest.title} - custom South India travel destination.`,
+    keywords: '',
     alternates: {
       canonical: `https://youandmevoyage.com/destinations/${slug}`,
     },
     openGraph: {
-      title: dest.metaTitle || `${dest.title} Travel Guide | You & Me Voyage`,
-      description: dest.metaDescription || dest.description || `Explore ${dest.title} - custom South India travel destination.`,
+      title: `${dest.title} Travel Guide | You & Me Voyage`,
+      description: dest.description || `Explore ${dest.title} - custom South India travel destination.`,
       url: `https://youandmevoyage.com/destinations/${slug}`,
       images: dest.image ? [{ url: dest.image }] : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: dest.metaTitle || `${dest.title} Travel Guide | You & Me Voyage`,
-      description: dest.metaDescription || dest.description || `Explore ${dest.title} - custom South India travel destination.`,
+      title: `${dest.title} Travel Guide | You & Me Voyage`,
+      description: dest.description || `Explore ${dest.title} - custom South India travel destination.`,
       images: dest.image ? [dest.image] : [],
     },
   };
