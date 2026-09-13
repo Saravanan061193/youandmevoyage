@@ -512,7 +512,9 @@ export default function AdminPage() {
         setAuthenticated(true);
         setAuthChecking(false);
         fetchAllData();
+      } else {
         setAuthError(data.error || 'Invalid credentials. Default: youandmevoyage@gmail.com / 9994315778');
+      }
     } catch (err: any) {
       setAuthError('Server error during login');
     }
