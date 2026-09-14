@@ -254,11 +254,76 @@ export default function AdminPage() {
 
   // Notifications state
   const [showNotifications, setShowNotifications] = useState(false);
-  const [notifications, setNotifications] = useState([
-    { id: 1, title: 'New Quote Inquiry', desc: 'Sarah Jenkins requested a custom quote for South India Private Tour', time: '10m ago', unread: true },
-    { id: 2, title: 'Blog Post Draft Saved', desc: 'Tamil Nadu & Kerala Grand Circuit guide created', time: '1h ago', unread: true },
-    { id: 3, title: 'CMS Data Synchronized', desc: 'Exchange rates & tour prices updated live', time: '3h ago', unread: false },
-  ]);
+  const [notifications, setNotifications] = useState<any[]>([]);
+
+  useEffect(() => {
+    let generated: any[] = [];
+    const now = new Date().getTime();
+
+    if (inquiries && inquiries.length > 0) {
+      const recentInquiries = [...inquiries].sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()).slice(0, 3);
+      recentInquiries.forEach(inq => {
+        if (!inq.createdAt) return;
+        const timeDiff = Math.max(0, now - new Date(inq.createdAt).getTime());
+        const mins = Math.floor(timeDiff / 60000);
+        const hrs = Math.floor(mins / 60);
+        const days = Math.floor(hrs / 24);
+        let timeStr = mins < 60 ? `${mins}m ago` : hrs < 24 ? `${hrs}h ago` : `${days}d ago`;
+        if (mins === 0) timeStr = 'Just now';
+        
+        generated.push({
+          id: `inq-${inq.id || Math.random()}`,
+          title: 'New Quote Inquiry',
+          desc: `${inq.name || 'A user'} requested a quote${inq.destination ? ` for ${inq.destination}` : ''}`,
+          time: timeStr,
+          timestamp: new Date(inq.createdAt).getTime(),
+          unread: true
+        });
+      });
+    }
+
+    if (blogs && blogs.length > 0) {
+      const recentBlogs = [...blogs].sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()).slice(0, 2);
+      recentBlogs.forEach(blog => {
+        if (!blog.createdAt) return;
+        const timeDiff = Math.max(0, now - new Date(blog.createdAt).getTime());
+        const mins = Math.floor(timeDiff / 60000);
+        const hrs = Math.floor(mins / 60);
+        const days = Math.floor(hrs / 24);
+        let timeStr = mins < 60 ? `${mins}m ago` : hrs < 24 ? `${hrs}h ago` : `${days}d ago`;
+        if (mins === 0) timeStr = 'Just now';
+        
+        generated.push({
+          id: `blog-${blog.id || Math.random()}`,
+          title: blog.published ? 'Blog Post Published' : 'Blog Post Draft Saved',
+          desc: `"${blog.title || 'Untitled'}" was created/updated`,
+          time: timeStr,
+          timestamp: new Date(blog.createdAt).getTime(),
+          unread: true
+        });
+      });
+    }
+
+    generated.sort((a, b) => b.timestamp - a.timestamp);
+    generated = generated.slice(0, 5);
+
+    if (generated.length === 0) {
+      generated = [
+        { id: 'sys-1', title: 'CMS Data Synchronized', desc: 'System is running smoothly.', time: 'Just now', unread: false, timestamp: now }
+      ];
+    }
+
+    setNotifications(prev => {
+      if (prev.length === 0 && generated.length > 0) return generated;
+      return generated.map(g => {
+        const existing = prev.find(p => p.id === g.id);
+        if (existing) {
+          return { ...g, unread: existing.unread };
+        }
+        return g;
+      });
+    });
+  }, [inquiries, blogs]);
 
   // Admin pagination states
   const [safariPage, setSafariPage] = useState(1);
@@ -4851,7 +4916,7 @@ export default function AdminPage() {
                       <div className="w-full">
                         <label className="text-xs text-stone-400 font-semibold block mb-1">Admin Passcode</label>
                         <input
-                          type="text"
+                          type="password"
                           value={settings.adminPasscode || 'admin123'}
                           onChange={(e) => setSettings({ ...settings, adminPasscode: e.target.value })}
                           className="w-full bg-stone-900 border border-stone-700/80 text-stone-100 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-primary"
