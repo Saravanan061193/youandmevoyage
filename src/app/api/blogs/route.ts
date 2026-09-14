@@ -27,7 +27,7 @@ export async function GET(request: Request) {
       where,
       orderBy: { createdAt: 'desc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const blogs = await Promise.race([dbPromise, timeoutPromise]);
 
     if (blogs && Array.isArray(blogs) && blogs.length > 0) {

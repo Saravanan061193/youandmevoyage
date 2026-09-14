@@ -18,7 +18,7 @@ export async function GET() {
     const dbPromise = prisma.review.findMany({
       orderBy: { createdAt: 'desc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const reviews = await Promise.race([dbPromise, timeoutPromise]);
 
     if (reviews && Array.isArray(reviews) && reviews.length > 0) {

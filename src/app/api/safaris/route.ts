@@ -32,7 +32,7 @@ export async function GET(request: Request) {
       where,
       orderBy: { createdAt: 'desc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const safaris = await Promise.race([dbPromise, timeoutPromise]);
 
     let memoryList = getInMemorySafaris();

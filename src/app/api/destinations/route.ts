@@ -18,7 +18,7 @@ export async function GET() {
     const dbPromise = prisma.destination.findMany({
       orderBy: { order: 'asc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const destinations = await Promise.race([dbPromise, timeoutPromise]);
 
     if (destinations !== null && Array.isArray(destinations)) {

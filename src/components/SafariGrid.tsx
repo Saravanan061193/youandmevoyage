@@ -325,7 +325,11 @@ export const SafariGrid = ({ onSelectSafari, filterParams }: SafariGridProps) =>
                 </div>
               ))
             ) : filteredSafaris.length === 0 ? (
-              <div className="col-span-full p-10 text-center text-slate-500">No journeys match the selected criteria.</div>
+              <div className="col-span-full p-10 text-center text-slate-500">
+                {safaris.length === 0 
+                  ? "No journeys have been added yet." 
+                  : "No journeys match the selected criteria."}
+              </div>
             ) : (
               paginatedSafaris.map((safari) => (
                 <article key={safari.id} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">

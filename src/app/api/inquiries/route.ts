@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     const dbPromise = prisma.inquiry.findMany({
       orderBy: { createdAt: 'desc' },
     });
-    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000));
+    const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000));
     const inquiries = await Promise.race([dbPromise, timeoutPromise]);
 
     if (!inquiries || !Array.isArray(inquiries) || inquiries.length === 0) {
