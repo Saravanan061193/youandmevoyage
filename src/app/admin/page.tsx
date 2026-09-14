@@ -6166,6 +6166,21 @@ export default function AdminPage() {
         </div>
       )}
 
+      {/* SAVING OVERLAY POPUP */}
+      {saving && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-150">
+          <div className="w-full max-w-sm bg-[#141210] border border-orange-500/30 rounded-2xl p-6 text-center space-y-4 shadow-2xl flex flex-col items-center">
+            <div className="w-14 h-14 rounded-full bg-orange-950/50 border border-orange-500/60 text-orange-400 flex items-center justify-center mx-auto shadow-xl">
+              <Loader2 className="w-8 h-8 animate-spin" />
+            </div>
+            <div>
+              <h3 className="font-serif text-xl font-bold text-stone-100">Saving Changes...</h3>
+              <p className="text-xs text-stone-400 mt-2 leading-relaxed">Please wait while we securely update your data and sync it live.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* SUCCESS NOTIFICATION POPUP MODAL */}
       {saveSuccessModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-150">
