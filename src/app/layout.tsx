@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
-import { GlobalLoader } from '@/components/GlobalLoader';
+
+import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 
 import { prisma } from '@/lib/prisma';
@@ -133,9 +133,17 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased selection:bg-orange-500 selection:text-white bg-white text-slate-900" suppressHydrationWarning>
-        <Suspense fallback={null}>
-          <GlobalLoader />
-        </Suspense>
+        <NextTopLoader 
+          color="#f97316"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #f97316,0 0 5px #f97316"
+        />
         {children}
       </body>
     </html>

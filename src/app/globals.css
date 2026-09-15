@@ -1791,3 +1791,49 @@ body {
   border-bottom: 1px solid #1e293b;
   color: #cbd5e1;
 }
+
+/* Custom Central Loading Popup (Overrides NProgress) */
+#nprogress .bar {
+  display: none !important;
+}
+
+#nprogress .spinner {
+  display: flex !important;
+  position: fixed !important;
+  z-index: 100000 !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: max-content !important;
+  min-width: 160px !important;
+  background: rgba(15, 23, 42, 0.9) !important;
+  padding: 12px 28px !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(249, 115, 22, 0.3) !important;
+  box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.15) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+#nprogress .spinner-icon {
+  width: 22px !important;
+  height: 22px !important;
+  box-sizing: border-box !important;
+  border: solid 2.5px transparent !important;
+  border-top-color: #f97316 !important;
+  border-left-color: #f97316 !important;
+  border-radius: 50% !important;
+  animation: nprogress-spinner 500ms linear infinite !important;
+}
+
+#nprogress .spinner::after {
+  content: 'Loading...' !important;
+  color: #F8FAFC !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
